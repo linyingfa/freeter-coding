@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cnadmart.dao.SysGeneratorDao">
+<mapper namespace="com.freeter.dao.SysGeneratorDao">
 	<select id="queryList" resultType="map">
 		select table_name tableName, engine, table_comment tableComment,
 		create_time createTime from information_schema.tables
@@ -16,7 +16,7 @@
 		</if>
 	</select>
 
-	<select id="queryReferenced" resultType="com.cnadmart.entity.ReferencedTable">
+	<select id="queryReferenced" resultType="com.freeter.entity.ReferencedTable">
 		select table_name tableName,column_name columnName,REFERENCED_TABLE_NAME referencedTableName,REFERENCED_column_name
 		 referencedColumnName from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where table_schema = (select
 		database()) and table_name = #{tableName} and constraint_name != 'PRIMARY'
