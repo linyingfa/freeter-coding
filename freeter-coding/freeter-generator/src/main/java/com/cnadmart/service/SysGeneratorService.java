@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.cnadmart.dao.SysGeneratorDao;
+import com.cnadmart.entity.ReferencedTable;
 import com.cnadmart.utils.GenUtils;
 
 import java.io.ByteArrayOutputStream;
@@ -40,7 +41,11 @@ public class SysGeneratorService {
 	public List<Map<String, String>> queryColumns(String tableName) {
 		return sysGeneratorDao.queryColumns(tableName);
 	}
-
+ 
+	public List<ReferencedTable> queryReferenced(String tableName) {
+		return sysGeneratorDao.queryReferenced(tableName);
+	}
+	
 	public byte[] generatorCode(String[] tableNames) throws IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ZipOutputStream zip = new ZipOutputStream(outputStream);
@@ -50,8 +55,10 @@ public class SysGeneratorService {
 			Map<String, String> table = queryTable(tableName);
 			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
+			//查询关联表的信息
+			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorCode(table, columns, zip);
+			GenUtils.generatorCode(table,listReferencedTable, columns, zip);
 		}
 		IOUtils.closeQuietly(zip);
 		return outputStream.toByteArray();
@@ -64,8 +71,10 @@ public class SysGeneratorService {
 			Map<String, String> table = queryTable(tableName);
 			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
+			//查询关联表的信息
+			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorAllCode(table, columns);
+			GenUtils.generatorAllCode(table,listReferencedTable, columns);
 		}
 	}
 
@@ -76,8 +85,10 @@ public class SysGeneratorService {
 			Map<String, String> table = queryTable(tableName);
 			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
+			//查询关联表的信息
+			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorApiCode(table, columns);
+			GenUtils.generatorApiCode(table,listReferencedTable, columns);
 		}
 	}
 
@@ -88,8 +99,10 @@ public class SysGeneratorService {
 			Map<String, String> table = queryTable(tableName);
 			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
+			//查询关联表的信息
+			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
 			// 生成代码
-			GenUtils.updateCode(table, columns);
+			GenUtils.updateCode(table,listReferencedTable, columns);
 		}
 
 	}

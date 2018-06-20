@@ -40,6 +40,7 @@ import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
 import com.cnadmart.entity.ColumnEntity;
+import com.cnadmart.entity.ReferencedTable;
 import com.cnadmart.entity.TableEntity;
 
 import cn.hutool.core.io.FileUtil;
@@ -92,6 +93,7 @@ public class GenUtils {
 				map.put("classname", tableEntity.getClassname());
 				map.put("pathName", tableEntity.getClassname().toLowerCase());
 				map.put("columns", tableEntity.getColumns());
+				map.put("listReferencedTable", tableEntity.getListReferencedTable());
 				map.put("hasBigDecimal", tableEntity.getHasBigDecimal());
 				map.put("mainPath", mainPath);
 				map.put("package", config.getString("package" ));
@@ -102,7 +104,9 @@ public class GenUtils {
 		
 		return  new VelocityContext(map);
 	}
-	private static TableEntity getTableInfo(Configuration config ,Map<String, String> table,
+	
+	//生成渲染表的信息
+	private static TableEntity getTableInfo(Configuration config ,Map<String, String> table,List<ReferencedTable> listReferencedTable,
 			List<Map<String, String>> columns) {
  		boolean hasBigDecimal = false;
 		//表信息
@@ -147,6 +151,19 @@ public class GenUtils {
 		if(tableEntity.getPk() == null){
 			tableEntity.setPk(tableEntity.getColumns().get(0));
 		}
+		//转换驼峰
+		for(ReferencedTable referencedTable :listReferencedTable) {
+		 
+ 			String referencedColumnName = columnToJava(referencedTable.getReferencedColumnName());
+ 			String refTableName = StringUtils.uncapitalize(tableToJava(referencedTable.getTableName(), config.getString("tablePrefix")));
+ 			String referencedTableName = StringUtils.uncapitalize(tableToJava(referencedTable.getReferencedTableName(), config.getString("tablePrefix")));
+ 			String refColumnName =columnToJava(referencedTable.getColumnName());
+ 			referencedTable.setTableNameJava (refTableName);
+			referencedTable.setReferencedColumnNameJava(referencedColumnName);
+			referencedTable.setReferencedTableNameJava(referencedTableName);
+			referencedTable.setColumnNameJava(refColumnName);
+		}
+		tableEntity.setListReferencedTable(listReferencedTable);
 		return tableEntity;
 	}
 	
@@ -155,11 +172,11 @@ public class GenUtils {
 	 * 生成代码
 	 * @throws IOException 
 	 */
-	public static void generatorCode(Map<String, String> table,
+	public static void generatorCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
 			List<Map<String, String>> columns, ZipOutputStream zip) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		TableEntity tableEntity = getTableInfo(config,table,columns);
+		TableEntity tableEntity = getTableInfo(config,table,listReferencedTable,columns);
         VelocityContext context = getVelocityContext(config,tableEntity);
         
         //获取模板列表
@@ -186,11 +203,11 @@ public class GenUtils {
 	 * 生成代码
 	 * @throws IOException 
 	 */
-	public static void generatorAllCode(Map<String, String> table,
+	public static void generatorAllCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		TableEntity tableEntity = getTableInfo(config,table,columns);
+		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
         VelocityContext context = getVelocityContext(config,tableEntity);
        
        //获取模板列表
@@ -234,12 +251,12 @@ public class GenUtils {
 	 * 生成接口代码
 	 * @throws IOException 
 	 */
-	public static void generatorApiCode(Map<String, String> table,
+	public static void generatorApiCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		
-		TableEntity tableEntity = getTableInfo(config,table,columns);
+		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
         VelocityContext context = getVelocityContext(config,tableEntity);
        
        //获取模板列表
@@ -292,11 +309,11 @@ public class GenUtils {
 	 * 更新代码
 	 * @throws IOException 
 	 */
-	public static void updateCode(Map<String, String> table,
+	public static void updateCode(Map<String, String> table, List<ReferencedTable> listReferencedTable,
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		TableEntity tableEntity = getTableInfo(config,table,columns);
+		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
         VelocityContext context = getVelocityContext(config,tableEntity);
         //获取模板列表
 		List<String> templates = getTemplates();

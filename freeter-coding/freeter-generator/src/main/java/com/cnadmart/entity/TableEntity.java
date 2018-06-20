@@ -7,7 +7,7 @@ import java.util.List;
  * 
  * @author xc
  * @email 171998110@qq.com
- * @date 2018年06月19日 上午17
+ * @date 2018年06月19日 上午10:12:59
  */
 public class TableEntity {
 	//表的名称
@@ -26,6 +26,9 @@ public class TableEntity {
 	
 	//判断是否存在
 	private Boolean hasBigDecimal;
+	
+	//关联的字段
+	private List<ReferencedTable> listReferencedTable;
 	
 	public String getTableName() {
 		return tableName;
@@ -69,5 +72,12 @@ public class TableEntity {
 	public void setHasBigDecimal(Boolean hasBigDecimal) {
 		this.hasBigDecimal = hasBigDecimal;
 	}
+	public List<ReferencedTable> getListReferencedTable() {
+		return listReferencedTable;
+	}
+	public void setListReferencedTable(List<ReferencedTable> listReferencedTable) {
+		this.listReferencedTable = listReferencedTable;
+	}
+	
 	
 }
