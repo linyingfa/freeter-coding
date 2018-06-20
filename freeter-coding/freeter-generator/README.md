@@ -29,19 +29,19 @@
 
 **部署程序步骤** 
 
-git 下载https://gitee.com/xcOschina/freeter-admin.git 项目,完成后导入到ide中
+1.git下载https://gitee.com/xcOschina/freeter-admin.git 项目,完成后导入到ide中
 
-eclipse File import... Maven Existing Projects into Workspace 选择项目的根路径。
+2.eclipse File import... Maven Existing Projects into Workspace 选择项目的根路径。
 
-IDE 会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。
+3.IDE 会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。
 
-执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
+4.执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
 
-最后修改数据库连接参数,配置文件在src/main/resources/application.yml
+5.最后修改数据库连接参数,配置文件在src/main/resources/application.yml
 
-启动项目，Eclipse、IDEA运行GeneratorApplication.java
+6.启动项目，Eclipse、IDEA运行GeneratorApplication.java
 
-浏览器输入http://127.0.0.1:8082/freeter-generator
+7.浏览器输入http://127.0.0.1:8082/freeter-generator
 <br>
 <br>
 
