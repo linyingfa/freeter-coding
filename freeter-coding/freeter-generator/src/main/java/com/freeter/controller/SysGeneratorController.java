@@ -1,10 +1,10 @@
-package com.cnadmart.controller;
+package com.freeter.controller;
 
 import com.alibaba.fastjson.JSON;
-import com.cnadmart.service.SysGeneratorService;
-import com.cnadmart.utils.PageUtils;
-import com.cnadmart.utils.Query;
-import com.cnadmart.utils.R;
+import com.freeter.service.SysGeneratorService;
+import com.freeter.utils.PageUtils;
+import com.freeter.utils.Query;
+import com.freeter.utils.R;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -1,4 +1,4 @@
-package com.cnadmart.entity;
+package com.freeter.entity;
 
 import java.util.List;
 

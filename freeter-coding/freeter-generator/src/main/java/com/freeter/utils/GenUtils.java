@@ -14,7 +14,7 @@
  * the License.
  */
 
-package com.cnadmart.utils;
+package com.freeter.utils;
 
 import java.io.File;
 import java.io.IOException;
@@ -39,9 +39,9 @@ import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 
-import com.cnadmart.entity.ColumnEntity;
-import com.cnadmart.entity.ReferencedTable;
-import com.cnadmart.entity.TableEntity;
+import com.freeter.entity.ColumnEntity;
+import com.freeter.entity.ReferencedTable;
+import com.freeter.entity.TableEntity;
 
 import cn.hutool.core.io.FileUtil;
 

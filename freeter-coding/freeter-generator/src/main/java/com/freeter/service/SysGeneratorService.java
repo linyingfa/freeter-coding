@@ -1,12 +1,12 @@
-package com.cnadmart.service;
+package com.freeter.service;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.cnadmart.dao.SysGeneratorDao;
-import com.cnadmart.entity.ReferencedTable;
-import com.cnadmart.utils.GenUtils;
+import com.freeter.dao.SysGeneratorDao;
+import com.freeter.entity.ReferencedTable;
+import com.freeter.utils.GenUtils;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package com.cnadmart.utils;
+package com.freeter.utils;
 
 import java.util.HashMap;
 import java.util.Map;

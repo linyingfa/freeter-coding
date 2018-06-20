@@ -1,4 +1,4 @@
-package com.cnadmart.utils;
+package com.freeter.utils;
 
 import java.io.Serializable;
 import java.util.List;

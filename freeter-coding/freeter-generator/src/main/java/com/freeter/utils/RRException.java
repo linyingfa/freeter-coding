@@ -1,4 +1,4 @@
-package com.cnadmart.utils;
+package com.freeter.utils;
 
 /**
  * 自定义异常

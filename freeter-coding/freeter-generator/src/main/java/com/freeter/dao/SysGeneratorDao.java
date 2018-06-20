@@ -1,11 +1,11 @@
-package com.cnadmart.dao;
+package com.freeter.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.cnadmart.entity.ReferencedTable;
+import com.freeter.entity.ReferencedTable;
 
 /**
  * 飞特超级代码生成器
