@@ -28,6 +28,7 @@
 <br> 
 
 **部署程序步骤** 
+
 git 下载https://gitee.com/xcOschina/freeter-admin.git 项目,完成后导入到ide中
 eclipse File import... Maven Existing Projects into Workspace 选择项目的根路径。
 IDE 会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。
