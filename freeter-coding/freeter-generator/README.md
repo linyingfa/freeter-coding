@@ -1,13 +1,14 @@
 **项目介绍** 
-- 飞特后台管理系统的超级代码生成器，可直接生成四种实体类，controller、service、dao、xml代码到eclipse或ide，减少70%以上的开发任务
+- 飞特后台管理系统的超级代码生成器，可直接生成四种实体类，controller、service、dao、xml代码到eclipse或ide，并支持多表连接，支持mybatis-plus 减少70%以上的开发任务
 - 目前只支持MySQL、下个版本支持oracle。
 <br>
 
-**同行特点** 
+**加强特点** 
+- mapper文件可生成多表连接
 - 实体类默认引入swagger-ui 的注解。
 - 实体类默认引入日期类格式化 的注解。
 - 实体类默认引入hibernate-validator的注解
-- 灵活的权限控制，可控制到页面或按钮，满足绝大部分的权限需求
+- 灵活的权限控制，可控制到页面或按钮，灵活的接口开发，满足绝大部分的前后端分离
 - 友好的代码结构及注释，便于阅读及二次开发
 
 <br>
@@ -29,14 +30,7 @@
 <br>
 
  **技术选型：** 
-- 核心框架：Spring Boot 1.5
-- 安全框架：Apache Shiro 1.3
-- 视图框架：Spring MVC 4.3
-- 持久层框架：MyBatis 3.3
-- 定时器：Quartz 2.3
-- 数据库连接池：Druid 1.1
-- 日志管理：SLF4J 1.7、Log4j
-- 页面交互：Vue2.x
+
 
 <br>
 
@@ -46,6 +40,11 @@
 - Tomcat8+
 - Maven3.0+
 
+需要引入
+			hibernate-validator
+			<artifactId>hutool-all</artifactId>
+			<artifactId>commons-beanutils</artifactId>
+			<artifactId>springfox-swagger-ui</artifactId>
 <br>
 
  **本地部署**
@@ -62,7 +61,7 @@
 <br>
 
  **项目演示**
-- 演示地址：http://demo.open.renren.io/renren-security
+- 演示地址：#
 - 账号密码：admin/admin
 
 <br>
