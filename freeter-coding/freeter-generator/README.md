@@ -1,5 +1,5 @@
 **项目介绍** 
-- 飞特后台管理系统的超级代码生成器，可直接生成四种实体类，controller、service、dao、xml代码到eclipse或ide，并支持多表连接，支持mybatis-plus 减少70%以上的开发任务
+- 飞特后台管理系统的超级代码生成器，可直接生成四种实体类，controller、service、dao、xml代码到eclipse或ij，并支持多表连接，支持mybatis-plus 减少70%以上的开发任务
 - 目前只支持MySQL、下个版本支持oracle。
 <br>
 
@@ -8,7 +8,9 @@
 - 实体类默认引入swagger-ui 的注解。
 - 实体类默认引入日期类格式化 的注解。
 - 实体类默认引入hibernate-validator的注解
-- 灵活的权限控制，可控制到页面或按钮，灵活的接口开发，满足绝大部分的前后端分离
+- 操作特别简单，能灵活生成到主流ide里面
+- 灵活的权限控制，可控制到页面或按钮
+- 灵活的接口开发，满足绝大部分的前后端分离
 - 友好的代码结构及注释，便于阅读及二次开发
 
 <br>
@@ -25,11 +27,15 @@
                  （通常后端关联的表或者自定义的字段需要返回使用）
 <br> 
 
-**项目结构** 
-
+**部署程序步骤** 
+git 下载https://gitee.com/xcOschina/freeter-admin.git 项目,完成后导入到ide中
+eclipse File import... Maven Existing Projects into Workspace 选择项目的根路径。
+IDE 会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。
+执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
+最后修改数据库连接参数,配置文件在src/main/resources/application.yml
+启动项目，Eclipse、IDEA运行GeneratorApplication.java
+浏览器输入http://127.0.0.1:8082/freeter-generator
 <br>
-
- **技术选型：** 
 
 
 <br>
@@ -47,19 +53,6 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 <br>
 
- **本地部署**
-- 通过git下载源码
-- 创建数据库renren_security，数据库编码为UTF-8
-- 执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
-- 修改application-dev.yml文件，更新MySQL账号和密码
-- 在renren-security目录下，执行mvn clean install
-<br>
-
-- Eclipse、IDEA运行AdminApplication.java，则可启动项目【renren-admin】
-- renren-admin访问路径：http://localhost:8082/freeter-generator
- 
-<br>
-
  **项目演示**
 - 演示地址：#
 - 账号密码：admin/admin
@@ -67,15 +60,15 @@
 <br>
 
 **如何交流、反馈、参与贡献？** 
-- 开发文档：http://www.renren.io/guide/security
-- 官方社区：http://www.renren.io/community
-- gitee仓库：https://gitee.com/renrenio/renren-security
-- github仓库：https://github.com/renrenio/renren-security
+- 开发文档：https://gitee.com/xcOschina/freeter-admin.git
+- 官方免费QQ群：http://www.renren.io/community
+- gitee仓库：https://gitee.com/xcOschina/freeter-admin.git
+- github仓库：暂不考虑，支持国产
 - [人人开源](http://www.renren.io)：http://www.renren.io   
 - 官方QQ群：324780204、145799952
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
-- 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
-- 微信扫码并关注【人人开源】，获得项目最新动态及更新提醒<br>
+- 技术讨论、二次开发等咨询、问题和建议，请移步到官方免费QQ群，我会在第一时间进行解答和回复！
+- 微信扫码并关注【飞特开源】，获得项目最新动态及更新提醒<br>
 ![输入图片说明](http://cdn.renren.io/47c26201804031918312618.jpg "在这里输入图片标题")
 <br>
 <br>
@@ -85,12 +78,12 @@
 
 <br>
 
-**Layui主题风格：**
+**代码生成器：**
 ![输入图片说明](http://cdn.renren.io/img/1013aa91fe8542b7b05d82bc9444433a "在这里输入图片标题")
 
 <br>
 
-**AdminLTE主题风格：**
+**飞特admin：**
 ![输入图片说明](http://cdn.renren.io/img/f9762bc6574545ce908e271995efcf1c "在这里输入图片标题")
 ![输入图片说明](http://cdn.renren.io/img/a1b8bf1ea3db4844a8652a9cf84048cc "在这里输入图片标题")
 ![输入图片说明](http://cdn.renren.io/img/e542060605f94b3ebec699b0afffc22d "在这里输入图片标题")
