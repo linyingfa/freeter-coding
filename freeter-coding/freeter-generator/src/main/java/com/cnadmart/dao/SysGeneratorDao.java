@@ -6,11 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 代码生成器
+ * 飞特超级代码生成器
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月19日 下午3:32:04
+ * @author xc
+ * @email 171998110@qq.com
+ * @date 2018年06月20日 上午9:12:58
  */
 @Mapper
 public interface SysGeneratorDao {

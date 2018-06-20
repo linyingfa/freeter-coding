@@ -45,11 +45,11 @@ import com.cnadmart.entity.TableEntity;
 import cn.hutool.core.io.FileUtil;
 
 /**
- * 代码生成器 工具类
+ * 飞特超级代码生成器
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月19日 下午11:40:24
+ * @author xc
+ * @email 171998110@qq.com
+ * @date 2018年06月20日 上午10:06:50
  */
 public class GenUtils {
 	public static final char UNDERLINE = '_';
@@ -72,15 +72,39 @@ public class GenUtils {
 		return templates;
 	}
 
-	/**
-	 * 生成代码
-	 * @throws IOException 
-	 */
-	public static void generatorCode(Map<String, String> table,
-			List<Map<String, String>> columns, ZipOutputStream zip) throws IOException {
-		//配置信息
-		Configuration config = getConfig();
-		boolean hasBigDecimal = false;
+	private static VelocityContext getVelocityContext(Configuration config ,TableEntity tableEntity) {
+		 
+		//设置velocity资源加载器
+				Properties prop = new Properties();  
+				prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");  
+				Velocity.init(prop);
+
+				String mainPath = config.getString("mainPath" );
+				mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
+				
+				//封装模板数据
+				Map<String, Object> map = new HashMap<>();
+				map.put("email", config.getString("email"));
+				map.put("tableName", tableEntity.getTableName());
+				map.put("comments", tableEntity.getComments());
+				map.put("pk", tableEntity.getPk());
+				map.put("className", tableEntity.getClassName());
+				map.put("classname", tableEntity.getClassname());
+				map.put("pathName", tableEntity.getClassname().toLowerCase());
+				map.put("columns", tableEntity.getColumns());
+				map.put("hasBigDecimal", tableEntity.getHasBigDecimal());
+				map.put("mainPath", mainPath);
+				map.put("package", config.getString("package" ));
+				map.put("moduleName", config.getString("moduleName" ));
+				map.put("author", config.getString("author"));
+				map.put("email", config.getString("email"));
+				map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
+		
+		return  new VelocityContext(map);
+	}
+	private static TableEntity getTableInfo(Configuration config ,Map<String, String> table,
+			List<Map<String, String>> columns) {
+ 		boolean hasBigDecimal = false;
 		//表信息
 		TableEntity tableEntity = new TableEntity();
 		tableEntity.setTableName(table.get("tableName"));
@@ -118,38 +142,25 @@ public class GenUtils {
 			columsList.add(columnEntity);
 		}
 		tableEntity.setColumns(columsList);
-		
+		tableEntity.setHasBigDecimal(hasBigDecimal);
 		//没主键，则第一个字段为主键
 		if(tableEntity.getPk() == null){
 			tableEntity.setPk(tableEntity.getColumns().get(0));
 		}
-		
-		//设置velocity资源加载器
-		Properties prop = new Properties();  
-		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");  
-		Velocity.init(prop);
-
-		String mainPath = config.getString("mainPath" );
-		mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
-		
-		//封装模板数据
-		Map<String, Object> map = new HashMap<>();
-		map.put("email", config.getString("email"));
-		map.put("tableName", tableEntity.getTableName());
-		map.put("comments", tableEntity.getComments());
-		map.put("pk", tableEntity.getPk());
-		map.put("className", tableEntity.getClassName());
-		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", tableEntity.getClassname().toLowerCase());
-		map.put("columns", tableEntity.getColumns());
-		map.put("hasBigDecimal", hasBigDecimal);
-		map.put("mainPath", mainPath);
-		map.put("package", config.getString("package" ));
-		map.put("moduleName", config.getString("moduleName" ));
-		map.put("author", config.getString("author"));
-		map.put("email", config.getString("email"));
-		map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-        VelocityContext context = new VelocityContext(map);
+		return tableEntity;
+	}
+	
+	
+	/**
+	 * 生成代码
+	 * @throws IOException 
+	 */
+	public static void generatorCode(Map<String, String> table,
+			List<Map<String, String>> columns, ZipOutputStream zip) throws IOException {
+		//配置信息
+		Configuration config = getConfig();
+		TableEntity tableEntity = getTableInfo(config,table,columns);
+        VelocityContext context = getVelocityContext(config,tableEntity);
         
         //获取模板列表
 		List<String> templates = getTemplates();
@@ -158,23 +169,6 @@ public class GenUtils {
 			StringWriter sw = new StringWriter();
 			Template tpl = Velocity.getTemplate(template, "UTF-8");
 			tpl.merge(context, sw);
-			if("template/Entity.java.vm".equals(template)) {
-				//获取当前项目的根路径 
-				 File directory = new File("");// 参数为空
-		         String courseFile = directory.getCanonicalPath();
-		        
-		         String project = config.getString("project");
-		         if( StringUtils.isNotEmpty(project)){
-		        	 int i=  StringUtils.lastIndexOf(courseFile, "\\");
- 		        	 courseFile=  courseFile.substring(0, StringUtils.lastIndexOf(courseFile, "\\"))+"\\"+project;
-		        	 
-		         }
-		        
-				String entityFileName = getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"));
-				 
-				FileUtil.writeString(sw.toString(),FileUtil.touch( courseFile+"\\src\\"+entityFileName), "UTF-8");
- 				//FileUtil.file(s)
-			}
 			try {
 				//添加到zip
 				zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"))));
@@ -196,75 +190,8 @@ public class GenUtils {
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		boolean hasBigDecimal = false;
-		//表信息
-		TableEntity tableEntity = new TableEntity();
-		tableEntity.setTableName(table.get("tableName"));
-		tableEntity.setComments(table.get("tableComment"));
-		//表名转换成Java类名
-		String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
-		tableEntity.setClassName(className);
-		tableEntity.setClassname(StringUtils.uncapitalize(className));
-		
-		//列信息
-		List<ColumnEntity> columsList = new ArrayList<>();
-		for(Map<String, String> column : columns){
-			ColumnEntity columnEntity = new ColumnEntity();
-			columnEntity.setColumnName(column.get("columnName"));
-			columnEntity.setDataType(column.get("dataType"));
-			columnEntity.setComments(column.get("columnComment"));
-			columnEntity.setExtra(column.get("extra"));
-			columnEntity.setIsNullable(column.get("isNullable"));
-			//列名转换成Java属性名
-			String attrName = columnToJava(columnEntity.getColumnName());
-			columnEntity.setAttrName(attrName);
-			columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
-			 
-			//列的数据类型，转换成Java类型
-			String attrType = config.getString(columnEntity.getDataType(), "unknowType");
-			columnEntity.setAttrType(attrType);
-			if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
-				hasBigDecimal = true;
-			}
-			//是否主键
-			if("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null){
-				tableEntity.setPk(columnEntity);
-			}
-			
-			columsList.add(columnEntity);
-		}
-		tableEntity.setColumns(columsList);
-		
-		//没主键，则第一个字段为主键
-		if(tableEntity.getPk() == null){
-			tableEntity.setPk(tableEntity.getColumns().get(0));
-		}
-		
-		//设置velocity资源加载器
-		Properties prop = new Properties();  
-		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");  
-		Velocity.init(prop);
-
-		String mainPath = config.getString("mainPath" );
-		mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
-		
-		//封装模板数据
-		Map<String, Object> map = new HashMap<>();
-		map.put("tableName", tableEntity.getTableName());
-		map.put("comments", tableEntity.getComments());
-		map.put("pk", tableEntity.getPk());
-		map.put("className", tableEntity.getClassName());
-		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", tableEntity.getClassname().toLowerCase());
-		map.put("columns", tableEntity.getColumns());
-		map.put("hasBigDecimal", hasBigDecimal);
-		map.put("mainPath", mainPath);
-		map.put("package", config.getString("package" ));
-		map.put("moduleName", config.getString("moduleName" ));
-		map.put("author", config.getString("author"));
-		map.put("email", config.getString("email"));
-		map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-       VelocityContext context = new VelocityContext(map);
+		TableEntity tableEntity = getTableInfo(config,table,columns);
+        VelocityContext context = getVelocityContext(config,tableEntity);
        
        //获取模板列表
 		List<String> templates = getTemplates();
@@ -311,75 +238,9 @@ public class GenUtils {
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		boolean hasBigDecimal = false;
-		//表信息
-		TableEntity tableEntity = new TableEntity();
-		tableEntity.setTableName(table.get("tableName"));
-		tableEntity.setComments(table.get("tableComment"));
-		//表名转换成Java类名
-		String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
-		tableEntity.setClassName(className);
-		tableEntity.setClassname(StringUtils.uncapitalize(className));
 		
-		//列信息
-		List<ColumnEntity> columsList = new ArrayList<>();
-		for(Map<String, String> column : columns){
-			ColumnEntity columnEntity = new ColumnEntity();
-			columnEntity.setColumnName(column.get("columnName"));
-			columnEntity.setDataType(column.get("dataType"));
-			columnEntity.setComments(column.get("columnComment"));
-			columnEntity.setExtra(column.get("extra"));
-			columnEntity.setIsNullable(column.get("isNullable"));
-			//列名转换成Java属性名
-			String attrName = columnToJava(columnEntity.getColumnName());
-			columnEntity.setAttrName(attrName);
-			columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
-			columnEntity.setColumnKey(column.get("columnKey"));
-			//列的数据类型，转换成Java类型
-			String attrType = config.getString(columnEntity.getDataType(), "unknowType");
-			columnEntity.setAttrType(attrType);
-			if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
-				hasBigDecimal = true;
-			}
-			//是否主键
-			if("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null){
-				tableEntity.setPk(columnEntity);
-			}
-			
-			columsList.add(columnEntity);
-		}
-		tableEntity.setColumns(columsList);
-		
-		//没主键，则第一个字段为主键
-		if(tableEntity.getPk() == null){
-			tableEntity.setPk(tableEntity.getColumns().get(0));
-		}
-		
-		//设置velocity资源加载器
-		Properties prop = new Properties();  
-		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");  
-		Velocity.init(prop);
-
-		String mainPath = config.getString("mainPath" );
-		mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
-		
-		//封装模板数据
-		Map<String, Object> map = new HashMap<>();
-		map.put("tableName", tableEntity.getTableName());
-		map.put("comments", tableEntity.getComments());
-		map.put("pk", tableEntity.getPk());
-		map.put("className", tableEntity.getClassName());
-		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", tableEntity.getClassname().toLowerCase());
-		map.put("columns", tableEntity.getColumns());
-		map.put("hasBigDecimal", hasBigDecimal);
-		map.put("mainPath", mainPath);
-		map.put("package", config.getString("package" ));
-		map.put("moduleName", config.getString("moduleName" ));
-		map.put("author", config.getString("author"));
-		map.put("email", config.getString("email"));
-		map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-       VelocityContext context = new VelocityContext(map);
+		TableEntity tableEntity = getTableInfo(config,table,columns);
+        VelocityContext context = getVelocityContext(config,tableEntity);
        
        //获取模板列表
 		List<String> templates = getTemplates();
@@ -435,76 +296,8 @@ public class GenUtils {
 			List<Map<String, String>> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
-		boolean hasBigDecimal = false;
-		//表信息
-		TableEntity tableEntity = new TableEntity();
-		tableEntity.setTableName(table.get("tableName"));
-		tableEntity.setComments(table.get("tableComment"));
-		//表名转换成Java类名
-		String className = tableToJava(tableEntity.getTableName(), config.getString("tablePrefix"));
-		tableEntity.setClassName(className);
-		tableEntity.setClassname(StringUtils.uncapitalize(className));
-		
-		//列信息
-		List<ColumnEntity> columsList = new ArrayList<>();
-		for(Map<String, String> column : columns){
-			ColumnEntity columnEntity = new ColumnEntity();
-			columnEntity.setColumnName(column.get("columnName"));
-			columnEntity.setDataType(column.get("dataType"));
-			columnEntity.setComments(column.get("columnComment"));
-			columnEntity.setExtra(column.get("extra"));
-			columnEntity.setIsNullable(column.get("isNullable"));
-			//列名转换成Java属性名
-			String attrName = columnToJava(columnEntity.getColumnName());
-			columnEntity.setAttrName(attrName);
-			columnEntity.setAttrname(StringUtils.uncapitalize(attrName));
-			
-			//列的数据类型，转换成Java类型
-			String attrType = config.getString(columnEntity.getDataType(), "unknowType");
-			columnEntity.setAttrType(attrType);
-			if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
-				hasBigDecimal = true;
-			}
-			//是否主键
-			if("PRI".equalsIgnoreCase(column.get("columnKey")) && tableEntity.getPk() == null){
-				tableEntity.setPk(columnEntity);
-			}
-			
-			columsList.add(columnEntity);
-		}
-		tableEntity.setColumns(columsList);
-		
-		//没主键，则第一个字段为主键
-		if(tableEntity.getPk() == null){
-			tableEntity.setPk(tableEntity.getColumns().get(0));
-		}
-		
-		//设置velocity资源加载器
-		Properties prop = new Properties();  
-		prop.put("file.resource.loader.class", "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader");  
-		Velocity.init(prop);
-
-		String mainPath = config.getString("mainPath" );
-		mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
-		
-		//封装模板数据
-		Map<String, Object> map = new HashMap<>();
-		map.put("tableName", tableEntity.getTableName());
-		map.put("comments", tableEntity.getComments());
-		map.put("pk", tableEntity.getPk());
-		map.put("className", tableEntity.getClassName());
-		map.put("classname", tableEntity.getClassname());
-		map.put("pathName", tableEntity.getClassname().toLowerCase());
-		map.put("columns", tableEntity.getColumns());
-		map.put("hasBigDecimal", hasBigDecimal);
-		map.put("mainPath", mainPath);
-		map.put("package", config.getString("package" ));
-		map.put("moduleName", config.getString("moduleName" ));
-		map.put("author", config.getString("author"));
-		map.put("email", config.getString("email"));
-		map.put("datetime", DateUtils.format(new Date(), DateUtils.DATE_TIME_PATTERN));
-        VelocityContext context = new VelocityContext(map);
-        
+		TableEntity tableEntity = getTableInfo(config,table,columns);
+        VelocityContext context = getVelocityContext(config,tableEntity);
         //获取模板列表
 		List<String> templates = getTemplates();
 		for(String template : templates){

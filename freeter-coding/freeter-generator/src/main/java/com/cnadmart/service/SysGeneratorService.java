@@ -14,11 +14,11 @@ import java.util.Map;
 import java.util.zip.ZipOutputStream;
 
 /**
- * 代码生成器
+ * 飞特超级代码生成器
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月19日 下午3:33:38
+ * @author xc
+ * @email 171998110@qq.com
+ * @date 2018年06月20日 上午10:06:50
  */
 @Service
 public class SysGeneratorService {
@@ -41,57 +41,56 @@ public class SysGeneratorService {
 		return sysGeneratorDao.queryColumns(tableName);
 	}
 
-	public byte[] generatorCode(String[] tableNames) throws IOException  {
+	public byte[] generatorCode(String[] tableNames) throws IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ZipOutputStream zip = new ZipOutputStream(outputStream);
 
-		for(String tableName : tableNames){
-			//查询表信息
+		for (String tableName : tableNames) {
+			// 查询表信息
 			Map<String, String> table = queryTable(tableName);
-			//查询列信息
+			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
-			//生成代码
+			// 生成代码
 			GenUtils.generatorCode(table, columns, zip);
 		}
 		IOUtils.closeQuietly(zip);
 		return outputStream.toByteArray();
 	}
-	
-	public void generatorAllCode(String[] tableNames) throws IOException  {
-		
-		for(String tableName : tableNames){
-			//查询表信息
+
+	public void generatorAllCode(String[] tableNames) throws IOException {
+
+		for (String tableName : tableNames) {
+			// 查询表信息
 			Map<String, String> table = queryTable(tableName);
-			//查询列信息
+			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
-			//生成代码
+			// 生成代码
 			GenUtils.generatorAllCode(table, columns);
 		}
- 	}
-	
-public void generatorApiCode(String[] tableNames) throws IOException  {
-		
-		for(String tableName : tableNames){
-			//查询表信息
+	}
+
+	public void generatorApiCode(String[] tableNames) throws IOException {
+
+		for (String tableName : tableNames) {
+			// 查询表信息
 			Map<String, String> table = queryTable(tableName);
-			//查询列信息
+			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
-			//生成代码
+			// 生成代码
 			GenUtils.generatorApiCode(table, columns);
 		}
- 	}
-	
+	}
+
 	public void updateCode(String[] tableNames) throws IOException {
-	 
-		for(String tableName : tableNames){
-			//查询表信息
+
+		for (String tableName : tableNames) {
+			// 查询表信息
 			Map<String, String> table = queryTable(tableName);
-			//查询列信息
+			// 查询列信息
 			List<Map<String, String>> columns = queryColumns(tableName);
-			//生成代码
+			// 生成代码
 			GenUtils.updateCode(table, columns);
 		}
-		 
-		 
+
 	}
 }

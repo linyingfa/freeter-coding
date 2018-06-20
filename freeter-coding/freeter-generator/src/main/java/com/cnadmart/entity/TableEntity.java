@@ -5,9 +5,9 @@ import java.util.List;
 /**
  * 表数据
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月20日 上午12:02:55
+ * @author xc
+ * @email 171998110@qq.com
+ * @date 2018年06月19日 上午17
  */
 public class TableEntity {
 	//表的名称
@@ -23,6 +23,9 @@ public class TableEntity {
 	private String className;
 	//类名(第一个字母小写)，如：sys_user => sysUser
 	private String classname;
+	
+	//判断是否存在
+	private Boolean hasBigDecimal;
 	
 	public String getTableName() {
 		return tableName;
@@ -60,4 +63,11 @@ public class TableEntity {
 	public void setClassname(String classname) {
 		this.classname = classname;
 	}
+	public Boolean getHasBigDecimal() {
+		return hasBigDecimal;
+	}
+	public void setHasBigDecimal(Boolean hasBigDecimal) {
+		this.hasBigDecimal = hasBigDecimal;
+	}
+	
 }

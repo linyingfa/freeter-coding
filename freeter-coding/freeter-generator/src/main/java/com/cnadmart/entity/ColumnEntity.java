@@ -3,9 +3,9 @@ package com.cnadmart.entity;
 /**
  * 列的属性
  * 
- * @author chenshun
- * @email sunlightcs@gmail.com
- * @date 2016年12月20日 上午12:01:45
+ * @author xc
+ * @email 171998110@qq.com
+ * @date 2018年06月20日 上午10:06:50
  */
 public class ColumnEntity {
 	//列名
