@@ -61,6 +61,7 @@ var vm = new Vue({
 			if(tableNames == null){
 				return ;
 			}
+			confirm('是否覆盖后端接口代码', function(){
 			 $.get( "sys/generator/allcode?tables=" + JSON.stringify(tableNames), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
@@ -70,12 +71,14 @@ var vm = new Vue({
                      alert(r.msg);
                  }
 	            });
+			});
  		},
  		generatorApi: function() {
 			var tableNames = getSelectedRows();
 			if(tableNames == null){
 				return ;
 			}
+			confirm('是否覆盖移动端接口代码', function(){
 			 $.get( "sys/generator/apicode?tables=" + JSON.stringify(tableNames), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
@@ -85,6 +88,7 @@ var vm = new Vue({
                      alert(r.msg);
                  }
 	            });
+			});
  		},
 		update: function() {
 			var tableNames = getSelectedRows();

@@ -11,11 +11,15 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 
 import ${package}.${moduleName}.entity.${className}Entity;
+import ${package}.${moduleName}.entity.view.${className}View;
+
 import ${package}.${moduleName}.service.${className}Service;
 import ${mainPath}.common.utils.PageUtils;
 import ${mainPath}.common.utils.R;
+import ${mainPath}.common.utils.MPUtil;
 
 
 
@@ -35,15 +39,41 @@ public class ${className}Controller {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @RequestMapping("/page")
     @RequiresPermissions("${moduleName}:${pathName}:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = ${classname}Service.queryPage(params);
-
+    public R page(@RequestParam Map<String, Object> params,${className}Entity ${classname}){
+ 
+        EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
+      	ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+    	PageUtils page = ${classname}Service.queryPage(params, ew);
+    
         return R.ok().put("page", page);
+        
     }
 
+	/**
+     * 列表
+     */
+    @RequestMapping("/list")
+    @RequiresPermissions("${moduleName}:${pathName}:list")
+    public R list( ${className}Entity ${classname}){
+       	EntityWrapper<  ${className}Entity> ew = new EntityWrapper<  ${className}Entity>();
+      	ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+        return R.ok().put("data",  ${classname}Service.selectListView(ew));
+    }
 
+	 /**
+     * 查询
+     */
+    @RequestMapping("/query")
+    @RequiresPermissions("${moduleName}:${pathName}:info")
+    public R query(${className}Entity ${classname}){
+        EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
+ 		ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+		${className}View  ${classname}View =  ${classname}Service.selectView(ew);
+		return R.ok("查询${comments}成功").put("data",  ${classname}View);
+    }
+	
     /**
      * 信息
      */

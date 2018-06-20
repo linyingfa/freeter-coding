@@ -2,6 +2,7 @@ package ${package}.${moduleName}.controller;
 
 import java.util.Arrays;
 import java.util.Map;
+import java.util.List;
 
 import ${mainPath}.common.validator.ValidatorUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,8 +14,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import ${package}.${moduleName}.entity.view.${className}View;
 import ${package}.${moduleName}.entity.model.${className}Model;
+import ${package}.${moduleName}.entity.vo.${className}VO;
+import com.freeter.common.utils.MPUtil;
 
 
 import ${package}.${moduleName}.entity.${className}Entity;
@@ -41,21 +43,50 @@ public class ${className}Controller {
     @Autowired
     private ${className}Service ${classname}Service;
  
+	 /**
+     * 列表
+     */
+    @GetMapping("/page")
+    @ApiOperation("分页查询${comments}")
+    public R page(@RequestParam Map<String, Object> params,${className}Model ${classname}Model){
+ 
+        EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
+        ${className}Entity ${classname} = new  ${className}Entity( ${classname}Model);
+     	ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+    	PageUtils page = ${classname}Service.queryPage(params, ew);
+        return R.ok().put("data",  page.getList());
+        
+    }
+	
+	
 	
     /**
      * 查询
      */
-    @GetMapping("/query")
+    @GetMapping("/list")
     @ApiOperation("查询${comments}")
-    public R Model(${className}Model ${classname}Model){
+    public R list(${className}Model ${classname}Model){
 		ValidatorUtils.validateEntity(${classname}Model);
         EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
 		${className}Entity ${classname} = new  ${className}Entity( ${classname}Model);
-		ew.setEntity(${classname});
-		${classname}Service.selectList(ew);
-		return R.ok("查询${comments}成功").put("data",${classname}Service.selectList(ew));
+     	ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+		List<${className}VO>  ${classname}VOList =  ${classname}Service.selectListVO(ew);
+		return R.ok("查询${comments}成功").put("data", ${classname}VOList);
     }
 
+	 /**
+     * 查询
+     */
+    @GetMapping("/query")
+    @ApiOperation("查询${comments}")
+    public R query(${className}Model ${classname}Model){
+		ValidatorUtils.validateEntity(${classname}Model);
+        EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
+		${className}Entity ${classname} = new  ${className}Entity( ${classname}Model);
+		ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+		${className}VO  ${classname}VO =  ${classname}Service.selectVO(ew);
+		return R.ok("查询${comments}成功").put("data",  ${classname}VO);
+    }
 	
 
     /**

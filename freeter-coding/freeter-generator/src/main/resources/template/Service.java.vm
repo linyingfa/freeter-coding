@@ -29,5 +29,7 @@ public interface ${className}Service extends IService<${className}Entity> {
    	List<${className}View> selectListView(Wrapper<${className}Entity> wrapper);
    	
    	${className}View selectView(@Param("ew") Wrapper<${className}Entity> wrapper);
+   	
+   	PageUtils queryPage(Map<String, Object> params,Wrapper<${className}Entity> wrapper);
 }
 

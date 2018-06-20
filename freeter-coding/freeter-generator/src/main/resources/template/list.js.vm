@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + '${moduleName}/${pathName}/list',
+        url: baseURL + '${moduleName}/${pathName}/page',
         datatype: "json",
         colModel: [			
 #foreach($column in $columns)

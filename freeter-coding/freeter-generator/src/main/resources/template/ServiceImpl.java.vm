@@ -32,6 +32,15 @@ public class ${className}ServiceImpl extends ServiceImpl<${className}Dao, ${clas
     }
     
     @Override
+	public PageUtils queryPage(Map<String, Object> params, Wrapper<${className}Entity> wrapper) {
+		  Page<${className}View> page =new Query<${className}View>(params).getPage();
+	        page.setRecords(baseMapper.selectListView(page,wrapper));
+	    	PageUtils pageUtil = new PageUtils(page);
+	    	return pageUtil;
+
+ 	}
+    
+    @Override
 	public List<${className}VO> selectListVO( Wrapper<${className}Entity> wrapper) {
  		return baseMapper.selectListVO(wrapper);
 	}
