@@ -8,7 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
  
 
 @SpringBootApplication
-@MapperScan(basePackages = {"com.cnadmart.dao","com.cnadmart.modules.*.dao"})
+@MapperScan(basePackages = {"com.freeter.dao","com.freeter.modules.*.dao"})
 public class ApiApplication extends SpringBootServletInitializer {
 
 	public static void main(String[] args) {

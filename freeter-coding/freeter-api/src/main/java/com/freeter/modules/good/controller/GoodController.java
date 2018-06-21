@@ -70,7 +70,6 @@ public class GoodController {
         EntityWrapper< GoodEntity> ew = new EntityWrapper< GoodEntity>();
         Map params = new HashMap();
 		params.put("category.category_id", good.getCategoryId());
- 		
  		ew.like("good.good_name", good.getSearch());
 		ew.or();
 		ew.like("good.page_keyword", good.getSearch());

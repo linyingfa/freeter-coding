@@ -16,21 +16,25 @@
 
 	<select id="selectListVO"
 		resultType="com.freeter.modules.pc.entity.vo.PcVO" >
-		SELECT * FROM t_pc as pc <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT * FROM t_pc  pc         
+        <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
 		resultType="com.freeter.modules.pc.entity.vo.PcVO" >
-		SELECT * FROM t_pc as pc <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT  pc.* FROM t_pc  pc 	
+ 		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
 		resultType="com.freeter.modules.pc.entity.view.PcView" >
-		SELECT  * FROM t_pc as pc <where> 1=1 ${ew.sqlSegment}</where>
+
+		SELECT  pc.* FROM t_pc  pc 	        
+        <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
 		resultType="com.freeter.modules.pc.entity.view.PcView" >
-		SELECT * FROM t_pc as pc <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT * FROM t_pc  pc <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 </mapper>
