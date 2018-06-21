@@ -59,7 +59,7 @@
 <br>
 
  **项目演示**
-- 演示地址：<a href="http://47.106.39.83:8082/freeter-generator/#generator.html">http://47.106.39.83:8082/freeter-generator/#generator.html<a>
+- 演示地址：<a href="http://47.106.39.83:8082/freeter-generator/#generator.html" target="_blank">http://47.106.39.83:8082/freeter-generator/#generator.html<a>
 <br>
 
 **如何交流、反馈、参与贡献？** 
