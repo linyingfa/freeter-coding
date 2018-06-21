@@ -64,7 +64,7 @@
 
 **如何交流、反馈、参与贡献？** 
 - 开发文档：https://gitee.com/xcOschina/freeter-admin.git
-- 官方免费QQ群：806251058
+- 官方免费QQ群：806251058<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4469c242246546fbe5548083e31b154f5f27df10c777c9ace61b094fbf7d922f"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="飞特开源技术交流" title="飞特开源技术交流"></a>
 - gitee仓库：https://gitee.com/xcOschina/freeter-admin.git
 - github仓库：暂不考虑，支持国产
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
@@ -80,7 +80,7 @@
 
 <br>
 
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=deecd1ba9eb914bec62005d04851f890a32afef7fbb891efb54820b6ff89a785"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="与你为邻" title="与你为邻">官方QQ群</a>
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4469c242246546fbe5548083e31b154f5f27df10c777c9ace61b094fbf7d922f"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="飞特开源技术交流" title="飞特开源技术交流"></a>
 
 <br>
 
