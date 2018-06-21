@@ -1,6 +1,6 @@
 **项目介绍** 
 - 飞特后台管理系统的超级代码生成器，可直接生成四种实体类，controller、service、dao、xml代码到eclipse或ij，并支持多表连接，支持mybatis-plus 减少70%以上的开发任务
-- 目前只支持MySQL、下个版本支持oracle。
+- 目前只支持MySQL、下个版本计划支持oracle,并支持最新版mybatis-plus 3.0
 <br>
 
 **加强特点** 
@@ -35,7 +35,7 @@
 
 3.IDE 会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。
 
-4.执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
+4.执行doc/mysql-test.sql文件，初始化数据【按需导入表结构及数据】
 
 5.最后修改数据库连接参数,配置文件在src/main/resources/application.yml
 
@@ -59,22 +59,18 @@
 <br>
 
  **项目演示**
-- 演示地址：#
-- 账号密码：admin/admin
-
+- 演示地址：http://127.0.0.1:8082/freeter-generator
 <br>
 
 **如何交流、反馈、参与贡献？** 
 - 开发文档：https://gitee.com/xcOschina/freeter-admin.git
-- 官方免费QQ群：http://www.renren.io/community
+- 官方免费QQ群：806251058
 - gitee仓库：https://gitee.com/xcOschina/freeter-admin.git
 - github仓库：暂不考虑，支持国产
-- [人人开源](http://www.renren.io)：http://www.renren.io   
-- 官方QQ群：324780204、145799952
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
 - 技术讨论、二次开发等咨询、问题和建议，请移步到官方免费QQ群，我会在第一时间进行解答和回复！
-- 微信扫码并关注【飞特开源】，获得项目最新动态及更新提醒<br>
-![输入图片说明](http://cdn.renren.io/47c26201804031918312618.jpg "在这里输入图片标题")
+- 微信扫码并关注【飞特开源】，获得项目最新动态及更新提醒，暂未开放<br>
+
 <br>
 <br>
 <br>
@@ -84,6 +80,7 @@
 
 <br>
 
+<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=deecd1ba9eb914bec62005d04851f890a32afef7fbb891efb54820b6ff89a785"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="与你为邻" title="与你为邻">官方QQ群</a>
 
 <br>
 
