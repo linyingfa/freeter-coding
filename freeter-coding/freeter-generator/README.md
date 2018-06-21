@@ -59,7 +59,7 @@
 <br>
 
  **项目演示**
-- 演示地址：http://127.0.0.1:8082/freeter-generator
+- 演示地址：http://47.106.39.83:8082/freeter-generator/#generator.html
 <br>
 
 **如何交流、反馈、参与贡献？** 
@@ -80,7 +80,6 @@
 
 <br>
 
-<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4469c242246546fbe5548083e31b154f5f27df10c777c9ace61b094fbf7d922f"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="飞特开源技术交流" title="飞特开源技术交流"></a>
 
 <br>
 
