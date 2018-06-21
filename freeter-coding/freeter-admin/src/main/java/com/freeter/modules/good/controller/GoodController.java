@@ -109,7 +109,7 @@ public class GoodController {
 			wrapper.in("category.category_id", categoryIds.toArray());
 		}
 		wrapper.like("good.good_name", goodView.getGoodName());
-		PageUtils page = new PageUtils(goodService.queryPage(params, wrapper));
+		PageUtils page = goodService.queryPage(params, wrapper);
 
 		return R.ok().put("page", page);
 	}
@@ -169,7 +169,7 @@ public class GoodController {
 		goodView.getImages().forEach(image -> {
 			GoodImageEntity goodImageEntity = new GoodImageEntity();
 			goodImageEntity.setGoodId(good.getGoodId().longValue());
-			;
+			 
 			goodImageEntity.setStatus(1);
 			goodImageEntity.setPicImg(image);
 			listGoodImageEntity.add(goodImageEntity);

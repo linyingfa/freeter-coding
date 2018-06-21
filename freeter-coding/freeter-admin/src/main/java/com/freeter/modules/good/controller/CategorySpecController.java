@@ -1,11 +1,9 @@
 package com.freeter.modules.good.controller;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.freeter.common.utils.GenUtils;
+import com.freeter.common.utils.MPUtil;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
@@ -24,7 +22,6 @@ import com.freeter.modules.good.entity.CategorySpecEntity;
 import com.freeter.modules.good.entity.view.CategorySpecView;
 import com.freeter.modules.good.service.CategorySpecService;
 
-import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 
 
@@ -50,10 +47,7 @@ public class CategorySpecController {
     public R list(@RequestParam Map<String, Object> params,CategorySpecEntity en){
        // PageUtils page = categorySpecService.queryPage(params);
     	EntityWrapper< CategorySpecEntity> ew = new EntityWrapper< CategorySpecEntity>();
-    	ew.setEntity(en);
-    	Map map = new HashMap();
-    	map = BeanUtil.beanToMap(en);
-    	ew.allEq(GenUtils.camelToUnderlineMap(map,"")); 
+     	ew.allEq(MPUtil.allEQMapPre(en, "categorySpecView")); 
     	Page<CategorySpecView> page = categorySpecService.queryPageCategorySpecView(params, ew);
         return R.ok().put("page", new PageUtils(page));
     }

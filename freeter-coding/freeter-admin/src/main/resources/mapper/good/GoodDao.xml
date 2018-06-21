@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.cnadmart.modules.good.dao.GoodDao">
+<mapper namespace="com.freeter.modules.good.dao.GoodDao">
 
 	<!-- 可根据自己的需求，是否要使用 -->
-    <resultMap type="com.cnadmart.modules.good.entity.GoodEntity" id="goodMap">
+    <resultMap type="com.freeter.modules.good.entity.GoodEntity" id="goodMap">
         <result property="goodId" column="good_id"/>
         <result property="goodName" column="good_name"/>
         <result property="goodNumber" column="good_number"/>
@@ -34,26 +34,26 @@
     </resultMap>
 
 	<select id="selectListVO"
-		resultType="com.cnadmart.modules.good.entity.vo.GoodVO" >
+		resultType="com.freeter.modules.good.entity.vo.GoodVO" >
 		SELECT * FROM cn_good as good <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
-		resultType="com.cnadmart.modules.good.entity.vo.GoodVO" >
+		resultType="com.freeter.modules.good.entity.vo.GoodVO" >
 		SELECT * FROM cn_good as good <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
-		resultType="com.cnadmart.modules.good.entity.view.GoodView" >
+		resultType="com.freeter.modules.good.entity.view.GoodView" >
 		SELECT  good.* FROM cn_good as good <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
-		resultType="com.cnadmart.modules.good.entity.view.GoodView" >
+		resultType="com.freeter.modules.good.entity.view.GoodView" >
 		SELECT * FROM cn_good as good <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
-	<select id="selectCategoryChannelByGood" resultType="com.cnadmart.modules.good.entity.view.GoodView">
+	<select id="selectCategoryChannelByGood" resultType="com.freeter.modules.good.entity.view.GoodView">
 SELECT
 	good.*,category.`name` category_name,channel.name channel_name,(select name from cn_category owner where owner.category_id =category.parent_id ) category_parent_name
 FROM

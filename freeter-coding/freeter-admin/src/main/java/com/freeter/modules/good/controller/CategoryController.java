@@ -45,7 +45,7 @@ public class CategoryController {
     @RequiresPermissions("good:category:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = categoryService.queryPage(params);
-
+        page.getList();
         return R.ok().put("page", page);
     }
 
@@ -59,8 +59,8 @@ public class CategoryController {
     	 
          CategoryEntity categoryEntity = new CategoryEntity();
     	EntityWrapper< CategoryEntity> ew = new EntityWrapper< CategoryEntity>();
-    	ew.orderBy("sort", true);
-        List page = categoryService.selectListVO(ew);
+     	ew.orderBy("sort", true);
+         List page = categoryService.selectListVO(ew);
         CategoryView v = new CategoryView();
         v.setParentId(-1l);
         v.setCategoryId(0L);

@@ -45,8 +45,8 @@ public class ShiroConfig {
 
     @Bean("sessionManager")
     public SessionManager sessionManager(RedisShiroSessionDAO redisShiroSessionDAO,
-                                         @Value("${renren.redis.open}") boolean redisOpen,
-                                         @Value("${renren.shiro.redis}") boolean shiroRedis){
+                                         @Value("${freeter.redis.open}") boolean redisOpen,
+                                         @Value("${freeter.shiro.redis}") boolean shiroRedis){
         DefaultWebSessionManager sessionManager = new DefaultWebSessionManager();
         //设置session过期时间为1小时(单位：毫秒)，默认为30分钟
         sessionManager.setGlobalSessionTimeout(60 * 60 * 1000);

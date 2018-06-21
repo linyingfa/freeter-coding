@@ -1,6 +1,6 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'pc/pc/list',
+        url: baseURL + 'pc/pc/page',
         datatype: "json",
         colModel: [			
 			{ label: 'pcId', name: 'pcId', index: 'pc_id', width: 50, key: true },

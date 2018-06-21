@@ -39,7 +39,7 @@ spring:
         date-format: yyyy-MM-dd HH:mm:ss
 
 
-renren:
+freeter:
     redis:
         open: false  # 是否开启redis缓存  true开启   false关闭
     shiro:
@@ -77,7 +77,7 @@ mybatis-plus:
 #logging
 logging:
   level: debug
-  level.com.cnadmart: debug
+  level.com.freeter: debug
   path: logs/
   file: admin.log
 
