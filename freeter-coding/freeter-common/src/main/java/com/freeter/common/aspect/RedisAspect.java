@@ -38,10 +38,10 @@ import com.freeter.common.exception.RRException;
 public class RedisAspect {
     private Logger logger = LoggerFactory.getLogger(getClass());
     //是否开启redis缓存  true开启   false关闭
-    @Value("${renren.redis.open: false}")
+    @Value("${freeter.redis.open: false}")
     private boolean open;
 
-    @Around("execution(* com.cnadmart.common.utils.RedisUtils.*(..))")
+    @Around("execution(* com.freeter.common.utils.RedisUtils.*(..))")
     public Object around(ProceedingJoinPoint point) throws Throwable {
         Object result = null;
         if(open){

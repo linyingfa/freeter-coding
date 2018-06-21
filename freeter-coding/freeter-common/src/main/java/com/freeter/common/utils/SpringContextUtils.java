@@ -35,7 +35,7 @@ import com.freeter.common.config.White;
 public class SpringContextUtils implements ApplicationContextAware {
 	public static ApplicationContext applicationContext; 
 	 
-	@Value("${white}")  
+	@Value("${white:}")  
 	private String[] white;
 	
 	@Override
