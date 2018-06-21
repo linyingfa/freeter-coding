@@ -19,10 +19,10 @@ var vm = new Vue({
             layer.open({
                 type: 2,
                 title: false,
-                area: ['806px', '467px'],
+                area: ['706px', '467px'],
                 closeBtn: 1,
                 shadeClose: false,
-                content: ['#', 'no']
+                content: ['http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg', 'no']
             });
         }
     }
