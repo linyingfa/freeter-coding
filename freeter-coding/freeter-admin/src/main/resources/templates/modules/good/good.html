@@ -208,14 +208,14 @@
     </div>
  	<!-- 规格预览 -->
 	 	<div id="specLayer"  style="display: none; padding: 10px;">
-		 	<div class="form-group formtitle ">
-								<div class="col-md-2 control-label" style="text-align:left;">规格名称</div> 
+		 	<div class="form-group formtitle " style="padding: 6px 12px;">
+								<div class="col-md-5 control-label" style="text-align:left;padding: 15px;">规格名称</div> 
 								<div class="col-md-2 control-label">库存</div> 
 								<div class="col-md-2 control-label">价格</div> 
 								<div class="col-md-2 control-label">销售量</div> 
  							</div>
 							<div class="form-group formitem" v-for="good in goodPrice" style="overflow:hidden;">
-								<div class="col-md-2">
+								<div class="col-md-5">
 									<span class="form-control" style="border:0;box-shadow:none;">{{good.specName}}</span> 
 								</div>
 								<div class="col-md-2">

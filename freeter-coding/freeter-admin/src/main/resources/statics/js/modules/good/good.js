@@ -300,14 +300,6 @@ function getImage(goodId){
 	    	console.log("filebatchselected");
 	     
 	    }).on('fileselect', function(event, data, previewId, index) {
-	    	console.log($('#input-702').fileinput('getPreview'));
-	    	console.log($('#input-702').fileinput('getFileStack'));
-	    	console.log(event, data,previewId,index);
-	    	console.log("fileselect");
-	    	var test = $(".file-preview-thumbnails .kv-preview-thumb").each(function(){
-	    		  
-	    		   console.info(    $(this).attr("id"));
-	    		});
 	    }).on('fileimagesloaded', function(event) {
 	        console.log("fileimagesloaded");
 	    }).on('fileloaded', function(event, file, previewId, index, reader) {

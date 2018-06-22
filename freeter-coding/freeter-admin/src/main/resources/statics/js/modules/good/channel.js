@@ -50,6 +50,7 @@ var vm = new Vue({
 			vm.showList = false;
 			vm.title = "新增";
 			vm.channel = {};
+			vm.channel.sort=0;
 		},
 		update: function (event) {
 			var channelId = getSelectedRow();

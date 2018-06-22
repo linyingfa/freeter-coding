@@ -186,7 +186,7 @@ var vm = new Vue({
 			});
 		},
 		reload: function (event) {
-			location.href='modules/good/good.html';
+			location.href=baseURL+'modules/good/good.html';
 		},
 		next: function (event) {
  			location.href='modules/good/standard.html?id='+vm.good.goodId+'&categoryId='+vm.good.categoryId;

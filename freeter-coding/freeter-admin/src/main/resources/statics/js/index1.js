@@ -36,6 +36,7 @@ isquery=true;
 var vm = new Vue({
     el: '#layui_layout',
     data: {
+    	system:'广品会',
         user: {},
         menuList: {},
         password: '',
@@ -109,7 +110,7 @@ var vm = new Vue({
         }).use(['navtab','layer'], function(){
             window.jQuery = window.$ = layui.jquery;
             window.layer = layui.layer;
-            var element = layui.element();
+            var element = layui.element;
             var  navtab = layui.navtab({
                 elem: '.larry-tab-box',
                 closed:false
@@ -124,10 +125,12 @@ var vm = new Vue({
                             var href = $a.data('url');
                             var icon = $a.children('i:first').data('icon');
                             var title = $a.children('span').text();
+                              
                             var data = {
                                 href: href,
                                 icon: icon,
-                                title: title
+                                title: title 
+                                
                             }
                             navtab.tabAdd(data);
                         });
