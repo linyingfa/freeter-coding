@@ -50,9 +50,9 @@ freeter-coding 此项目会持续更新
 - 文件上传：Bootstrap File Input
 - 热部署 jrebel
 - 验证框架 hibernate-validator
-- mybatis加强工具 mybatis-plus
-- 通用工具类 hutool
-<br>
+- mybatis加强工具 mybatis-plus  文档 http://mp.baomidou.com/#/?id=%E7%AE%80%E4%BB%8B
+- 通用工具类 hutool 文档 http://hutool.mydoc.io/
+<br> 
 
  **软件需求** 
 - JDK1.8
@@ -63,41 +63,45 @@ freeter-coding 此项目会持续更新
 <br>
 
  **本地部署**
-- 通过git下载源码
-- 创建数据库renren_security，数据库编码为UTF-8
-- 执行db/mysql.sql文件，初始化数据【按需导入表结构及数据】
-- 修改application-dev.yml文件，更新MySQL账号和密码
-- 在renren-security目录下，执行mvn clean install
+
+1.git下载https://gitee.com/xcOschina/freeter-admin.git项目,完成后导入到ide中 <br>
+2.eclipse File import... Maven Existing Projects into Workspace 选择项目的根路径。<br>
+3.IDE会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。<br>
+4.执行doc/mysql-test.sql文件，初始化数据【按需导入表结构及数据】<br>
+5.最后修改数据库连接参数,配置文件在src/main/resources/application.yml<br>
+6.在freeter-coding目录下，执行mvn clean install
 <br>
 
-- Eclipse、IDEA运行AdminApplication.java，则可启动项目【renren-admin】
-- renren-admin访问路径：http://localhost:8080/renren-admin
-- swagger文档路径：http://localhost:8080/renren-admin/swagger/index.html
+- Eclipse、IDEA运行AdminApplication.java，则可启动项目【freeter-admin】
+- freeter-admin访问路径：http://localhost:8080/renren-admin/index.html
 - 账号密码：admin/admin
 
 <br>
 
-- Eclipse、IDEA运行ApiApplication.java，则可启动项目【renren-api】
-- renren-api访问路径：http://localhost:8081/renren-api/swagger-ui.html
+- Eclipse、IDEA运行ApiApplication.java，则可启动项目【freeter-api】
+- renren-api访问路径：http://localhost:8081/freeter-api/swagger-ui.html
 
 <br>
 
-- Eclipse、IDEA运行GeneratorApplication.java，则可启动项目【renren-generator】
-- renren-generator访问路径：http://localhost:8082/renren-generator
+- Eclipse、IDEA运行GeneratorApplication.java，则可启动项目【freeter-generator】
+- renren-generator访问路径：http://localhost:8082/freeter-generator
 
 
 <br>
 
- **分布式部署**
-- 分布式部署，需要安装redis，并配置config.properties里的redis信息
-- 需要配置【renren.redis.open=true】，表示开启redis缓存
-- 需要配置【renren.shiro.redis=true】，表示把shiro session存到redis里
-
 <br>
 
- **项目演示**
-- 演示地址：http://demo.open.renren.io/renren-security
+ **后端项目演示**
+- 演示地址：http://47.106.39.83:8080/freeter-admin/login.html
 - 账号密码：admin/admin
+
+ **移动端接口项目演示**
+- 演示地址：http://47.106.39.83:8081/freeter-api/swagger-ui.html
+
+ **超级代码生成器项目演示**
+- 演示地址：http://47.106.39.83:8082/freeter-generator
+
+
 
 <br>
 
