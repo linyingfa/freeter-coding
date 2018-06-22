@@ -73,7 +73,7 @@ freeter-coding 此项目会持续更新
 <br>
 
 - Eclipse、IDEA运行AdminApplication.java，则可启动项目【freeter-admin】
-- freeter-admin访问路径：http://localhost:8080/renren-admin/index.html
+- freeter-admin访问路径：http://localhost:8080/freeter-admin/index.html
 - 账号密码：admin/admin
 
 <br>
