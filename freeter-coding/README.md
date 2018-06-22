@@ -137,9 +137,11 @@ freeter-coding 此项目会持续更新
 <br>
 
 **后端模块自动生成的实体类：**
-@TableName("cn_good")
-@ApiModel(value = "Good")
-public class GoodEntity<T> implements Serializable {
+
+    @TableName("cn_good") 
+    @ApiModel(value = "Good")
+    public class GoodEntity<T> implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 
 
