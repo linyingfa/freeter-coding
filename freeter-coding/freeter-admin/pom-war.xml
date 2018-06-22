@@ -1,11 +1,11 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
-		<groupId>com.cnadmart</groupId>
-		<artifactId>cnadmart-security</artifactId>
+		<groupId>com.freeter</groupId>
+		<artifactId>freeter-coding</artifactId>
 		<version>3.2.0</version>
 	</parent>
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>cnadmart-admin</artifactId>
+	<artifactId>freeter-admin</artifactId>
 	<packaging>war</packaging>
 	<description>war包对应的pom，打war包，执行【mvn clean package -f pom-war.xml】</description>
 
@@ -21,8 +21,8 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.cnadmart</groupId>
-			<artifactId>cnadmart-common</artifactId>
+			<groupId>com.freeter</groupId>
+			<artifactId>freeter-common</artifactId>
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
@@ -103,7 +103,7 @@
 
 
 		<dependency>
-			<groupId>com.cnadmart</groupId>
+			<groupId>com.freeter</groupId>
 			<artifactId>FYOpenApi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
