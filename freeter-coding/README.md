@@ -122,6 +122,55 @@ freeter-coding 此项目会持续更新
 <br>
 
 
+**商城移动端接口：**
+![输入图片说明](http://img.cnadmart.com/20180623/8ed6b37c0e354b219a76a2389fa733f5.png "在这里输入图片标题")
 <br>
+
+**商城后端：**
+![输入图片说明](http://img.cnadmart.com/20180623/e1732d3dd44e4513a88cf4589b4960df.png "在这里输入图片标题")
+<br>
+![输入图片说明](http://img.cnadmart.com/20180623/87fc8c561d02475db2008b1bf6963cf0.png "在这里输入图片标题")
+<br>
+
+
+
+<br>
+
+**后端模块自动生成的实体类：**
+@TableName("cn_good")
+@ApiModel(value = "Good")
+public class GoodEntity<T> implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+
+	public GoodEntity() {
+		
+	}
+	
+	public GoodEntity(T t) {
+		try {
+			BeanUtils.copyProperties(this, t);
+		} catch (IllegalAccessException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * 商品ID
+	 */
+	
+	@TableId 					
+	@ApiModelProperty(value = "商品ID",hidden = true)
+	private Integer goodId;
+	
+	/**
+	 * 商品名称
+	 */
+				
+	@NotBlank (message = "商品名称不能为空") 			
+	@ApiModelProperty(value = "商品名称")
+	private String goodName;
+	
 
 ![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
