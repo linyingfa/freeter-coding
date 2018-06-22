@@ -103,42 +103,25 @@ freeter-coding 此项目会持续更新
 
 
 
-<br>
-
 **如何交流、反馈、参与贡献？** 
-- 开发文档：http://www.renren.io/guide/security
-- 官方社区：http://www.renren.io/community
-- gitee仓库：https://gitee.com/renrenio/renren-security
-- github仓库：https://github.com/renrenio/renren-security
-- [人人开源](http://www.renren.io)：http://www.renren.io   
-- 官方QQ群：324780204、145799952
+- 开发文档：https://gitee.com/xcOschina/freeter-admin.git
+- 官方免费QQ群：806251058<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4469c242246546fbe5548083e31b154f5f27df10c777c9ace61b094fbf7d922f"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="飞特开源技术交流" title="飞特开源技术交流"></a>
+- gitee仓库：https://gitee.com/xcOschina/freeter-admin.git
+- github仓库：暂不考虑，支持国产
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
-- 技术讨论、二次开发等咨询、问题和建议，请移步到官方社区，我会在第一时间进行解答和回复！
-- 微信扫码并关注【人人开源】，获得项目最新动态及更新提醒<br>
-![输入图片说明](http://cdn.renren.io/47c26201804031918312618.jpg "在这里输入图片标题")
+- 技术讨论、二次开发等咨询、问题和建议，请移步到官方免费QQ群，我会在第一时间进行解答和回复！
+- 微信扫码并关注【飞特开源】，获得项目最新动态及更新提醒，暂未开放<br>
+
+<br>
 <br>
 <br>
 
-**接口文档效果图：** 
-![输入图片说明](http://cdn.renren.io/img/c8dae596146248d8b4d0639738c2932b "在这里输入图片标题")
+**代码生成器：**
+![输入图片说明](http://img.cnadmart.com/20180621/9b7b21a26bb74536985b073488eae307.png "在这里输入图片标题")
 
 <br>
 
-**Layui主题风格：**
-![输入图片说明](http://cdn.renren.io/img/1013aa91fe8542b7b05d82bc9444433a "在这里输入图片标题")
 
 <br>
 
-**AdminLTE主题风格：**
-![输入图片说明](http://cdn.renren.io/img/f9762bc6574545ce908e271995efcf1c "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/a1b8bf1ea3db4844a8652a9cf84048cc "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/e542060605f94b3ebec699b0afffc22d "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/c94be5b4bf0d4387b18e119c91b1a986 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/ae8c683a01c74d8dbc52d62547efda31 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/ca38bcf3717c427d82dd67d86b744e18 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/4862ec46a9ad469b90c30788c4707e35 "在这里输入图片标题")
-![输入图片说明](http://cdn.renren.io/img/5d8e7243d30a4421b90f15394b6d1ccd "在这里输入图片标题")
-
-<br>
-
-![捐赠](http://cdn.renren.io/donate.jpg "捐赠") 
+![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
