@@ -97,7 +97,7 @@ freeter-coding 此项目会持续更新
  **移动端接口项目演示**
 - 演示地址：<a href="http://47.106.39.83:8081/freeter-api/swagger-ui.html"  target="_blank">
 47.106.39.83:8081/freeter-api/swagger-ui.html</a>
-<br> 
+
  **超级代码生成器项目演示**
 - 演示地址：<a href="http://47.106.39.83:8082/freeter-generator/#generator.html"  target="_blank">
 47.106.39.83:8082/freeter-generator/#generator.html</a>
