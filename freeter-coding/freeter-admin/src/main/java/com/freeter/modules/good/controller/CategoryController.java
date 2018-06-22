@@ -1,5 +1,6 @@
 package com.freeter.modules.good.controller;
 
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.PageUtils;
@@ -18,8 +20,10 @@ import com.freeter.common.utils.R;
 import com.freeter.common.validator.Assert;
 import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.modules.good.entity.CategoryEntity;
+import com.freeter.modules.good.entity.GoodEntity;
 import com.freeter.modules.good.entity.view.CategoryView;
 import com.freeter.modules.good.service.CategoryService;
+import com.freeter.modules.oss.cloud.OSSFactory;
 
 import cn.hutool.core.bean.BeanUtil;
 
@@ -45,7 +49,7 @@ public class CategoryController {
     @RequiresPermissions("good:category:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = categoryService.queryPage(params);
-        page.getList();
+
         return R.ok().put("page", page);
     }
 
@@ -59,8 +63,8 @@ public class CategoryController {
     	 
          CategoryEntity categoryEntity = new CategoryEntity();
     	EntityWrapper< CategoryEntity> ew = new EntityWrapper< CategoryEntity>();
-     	ew.orderBy("sort", true);
-         List page = categoryService.selectListVO(ew);
+    	ew.orderBy("sort", true);
+        List page = categoryService.selectListVO(ew);
         CategoryView v = new CategoryView();
         v.setParentId(-1l);
         v.setCategoryId(0L);
@@ -147,6 +151,39 @@ public class CategoryController {
         categoryService.insert(category);
           return R.ok();
     }
+    
+    /**
+     * 修改
+     * @throws Exception 
+     */
+    @RequestMapping("/uploadIcon")
+    @RequiresPermissions("good:category:update")
+    public R uploadIcon(CategoryEntity category, @RequestParam("files") MultipartFile file) throws Exception{
+    	if (file != null && file.getSize() > 0) {
+
+			// 上传文件
+			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+			String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+			category.setIcon(url);
+		}
+    	categoryService.updateById(category);
+        
+        return R.ok();
+    }
+    /**
+     * 修改
+     */
+    @RequestMapping("/deleteIcon")
+    @RequiresPermissions("good:category:update")
+    public R deleteIcon(CategoryEntity category, @RequestParam(value = "filePath") String filePath){
+    	OSSFactory.build().deleteByPath(filePath);
+		 
+     	CategoryEntity  categoryEntity = categoryService.selectById(category.getCategoryId());
+     	categoryEntity.setIcon(null);
+        categoryService.updateAllColumnById(categoryEntity);//全部更新
+        
+        return R.ok();
+    }
 
     /**
      * 修改
@@ -155,6 +192,8 @@ public class CategoryController {
     @RequiresPermissions("good:category:update")
     public R update(@RequestBody CategoryEntity category){
         ValidatorUtils.validateEntity(category);
+        CategoryEntity  categoryEntity = categoryService.selectById(category.getCategoryId());
+        category.setIcon(categoryEntity.getIcon());
         categoryService.updateAllColumnById(category);//全部更新
         
         return R.ok();

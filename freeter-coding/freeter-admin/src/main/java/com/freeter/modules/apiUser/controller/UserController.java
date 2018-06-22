@@ -3,6 +3,12 @@ package com.freeter.modules.apiUser.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.apiUser.entity.UserEntity;
+import com.freeter.modules.apiUser.entity.view.UserSearch;
+import com.freeter.modules.apiUser.entity.view.UserView;
+import com.freeter.modules.apiUser.service.UserService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,12 +20,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
-import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.apiUser.entity.UserEntity;
-import com.freeter.modules.apiUser.entity.view.UserSearch;
-import com.freeter.modules.apiUser.entity.view.UserView;
-import com.freeter.modules.apiUser.service.UserService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

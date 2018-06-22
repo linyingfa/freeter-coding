@@ -34,7 +34,7 @@ public interface GoodService extends IService<GoodEntity> {
    	
    	GoodView selectView(@Param("ew") Wrapper<GoodEntity> wrapper);
    	
-   	PageUtils queryPage(Map<String, Object> params,Wrapper<GoodEntity> wrapper);
+    Page<GoodView> queryPage(Map<String, Object> params,Wrapper<GoodEntity> wrapper);
 
 	//PageUtils queryGoodPage(Map<String, Object> params,@Param("ew") Wrapper<GoodEntity> wrapper);
 

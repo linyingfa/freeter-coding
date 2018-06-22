@@ -4,6 +4,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.freeter.common.utils.Query;
+import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.expressCompany.entity.ExpressCompanyEntity;
+import com.freeter.modules.expressCompany.entity.view.ExpressCompanySearch;
+import com.freeter.modules.expressCompany.entity.view.ExpressCompanyView;
+import com.freeter.modules.expressCompany.service.ExpressCompanyService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -14,14 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.PageUtils;
-import com.freeter.common.utils.Query;
 import com.freeter.common.utils.R;
-import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.expressCompany.entity.ExpressCompanyEntity;
-import com.freeter.modules.expressCompany.entity.view.ExpressCompanySearch;
-import com.freeter.modules.expressCompany.entity.view.ExpressCompanyView;
-import com.freeter.modules.expressCompany.service.ExpressCompanyService;
-
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

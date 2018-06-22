@@ -7,8 +7,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.freeter.modules.apiUser.entity.view.UserView;
-
 import java.lang.reflect.InvocationTargetException;
 
 import io.swagger.annotations.ApiModel;
@@ -16,19 +14,20 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.beanutils.BeanUtils;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 
 
 
 /**
  * 用户表
  * 
- * @author liuqi
- * @email 363236211@qq.com
- * @date 2018-06-07 13:18:33
+ * @author xuchen
+ * @email 171998110@qq.com
+ * @date 2018-06-19 16:22:44
  */
 @TableName("cn_user")
 @ApiModel(value = "User")
@@ -53,21 +52,21 @@ public class UserEntity<T> implements Serializable {
 	 * 用户ID
 	 */
 	
-	@TableId 				 
+	@TableId 					
 	@ApiModelProperty(value = "用户ID",hidden = true)
 	private Long userId;
 	
 	/**
 	 * 身份证号码
 	 */
-					 
+						
 	@ApiModelProperty(value = "身份证号码")
 	private String idCard;
 	
 	/**
 	 * 用户编号
 	 */
-					 
+						
 	@ApiModelProperty(value = "用户编号")
 	private String userNumber;
 	
@@ -75,7 +74,7 @@ public class UserEntity<T> implements Serializable {
 	 * 手机号
 	 */
 				
-	@NotBlank (message = "手机号不能为空") 		 
+	@NotBlank (message = "手机号不能为空") 			
 	@ApiModelProperty(value = "手机号")
 	private String phone;
 	
@@ -83,35 +82,35 @@ public class UserEntity<T> implements Serializable {
 	 * 密码
 	 */
 				
-	@NotBlank (message = "密码不能为空") 		 
+	@NotBlank (message = "密码不能为空") 			
 	@ApiModelProperty(value = "密码")
 	private String password;
 	
 	/**
 	 * 盐
 	 */
-					 
+						
 	@ApiModelProperty(value = "盐")
 	private String salt;
 	
 	/**
 	 * 用户昵称
 	 */
-					 
+						
 	@ApiModelProperty(value = "用户昵称")
 	private String userName;
 	
 	/**
 	 * 真实姓名
 	 */
-					 
+						
 	@ApiModelProperty(value = "真实姓名")
 	private String realName;
 	
 	/**
 	 * 性别
 	 */
-					 
+						
 	@ApiModelProperty(value = "性别")
 	private Integer sex;
 	
@@ -120,42 +119,42 @@ public class UserEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "出生日期")
 	private Date birth;
 	
 	/**
 	 * 年龄
 	 */
-					 
+						
 	@ApiModelProperty(value = "年龄")
 	private Integer age;
 	
 	/**
 	 * 用户头像
 	 */
-					 
+						
 	@ApiModelProperty(value = "用户头像")
 	private String picImg;
 	
 	/**
 	 * 状态 0=冻结/1=正常
 	 */
-					 
+						
 	@ApiModelProperty(value = "状态 0=冻结/1=正常")
 	private Integer status;
 	
 	/**
 	 * 总金额
 	 */
-					 
+						
 	@ApiModelProperty(value = "总金额")
 	private String amount;
 	
 	/**
 	 * 用户类型
 	 */
-					 
+						
 	@ApiModelProperty(value = "用户类型")
 	private String userType;
 	
@@ -164,14 +163,15 @@ public class UserEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "注册时间")
 	private Date regeistTime;
 	
 	/**
 	 * 创建者
 	 */
-					 
+							
+	@TableField(fill = FieldFill.INSERT) 
 	@ApiModelProperty(value = "创建者",hidden = true)
 	private String createBy;
 	
@@ -180,30 +180,32 @@ public class UserEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
+	@TableField(fill = FieldFill.UPDATE) 	
 	@ApiModelProperty(value = "修改时间",hidden = true)
 	private Date updateTime;
 	
 	/**
 	 * 修改人
 	 */
-					 
+						
+	@TableField(fill = FieldFill.UPDATE) 	
 	@ApiModelProperty(value = "修改人",hidden = true)
 	private String updateBy;
 	
 	/**
 	 * 身份证正面照
 	 */
-					 
+						
 	@ApiModelProperty(value = "身份证正面照")
-	private String idCardFrontImg;
+	private String idcardFrontImg;
 	
 	/**
 	 * 身份证反面照
 	 */
-					 
+						
 	@ApiModelProperty(value = "身份证反面照")
-	private String idCardBackImg;
+	private String idcardBackImg;
 	
 	/**
 	 * 设置：用户ID
@@ -436,25 +438,25 @@ public class UserEntity<T> implements Serializable {
 	/**
 	 * 设置：身份证正面照
 	 */
-	public void setIdCardFrontImg(String idCardFrontImg) {
-		this.idCardFrontImg = idCardFrontImg;
+	public void setIdcardFrontImg(String idcardFrontImg) {
+		this.idcardFrontImg = idcardFrontImg;
 	}
 	/**
 	 * 获取：身份证正面照
 	 */
-	public String getIdCardFrontImg() {
-		return idCardFrontImg;
+	public String getIdcardFrontImg() {
+		return idcardFrontImg;
 	}
 	/**
 	 * 设置：身份证反面照
 	 */
-	public void setIdCardBackImg(String idCardBackImg) {
-		this.idCardBackImg = idCardBackImg;
+	public void setIdcardBackImg(String idcardBackImg) {
+		this.idcardBackImg = idcardBackImg;
 	}
 	/**
 	 * 获取：身份证反面照
 	 */
-	public String getIdCardBackImg() {
-		return idCardBackImg;
+	public String getIdcardBackImg() {
+		return idcardBackImg;
 	}
 }

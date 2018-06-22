@@ -10,7 +10,6 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.Query;
-import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.modules.apiUser.entity.UserEntity;
 import com.freeter.modules.apiUser.service.UserService;
@@ -32,7 +31,7 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-
+import com.freeter.common.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import javax.servlet.http.HttpServletRequest;
@@ -88,8 +87,7 @@ public class OrderController  extends AbstractController {
         OrderEntity orderEntity=orderService.selectById(orderId);
         OrderModel orderModel=new OrderModel();
         orderModel.setOrderId(orderEntity.getId());
-        orderModel.setAddress(orderEntity.getAddress());
-        orderModel.setTotalAmount(orderEntity.getTotalMoney());
+         orderModel.setTotalAmount(orderEntity.getTotalMoney());
         orderModel.setConsignee(orderEntity.getConsignee());
         orderModel.setStrCreatedTime(new SimpleDateFormat("yyyyMMdd hh:mm:ss").format(orderEntity.getCreatedTime()));
         orderModel.setPostCode(orderEntity.getPostcode());
@@ -152,7 +150,7 @@ public class OrderController  extends AbstractController {
             EntityWrapper<OrderEntity> orderEntityWrapper=new EntityWrapper<OrderEntity>();
             Wrapper<OrderEntity> orderWrapper=orderEntityWrapper.eq("id",orderId);
             OrderEntity orderEntity=orderService.selectOne(orderWrapper);
-            orderEntity.setVirDel("1");
+            orderEntity.setVirDel(1);
             orderService.updateAllColumnById(orderEntity);
         }
         return R.ok("订单已删除");
@@ -313,7 +311,7 @@ public class OrderController  extends AbstractController {
             Integer userId = orderEntity.getUserId();
             //EntityWrapper<OrderGoodEntity> orderGoodEntityWrapper = new EntityWrapper<OrderGoodEntity>();
             orderModel.setOrderId(orderEntity.getId());
-            orderModel.setAddress(orderEntity.getAddress());
+            orderModel.setAddress(orderEntity.getDetailedAddress());
             orderModel.setTotalAmount(orderEntity.getTotalMoney());
             orderModel.setConsignee(orderEntity.getConsignee());
             SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd hh:mm:ss");

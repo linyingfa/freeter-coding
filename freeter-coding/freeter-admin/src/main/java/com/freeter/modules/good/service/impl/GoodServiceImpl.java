@@ -62,12 +62,9 @@ public class GoodServiceImpl extends ServiceImpl<GoodDao, GoodEntity> implements
 	}
 
 	@Override
-	public   PageUtils queryPage(Map<String, Object> params, Wrapper<GoodEntity> wrapper) {
+	public   Page<GoodView> queryPage(Map<String, Object> params, Wrapper<GoodEntity> wrapper) {
 		  Page<GoodView> page =new Query<GoodView>(params).getPage();
-	         page.setRecords(  baseMapper.selectCategoryChannelByGood(page,wrapper));
-	    	PageUtils pageUtil = new PageUtils(page);
-	    	return pageUtil;
-
+	        return page.setRecords(  baseMapper.selectCategoryChannelByGood(page,wrapper));
  	}
 
 	 

@@ -7,8 +7,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.freeter.modules.order.entity.view.OrderView;
-
 import java.lang.reflect.InvocationTargetException;
 
 import io.swagger.annotations.ApiModel;
@@ -17,19 +15,20 @@ import java.math.BigDecimal;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.beanutils.BeanUtils;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 
 
 
 /**
  * 订单主表
  * 
- * @author liuqi
- * @email 363236211@qq.com
- * @date 2018-05-28 15:57:37
+ * @author xuchen
+ * @email 171998110@qq.com
+ * @date 2018-06-19 16:07:35
  */
 @TableName("cn_order")
 @ApiModel(value = "Order")
@@ -50,30 +49,27 @@ public class OrderEntity<T> implements Serializable {
 		}
 	}
 
-
-
 	/**
-	 * 主键id
+	 * 主键
 	 */
 	
-	@TableId 				 
-	@ApiModelProperty(value = "订单id",hidden = true)
+	@TableId 					
+	@ApiModelProperty(value = "主键",hidden = true)
 	private Integer id;
-
+	
 	/**
 	 * 订单编号
 	 */
-
-	@NotNull (message = "订单编号不能为空")
+				
+	@NotBlank (message = "订单编号不能为空") 			
 	@ApiModelProperty(value = "订单编号")
 	private String orderNo;
-
 	
 	/**
 	 * 订单总额
 	 */
 			
-	@NotNull (message = "订单总额不能为空") 			 
+	@NotNull (message = "订单总额不能为空") 				
 	@ApiModelProperty(value = "订单总额")
 	private BigDecimal totalMoney;
 	
@@ -81,7 +77,7 @@ public class OrderEntity<T> implements Serializable {
 	 * 订单状态 0:待支付 1:待支付关闭 2:已付款，待发货  3:待收货 4:已收货 5:待评价 6:申请退款 7:退款完成 8:已完成订单
 	 */
 			
-	@NotNull (message = "订单状态 0:待支付 1:待支付关闭 2:已付款，待发货  3:待收货 4:已收货 5:待评价 6:申请退款 7:退款完成 8:已完成订单不能为空") 			 
+	@NotNull (message = "订单状态 0:待支付 1:待支付关闭 2:已付款，待发货  3:待收货 4:已收货 5:待评价 6:申请退款 7:退款完成 8:已完成订单不能为空") 				
 	@ApiModelProperty(value = "订单状态 0:待支付 1:待支付关闭 2:已付款，待发货  3:待收货 4:已收货 5:待评价 6:申请退款 7:退款完成 8:已完成订单")
 	private Integer orderStatus;
 	
@@ -89,11 +85,9 @@ public class OrderEntity<T> implements Serializable {
 	 * 用户id
 	 */
 			
-	@NotNull (message = "用户id不能为空") 			 
+	@NotNull (message = "用户id不能为空") 				
 	@ApiModelProperty(value = "用户id")
 	private Integer userId;
-
-
 	
 	/**
 	 * 订单提交时间
@@ -101,16 +95,25 @@ public class OrderEntity<T> implements Serializable {
 			
 	@NotNull (message = "订单提交时间不能为空") 			
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "订单提交时间")
 	private Date createdTime;
+	
+	/**
+	 * 订单支付时间
+	 */
+					
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat 		
+	@ApiModelProperty(value = "订单支付时间")
+	private Date payTime;
 	
 	/**
 	 * 发货时间
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "发货时间")
 	private Date deliveryTime;
 	
@@ -119,7 +122,7 @@ public class OrderEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "收货时间")
 	private Date receivingTime;
 	
@@ -128,7 +131,7 @@ public class OrderEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "申请退款时间")
 	private Date refundPeriod;
 	
@@ -137,31 +140,50 @@ public class OrderEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
 	@ApiModelProperty(value = "退款完成时间")
 	private Date refundCompletePeriod;
 	
 	/**
-	 * 收货地址
+	 * 详细地址
 	 */
-				
-	@NotBlank (message = "收货地址不能为空") 		 
-	@ApiModelProperty(value = "收货地址")
-	private String address;
+						
+	@ApiModelProperty(value = "详细地址")
+	private String detailedAddress;
+	
+	/**
+	 * 区
+	 */
+						
+	@ApiModelProperty(value = "区")
+	private String area;
+	
+	/**
+	 * 市
+	 */
+						
+	@ApiModelProperty(value = "市")
+	private String city;
+	
+	/**
+	 * 省
+	 */
+						
+	@ApiModelProperty(value = "省")
+	private String province;
 	
 	/**
 	 * 收货人
 	 */
 				
-	@NotBlank (message = "收货人不能为空") 		 
+	@NotBlank (message = "收货人不能为空") 			
 	@ApiModelProperty(value = "收货人")
 	private String consignee;
 	
 	/**
 	 * 邮编
 	 */
-				
-	@NotBlank (message = "邮编不能为空") 		 
+						
 	@ApiModelProperty(value = "邮编")
 	private String postcode;
 	
@@ -169,80 +191,87 @@ public class OrderEntity<T> implements Serializable {
 	 * 收货人手机号
 	 */
 				
-	@NotBlank (message = "收货人手机号不能为空") 		 
+	@NotBlank (message = "收货人手机号不能为空") 			
 	@ApiModelProperty(value = "收货人手机号")
 	private String tel;
 	
 	/**
 	 * 快递单号
 	 */
+						
 	@ApiModelProperty(value = "快递单号")
 	private String expressNumber;
 	
 	/**
 	 * 快递公司编号
 	 */
+						
 	@ApiModelProperty(value = "快递公司编号")
 	private String expressCompanyNo;
-
+	
 	/**
 	 * 快递公司名称
 	 */
-    private String expressCompanyName;
-
-
-
+						
+	@ApiModelProperty(value = "快递公司名称")
+	private String expressCompanyName;
+	
+	/**
+	 * 快递类型 0：自主发货 1：快递发货
+	 */
+						
+	@ApiModelProperty(value = "快递类型 0：自主发货 1：快递发货")
+	private Integer expressType;
+	
+	/**
+	 * 配送人电话号码
+	 */
+						
+	@ApiModelProperty(value = "配送人电话号码")
+	private String deliveryPersonTel;
+	
 	/**
 	 * 备注
 	 */
-	@ApiModelProperty(value="备注")
+						
+	@ApiModelProperty(value = "备注")
 	private String note;
-
+	
 	/**
 	 * 运费
 	 */
-	@ApiModelProperty(value="运费")
-	private Double 	freight;
-
+						
+	@ApiModelProperty(value = "运费")
+	private BigDecimal freight;
+	
 	/**
-	 * 虚拟删除
+	 * 虚拟删除 0：未删除 1：删除
 	 */
-	@ApiModelProperty(value="虚拟删除")
-	private String virDel;
-
+						
+	@ApiModelProperty(value = "虚拟删除 0：未删除 1：删除")
+	private Integer virDel;
+	
 	/**
-	 * 发货人id
+	 * 发货代理商id
 	 */
+						
+	@ApiModelProperty(value = "发货代理商id")
 	private Integer consignorId;
-
+	
 	/**
-	 * 配送人电话
-	 */
-	private String deliveryPersonTel;
-
-	/**
-	 * 快递类型
-	 */
-	private Integer expressType;
-
-
-
-
-	/**
-	 * 设置：订单id
+	 * 设置：主键
 	 */
 	public void setId(Integer id) {
 		this.id = id;
 	}
 	/**
-	 * 获取：订单主键id
+	 * 获取：主键
 	 */
-	public Integer  getId() {
+	public Integer getId() {
 		return id;
 	}
-
 	/**
-	 * 设置订单编号
+	 * 设置：订单编号
 	 */
 	public void setOrderNo(String orderNo) {
 		this.orderNo = orderNo;
@@ -253,7 +282,6 @@ public class OrderEntity<T> implements Serializable {
 	public String getOrderNo() {
 		return orderNo;
 	}
-
 	/**
 	 * 设置：订单总额
 	 */
@@ -301,6 +329,18 @@ public class OrderEntity<T> implements Serializable {
 	 */
 	public Date getCreatedTime() {
 		return createdTime;
+	}
+	/**
+	 * 设置：订单支付时间
+	 */
+	public void setPayTime(Date payTime) {
+		this.payTime = payTime;
+	}
+	/**
+	 * 获取：订单支付时间
+	 */
+	public Date getPayTime() {
+		return payTime;
 	}
 	/**
 	 * 设置：发货时间
@@ -351,16 +391,52 @@ public class OrderEntity<T> implements Serializable {
 		return refundCompletePeriod;
 	}
 	/**
-	 * 设置：收货地址
+	 * 设置：详细地址
 	 */
-	public void setAddress(String address) {
-		this.address = address;
+	public void setDetailedAddress(String detailedAddress) {
+		this.detailedAddress = detailedAddress;
 	}
 	/**
-	 * 获取：收货地址
+	 * 获取：详细地址
 	 */
-	public String getAddress() {
-		return address;
+	public String getDetailedAddress() {
+		return detailedAddress;
+	}
+	/**
+	 * 设置：区
+	 */
+	public void setArea(String area) {
+		this.area = area;
+	}
+	/**
+	 * 获取：区
+	 */
+	public String getArea() {
+		return area;
+	}
+	/**
+	 * 设置：市
+	 */
+	public void setCity(String city) {
+		this.city = city;
+	}
+	/**
+	 * 获取：市
+	 */
+	public String getCity() {
+		return city;
+	}
+	/**
+	 * 设置：省
+	 */
+	public void setProvince(String province) {
+		this.province = province;
+	}
+	/**
+	 * 获取：省
+	 */
+	public String getProvince() {
+		return province;
 	}
 	/**
 	 * 设置：收货人
@@ -422,60 +498,88 @@ public class OrderEntity<T> implements Serializable {
 	public String getExpressCompanyNo() {
 		return expressCompanyNo;
 	}
-
-	public String getNote() {
-		return note;
-	}
-
-	public Double getFreight() {
-		return freight;
-	}
-
-	public void setNote(String note) {
-		this.note = note;
-	}
-
-	public void setFreight(Double freight) {
-		this.freight = freight;
-	}
-
-	public String getVirDel() {
-		return virDel;
-	}
-
-	public void setVirDel(String virDel) {
-		this.virDel = virDel;
-	}
-
-	public Integer getConsignorId() {
-		return consignorId;
-	}
-
-	public void setConsignorId(Integer consignorId) {
-		this.consignorId = consignorId;
-	}
-
-	public String getExpressCompanyName() {
-		return expressCompanyName;
-	}
-
+	/**
+	 * 设置：快递公司名称
+	 */
 	public void setExpressCompanyName(String expressCompanyName) {
 		this.expressCompanyName = expressCompanyName;
 	}
-
-	public String getDeliveryPersonTel() {
-		return deliveryPersonTel;
+	/**
+	 * 获取：快递公司名称
+	 */
+	public String getExpressCompanyName() {
+		return expressCompanyName;
 	}
-
-	public void setDeliveryPersonTel(String deliveryPersonTel) {
-		this.deliveryPersonTel = deliveryPersonTel;
+	/**
+	 * 设置：快递类型 0：自主发货 1：快递发货
+	 */
+	public void setExpressType(Integer expressType) {
+		this.expressType = expressType;
 	}
-
+	/**
+	 * 获取：快递类型 0：自主发货 1：快递发货
+	 */
 	public Integer getExpressType() {
 		return expressType;
 	}
-
-	public void setExpressType(Integer expressType) {
-		this.expressType = expressType;
+	/**
+	 * 设置：配送人电话号码
+	 */
+	public void setDeliveryPersonTel(String deliveryPersonTel) {
+		this.deliveryPersonTel = deliveryPersonTel;
+	}
+	/**
+	 * 获取：配送人电话号码
+	 */
+	public String getDeliveryPersonTel() {
+		return deliveryPersonTel;
+	}
+	/**
+	 * 设置：备注
+	 */
+	public void setNote(String note) {
+		this.note = note;
+	}
+	/**
+	 * 获取：备注
+	 */
+	public String getNote() {
+		return note;
+	}
+	/**
+	 * 设置：运费
+	 */
+	public void setFreight(BigDecimal freight) {
+		this.freight = freight;
+	}
+	/**
+	 * 获取：运费
+	 */
+	public BigDecimal getFreight() {
+		return freight;
+	}
+	/**
+	 * 设置：虚拟删除 0：未删除 1：删除
+	 */
+	public void setVirDel(Integer virDel) {
+		this.virDel = virDel;
+	}
+	/**
+	 * 获取：虚拟删除 0：未删除 1：删除
+	 */
+	public Integer getVirDel() {
+		return virDel;
+	}
+	/**
+	 * 设置：发货代理商id
+	 */
+	public void setConsignorId(Integer consignorId) {
+		this.consignorId = consignorId;
+	}
+	/**
+	 * 获取：发货代理商id
+	 */
+	public Integer getConsignorId() {
+		return consignorId;
 	}
 }

@@ -3,6 +3,10 @@ package com.freeter.modules.sys.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.sys.entity.AddressEntity;
+import com.freeter.modules.sys.service.AddressService;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,9 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
-import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.sys.entity.AddressEntity;
-import com.freeter.modules.sys.service.AddressService;
 
 
 

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.freeter.common.utils.MPUtil;
+import com.freeter.common.utils.GenUtils;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
@@ -22,6 +22,7 @@ import com.freeter.modules.good.entity.CategorySpecEntity;
 import com.freeter.modules.good.entity.view.CategorySpecView;
 import com.freeter.modules.good.service.CategorySpecService;
 
+import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 
 
@@ -47,7 +48,10 @@ public class CategorySpecController {
     public R list(@RequestParam Map<String, Object> params,CategorySpecEntity en){
        // PageUtils page = categorySpecService.queryPage(params);
     	EntityWrapper< CategorySpecEntity> ew = new EntityWrapper< CategorySpecEntity>();
-     	ew.allEq(MPUtil.allEQMapPre(en, "categorySpecView")); 
+    	ew.setEntity(en);
+    	Map map = new HashMap();
+    	map = BeanUtil.beanToMap(en);
+    	ew.allEq(GenUtils.camelToUnderlineMap(map,"")); 
     	Page<CategorySpecView> page = categorySpecService.queryPageCategorySpecView(params, ew);
         return R.ok().put("page", new PageUtils(page));
     }

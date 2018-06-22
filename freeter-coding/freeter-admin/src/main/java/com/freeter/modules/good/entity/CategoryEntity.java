@@ -1,23 +1,24 @@
 package com.freeter.modules.good.entity;
 
-import java.io.Serializable;
-import java.lang.reflect.InvocationTargetException;
-import java.util.Date;
-
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.baomidou.mybatisplus.enums.FieldFill;
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import java.lang.reflect.InvocationTargetException;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.apache.commons.beanutils.BeanUtils;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 
 
 
@@ -26,7 +27,7 @@ import io.swagger.annotations.ApiModelProperty;
  * 
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-05-28 17:34:00
+ * @date 2018-06-15 14:33:44
  */
 @TableName("cn_category")
 @ApiModel(value = "Category")
@@ -51,89 +52,96 @@ public class CategoryEntity<T> implements Serializable {
 	 * 分类ID
 	 */
 	
-	@TableId 				 
+	@TableId 					
 	@ApiModelProperty(value = "分类ID",hidden = true)
 	private Long categoryId;
 	
 	/**
 	 * 父分类ID
 	 */
-					 
+						
 	@ApiModelProperty(value = "父分类ID")
-	@NotNull(message="父级分类不能为空")
 	private Long parentId;
-	
-	/**
-	 * 父菜单名称
-	 */
-	@TableField(exist=false)
-	private String parentName;
 	
 	/**
 	 * 分类名称
 	 */
-	@NotEmpty(message="分类名称不能为空")				 
+						
 	@ApiModelProperty(value = "分类名称")
 	private String name;
 	
 	/**
 	 * 排序
 	 */
-					 
+						
 	@ApiModelProperty(value = "排序")
 	private Integer sort;
 	
 	/**
 	 * 目录类型 2=二级目录/1=一级目录/0=总目录
 	 */
-					 
+						
 	@ApiModelProperty(value = "目录类型 2=二级目录/1=一级目录/0=总目录")
 	private Integer type;
 	
 	/**
 	 * 状态 1=显示/0=隐藏
 	 */
-					 
+						
 	@ApiModelProperty(value = "状态 1=显示/0=隐藏")
 	private Integer status;
 	
 	/**
+	 * 是否推荐（0：不推荐 1：推荐）
+	 */
+						
+	@ApiModelProperty(value = "是否推荐（0：不推荐 1：推荐）")
+	private Integer showInCommend;
+	
+	/**
 	 * 是否导航栏 1=显示/0=隐藏
 	 */
-					 
+						
 	@ApiModelProperty(value = "是否导航栏 1=显示/0=隐藏")
 	private Integer showInNav;
 	
 	/**
 	 * 是否置顶 1=置顶/0=默认
 	 */
-					 
+						
 	@ApiModelProperty(value = "是否置顶 1=置顶/0=默认")
 	private Integer showInTop;
 	
 	/**
 	 * 是否热门 1=热门/0=默认
 	 */
-					 
+						
 	@ApiModelProperty(value = "是否热门 1=热门/0=默认")
 	private Integer showInHot;
+	
+	/**
+	 * 分类小图标
+	 */
+						
+	@ApiModelProperty(value = "分类小图标")
+	private String icon;
 	
 	/**
 	 * 创建时间
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 			
+	@TableField(fill = FieldFill.INSERT) 
 	@ApiModelProperty(value = "创建时间",hidden = true)
-	@TableField(fill = FieldFill.INSERT)
 	private Date createTime;
 	
 	/**
 	 * 创建者
 	 */
-					 
+							
+	@TableField(fill = FieldFill.INSERT) 
 	@ApiModelProperty(value = "创建者",hidden = true)
-	@TableField(fill = FieldFill.INSERT)
 	private String createBy;
 	
 	/**
@@ -141,53 +149,53 @@ public class CategoryEntity<T> implements Serializable {
 	 */
 					
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat 	 
+	@DateTimeFormat 		
+	@TableField(fill = FieldFill.UPDATE) 	
 	@ApiModelProperty(value = "更新时间",hidden = true)
-    @TableField(update = "now()")
 	private Date updateTime;
 	
 	/**
 	 * 更新者
 	 */
-					 
+						
+	@TableField(fill = FieldFill.UPDATE) 	
 	@ApiModelProperty(value = "更新者",hidden = true)
-	@TableField(fill = FieldFill.UPDATE)
 	private String updateBy;
 	
 	/**
 	 * 页面标题
 	 */
-					 
+						
 	@ApiModelProperty(value = "页面标题")
 	private String pageTitle;
 	
 	/**
 	 * 页面描述
 	 */
-					 
+						
 	@ApiModelProperty(value = "页面描述")
 	private String pageDescription;
 	
 	/**
 	 * 页面关键词
 	 */
-					 
+						
 	@ApiModelProperty(value = "页面关键词")
 	private String pageKeyword;
 	
 	/**
 	 * 备注信息
 	 */
-					 
+						
 	@ApiModelProperty(value = "备注信息")
 	private String remarks;
 	
 	/**
 	 * 频道id
 	 */
-					 
+						
 	@ApiModelProperty(value = "频道id")
-	private Long channelId;
+	private String channelId;
 	
 	/**
 	 * 设置：分类ID
@@ -262,6 +270,18 @@ public class CategoryEntity<T> implements Serializable {
 		return status;
 	}
 	/**
+	 * 设置：是否推荐（0：不推荐 1：推荐）
+	 */
+	public void setShowInCommend(Integer showInCommend) {
+		this.showInCommend = showInCommend;
+	}
+	/**
+	 * 获取：是否推荐（0：不推荐 1：推荐）
+	 */
+	public Integer getShowInCommend() {
+		return showInCommend;
+	}
+	/**
 	 * 设置：是否导航栏 1=显示/0=隐藏
 	 */
 	public void setShowInNav(Integer showInNav) {
@@ -296,6 +316,18 @@ public class CategoryEntity<T> implements Serializable {
 	 */
 	public Integer getShowInHot() {
 		return showInHot;
+	}
+	/**
+	 * 设置：分类小图标
+	 */
+	public void setIcon(String icon) {
+		this.icon = icon;
+	}
+	/**
+	 * 获取：分类小图标
+	 */
+	public String getIcon() {
+		return icon;
 	}
 	/**
 	 * 设置：创建时间
@@ -396,23 +428,13 @@ public class CategoryEntity<T> implements Serializable {
 	/**
 	 * 设置：频道id
 	 */
-	public void setChannelId(Long channelId) {
+	public void setChannelId(String channelId) {
 		this.channelId = channelId;
 	}
 	/**
 	 * 获取：频道id
 	 */
-	public Long getChannelId() {
+	public String getChannelId() {
 		return channelId;
 	}
-
-	public String getParentName() {
-		return parentName;
-	}
-
-	public void setParentName(String parentName) {
-		this.parentName = parentName;
-	}
-	
-	
 }

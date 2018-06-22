@@ -6,6 +6,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.good.entity.CategoryEntity;
+import com.freeter.modules.good.entity.GoodImageEntity;
+import com.freeter.modules.good.service.GoodImageService;
+import com.freeter.modules.oss.cloud.OSSFactory;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +25,6 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.exception.RRException;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
-import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.good.entity.CategoryEntity;
-import com.freeter.modules.good.entity.GoodImageEntity;
-import com.freeter.modules.good.service.GoodImageService;
-import com.freeter.modules.oss.cloud.OSSFactory;
 
 
 

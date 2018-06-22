@@ -37,7 +37,7 @@ public class SysPageController {
 
 	@RequestMapping(value = {"index.html"})
 	public String index(){
-		return "index";
+		return "index1";
 	}
 	
 	@RequestMapping(value = {"/"})

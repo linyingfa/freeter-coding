@@ -3,6 +3,10 @@ package com.freeter.modules.sys.api.controller;
 import java.util.Arrays;
 import java.util.Map;
 
+import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.sys.entity.AddressEntity;
+import com.freeter.modules.sys.service.AddressService;
+
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -10,16 +14,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
-import com.freeter.common.utils.PageUtils;
-import com.freeter.common.utils.R;
-import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.sys.entity.AddressEntity;
-import com.freeter.modules.sys.service.AddressService;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.freeter.common.utils.PageUtils;
+import com.freeter.common.utils.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
