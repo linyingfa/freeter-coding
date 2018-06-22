@@ -90,16 +90,20 @@ freeter-coding 此项目会持续更新
 <br>
 
 <br>
-
+ 
  **后端项目演示**
-- 演示地址：http://47.106.39.83:8080/freeter-admin/login.html
+- 演示地址：<a href="http://47.106.39.83:8080/freeter-admin/login.html"  target="_blank">
+47.106.39.83:8080/freeter-admin/login.htm</a>
 - 账号密码：admin/admin
 
  **移动端接口项目演示**
-- 演示地址：http://47.106.39.83:8081/freeter-api/swagger-ui.html
-
+- 演示地址：<a href="http://47.106.39.83:8081/freeter-api/swagger-ui.html"  target="_blank">
+47.106.39.83:8081/freeter-api/swagger-ui.html</a>
+<br> 
  **超级代码生成器项目演示**
-- 演示地址：http://47.106.39.83:8082/freeter-generator
+- 演示地址：<a href="http://47.106.39.83:8082/freeter-generator/#generator.html"  target="_blank">
+47.106.39.83:8082/freeter-generator/#generator.html</a>
+<br>
 
 
 
