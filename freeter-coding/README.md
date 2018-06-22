@@ -1,80 +1,63 @@
+ **飞特后台管理系统是接私活利器，企业级快速开发框架**
+ 
 **项目说明** 
-- 采用SpringBoot、MyBatis、Shiro框架，开发的一套权限系统，极低门槛，拿来即用。设计之初，就非常注重安全性，为企业系统保驾护航，让一切都变得如此简单。
-- 提供了代码生成器，只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
+
+- 采用SpringBoot、MyBatis、Shiro、mybaits-plus黄金搭档。
+- 有单独的后台，还有单独的接口框架，可以实现前后端分离协作开发，还有火爆的商场功能模块
+- 提供了超级代码生成器，可以生成验证注解，swagger-ui注解，多表分页查询sql,只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
 <br>
 
 **具有如下特点** 
+- 火爆的商场模块，后续会加入更多的商城模块
+- 超级代码生成器，可直接生成到IDE中，eclipse和ij都可以
 - 灵活的权限控制，可控制到页面或按钮，满足绝大部分的权限需求
 - 完善的部门管理及数据权限，通过注解实现数据权限的控制
-- 完善的XSS防范及脚本过滤，彻底杜绝XSS攻击
+- 完善的XSS防范及脚本过滤，支持白名单过滤,彻底杜绝XSS攻击
 - 支持分布式部署，session存储在redis中
 - 友好的代码结构及注释，便于阅读及二次开发
 - 引入quartz定时任务，可动态完成任务的添加、修改、删除、暂停、恢复及日志查看等功能
-- 页面交互使用Vue2.x，极大的提高了开发效率
+- 页面交互使用layui,vue.js，极大的提高了开发效率
 - 引入swagger文档支持，方便编写API接口文档
 
 <br>
 
-**数据权限设计思想** 
-- 管理员管理、角色管理、部门管理，可操作本部门及子部门数据
-- 菜单管理、定时任务、参数管理、字典管理、系统日志，没有数据权限
-- 业务功能，按照用户数据权限，查询、操作数据【没有本部门数据权限，也能查询本人数据】
+ **项目结构** 
+
+freeter-coding 此项目会持续更新
+
+|--freeter-admin 后台管理 <br>
+|--freeter-api 移动端接口<br>
+|--freeter-common 公共模块<br>
+|--freeter-generator 代码生成<br>
 
 <br> 
 
-**项目结构** 
-```
-renren-security
-├─renren-common     公共模块
-│ 
-├─renren-admin      管理后台
-│    ├─db  数据库SQL脚本
-│    │ 
-│    ├─modules  模块
-│    │    ├─job 定时任务
-│    │    ├─oss 文件存储
-│    │    └─sys 系统管理(核心)
-│    │ 
-│    └─resources 
-│        ├─mapper   MyBatis文件
-│        ├─statics  静态资源
-│        ├─template 系统页面
-│        │    ├─modules      模块页面
-│        │    ├─index.html   AdminLTE主题风格（默认主题）
-│        │    └─index1.html  Layui主题风格
-│        └─application.yml   全局配置文件
-│       
-│ 
-├─renren-api        API服务
-│ 
-├─renren-generator  代码生成器
-│        └─resources 
-│           ├─mapper   MyBatis文件
-│           ├─template 代码生成器模板（可增加或修改相应模板）
-│           ├─application.yml    全局配置文件
-│           └─generator.properties   代码生成器，配置文件
-│
-```
+
 
 <br>
 
  **技术选型：** 
-- 核心框架：Spring Boot 1.5
-- 安全框架：Apache Shiro 1.3
-- 视图框架：Spring MVC 4.3
-- 持久层框架：MyBatis 3.3
+- 核心框架：Spring Boot
+- 安全框架：Apache Shiro
+- 视图框架：Spring MVC
+- 持久层框架：MyBatis
 - 定时器：Quartz 2.3
-- 数据库连接池：Druid 1.1
-- 日志管理：SLF4J 1.7、Log4j
-- 页面交互：Vue2.x
-
+- 数据库连接池：Druid
+- 日志管理：logback
+- 页面交互：layui
+- 下拉框：bootstrap-select
+- 文件上传：Bootstrap File Input
+- 热部署 jrebel
+- 验证框架 hibernate-validator
+- mybatis加强工具 mybatis-plus
+- 通用工具类 hutool
 <br>
 
  **软件需求** 
 - JDK1.8
 - MySQL5.5+
-- Tomcat8.5+
+- Tomcat8+
 - Maven3.0+
 
 <br>
