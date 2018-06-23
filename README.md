@@ -190,4 +190,13 @@ SELECT  student.* FROM t_student  student
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
+
+特别鸣谢：
+
+人人开源 / renren-generator
+
+baomidou / mybatis-plus
+
+
+
 ![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
