@@ -38,7 +38,7 @@ Vue.component('menuItem',menuItem);
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		system:'广品会',
+		system:'飞特',
 		user:{},
 		menuList:{},
 		main:"main.html",

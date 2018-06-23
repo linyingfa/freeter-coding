@@ -36,7 +36,7 @@ isquery=true;
 var vm = new Vue({
     el: '#layui_layout',
     data: {
-    	system:'广品会',
+    	system:'飞特',
         user: {},
         menuList: {},
         password: '',
@@ -91,7 +91,7 @@ var vm = new Vue({
                 area: ['806px', '467px'],
                 closeBtn: 1,
                 shadeClose: false,
-                content: ['http://cdn.renren.io/donate.jpg', 'no']
+                content: ['http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg', 'no']
             });
         }
     },
