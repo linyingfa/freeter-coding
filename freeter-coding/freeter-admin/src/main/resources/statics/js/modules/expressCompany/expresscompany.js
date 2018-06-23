@@ -51,8 +51,7 @@ var vm = new Vue({
 			vm.expressCompany = {};
 		},
 		update: function (event) {
-			var rowId = getSelectedRow();
-            var expressCompanyId = $("#jqGrid").jqGrid("getRowData",rowId).id;
+            var expressCompanyId = getSelectedRow();
 			if(expressCompanyId == null){
 				return ;
 			}
