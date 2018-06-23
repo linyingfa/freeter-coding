@@ -6,7 +6,7 @@ server:
         min-spare-threads: 30
     port: 8081
     servlet:
-        context-path: /cnadmart-api
+        context-path: /freeter-api
 
 # mysql
 spring:
@@ -76,7 +76,7 @@ mybatis-plus:
 
 logging:
   level: debug
-  level.com.cnadmart: debug
+  level.com.freeter: debug
   path: logs/
   file: api.log
   
