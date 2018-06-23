@@ -84,29 +84,20 @@ public class GoodController {
 		} else if (oneCategotyId != null) {
 			EntityWrapper<CategoryEntity> wrapperCategory = new EntityWrapper<CategoryEntity>();
 			wrapperCategory.eq("parent_id", oneCategotyId);
-			List<CategoryEntity> list = categoryService.selectList(wrapperCategory);
-			List<Long> categoryIds = new ArrayList();
-
-			for (CategoryEntity categoryEntity : list) {
-				categoryIds.add(categoryEntity.getCategoryId());
-			}
+			List<Object> categoryIds = categoryService.selectObjs(wrapperCategory);
 			if (categoryIds.isEmpty()) {
 				return R.ok().put("page", new PageUtils(params));
 			}
-			wrapper.in("category.category_id", categoryIds.toArray());
+			wrapper.in("category.category_id", categoryIds);
 		} else if (goodView.getChannelId() != null) {
 			EntityWrapper<CategoryEntity> wrapperCategory = new EntityWrapper<CategoryEntity>();
 			wrapperCategory.eq("channel_id", goodView.getChannelId());
-			List<CategoryEntity> list = categoryService.selectList(wrapperCategory);
-			List<Long> categoryIds = new ArrayList();
-			for (CategoryEntity categoryEntity : list) {
-				categoryIds.add(categoryEntity.getCategoryId());
-			}
+			List<Object> categoryIds = categoryService.selectObjs(wrapperCategory);
 			if (categoryIds.isEmpty()) {
 
 				return R.ok().put("page", new PageUtils(params));
 			}
-			wrapper.in("category.category_id", categoryIds.toArray());
+			wrapper.in("category.category_id", categoryIds);
 		}
 		wrapper.like("good.good_name", goodView.getGoodName());
 		PageUtils page = new PageUtils(goodService.queryPage(params, wrapper));
