@@ -179,4 +179,24 @@ freeter-coding 此项目会持续更新
 	private String goodName;
 	
 
+**mapper 有外键自动生成多表关联语句：**
+
+`<select id="selectListView"  
+resultType="com.freeter.modules.pc.entity.view.StudentView"`>
+	
+SELECT  student.* FROM t_student  student 			   
+        left join t_professional  professional on  professional.professional_id = student.professional_id 		   
+        left join t_school  school on  school.school_id = student.school_id         
+        <where> 1=1 ${ew.sqlSegment}</where>
+	</select>
+
+
+特别鸣谢：
+
+人人开源 / renren-generator
+
+baomidou / mybatis-plus
+
+
+
 ![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
