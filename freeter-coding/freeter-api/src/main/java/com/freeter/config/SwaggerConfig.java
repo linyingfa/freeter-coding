@@ -53,9 +53,9 @@ public class SwaggerConfig {
 
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
-            .title("广品会")
-            .description("广品会-api文档")
-            .termsOfServiceUrl("http://www.cnadmart.cn")
+            .title("freeter")
+            .description("freeter-api文档")
+            .termsOfServiceUrl("freeter-api/swagger-ui.html")
             .version("3.2.0")
             .build();
     }
