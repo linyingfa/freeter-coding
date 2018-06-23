@@ -87,7 +87,6 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
         }
     });
-    $('.')
 });
 
 var vm = new Vue({
@@ -121,8 +120,7 @@ var vm = new Vue({
         },
         update:function(event){
             //var rowId=$("#jqGrid").jqGrid("getGridParam","selrow");
-            var rowId=getSelectedRow();
-            var orderId = $("#jqGrid").jqGrid("getRowData",rowId).orderId;
+            var orderId=getSelectedRow();
             if(orderId == null){
                 return ;
             }
