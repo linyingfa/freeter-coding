@@ -21,7 +21,18 @@
                 <span  class="widthseven"><input type="text" class="form-control" v-model="q.sel"  placeholder="收货人电话"></span>
                 <a class="btn btn-default" @click="query()">查询</a>
             </div>
+ <div class="buttoonnamber">
 
+             <span><input class="btn btn-default " id="allOrder" type="button" value="全部订单" @click="query('')"></span>
+              <span><input class="btn btn-default" type="button" value="待支付" @click="query(0)"></span>
+             <span><input class="btn btn-default" type="button" value="待支付关闭" @click="query(1)"></span>
+              <span><input class="btn btn-default" type="button" value="待发货" @click="query(2)"></span>
+              <span><input class="btn btn-default" type="button" value="待收货" @click="query(3)"></span>
+             <span><input class="btn btn-default" type="button" value="已收货" @click="query(4)"></span>
+             <span><input class="btn btn-default" type="button" value="申请退款" @click="query(6)"></span>
+              <span><input class="btn btn-default" type="button" value="已完成" @click="query(8)"></span>
+
+         </div>
 
          </div>
          <table id="jqGrid"></table>

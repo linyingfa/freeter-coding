@@ -100,7 +100,7 @@
 
 
 		<dependency>
-			<groupId>com.cnadmart</groupId>
+			<groupId>com.freeter</groupId>
 			<artifactId>FYOpenApi</artifactId>
 			<version>1.0</version>
 			<scope>system</scope>
@@ -120,7 +120,7 @@
 			</includes> </resource> &lt;!&ndash; <resource> <directory>src/main/resources</directory> 
 			注意这里，我用的是springboot，所以是boot-inf <targetPath>BOOT-INF/classes/</targetPath> 
 			<includes> <include>**/*</include> </includes> </resource> &ndash;&gt; <resource> 
-			<directory>src/main/resources</directory> <targetPath>/com/cnadmart/</targetPath> 
+			<directory>src/main/resources</directory> <targetPath>/com/freeter/</targetPath> 
 			</resource> </resources> -->
 
 		<plugins>

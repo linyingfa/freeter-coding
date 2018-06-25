@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.freeter.modules.good.entity.view.GoodSpecValueView;
+import javax.validation.constraints.NotNull;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import java.lang.reflect.InvocationTargetException;
 
 import io.swagger.annotations.ApiModel;
@@ -14,19 +14,20 @@ import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
 
-import javax.validation.constraints.NotBlank;
 import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.apache.commons.beanutils.BeanUtils;
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.enums.FieldFill;
 
 
 
 /**
- * 
- * 
- * @author liuqi
- * @email 363236211@qq.com
- * @date 2018-05-23 12:01:16
+ * 商品规格值表
+ * 数据库通用操作实体类（普通增删改查）
+ * @author xuchen
+ * @email 171998110@qq.com
+ * @date 2018-06-25 09:20:59
  */
 @TableName("cn_good_spec_value")
 @ApiModel(value = "GoodSpecValue")
@@ -51,7 +52,7 @@ public class GoodSpecValueEntity<T> implements Serializable {
 	 * 商品规格值表主键id
 	 */
 	
-	@TableId 				 
+	@TableId 					
 	@ApiModelProperty(value = "商品规格值表主键id",hidden = true)
 	private Integer id;
 	
@@ -59,7 +60,7 @@ public class GoodSpecValueEntity<T> implements Serializable {
 	 * 商品id
 	 */
 			
-	@NotEmpty (message = "商品id不能为空") 			 
+	@NotNull (message = "商品id不能为空") 				
 	@ApiModelProperty(value = "商品id")
 	private Integer goodId;
 	
@@ -67,20 +68,24 @@ public class GoodSpecValueEntity<T> implements Serializable {
 	 * 分类规格id
 	 */
 			
-	@NotEmpty (message = "分类规格id不能为空") 			 
+	@NotNull (message = "分类规格id不能为空") 				
 	@ApiModelProperty(value = "分类规格id")
 	private Integer categorySpecId;
-
-
-
 	
 	/**
 	 * 商品规格值
 	 */
 				
-	@NotBlank (message = "商品规格值不能为空") 		 
+	@NotBlank (message = "商品规格值不能为空") 			
 	@ApiModelProperty(value = "商品规格值")
 	private String specValue;
+	
+	/**
+	 * 使用状态（0使用 1未使用）
+	 */
+						
+	@ApiModelProperty(value = "使用状态（0使用 1未使用）")
+	private Integer status;
 	
 	/**
 	 * 设置：商品规格值表主键id
@@ -106,7 +111,18 @@ public class GoodSpecValueEntity<T> implements Serializable {
 	public Integer getGoodId() {
 		return goodId;
 	}
-
+	/**
+	 * 设置：分类规格id
+	 */
+	public void setCategorySpecId(Integer categorySpecId) {
+		this.categorySpecId = categorySpecId;
+	}
+	/**
+	 * 获取：分类规格id
+	 */
+	public Integer getCategorySpecId() {
+		return categorySpecId;
+	}
 	/**
 	 * 设置：商品规格值
 	 */
@@ -119,13 +135,16 @@ public class GoodSpecValueEntity<T> implements Serializable {
 	public String getSpecValue() {
 		return specValue;
 	}
-
-	public Integer getCategorySpecId() {
-		return categorySpecId;
+	/**
+	 * 设置：使用状态（0使用 1未使用）
+	 */
+	public void setStatus(Integer status) {
+		this.status = status;
 	}
-
-	public void setCategorySpecId(Integer categorySpecId) {
-		this.categorySpecId = categorySpecId;
+	/**
+	 * 获取：使用状态（0使用 1未使用）
+	 */
+	public Integer getStatus() {
+		return status;
 	}
-
 }

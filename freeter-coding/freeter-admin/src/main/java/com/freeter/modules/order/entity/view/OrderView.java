@@ -25,9 +25,21 @@ public class OrderView  extends OrderEntity implements Serializable {
 	public OrderView(){
 	}
  
+	private String userName;
+	
  	public OrderView(OrderEntity orderEntity){
  	
  		BeanUtils.copyProperties(this, orderEntity);
 
 	}
+
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+ 	
+ 	
 }

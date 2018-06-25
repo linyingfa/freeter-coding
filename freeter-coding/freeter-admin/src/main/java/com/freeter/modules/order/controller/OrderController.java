@@ -1,40 +1,53 @@
 package com.freeter.modules.order.controller;
 
-import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.freeter.common.utils.GenUtils;
+import com.freeter.common.utils.MPUtil;
 import com.freeter.common.utils.PageUtils;
-import com.freeter.common.utils.Query;
+import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.modules.apiUser.entity.UserEntity;
 import com.freeter.modules.apiUser.service.UserService;
-import com.freeter.modules.expressCompany.entity.ExpressCompanyEntity;
-import com.freeter.modules.good.entity.*;
-import com.freeter.modules.good.service.*;
+import com.freeter.modules.good.entity.CategorySpecEntity;
+import com.freeter.modules.good.entity.GoodEntity;
+import com.freeter.modules.good.entity.GoodSpecPriceEntity;
+import com.freeter.modules.good.entity.GoodSpecValueEntity;
+import com.freeter.modules.good.service.CategorySpecService;
+import com.freeter.modules.good.service.GoodService;
+import com.freeter.modules.good.service.GoodSpecPriceService;
+import com.freeter.modules.good.service.GoodSpecValueService;
 import com.freeter.modules.order.entity.OrderEntity;
 import com.freeter.modules.order.entity.OrderGoodEntity;
 import com.freeter.modules.order.entity.model.OrderGoodModel;
 import com.freeter.modules.order.entity.model.OrderModel;
-import com.freeter.modules.order.entity.view.OrderSearch;
 import com.freeter.modules.order.service.OrderGoodService;
 import com.freeter.modules.order.service.OrderService;
 import com.freeter.modules.sys.controller.AbstractController;
 import com.freeter.modules.sys.entity.SysUserEntity;
-import com.sun.org.apache.xpath.internal.SourceTree;
-import io.swagger.annotations.ApiModelProperty;
-import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.freeter.common.utils.R;
+
+import cn.hutool.core.bean.BeanUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import javax.servlet.http.HttpServletRequest;
 
 
 /**
@@ -72,9 +85,9 @@ public class OrderController  extends AbstractController {
     @ApiOperation("订单列表")
     public R orderList(@RequestParam Map<String, Object> params){
         PageUtils page=orderService.queryPage(params);
-        List<OrderEntity> orderEntityList=(List<OrderEntity>) page.getList();
+        /*List<OrderEntity> orderEntityList=(List<OrderEntity>) page.getList();
         List<OrderModel> orderModelList=getOrderModelList(orderEntityList);
-        page.setList(orderModelList);
+        page.setList(orderModelList);*/
         return R.ok().put("page",page);
     }
 
@@ -222,19 +235,15 @@ public class OrderController  extends AbstractController {
         String selectType=(String)params.get("selectType");
         String selectValue=(String)params.get("selectValue");
         EntityWrapper<OrderEntity> orderEntityWrapper=new EntityWrapper<OrderEntity>();
-        if("userName".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"user_id", selectValue);
-        }else if("tel".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"tel", selectValue);
-        }else if("orderNo".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"order_no", selectValue);
-        }
-        Wrapper<OrderEntity> orderWrapper=orderEntityWrapper.eq("order_status","2");
-        Page page=orderService.selectPage(new Query<OrderEntity>(params).getPage(),orderWrapper);
-        List<OrderEntity> orderEntityList=page.getRecords();
-        List<OrderModel> orderModelList=getOrderModelList(orderEntityList);
-        PageUtils pageUtils=new PageUtils(page);
-        pageUtils.setList(orderModelList);
+        if("userName".equals(selectType)) {
+        	EntityWrapper<UserEntity> userEntityWrapper=new EntityWrapper<UserEntity>();
+           List<Object> listUserIds=userService.selectObjs(userEntityWrapper.like("user_name", selectValue));
+           orderEntityWrapper.in("user.user_id", listUserIds);
+        }else {   	
+        	orderEntityWrapper.like(MPUtil.camelToUnderline(selectType), selectValue);
+        }     
+       orderEntityWrapper.eq("order_status","2");
+       PageUtils pageUtils= orderService.queryPage(params, orderEntityWrapper);
         return R.ok().put("page",pageUtils);
 
     }
@@ -254,6 +263,7 @@ public class OrderController  extends AbstractController {
             SysUserEntity user=getUser();
             orderEntity.setConsignorId(user.getUserId().intValue());
             orderEntity.setOrderStatus(3);
+            orderEntity.setDeliveryTime(new Date());
             orderService.updateAllColumnById(orderEntity);
         }else{
             orderEntity.setExpressType(1);
@@ -263,6 +273,7 @@ public class OrderController  extends AbstractController {
             SysUserEntity user=getUser();
             orderEntity.setConsignorId(user.getUserId().intValue());
             orderEntity.setOrderStatus(3);
+            orderEntity.setDeliveryTime(new Date());
             orderService.updateAllColumnById(orderEntity);
         }
         return R.ok("发货成功");
@@ -275,104 +286,24 @@ public class OrderController  extends AbstractController {
      */
     @RequestMapping("myOrderList")
     @ApiOperation("我的订单")
-    public R myOrderList(@RequestParam  Map<String, Object> params){
+    public R myOrderList(@RequestParam  Map<String, Object> params,OrderEntity orderEntity){
 
         String selectType=(String)params.get("selectType");
         String selectValue=(String)params.get("selectValue");
         EntityWrapper<OrderEntity> orderEntityWrapper=new EntityWrapper<OrderEntity>();
-        if("userName".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"user_id", selectValue);
-        }else if("tel".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"tel", selectValue);
-        }else if("orderNo".equals(selectType)){
-            orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"order_no", selectValue);
-        }
-        Wrapper<OrderEntity> orderWrapper=orderEntityWrapper.eq("consignor_id",getUserId());
-        Page page=orderService.selectPage(new Query<OrderEntity>(params).getPage(),orderWrapper);
-        List<OrderEntity> orderEntityList=page.getRecords();
-        List<OrderModel> orderModelList=getOrderModelList(orderEntityList);
-        PageUtils pageUtils=new PageUtils(page);
-        pageUtils.setList(orderModelList);
-        return R.ok().put("page",pageUtils);
+         if("userName".equals(selectType)) {
+        	EntityWrapper<UserEntity> userEntityWrapper=new EntityWrapper<UserEntity>();
+           List<Object> listUserIds=userService.selectObjs(userEntityWrapper.like("user_name", selectValue));
+           orderEntityWrapper.in("user.user_id", listUserIds);
+        }else {   	
+        	orderEntityWrapper.like(MPUtil.camelToUnderline(selectType), selectValue);
+        }    
+      orderEntityWrapper.eq("consignor_id",getUserId());
+      orderEntityWrapper.allEq(BeanUtil.beanToMap(orderEntity, true, true));
+      PageUtils pageUtils= orderService.queryPage(params, orderEntityWrapper);
+      return R.ok().put("page",pageUtils);
 
     }
 
-    /**
-     * 根据OrederEntityList获取OrderModel列表
-     * @param orderEntityList 订单List
-     * @return
-     */
-    public List<OrderModel> getOrderModelList(List<OrderEntity> orderEntityList){
-        Iterator orderEntityListIt=orderEntityList.iterator();
-        List<OrderModel> orderModelList=new ArrayList<OrderModel>();
-        while(orderEntityListIt.hasNext()) {
-            OrderModel orderModel = new OrderModel();
-            OrderEntity orderEntity = (OrderEntity) orderEntityListIt.next();
-            Integer userId = orderEntity.getUserId();
-            //EntityWrapper<OrderGoodEntity> orderGoodEntityWrapper = new EntityWrapper<OrderGoodEntity>();
-            orderModel.setOrderId(orderEntity.getId());
-            orderModel.setAddress(orderEntity.getDetailedAddress());
-            orderModel.setTotalAmount(orderEntity.getTotalMoney());
-            orderModel.setConsignee(orderEntity.getConsignee());
-            SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd hh:mm:ss");
-            String createdTimeStr=sdf.format(orderEntity.getCreatedTime());
-            orderModel.setStrCreatedTime(createdTimeStr);
-            orderModel.setPostCode(orderEntity.getPostcode());
-            orderModel.setExpressCompanyNo(orderEntity.getExpressCompanyNo());
-            orderModel.setExpressCompanyName(orderEntity.getExpressCompanyName());
-            orderModel.setExpressNumber(orderEntity.getExpressNumber());
-            orderModel.setOrderNo(orderEntity.getOrderNo());
-            orderModel.setTel(orderEntity.getTel());
-            orderModel.setUserId(userId);
-            EntityWrapper<UserEntity> userEntityWrapper=new EntityWrapper<UserEntity>();
-            Wrapper<UserEntity> userWrapper=userEntityWrapper.eq("user_id",userId);
-            UserEntity userEntity=userService.selectOne(userWrapper);
-            Integer orderStatus=orderEntity.getOrderStatus();
-            switch(orderStatus){
-                case 0:
-                    orderModel.setOrderStatus("待支付");
-                    break;
-                case 1:
-                    orderModel.setOrderStatus("待支付关闭");
-                    break;
-                case 2:
-                    orderModel.setOrderStatus("待发货");
-                    break;
-                case 3:
-                    orderModel.setOrderStatus("待收货");
-                    break;
-                case 4:
-                    orderModel.setOrderStatus("已收货");
-                    break;
-                case 5:
-                    orderModel.setOrderStatus("待评价");
-                    break;
-                case 6:
-                    orderModel.setOrderStatus("申请退款");
-                    break;
-                case 7:
-                    orderModel.setOrderStatus("退款完成");
-                    break;
-                case 8:
-                    orderModel.setOrderStatus("已完成订单");
-                    break;
-            }
-            if(orderEntity.getDeliveryPersonTel()!=null){
-                orderModel.setDeliveryPersonTel(orderEntity.getDeliveryPersonTel());
-            }
-            if(orderEntity.getExpressType()!=null){
-                if(orderEntity.getExpressType()==0){
-                    orderModel.setExpressType("自主发货");
-                    orderModel.setExpressMsg("配送人电话："+orderEntity.getDeliveryPersonTel());
-                }
-                if(orderEntity.getExpressType()==1){
-                    orderModel.setExpressType("快递发货");
-                    orderModel.setExpressMsg("运单号："+orderEntity.getExpressNumber()+"("+orderEntity.getExpressCompanyName()+")");
-                }
-            }
-            orderModel.setUserName(userEntity.getUserName());
-            orderModelList.add(orderModel);
-        }
-        return orderModelList;
-    }
+   
 }

@@ -1,5 +1,6 @@
 package com.freeter.modules.order.service;
 
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.modules.order.entity.OrderEntity;
@@ -15,5 +16,7 @@ import java.util.Map;
  */
 public interface OrderService extends IService<OrderEntity> {
     PageUtils queryPage(Map<String, Object> params);
+
+	PageUtils queryPage(Map<String, Object> params, Wrapper<OrderEntity> wrapper);
 }
 

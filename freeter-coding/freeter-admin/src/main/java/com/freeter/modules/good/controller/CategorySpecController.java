@@ -25,8 +25,6 @@ import com.freeter.modules.good.service.CategorySpecService;
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.lang.Assert;
 
-
-
 /**
  * 分类规格表
  *
@@ -37,89 +35,92 @@ import cn.hutool.core.lang.Assert;
 @RestController
 @RequestMapping("good/categoryspec")
 public class CategorySpecController {
-    @Autowired
-    private CategorySpecService categorySpecService;
+	@Autowired
+	private CategorySpecService categorySpecService;
 
-    /**
-     * 列表
-     */
-    @RequestMapping("/list")
-    @RequiresPermissions("good:categoryspec:list")
-    public R list(@RequestParam Map<String, Object> params,CategorySpecEntity en){
-       // PageUtils page = categorySpecService.queryPage(params);
-    	EntityWrapper< CategorySpecEntity> ew = new EntityWrapper< CategorySpecEntity>();
-    	ew.setEntity(en);
-    	Map map = new HashMap();
-    	map = BeanUtil.beanToMap(en);
-    	ew.allEq(GenUtils.camelToUnderlineMap(map,"")); 
-    	Page<CategorySpecView> page = categorySpecService.queryPageCategorySpecView(params, ew);
-        return R.ok().put("page", new PageUtils(page));
-    }
+	/**
+	 * 列表
+	 */
+	@RequestMapping("/list")
+	@RequiresPermissions("good:categoryspec:list")
+	public R list(@RequestParam Map<String, Object> params, CategorySpecEntity en) {
+		// PageUtils page = categorySpecService.queryPage(params);
+		EntityWrapper<CategorySpecEntity> ew = new EntityWrapper<CategorySpecEntity>();
+		ew.setEntity(en);
+		Map map = new HashMap();
+		map = BeanUtil.beanToMap(en);
+		ew.allEq(GenUtils.camelToUnderlineMap(map, ""));
+		Page<CategorySpecView> page = categorySpecService.queryPageCategorySpecView(params, ew);
+		return R.ok().put("page", new PageUtils(page));
+	}
 
-    /**
-     * 列表
-     */
-    @RequestMapping("/specList")
-    @RequiresPermissions("good:categoryspec:list")
-    public R specList(CategorySpecEntity cse){
-    	 
-      	EntityWrapper< CategorySpecEntity> ew = new EntityWrapper< CategorySpecEntity>();
-      	ew.setEntity(cse);
-        return R.ok().put("data", categorySpecService.selectList(ew));
-    }
+	/**
+	 * 列表
+	 */
+	@RequestMapping("/specList")
+	@RequiresPermissions("good:categoryspec:list")
+	public R specList(CategorySpecEntity cse) {
 
-    
+		EntityWrapper<CategorySpecEntity> ew = new EntityWrapper<CategorySpecEntity>();
+		ew.setEntity(cse);
+		ew.or("category_id is null ");
+		return R.ok().put("data", categorySpecService.selectList(ew));
+	}
 
-    /**
-     * 信息
-     */
-    @RequestMapping("/info/{id}")
-    @RequiresPermissions("good:categoryspec:info")
-    public R info(@PathVariable("id") Integer id){
-        CategorySpecEntity categorySpec = categorySpecService.selectById(id);
+	/**
+	 * 信息
+	 */
+	@RequestMapping("/info/{id}")
+	@RequiresPermissions("good:categoryspec:info")
+	public R info(@PathVariable("id") Integer id) {
+		CategorySpecEntity categorySpec = categorySpecService.selectById(id);
 
-        return R.ok().put("categorySpec", categorySpec);
-    }
+		return R.ok().put("categorySpec", categorySpec);
+	}
 
-    /**
-     * 保存
-     */
-    @RequestMapping("/save")
-    @RequiresPermissions("good:categoryspec:save")
-    public R save(@RequestBody CategorySpecView categorySpec){
-    	//ValidatorUtils.validateEntity(categorySpec);
-    	Assert.notBlank(categorySpec.getSpecName(),"规格名称不能为空");
-    	Assert.notNull(categorySpec.getCategoryIds(),"分类不能为空");
-    	Long[] categoryIds = categorySpec.getCategoryIds();
-    	for(Long categoryId:categoryIds) {
-    		categorySpec.setCategoryId(categoryId.intValue());
-    		categorySpecService.insert(categorySpec);
-    	}
+	/**
+	 * 保存
+	 */
+	@RequestMapping("/save")
+	@RequiresPermissions("good:categoryspec:save")
+	public R save(@RequestBody CategorySpecView categorySpec) {
+		// ValidatorUtils.validateEntity(categorySpec);
+		Assert.notBlank(categorySpec.getSpecName(), "规格名称不能为空");
+		Long[] categoryIds = categorySpec.getCategoryIds();
+		if (categoryIds != null) {
 
-        return R.ok();
-    }
+			for (Long categoryId : categoryIds) {
+				categorySpec.setCategoryId(categoryId.intValue());
+				categorySpecService.insert(categorySpec);
+			}
+		} else {
+			categorySpecService.insert(categorySpec);
+		}
 
-    /**
-     * 修改
-     */
-    @RequestMapping("/update")
-    @RequiresPermissions("good:categoryspec:update")
-    public R update(@RequestBody CategorySpecEntity categorySpec){
-        ValidatorUtils.validateEntity(categorySpec);
-        categorySpecService.updateAllColumnById(categorySpec);//全部更新
-        
-        return R.ok();
-    }
+		return R.ok();
+	}
 
-    /**
-     * 删除
-     */
-    @RequestMapping("/delete")
-    @RequiresPermissions("good:categoryspec:delete")
-    public R delete(@RequestBody Integer[] ids){
-        categorySpecService.deleteBatchIds(Arrays.asList(ids));
+	/**
+	 * 修改
+	 */
+	@RequestMapping("/update")
+	@RequiresPermissions("good:categoryspec:update")
+	public R update(@RequestBody CategorySpecEntity categorySpec) {
+		ValidatorUtils.validateEntity(categorySpec);
+		categorySpecService.updateAllColumnById(categorySpec);// 全部更新
 
-        return R.ok();
-    }
+		return R.ok();
+	}
+
+	/**
+	 * 删除
+	 */
+	@RequestMapping("/delete")
+	@RequiresPermissions("good:categoryspec:delete")
+	public R delete(@RequestBody Integer[] ids) {
+		categorySpecService.deleteBatchIds(Arrays.asList(ids));
+
+		return R.ok();
+	}
 
 }

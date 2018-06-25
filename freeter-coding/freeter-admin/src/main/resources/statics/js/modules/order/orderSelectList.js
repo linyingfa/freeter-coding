@@ -1,3 +1,34 @@
+function getOrderStatus(orderStatus){
+	  switch(orderStatus){
+      case 0:
+         return "待支付";
+          break;
+      case 1:
+    	  return("待支付关闭");
+          break;
+      case 2:
+    	  return("待发货");
+          break;
+      case 3:
+    	  return("待收货");
+          break;
+      case 4:
+    	  return("已收货");
+          break;
+      case 5:
+    	  return("待评价");
+          break;
+      case 6:
+    	  return("申请退款");
+          break;
+      case 7:
+    	  return("退款完成");
+          break;
+      case 8:
+    	  return("已完成订单");
+          break;
+  }
+}
 $(function () {
 
     $("#expressType").bind("change",function(){
@@ -11,7 +42,7 @@ $(function () {
         }
     })
     //初始化快递公司列表
-    $.get("/expressCompany/all",null,function(r){
+    $.get( baseURL +"expressCompany/all",null,function(r){
         var expressCompanyList=r.data;
         vm.expressCompanyList=expressCompanyList;
     })
@@ -30,32 +61,38 @@ $(function () {
         url: baseURL + 'order/orderSelectList',
         datatype: "json",
         colModel: [
-            { label: '用户名', name: 'userName', width: 80 },
-            { label: '订单编号', name: 'orderNo', width: 100},
-            { label: '订单金额', name: 'totalAmount',  width: 90 },
-            { label: '收货人', name: 'consignee',  width: 80 },
-            { label: '订单提交时间', name: 'strCreatedTime', width: 110 },
-            { label: '收货地址', name: 'address',width:80},
-            { label: '收货人电话', name: 'tel', width: 70 },
-            { label: '配送方式', name: 'expressType', width: 80 },
-            { label: '快递信息', name: 'expressMsg',width: 80},
-            { label: '订单状态', name: 'orderStatus', width: 80 },
+            { label: '用户名', name: 'userName', width: 120 },
+            { label: '订单编号', name: 'orderNo', width: 200},
+            { label: '总金额', name: 'totalMoney',  width: 60 },
+            { label: '收货人', name: 'consignee',  width: 180 , formatter: function (cellvalue, options, rowObject) {
+                
+                return cellvalue +"("+rowObject.tel+")";
+            }},
+            { label: '订单提交时间', name: 'createdTime', width: 180 },
+            { label: '收货地址', name: 'detailedAddress',width:210},
+           /* { label: '收货人电话', name: 'tel', width: 70 },*/
+           /* { label: '配送方式', name: 'expressType', width: 80 },
+            { label: '快递信息', name: 'expressMsg',width: 80},*/
+            { label: '订单状态', name: 'orderStatus', width: 80, formatter: function (cellvalue, options, rowObject) {     
+            	alert(cellvalue);
+            	return getOrderStatus(cellvalue);
+            }},
 
             {
                 label: '订单商品', name: '', index: 'operate', width: 80, align: 'center',
                 formatter: function (cellvalue, options, rowObject) {
-                    var detail="<input type='button' value='查看' onclick='getOrderGood(\""+rowObject.orderId+"\")'>";
+                    var detail="<input type='button' value='查看' onclick='getOrderGood(\""+rowObject.id+"\")'>";
                     return detail;
                 },
             },
             {
-                label: '发货', name: '', index: 'operate', width: 60, align: 'center',
+                label: '发货', name: '', index: 'operate', width: 100, align: 'center',
                 formatter: function (cellvalue, options, rowObject) {
-                    var detail="<input type='button' value='点击发货' onclick='delivery(\""+rowObject.orderId+"\")'>";
+                    var detail="<input type='button' value='点击发货' onclick='delivery(\""+rowObject.id+"\")'>";
                     return detail;
                 },
             },
-            { label: '订单id',  name:'orderId',width:80,hidden:'true'}
+            { label: '订单id',  name:'id',width:80,hidden:'true'}
 
 
         ],
@@ -217,7 +254,6 @@ function delivery(orderId){
             $("#delivery").show();
         },
         yes:function(){
-            debugger
             var expressType=$("#expressType").val();
             var options=$("#expressCompany option:selected");
             var expressNumber=$("input[name='expressNumber']").val();
@@ -232,7 +268,7 @@ function delivery(orderId){
             }
             var expressCompanyNo=options.val();
             var expressCompanyName=options.text();
-            $.post("/order/delivery",{"expressType":expressType,"orderId":orderId,"expressNumber":expressNumber,"expressCompanyNo":expressCompanyNo,"expressCompanyName":expressCompanyName,"deliveryPersonTel":deliveryPersonTel},function(r){
+            $.post(baseURL +"order/delivery",{"expressType":expressType,"orderId":orderId,"expressNumber":expressNumber,"expressCompanyNo":expressCompanyNo,"expressCompanyName":expressCompanyName,"deliveryPersonTel":deliveryPersonTel},function(r){
                    layer.closeAll();
                    layer.alert("发货成功",{icon:6},function () {
                        layer.closeAll();

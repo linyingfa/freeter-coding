@@ -61,7 +61,7 @@ public class CategoryController {
     @RequiresPermissions("good:category:list")
     public R getCategorylist(){
     	 
-         CategoryEntity categoryEntity = new CategoryEntity();
+        CategoryEntity categoryEntity = new CategoryEntity();
     	EntityWrapper< CategoryEntity> ew = new EntityWrapper< CategoryEntity>();
     	ew.orderBy("sort", true);
         List page = categoryService.selectListVO(ew);

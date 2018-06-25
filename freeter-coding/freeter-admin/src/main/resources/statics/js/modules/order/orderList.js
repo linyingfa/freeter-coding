@@ -1,3 +1,34 @@
+function getOrderStatus(orderStatus){
+	  switch(orderStatus){
+      case 0:
+         return "待支付";
+          break;
+      case 1:
+    	  return("待支付关闭");
+          break;
+      case 2:
+    	  return("待发货");
+          break;
+      case 3:
+    	  return("待收货");
+          break;
+      case 4:
+    	  return("已收货");
+          break;
+      case 5:
+    	  return("待评价");
+          break;
+      case 6:
+    	  return("申请退款");
+          break;
+      case 7:
+    	  return("退款完成");
+          break;
+      case 8:
+    	  return("已完成订单");
+          break;
+  }
+}
 $(function () {
     $('.buttoonnamber input').removeClass('active')
     $('.buttoonnamber input').eq(0).addClass('active');
@@ -40,24 +71,36 @@ $(function () {
                 },
             },
             { label: '订单id',  name:'orderId',width:80,hidden:'true'}*/
-            { label: '用户名', name: 'userName', width: 90 },
-            { label: '订单编号', name: 'orderNo', width: 100},
-            { label: '订单金额', name: 'totalAmount',  width: 90 },
-            { label: '收货人', name: 'consignee',  width: 100 },
-            { label: '订单提交时间', name: 'strCreatedTime', width: 130 },
-            { label: '收货地址', name: 'address'},
-            { label: '收货人电话', name: 'tel', width: 70 },
-            { label: '快递单号', name: 'expressNumber' },
-            { label: '快递公司', name: 'expressCompanyName' },
-            { label: '订单状态', name: 'orderStatus', width: 150 },
+            { label: '用户名', name: 'userName', width: 120 },
+            { label: '订单编号', name: 'orderNo', width: 210},
+            { label: '总额', name: 'totalMoney',  width: 60 },
+            { label: '收货人', name: 'consignee',  width: 180 , formatter: function (cellvalue, options, rowObject) {
+                 
+                return cellvalue +" ("+rowObject.tel+")";
+            }},
+            { label: '订单提交时间', name: 'createdTime', width: 180 },
+            { label: '收货地址', name: 'detailedAddress',width: 210},
+          /*  { label: '收货人电话', name: 'tel', width: 70 },*/
+            { label: '快递单号', name: 'expressNumber', width: 210, formatter: function (cellvalue, options, rowObject) {
+                 if(rowObject.expressCompanyName){
+                	 
+                	 return cellvalue +" ("+rowObject.expressCompanyName+")";
+                 }
+                 return cellvalue + "（暂无快递公司）";
+                 
+            }},
+          /*  { label: '快递公司', name: 'expressCompanyName' },*/
+            { label: '订单状态', name: 'orderStatus', width: 80, formatter: function (cellvalue, options, rowObject) {     
+             	return getOrderStatus(cellvalue);
+            }},
             {
-                label: '订单商品', name: '', index: 'operate', width: 50, align: 'center',
+                label: '订单商品', name: '', index: 'operate', width: 80, align: 'center',
                 formatter: function (cellvalue, options, rowObject) {
-                    var detail="<input type='button' value='查看' onclick='getOrderGood(\""+rowObject.orderId+"\")'>";
+                    var detail="<input type='button' value='查看' onclick='getOrderGood(\""+rowObject.id+"\")'>";
                     return detail;
                 },
             },
-            { label: '订单id',  name:'orderId',width:80,hidden:'true'}
+            { label: '订单id',  name:'id',width:80,hidden:'true'}
 
 
         ],
@@ -87,6 +130,7 @@ $(function () {
             $("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
         }
     });
+    $('.')
 });
 
 var vm = new Vue({
@@ -120,7 +164,8 @@ var vm = new Vue({
         },
         update:function(event){
             //var rowId=$("#jqGrid").jqGrid("getGridParam","selrow");
-            var orderId=getSelectedRow();
+            var rowId=getSelectedRow();
+            var orderId = $("#jqGrid").jqGrid("getRowData",rowId).orderId;
             if(orderId == null){
                 return ;
             }
@@ -169,7 +214,7 @@ function getOrderGood(orderId){
                 url:baseURL+'order/good/'+orderId,
                 datatype: "json",
                 colModel: [
-                    { label: '商品名称', name: 'goodTitle', width: 200 },
+                    { label: '商品名称', name: 'goodName', width: 200 },
                     { label: '商品规格', name: 'goodSpec', width: 400},
                     { label: '单价', name: 'unitPrice', width: 200},
                     { label: '购买数量', name: 'goodCount',  width: 300 }

@@ -1,22 +1,24 @@
 package com.freeter.modules.order.service.impl;
 
-import com.baomidou.mybatisplus.mapper.BaseMapper;
-import com.baomidou.mybatisplus.mapper.Wrapper;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import java.util.Map;
+
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.freeter.common.utils.MPUtil;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.Query;
 import com.freeter.modules.apiUser.entity.UserEntity;
 import com.freeter.modules.apiUser.service.UserService;
 import com.freeter.modules.order.dao.OrderDao;
 import com.freeter.modules.order.entity.OrderEntity;
-import com.freeter.modules.order.entity.OrderGoodEntity;
+import com.freeter.modules.order.entity.view.OrderView;
 import com.freeter.modules.order.service.OrderService;
 
 
@@ -31,35 +33,27 @@ public class OrderServiceImpl extends ServiceImpl<OrderDao, OrderEntity> impleme
         String selectValue=(String)params.get("selectValue");
         String orderStatus=(String)params.get("orderStatus");
         EntityWrapper<OrderEntity> orderEntityWrapper=new EntityWrapper<OrderEntity>();
-        if(orderStatus==null || "100".equals(orderStatus)){
+       
             if("userName".equals(selectType)){
                 EntityWrapper<UserEntity> userEntityWrapper=new EntityWrapper<UserEntity>();
-                UserEntity userEntity=userService.selectOne(userEntityWrapper.eq("user_name",selectValue));
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"user_id",userEntity.getUserId().toString());
-            }else if("tel".equals(selectType)){
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"tel", selectValue);
-            }else if("orderNo".equals(selectType)){
-
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"order_no", selectValue);
+                List<Object> userIdsList=userService.selectObjs(userEntityWrapper.like("user_name",selectValue));
+              orderEntityWrapper.in("user.user_id",userIdsList);
+            }else {
+            	orderEntityWrapper.like(MPUtil.camelToUnderline(selectType), selectValue);
             }
-
-        }else{
-            orderEntityWrapper= (EntityWrapper<OrderEntity>) orderEntityWrapper.eq("order_status",orderStatus);
-            if("userName".equals(selectType)){
-                EntityWrapper<UserEntity> userEntityWrapper=new EntityWrapper<UserEntity>();
-                UserEntity userEntity=userService.selectOne(userEntityWrapper.eq("user_name",selectValue));
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"user_id",userEntity.getUserId().toString());
-            }else if("tel".equals(selectType)){
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"tel", selectValue);
-            }else if("orderNo".equals(selectType)){
-                orderEntityWrapper=(EntityWrapper)orderEntityWrapper.like(StringUtils.isNotBlank(selectValue),"order_no", selectValue);
-            }
-        }
-        Page<OrderEntity> page = this.selectPage(
-                new Query<OrderEntity>(params).getPage(),orderEntityWrapper
-        );
+            orderEntityWrapper.eq(StringUtils.isNotBlank(orderStatus), "order_status", orderStatus);
+            Page<OrderView> page =new Query<OrderView>(params).getPage();
+            page.setRecords(baseMapper.selectListView(page,orderEntityWrapper));
+        	PageUtils pageUtil = new PageUtils(page);
         return new PageUtils(page);
     }
-
+    
+    @Override
+	public PageUtils queryPage(Map<String, Object> params, Wrapper<OrderEntity> wrapper) {
+		Page<OrderView> page =new Query<OrderView>(params).getPage();
+        page.setRecords(baseMapper.selectListView(page,wrapper));
+    	PageUtils pageUtil = new PageUtils(page);
+    	return pageUtil;
+	}
 
 }
