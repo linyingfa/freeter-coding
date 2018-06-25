@@ -1,7 +1,7 @@
 package com.freeter.modules.good.controller;
 
-import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,8 +21,6 @@ import com.freeter.modules.good.entity.GoodSpecPriceEntity;
 import com.freeter.modules.good.entity.GoodSpecValueEntity;
 import com.freeter.modules.good.service.GoodSpecPriceService;
 import com.freeter.modules.good.service.GoodSpecValueService;
-
-import cn.hutool.core.bean.BeanUtil;
 
 /**
  * 商品规格值表
@@ -95,6 +93,19 @@ public class GoodSpecValueController {
 	}
 
 	/**
+	 * 删除
+	 */
+	@RequestMapping("/deleteSpec")
+	@RequiresPermissions("good:good:delete")
+	public R deleteSpec(Integer goodId) {
+		Map columnMap = new HashMap();
+		columnMap.put("good_id", goodId);
+		goodSpecValueService.deleteByMap(columnMap);
+		goodSpecPriceService.deleteByMap(columnMap);
+		return R.ok();
+	}
+	
+	/**
 	 * 修改
 	 */
 	@RequestMapping("/update")
@@ -113,7 +124,6 @@ public class GoodSpecValueController {
 	@RequiresPermissions("good:goodspecvalue:delete")
 	public R delete(@RequestBody Integer[] ids) {
 		goodSpecValueService.deleteBatchIds(Arrays.asList(ids));
-
 		return R.ok();
 	}
 
