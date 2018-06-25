@@ -598,6 +598,33 @@ var vm = new Vue({
 			});  
 			 
 		},
+		specReset: function (event) {
+			var goodId = getSelectedRow();
+			if(goodId == null){
+				return ;
+			}
+			 
+		 confirm('确定要重置商品规格吗', function(){
+			        	$.ajax({
+							type: "POST",
+						    url: baseURL + "good/goodspecvalue/deleteSpec",
+ 						    data: {goodId:goodId},
+						    success: function(r){
+						    	if(r.code === 0){
+									alert('操作成功', function(data){
+										vm.reload();
+									});
+								}else{
+									alert(r.msg, function(data){
+										vm.reload();
+ 									});
+								} 
+							}
+						});
+			});  
+			 
+		},
+		 	 
 		saveOrUpdate: function (event) {
 			var url = vm.good.goodId == null ? "good/good/save" : "good/good/update";
 			$.ajax({
