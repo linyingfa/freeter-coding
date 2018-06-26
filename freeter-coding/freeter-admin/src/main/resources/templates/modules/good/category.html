@@ -19,13 +19,14 @@
 	<div id="rrapp" v-cloak>
 		<div v-show="showList">
 			<div class="grid-btn">
-			<div class="form-group col-sm-2">
+			<div class="form-group ">
 				<select id="search_channelId" name="channelId" class="selectpicker" @keyup.enter="query" 
 							data-live-search="true" v-model="search.channelId">
 
 				</select>
-<!-- 				<input type="text" class="form-control"  v-model="search.name" @keyup.enter="query" placeholder="用户名">
- -->			</div>
+				<input type="text" class="form-control"  v-model="search.name"  @keyup.enter="query" placeholder="分类名称"     style="width: 17%;display: inline-block;">
+ 		
+	 
 			<a class="btn btn-default" @click="query">查询</a>
 				<#if shiro.hasPermission("good:category:save")> <a
 					class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
@@ -39,7 +40,9 @@
 				
 			 
 				 
-			</div>
+			 
+ 		</div>
+ 		 
 			<table id="menuTable" data-mobile-responsive="true" data-click-to-select="true">
 			<thead>
 			<tr>

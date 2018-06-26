@@ -1,3 +1,67 @@
+ function querySpecVal(goodId){
+	 $.ajax({
+			url : baseURL +"good/goodspecvalue/list",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+			// 数据发送方式
+			type : "get",
+			// 接受数据格式
+			dataType : "json",
+			// 要传递的数据
+			data : {goodId:goodId},
+			// 回调函数，接受服务器端返回给客户端的值，即result值
+			success : function(data) {
+				 vm.specVal = [];
+				 if(!data.data||data.data.length==0){
+					alert("请先添加规格数据")
+				} 
+					$.each(data.data, function(i) {
+						 
+						 vm.specVal.push(data.data[i]);
+	 					 
+					});
+
+			},
+			error : function(data) {
+
+				alert("查询失败" + data);
+
+			}
+		})
+
+ }
+/* 查看规格值*/
+function getSpecVal(){
+	$.ajax({
+		url : baseURL +"good/categoryspec/specList",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+		// 数据发送方式
+		type : "get",
+		// 接受数据格式
+		dataType : "json",
+		// 要传递的数据
+		data : {is_show:1,categoryId:vm.oneCategoryId},
+		// 回调函数，接受服务器端返回给客户端的值，即result值
+		success : function(data) {
+			 vm.spec = [];
+			 if(!data.data||data.data.length==0){
+				alert("请先添加规格数据")
+			} 
+				$.each(data.data, function(i) {
+					 let specObj = {};
+					specObj.specName =  data.data[i].specName;
+					specObj.id = data.data[i].id;
+					 vm.spec.push(specObj);
+ 					 
+				});
+
+		},
+		error : function(data) {
+
+			alert("查询失败" + data);
+
+		}
+	})
+
+}
+
 /*获取商城频道列表*/
 function getchannelList() {//获取下拉频道列表
 	$.ajax({
@@ -36,7 +100,7 @@ function getchannelList() {//获取下拉频道列表
 
 }
 /*获取商品规格*/
-function getGoodSpec(goodId){
+function getGoodSpecPrice(goodId){
 	$.ajax({
 		url : baseURL +"good/goodspecprice/getGoodSpecPricelist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
 		// 数据发送方式
@@ -144,7 +208,7 @@ function getOneCategoryList() {//获取下拉学校列表
 
 
 function spec(goodId){
- 	getGoodSpec(goodId);
+ 	getGoodSpecPrice(goodId);
 	 layer.open({
         type: 1,
         offset: '50px',
@@ -152,6 +216,7 @@ function spec(goodId){
         title: "设置规格",
         area: ['700px', '450px'],
         shade: 0,
+        maxmin: true,
         shadeClose: false,
         content: jQuery("#specLayer"),
         btn: ['确定', '取消'],
@@ -179,6 +244,72 @@ function spec(goodId){
     });
 }
 
+function specValLayer(){
+	 layer.open({
+        type: 1,
+        offset: '50px',
+        skin: 'layui-layer-molv',
+        title: "设置规格",
+        area: ['700px', '450px'],
+        shade: 0,
+        shadeClose: false,
+        maxmin: true,
+        content: jQuery("#specValLayer"),
+        btn: ['重置规格','更新规格', '关闭'],
+        yes: function (index) {
+        	var goodId = getSelectedRow();
+			if(goodId == null){
+				return ;
+			}	 
+		 confirm('是否删除所有的商品规格吗', function(){
+			        	$.ajax({
+							type: "POST",
+						    url: baseURL + "good/goodspecvalue/deleteSpec",
+ 						    data: {goodId:goodId},
+						    success: function(r){
+						    	if(r.code === 0){
+									alert('操作成功', function(data){
+										 layer.close(index);
+ 									});
+								}else{
+									alert(r.msg, function(data){
+										 
+ 									});
+								} 
+							}
+						});
+			});    
+        },
+	 btn2: function (index) {
+		 confirm('是否确定要重新生成商品规格吗', function(){
+			  var url = "good/goodspecvalue/saveGoodSpecValue"
+		 			$.ajax({
+						type: "POST",
+					    url: baseURL + url,
+		             contentType: "application/json",
+					    data: JSON.stringify(vm.specVal),
+					    success: function(r){
+					    	if(r.code === 0){
+								alert('操作成功', function(data){
+									layer.close(index);
+								});
+							}else{
+								alert(r.msg,function(data){
+									 
+									});
+							}
+						}
+					});
+			 
+		 
+		 });
+		 return false;
+
+}
+       
+    });
+}
+
 function picImg(goodId){
 	$('#input-702').fileinput('destroy');
 
@@ -193,7 +324,7 @@ function picImg(goodId){
          shade: 0,
          shadeClose: false,
          content: jQuery("#imgLayer"),
-         btn: ['确定', '取消'],
+         btn: ['规格删除','重新生成规格', '取消'],
          btn1: function (index) {
         	 
              layer.close(index);
@@ -355,10 +486,20 @@ $(function () {
 				return   rowObject.categoryParentName+"->"+rowObject.categoryName;
 	           
 	        }},  			
-/*			{ label: '商品分类', name: 'categoryName', index: 'categoryName', width: 150 }, 			
-*/ 			{ label: '图片', name: 'goodId', index: 'good_id', width: 120,formatter: function(cellvalue, options, rowObject){
+	        { label: '商品分类', name: 'oneCategoryId', index: 'oneCategoryId', width: 150,hidden:true }, 			
+ 			{ label: '详情图片', name: 'goodId', index: 'good_id', width: 120,formatter: function(cellvalue, options, rowObject){
 			 
 	            return       '<a class="btn btn-sm btn-info" onclick="picImg('+cellvalue+')"><i class="fa fa-file-photo-o"></i>&nbsp;预览</a>';
+	           
+	        }}, 
+			{ label: '缩略图', name: 'picImg', index: 'pic_img', width: 150,formatter: function(cellvalue, options, rowObject){
+				 if(cellvalue){
+					 
+					 return       '<a class="btn btn-sm btn-success" href="'+cellvalue+'"  target="_blank"><i class="fa fa-file-photo-o"></i>&nbsp;预览</a>';
+				 }else{
+					 return       '<a class="btn btn-sm btn-warning" ><i class="fa fa-file-photo-o"></i>&nbsp;暂无图片</a>';
+
+				 }
 	           
 	        }}, 
 	        { label: '规格', name: 'goodId', index: 'pic_img', width: 120,formatter: function(cellvalue, options, rowObject){
@@ -467,9 +608,12 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
+		oneCategoryId:null,
 		showList: true,
 		title: null,
 		goodPrice:{},
+		spec:[],
+		specVal:[],
 		good: {},
 		goodImage:[],
 		goodImageIds:[],
@@ -477,6 +621,16 @@ var vm = new Vue({
 		search:{}
 	},
 	methods: {
+		specReset:function(){
+			var goodId = getSelectedRow();
+			if(!goodId){
+				return
+			}
+			 vm.oneCategoryId = $("#jqGrid").jqGrid("getRowData",goodId).oneCategoryId;
+			 getSpecVal();
+			 querySpecVal(goodId);
+			 specValLayer();
+		},
 		query: function () {
 			vm.search.channelId =$('#search_channelId').selectpicker('val');
 			vm.search.oneCategoryId =$('#search_oneCategory').selectpicker('val');
@@ -598,32 +752,23 @@ var vm = new Vue({
 			});  
 			 
 		},
-		specReset: function (event) {
-			var goodId = getSelectedRow();
-			if(goodId == null){
-				return ;
-			}
-			 
-		 confirm('确定要重置商品规格吗', function(){
-			        	$.ajax({
-							type: "POST",
-						    url: baseURL + "good/goodspecvalue/deleteSpec",
- 						    data: {goodId:goodId},
-						    success: function(r){
-						    	if(r.code === 0){
-									alert('操作成功', function(data){
-										vm.reload();
-									});
-								}else{
-									alert(r.msg, function(data){
-										vm.reload();
- 									});
-								} 
-							}
-						});
-			});  
-			 
-		},
+		insertSpec:function (type){
+   		 let specObj = {};
+   		 
+    		 var addvalue = $("#spec"+type.id).val();
+    		 if(addvalue == ''){
+    			 alert("请输入规格值");
+    			 return false;
+    		 }
+			specObj.specValue = addvalue;
+			specObj.categorySpecId = type.id;
+			specObj.goodId = this.goodId;
+   		 vm.specVal.push(specObj); 
+ 
+   	},
+   	remove:function (item) {
+   	      this.specVal.splice(this.specVal.indexOf(item), 1)
+       },
 		 	 
 		saveOrUpdate: function (event) {
 			var url = vm.good.goodId == null ? "good/good/save" : "good/good/update";

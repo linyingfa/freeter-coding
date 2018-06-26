@@ -55,7 +55,15 @@
 	
 	<select id="selectCategoryChannelByGood" resultType="com.freeter.modules.good.entity.view.GoodView">
 SELECT
-	good.*,category.`name` category_name,channel.name channel_name,(select name from cn_category owner where owner.category_id =category.parent_id ) category_parent_name
+	good.*,category.`name` category_name,category.category_id,channel.name channel_name,(select name from cn_category owner where owner.category_id =category.parent_id ) category_parent_name
+	,(
+		SELECT
+			category_id
+		FROM
+			cn_category OWNER
+		WHERE
+			OWNER .category_id = category.parent_id
+	) one_category_id
 FROM
 	cn_good good
 LEFT JOIN cn_category_good category_good ON good.good_id = category_good.good_id
