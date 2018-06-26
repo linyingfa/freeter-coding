@@ -10,10 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.freeter.common.utils.PageUtils;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.R;
 import com.freeter.common.utils.SpecUtil;
 import com.freeter.common.validator.ValidatorUtils;
@@ -42,11 +41,11 @@ public class GoodSpecValueController {
 	 * 列表
 	 */
 	@RequestMapping("/list")
-	@RequiresPermissions("good:goodspecvalue:list")
-	public R list(@RequestParam Map<String, Object> params) {
-		PageUtils page = goodSpecValueService.queryPage(params);
-
-		return R.ok().put("page", page);
+	@RequiresPermissions("good:good:list")
+	public R list(GoodSpecValueEntity goodSpecValueEntity) {
+		EntityWrapper<GoodSpecValueEntity> wrapper = new EntityWrapper<GoodSpecValueEntity>();
+		wrapper.setEntity(goodSpecValueEntity);	 
+		return R.ok().put("data", goodSpecValueService.selectList(wrapper));
 	}
 
 	/**
@@ -79,7 +78,13 @@ public class GoodSpecValueController {
 	// @RequiresPermissions("good:goodspecvalue:save")
 	public R saveGoodSpecValue(@RequestBody List<GoodSpecValueEntity> goodSpecValueList) {
 		
+		Integer goodId = goodSpecValueList.get(0).getGoodId();
+		Map columnMap = new HashMap();
+		columnMap.put("good_id", goodId);
+		goodSpecValueService.deleteByMap(columnMap);
+		goodSpecPriceService.deleteByMap(columnMap);
 		
+	 
 		
 		goodSpecValueService.insertBatch(goodSpecValueList);
 

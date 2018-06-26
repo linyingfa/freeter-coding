@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -98,7 +99,8 @@ public class CategoryController {
     @RequiresPermissions("good:category:list")
     public List getCategoryTreeTable(CategoryEntity categoryEntity){
      	EntityWrapper< CategoryEntity> ew = new EntityWrapper< CategoryEntity>();
-      	ew.allEq(BeanUtil.beanToMap(categoryEntity, true, true));
+      	ew.eq(StringUtils.isNotBlank(categoryEntity.getChannelId()),"channel_id",categoryEntity.getChannelId());
+      	ew.like("name", categoryEntity.getName());
      	ew.orderBy("sort is null,sort ", true);
      	List<CategoryView> page = categoryService.selectListView(ew);
       /*  if(page.size() >0) {
