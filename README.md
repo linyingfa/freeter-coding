@@ -6,11 +6,13 @@
 - 有单独的后台，还有单独的接口框架，可以实现前后端分离协作开发，还有火爆的商场功能模块
 - 提供了超级代码生成器，可以生成验证注解，swagger-ui注解，多表分页查询sql,只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
+- 支持j2cache 二级缓存
 <br>
 
 **具有如下特点** 
 - 火爆的商场模块，后续会加入更多的商城模块
 - 超级代码生成器，可直接生成到IDE中，eclipse和ij都可以
+- 引入2Cache 是 OSChina 目前正在使用的两级缓存框架
 - 灵活的权限控制，可控制到页面或按钮，满足绝大部分的权限需求
 - 完善的部门管理及数据权限，通过注解实现数据权限的控制
 - 完善的XSS防范及脚本过滤，支持白名单过滤,彻底杜绝XSS攻击
@@ -42,6 +44,8 @@ freeter-coding 此项目会持续更新
 商品规格： 可以设置通用规格 也可以与一级分类绑定设置规格。
 
 商品基础功能全部完成。
+
+会员管理
 
 <br>
 
@@ -77,7 +81,15 @@ freeter-coding 此项目会持续更新
 3.IDE会下载maven依赖包，自动编译 如果有报错 请update project... jdk环境配置。<br>
 4.执行doc/mysql-test.sql文件，初始化数据【按需导入表结构及数据】<br>
 5.最后修改数据库连接参数,配置文件在src/main/resources/application.yml<br>
-6.在freeter-coding目录下，执行mvn clean install
+6.j2cache:
+    config-location: /cache/j2cache-no.properties     
+    open-spring-cache: true  
+
+j2cache-no.properties    就是不用缓存
+j2cache-redis.properties redis 包括二级缓存
+j2cache-caffeine.properties 一级缓存
+
+7.在freeter-coding目录下，执行mvn clean install
 <br>
 
 - Eclipse、IDEA运行AdminApplication.java，则可启动项目【freeter-admin】
@@ -209,6 +221,6 @@ SELECT  student.* FROM t_student  student
 
 baomidou / mybatis-plus
 
-
+ 红薯 / J2Cache
 
 ![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
