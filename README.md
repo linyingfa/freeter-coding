@@ -64,6 +64,7 @@ freeter-coding 此项目会持续更新
 - 验证框架 hibernate-validator
 - mybatis加强工具 mybatis-plus  文档 http://mp.baomidou.com/#/?id=%E7%AE%80%E4%BB%8B
 - 通用工具类 hutool 文档 http://hutool.mydoc.io/
+- j2cache  https://gitee.com/ld/J2Cache
 <br> 
 
  **软件需求** 
