@@ -1,25 +1,52 @@
 $(function () {
     $("#jqGrid").jqGrid({
-        url: baseURL + 'user/user/list',
+        url: baseURL + 'user/user/page',
         datatype: "json",
         colModel: [			
 			{ label: 'userId', name: 'userId', index: 'user_id', width: 50, key: true },
-			{ label: '用户编号', name: 'userNumber', index: 'user_number', width: 80 }, 			
-			{ label: '手机号', name: 'phone', index: 'phone', width: 80 }, 			
-			{ label: '密码', name: 'password', index: 'password', width: 80 }, 			
-			{ label: '盐', name: 'salt', index: 'salt', width: 80 }, 			
+			{ label: '手机号', name: 'phone', index: 'phone', width: 80 }, 				
 			{ label: '用户昵称', name: 'userName', index: 'user_name', width: 80 }, 			
 			{ label: '真实姓名', name: 'realName', index: 'real_name', width: 80 }, 			
-			{ label: '性别', name: 'sex', index: 'sex', width: 80 },
+			{ label: '性别', name: 'sex', index: 'sex', width: 80 ,formatter: function(cellvalue, options, rowObject){
+				if(cellvalue == 0){
+	                return '男';
+	            }
+	            if(cellvalue == 1){
+	                return '女';
+	            }  
+	            return '男';
+	           
+	        }}, 								 			
+			{ label: '出生日期', name: 'birth', index: 'birth', width: 80 }, 			
 			{ label: '年龄', name: 'age', index: 'age', width: 80 }, 			
 			{ label: '用户头像', name: 'picImg', index: 'pic_img', width: 80 }, 			
-			{ label: '状态 0=冻结/1=正常', name: 'status', index: 'status', width: 80 }, 			
+			{ label: '状态 ', name: 'status', index: 'status', width: 80 ,formatter: function(cellvalue, options, rowObject){
+				if(cellvalue == 0){
+	                return '<span class="label label-primary">正常/span>';
+	            }
+	            if(cellvalue == 1){
+	                return '<span class="label label-success">冻结</span>';
+	            }  
+	            return '<span class="label label-primary">正常</span>';
+	           
+	        }}, 								
 			{ label: '总金额', name: 'amount', index: 'amount', width: 80 }, 			
-			{ label: '用户类型', name: 'userType', index: 'user_type', width: 80 }, 			
+			{ label: '用户类型', name: 'userType', index: 'user_type', width: 80 ,formatter: function(cellvalue, options, rowObject){
+				if(cellvalue === 0){
+	                return '<span class="label label-primary">会员/span>';
+	            }
+	            if(cellvalue === 1){
+	                return '<span class="label label-success">其他</span>';
+	            }  
+	            return '<span class="label label-primary">会员</span>';
+	           
+	        }}, 											
 			{ label: '注册时间', name: 'regeistTime', index: 'regeist_time', width: 80 }, 			
-			{ label: '创建者', name: 'createBy', index: 'create_by', width: 80 }, 			
+			/*{ label: '创建者', name: 'createBy', index: 'create_by', width: 80 }, 			
 			{ label: '修改时间', name: 'updateTime', index: 'update_time', width: 80 }, 			
-			{ label: '修改人', name: 'updateBy', index: 'update_by', width: 80 }			
+			{ label: '修改人', name: 'updateBy', index: 'update_by', width: 80 }, 	*/		
+		/*	{ label: '身份证正面照', name: 'idcardFrontImg', index: 'idcard_front_img', width: 80 }, 			
+			{ label: '身份证反面照', name: 'idcardBackImg', index: 'idcard_back_img', width: 80 }			*/
         ],
 		viewrecords: true,
         height: 385,
@@ -49,32 +76,38 @@ $(function () {
 });
 
 var vm = new Vue({
-                el:'#rrapp',
-                data:{
-                    showList: true,
-                    title: null,
-                    user: {}
-                },
-                methods: {
-                    query: function () {
-                        vm.reload();
-                    },
-                    add: function(){
-                        vm.showList = false;
-                        vm.title = "新增";
-                        vm.user = {};
-                    },
-                    update: function (event) {
-                        var userId = getSelectedRow();
-                        if(userId == null){
-                            return ;
-                        }
-                        vm.showList = false;
-                        vm.title = "修改";
+	el:'#rrapp',
+	data:{
+		showList: true,
+		title: null,
+		user: {},
+		search : {},
+		selectSearch : 'phone',
+		selectSearchVal : null
 
-                        vm.getInfo(userId)
+	},
+	methods: {
+		query: function () {
+			vm.reload();
+		},
+		add: function(){
+			vm.showList = false;
+			vm.title = "新增";
+			vm.user = {};
+		},
+		update: function (event) {
+			var userId = getSelectedRow();
+			if(userId == null){
+				return ;
+			}
+			vm.showList = false;
+            vm.title = "修改";
+            
+            vm.getInfo(userId)
 		},
 		saveOrUpdate: function (event) {
+			var birth =$("#test1").val();
+			vm.user.birth = birth;
 			var url = vm.user.userId == null ? "user/user/save" : "user/user/update";
 			$.ajax({
 				type: "POST",
@@ -119,14 +152,29 @@ var vm = new Vue({
 		getInfo: function(userId){
 			$.get(baseURL + "user/user/info/"+userId, function(r){
                 vm.user = r.user;
+            	var birth =$("#test1").val(vm.user.birth );
+    			 
             });
 		},
 		reload: function (event) {
 			vm.showList = true;
 			var page = $("#jqGrid").jqGrid('getGridParam','page');
-			$("#jqGrid").jqGrid('setGridParam',{ 
-                page:page
-            }).trigger("reloadGrid");
-		}
+  			 var search =  vm.search;
+  			 //清空元素的值
+  			for (var Key in search){
+  		      search[Key] = "";
+  		    }
+			Vue.set(vm.search, vm.selectSearch, vm.selectSearchVal);
+			 
+			$("#jqGrid").jqGrid('setGridParam',{
+					postData: vm.search,
+					 page:page
+					}).trigger("reloadGrid");
+			 
+		}, mounted: function () {
+		 
+			 
+			 
+        } 
 	}
 });
