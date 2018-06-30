@@ -21,13 +21,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.freeter.common.utils.GenUtils;
 import com.freeter.common.utils.MPUtil;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
-import com.freeter.modules.apiUser.entity.UserEntity;
-import com.freeter.modules.apiUser.service.UserService;
 import com.freeter.modules.good.entity.CategorySpecEntity;
 import com.freeter.modules.good.entity.GoodEntity;
 import com.freeter.modules.good.entity.GoodSpecPriceEntity;
@@ -44,6 +41,8 @@ import com.freeter.modules.order.service.OrderGoodService;
 import com.freeter.modules.order.service.OrderService;
 import com.freeter.modules.sys.controller.AbstractController;
 import com.freeter.modules.sys.entity.SysUserEntity;
+import com.freeter.modules.user.entity.UserEntity;
+import com.freeter.modules.user.service.UserService;
 
 import cn.hutool.core.bean.BeanUtil;
 import io.swagger.annotations.Api;
@@ -204,6 +203,7 @@ public class OrderController  extends AbstractController {
             Integer goodSpecPriceId=orderGoodEntity.getGoodSpecPriceId();
             Integer goodId=orderGoodEntity.getGoodId();
             GoodEntity goodEntity=goodService.selectById(goodId);
+            //如果规格重置 那么 订单表的商品价格规格id不存在
             GoodSpecPriceEntity goodSpecPriceEntity=goodSpecPriceService.selectById(goodSpecPriceId);
             String spec=goodSpecPriceEntity.getSpec();
             String[]  goodSpecValueIdArray=spec.split(",");

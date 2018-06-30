@@ -16,22 +16,24 @@
 
 package com.freeter.modules.sys.controller;
 
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.freeter.common.annotation.J2CacheEvit;
 import com.freeter.common.annotation.SysLog;
 import com.freeter.common.exception.RRException;
 import com.freeter.common.utils.Constant;
 import com.freeter.common.utils.R;
 import com.freeter.modules.sys.entity.SysMenuEntity;
 import com.freeter.modules.sys.service.SysMenuService;
-
-import java.util.List;
 
 /**
  * 系统菜单
@@ -108,6 +110,8 @@ public class SysMenuController extends AbstractController {
 	@SysLog("保存菜单")
 	@RequestMapping("/save")
 	@RequiresPermissions("sys:menu:save")
+	@CacheEvict(value={"sysMenu"},allEntries=true)
+	@J2CacheEvit("permsList")
 	public R save(@RequestBody SysMenuEntity menu){
 		//数据校验
 		verifyForm(menu);
@@ -123,6 +127,8 @@ public class SysMenuController extends AbstractController {
 	@SysLog("修改菜单")
 	@RequestMapping("/update")
 	@RequiresPermissions("sys:menu:update")
+	@CacheEvict(value={"sysMenu"},allEntries=true)
+	@J2CacheEvit("permsList")
 	public R update(@RequestBody SysMenuEntity menu){
 		//数据校验
 		verifyForm(menu);
@@ -136,6 +142,8 @@ public class SysMenuController extends AbstractController {
 	@SysLog("删除菜单")
 	@RequestMapping("/delete")
 	@RequiresPermissions("sys:menu:delete")
+	@CacheEvict(value={"sysMenu"},allEntries=true)
+	@J2CacheEvit("permsList")
 	public R delete(long menuId){
 		if(menuId <= 31){
 			return R.error("系统菜单，不能删除");

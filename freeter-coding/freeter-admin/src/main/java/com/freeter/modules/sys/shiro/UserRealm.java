@@ -47,6 +47,8 @@ import com.freeter.modules.sys.dao.SysUserDao;
 import com.freeter.modules.sys.entity.SysMenuEntity;
 import com.freeter.modules.sys.entity.SysUserEntity;
 
+import net.oschina.j2cache.CacheChannel;
+
 /**
  * 认证
  * 
@@ -56,6 +58,9 @@ import com.freeter.modules.sys.entity.SysUserEntity;
  */
 @Component
 public class UserRealm extends AuthorizingRealm {
+    
+	@Autowired
+	private CacheChannel cacheChannel;
     @Autowired
     private SysUserDao sysUserDao;
     @Autowired
@@ -70,7 +75,8 @@ public class UserRealm extends AuthorizingRealm {
 		Long userId = user.getUserId();
 		
 		List<String> permsList;
-		
+		// 如果缓存不存在就加入缓存
+		if(!cacheChannel.exists("permsList",userId.toString())) {
 		//系统管理员，拥有最高权限
 		if(userId == Constant.SUPER_ADMIN){
 			List<SysMenuEntity> menuList = sysMenuDao.selectList(null);
@@ -81,7 +87,12 @@ public class UserRealm extends AuthorizingRealm {
 		}else{
 			permsList = sysUserDao.queryAllPerms(userId);
 		}
-
+		cacheChannel.set("permsList", userId.toString(), permsList);
+		}
+		else {
+			
+			permsList = (List<String>) cacheChannel.get("permsList", userId.toString()).getValue();
+		}
 		//用户权限列表
 		Set<String> permsSet = new HashSet<>();
 		for(String perms : permsList){

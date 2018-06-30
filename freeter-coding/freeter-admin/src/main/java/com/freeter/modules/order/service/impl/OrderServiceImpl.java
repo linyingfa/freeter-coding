@@ -14,12 +14,12 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.freeter.common.utils.MPUtil;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.Query;
-import com.freeter.modules.apiUser.entity.UserEntity;
-import com.freeter.modules.apiUser.service.UserService;
 import com.freeter.modules.order.dao.OrderDao;
 import com.freeter.modules.order.entity.OrderEntity;
 import com.freeter.modules.order.entity.view.OrderView;
 import com.freeter.modules.order.service.OrderService;
+import com.freeter.modules.user.entity.UserEntity;
+import com.freeter.modules.user.service.UserService;
 
 
 @Service("orderService")

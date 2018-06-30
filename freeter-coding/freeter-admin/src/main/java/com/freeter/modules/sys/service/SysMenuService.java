@@ -22,6 +22,8 @@ import com.freeter.modules.sys.entity.SysMenuEntity;
 
 import java.util.List;
 
+import org.springframework.cache.annotation.Cacheable;
+
 
 /**
  * 菜单管理
@@ -53,6 +55,7 @@ public interface SysMenuService extends IService<SysMenuEntity> {
 	/**
 	 * 获取用户菜单列表
 	 */
+	@Cacheable("sysMenu")
 	List<SysMenuEntity> getUserMenuList(Long userId);
 
 	/**
