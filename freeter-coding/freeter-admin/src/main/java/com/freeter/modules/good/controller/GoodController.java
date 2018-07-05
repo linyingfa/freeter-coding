@@ -118,13 +118,18 @@ public class GoodController {
 		categoryGoodEntity.setGoodId(goodId.longValue());
 		GoodView goodView = new GoodView(good);
 		ew.setEntity(categoryGoodEntity);
-		Long categoryId = categoryGoodService.selectOne(ew).getCategoryId();
-		goodView.setCategoryId(categoryId);
-		EntityWrapper<CategoryEntity> wrapper = new EntityWrapper<CategoryEntity>();
-		wrapper.eq("category_id", categoryId);
-		CategoryEntity ce = categoryService.selectOne(wrapper);
-
-		goodView.setOneCategoryId(ce.getParentId());
+		CategoryGoodEntity categoryGood = categoryGoodService.selectOne(ew);
+		if(categoryGood!= null){
+			Long categoryId = categoryGood.getCategoryId();
+			goodView.setCategoryId(categoryId);
+			EntityWrapper<CategoryEntity> wrapper = new EntityWrapper<CategoryEntity>();
+			wrapper.eq("category_id", categoryId);
+			CategoryEntity ce = categoryService.selectOne(wrapper);
+			if(ce != null){
+				goodView.setOneCategoryId(ce.getParentId());
+			}
+		}
+	 
 		return R.ok().put("good", goodView);
 
 	}
@@ -201,10 +206,21 @@ public class GoodController {
 		EntityWrapper<CategoryGoodEntity> ew = new EntityWrapper<CategoryGoodEntity>();
 		categoryGoodEntity.setGoodId(goodEntity.getGoodId().longValue());
  		ew.setEntity(categoryGoodEntity);
-		Long oldCategoryId = categoryGoodService.selectOne(ew).getCategoryId();
+ 		CategoryGoodEntity oldCategoryGoodEntity = categoryGoodService.selectOne(ew);
+		Long oldCategoryId =  oldCategoryGoodEntity.getCategoryId();
 		EntityWrapper<CategoryEntity> wrapperOld = new EntityWrapper<CategoryEntity>();
 		wrapperOld.eq("category_id",oldCategoryId);
 		CategoryEntity oldCe = categoryService.selectOne(wrapperOld);
+		if(oldCe == null){
+ 			 
+			oldCategoryGoodEntity.setCategoryId(newCategoryId);
+			oldCategoryGoodEntity.setCategoryName(ce.getName());
+		 
+			categoryGoodService.updateById (oldCategoryGoodEntity);
+			goodView.setPicImg(goodEntity.getPicImg());
+			goodService.updateAllColumnById(goodView);// 全部更新	
+			return R.ok();
+		}
 		Long oldParentCategoryId = oldCe.getParentId();
 		
 		if(newCategoryId.equals(oldCategoryId)) {
@@ -215,11 +231,10 @@ public class GoodController {
 		
 		if(oldParentCategoryId.equals(parentCategoryId)) {
 			EntityWrapper<CategoryGoodEntity> wrapperCategoryGood =  new EntityWrapper<CategoryGoodEntity>(); 
-			CategoryGoodEntity  entity = new CategoryGoodEntity();
-			entity.setCategoryId(newCategoryId);
-			wrapperCategoryGood.eq("category_id", oldCategoryId);
-			wrapperCategoryGood.eq("good_id", goodView.getGoodId());
-			categoryGoodService.update(entity, wrapperCategoryGood);
+			oldCategoryGoodEntity.setCategoryId(newCategoryId);
+			oldCategoryGoodEntity.setCategoryName(ce.getName());
+		 
+			categoryGoodService.updateById (oldCategoryGoodEntity);
 			
 			goodView.setPicImg(goodEntity.getPicImg());
 			goodService.updateAllColumnById(goodView);// 全部更新
