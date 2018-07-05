@@ -43,7 +43,7 @@ function getchannelList() {//获取频道列表
 /*获取商品一级分类*/
 function getOneCategoryList() {//获取下拉学校列表
 	var channelId =   $('#channelId').selectpicker('val');
-	console.info(channelId);
+	 
  	$.ajax({
 		url : baseURL +"good/category/getOneCategorylist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
 		// 数据发送方式
@@ -58,14 +58,20 @@ function getOneCategoryList() {//获取下拉学校列表
 				alert("一级分类一晃而过")
 			} 
  			$('#oneCategory').empty();
- 		 
+ 			console.info( vm.goodInfo.oneCategoryId);
+ 			if( !vm.goodInfo.oneCategoryId){
+ 				$('#oneCategory').append(
+						"<option  value= ''> 全部分类</option>");
+  			}
 			$.each(data.data, function(i) {
 				$('#oneCategory').append(
 						"<option value=" + data.data[i].categoryId   + ">"
 								+ data.data[i].name + "</option>");
 			});
   			
-   			$('#oneCategory').selectpicker('val', vm.goodInfo.oneCategoryId);
+  			
+   			//$('#oneCategory').selectpicker('val', vm.goodInfo.oneCategoryId);
+			$('#oneCategory').selectpicker('val',  vm.goodInfo.oneCategoryId);
  			$('#oneCategory').selectpicker('render');
  			$('#oneCategory').selectpicker('refresh');
  			$('#twoCategory').empty();
@@ -84,6 +90,7 @@ function getOneCategoryList() {//获取下拉学校列表
 /*获取商品二级分类数据
 */function getTwoCategoryList() {//获取下拉列表
 	var oneCategory =   $('#oneCategory').selectpicker('val');
+	if(oneCategory){
 	$.ajax({
 		url : baseURL +"good/category/getOneCategorylist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
 		// 数据发送方式
@@ -114,12 +121,17 @@ function getOneCategoryList() {//获取下拉学校列表
 
 		},
 		error : function(data) {
-
+			 $('#twoCategory').empty();
 			alert("查询失败" + data);
 
 		}
 	})
-
+	}
+	else{
+		 $('#twoCategory').empty();
+		alert("分类已经删除了，请重新添加");
+	}
+	
 }
 
 var editor;
@@ -441,7 +453,9 @@ function getImage(){
      });
 }
 function getGoodSpec(){
-	$.ajax({
+	if(vm.goodInfo.oneCategoryId){
+		$.ajax({
+	
 		url : baseURL +"good/goodspecprice/getGoodSpecPricelist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
 		// 数据发送方式
 		type : "get",
@@ -465,6 +479,7 @@ function getGoodSpec(){
 
 		}
 	})
+	}
 }
 $(document).on("ready", function() { 
 	getInfo();
