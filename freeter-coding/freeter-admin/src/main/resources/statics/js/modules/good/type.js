@@ -185,6 +185,9 @@ function getDetail(){
 		if(r.goodDetail){
 			vm.goodDetail = r.goodDetail;
 		}
+		  var editor = new E('#div1')
+		   
+		    editor.txt.html(vm.goodDetail);
      });
 }
 function getGoodParam(){
