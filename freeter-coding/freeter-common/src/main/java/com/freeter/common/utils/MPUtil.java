@@ -38,6 +38,11 @@ public class MPUtil {
 			return genLike(wrapper,result);
 		}
 	
+		public static Wrapper allLike(Wrapper wrapper,Object bean) {
+			  Map result = BeanUtil.beanToMap(bean, true, true);			 
+			return genLike(wrapper,result);
+		}
+	
 	
 		public static Wrapper genLike( Wrapper wrapper,Map param) {
 			Iterator<Map.Entry<String, Object>> it = param.entrySet().iterator();
