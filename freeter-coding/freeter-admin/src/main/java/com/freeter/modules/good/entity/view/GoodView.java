@@ -51,6 +51,14 @@ public class GoodView  extends GoodEntity implements Serializable {
  	
  	private String channelName;
  	
+ 	private Long attributeId;
+ 	
+ 	private Long salesVolume;
+ 	
+ 	private Long stock;
+ 	
+ 	private Long pageViews;
+ 	
 	public Long getCategoryId() {
 		return categoryId;
 	}
@@ -105,6 +113,38 @@ public class GoodView  extends GoodEntity implements Serializable {
 
 	public void setChannelId(Long channelId) {
 		this.channelId = channelId;
+	}
+
+	public Long getSalesVolume() {
+		return salesVolume;
+	}
+
+	public void setSalesVolume(Long salesVolume) {
+		this.salesVolume = salesVolume;
+	}
+
+	public Long getStock() {
+		return stock;
+	}
+
+	public void setStock(Long stock) {
+		this.stock = stock;
+	}
+
+	public Long getPageViews() {
+		return pageViews;
+	}
+
+	public void setPageViews(Long pageViews) {
+		this.pageViews = pageViews;
+	}
+
+	public Long getAttributeId() {
+		return attributeId;
+	}
+
+	public void setAttributeId(Long attributeId) {
+		this.attributeId = attributeId;
 	}
  	
  	

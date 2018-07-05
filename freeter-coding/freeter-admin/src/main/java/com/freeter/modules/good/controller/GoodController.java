@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
+import com.freeter.common.validator.Assert;
 import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.modules.good.entity.CategoryEntity;
 import com.freeter.modules.good.entity.CategoryGoodEntity;
@@ -116,6 +117,7 @@ public class GoodController {
 		EntityWrapper<CategoryGoodEntity> ew = new EntityWrapper<CategoryGoodEntity>();
 		categoryGoodEntity.setGoodId(goodId.longValue());
 		GoodView goodView = new GoodView(good);
+		ew.setEntity(categoryGoodEntity);
 		Long categoryId = categoryGoodService.selectOne(ew).getCategoryId();
 		goodView.setCategoryId(categoryId);
 		EntityWrapper<CategoryEntity> wrapper = new EntityWrapper<CategoryEntity>();
@@ -184,13 +186,54 @@ public class GoodController {
 	 */
 	@RequestMapping("/update")
 	@RequiresPermissions("good:good:update")
-	public R update(@RequestBody GoodEntity good) throws IOException {
-		ValidatorUtils.validateEntity(good);
-		GoodEntity goodEntity = goodService.selectById(good.getGoodId());
-		good.setPicImg(goodEntity.getPicImg());
-		goodService.updateAllColumnById(good);// 全部更新
+	public R update(@RequestBody GoodView goodView) throws IOException {
+		Long newCategoryId = goodView.getCategoryId();
+		Assert.isNull(goodView.getCategoryId(), "分类不能为空");
+		ValidatorUtils.validateEntity(goodView);
+		GoodEntity goodEntity = goodService.selectById(goodView.getGoodId());
 		
-		return R.ok();
+		EntityWrapper<CategoryEntity> wrapper = new EntityWrapper<CategoryEntity>();
+		wrapper.eq("category_id", goodView.getCategoryId());
+		CategoryEntity ce = categoryService.selectOne(wrapper);
+		Long parentCategoryId = ce.getParentId();
+		
+		CategoryGoodEntity categoryGoodEntity = new CategoryGoodEntity();
+		EntityWrapper<CategoryGoodEntity> ew = new EntityWrapper<CategoryGoodEntity>();
+		categoryGoodEntity.setGoodId(goodEntity.getGoodId().longValue());
+ 		ew.setEntity(categoryGoodEntity);
+		Long oldCategoryId = categoryGoodService.selectOne(ew).getCategoryId();
+		EntityWrapper<CategoryEntity> wrapperOld = new EntityWrapper<CategoryEntity>();
+		wrapperOld.eq("category_id",oldCategoryId);
+		CategoryEntity oldCe = categoryService.selectOne(wrapperOld);
+		Long oldParentCategoryId = oldCe.getParentId();
+		
+		if(newCategoryId.equals(oldCategoryId)) {
+			goodView.setPicImg(goodEntity.getPicImg());
+			goodService.updateAllColumnById(goodView);// 全部更新	
+			return R.ok();
+		}
+		
+		if(oldParentCategoryId.equals(parentCategoryId)) {
+			EntityWrapper<CategoryGoodEntity> wrapperCategoryGood =  new EntityWrapper<CategoryGoodEntity>(); 
+			CategoryGoodEntity  entity = new CategoryGoodEntity();
+			entity.setCategoryId(newCategoryId);
+			wrapperCategoryGood.eq("category_id", oldCategoryId);
+			wrapperCategoryGood.eq("good_id", goodView.getGoodId());
+			categoryGoodService.update(entity, wrapperCategoryGood);
+			
+			goodView.setPicImg(goodEntity.getPicImg());
+			goodService.updateAllColumnById(goodView);// 全部更新
+			
+			return R.ok();
+			
+		}else {
+			return R.error("只能更换二级分类，因为分类的规格不一样");
+		}
+		
+		
+	 
+		
+	 
 	}
 
 	/**

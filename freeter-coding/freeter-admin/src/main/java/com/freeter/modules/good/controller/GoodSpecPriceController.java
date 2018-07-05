@@ -13,12 +13,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.alibaba.druid.util.StringUtils;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.ValidatorUtils;
+import com.freeter.modules.good.entity.GoodAttributeEntity;
 import com.freeter.modules.good.entity.GoodEntity;
 import com.freeter.modules.good.entity.GoodSpecPriceEntity;
+import com.freeter.modules.good.service.GoodAttributeService;
 import com.freeter.modules.good.service.GoodService;
 import com.freeter.modules.good.service.GoodSpecPriceService;
 
@@ -39,6 +42,10 @@ public class GoodSpecPriceController {
 
     @Autowired
     private GoodService goodService;
+    
+    @Autowired
+    private GoodAttributeService goodAttributeService;
+
     
     /**
      * 列表
@@ -97,13 +104,26 @@ public class GoodSpecPriceController {
     public R saveGoodSpecPriceEntity(@RequestBody List<GoodSpecPriceEntity> goodSpecPriceList){
     	//ValidatorUtils.validateEntity(goodSpecPrice);
     	goodSpecPriceList.sort((u1, u2) -> u1.getPrice().compareTo(u2.getPrice()));
-    	BigDecimal maxPrice = goodSpecPriceList.get(0).getPrice();
-    	BigDecimal minPrice = goodSpecPriceList.get(goodSpecPriceList.size()-1).getPrice();
+    	BigDecimal minPrice = goodSpecPriceList.get(0).getPrice();
+    	BigDecimal maxPrice = goodSpecPriceList.get(goodSpecPriceList.size()-1).getPrice();
     	Integer goodId = goodSpecPriceList.get(0).getGoodId();
     	GoodEntity good = goodService.selectById(goodId);
     	good.setMinPrice(minPrice);
     	good.setMaxPrice(maxPrice);
     	good.setActivate(1);
+    	long  salesVolume=goodSpecPriceList.stream().mapToLong(p->Long.parseLong (  StringUtils.isEmpty(p.getSalesVolume()) ? "0": p.getSalesVolume())).sum();
+    	long stocks=goodSpecPriceList.stream().mapToLong(p->  p.getStock()==null?0:p.getStock()).sum();   
+    	EntityWrapper<GoodAttributeEntity> wrapper = new EntityWrapper<GoodAttributeEntity>();
+    	wrapper.eq("good_id", goodId);
+    	GoodAttributeEntity goodAttributeEntity = goodAttributeService.selectOne(wrapper);
+    	if(goodAttributeEntity == null) {
+    		goodAttributeEntity = new GoodAttributeEntity();
+    	}
+    	goodAttributeEntity.setSalesVolume(salesVolume);
+    	goodAttributeEntity.setStock(stocks);
+    	goodAttributeEntity.setGoodId(goodId.longValue());
+    	goodAttributeService.insertOrUpdate(goodAttributeEntity);
+    	
     	goodService.updateById(good);
          goodSpecPriceService.updateAllColumnBatchById(goodSpecPriceList);
          return R.ok();
