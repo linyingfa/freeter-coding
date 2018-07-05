@@ -12,17 +12,17 @@ var vm = new Vue({
 		initialPreviewConfig:[],
 		uploadExtraData:[]
 	},
-      created:function() {
-    	   Vue.nextTick(function () {
-    		   var E = window.wangEditor;
-    	        var editor = new E('#editor');
-    	        // 配置服务器端地址
-    	        editor.customConfig.uploadImgServer = '/upload';
-    	        editor.create();
-    	         }); 
-    	 
-      }
-,
+    created:function() {
+  	   Vue.nextTick(function () {
+  		   var E = window.wangEditor;
+  	          editor = new E('#editor');
+  	        // 配置服务器端地址
+  	       editor.customConfig.uploadFileName = 'file';
+  	        editor.customConfig.uploadImgServer = baseURL +'sys/oss/wangEditorupload';
+  	        editor.create();
+  	         }); 
+  	 
+    },
 	methods: {
 		insertGoodParam:function (type){
    		 	let goodParam = {};
