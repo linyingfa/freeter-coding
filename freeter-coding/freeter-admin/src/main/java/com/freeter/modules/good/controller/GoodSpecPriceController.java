@@ -113,11 +113,16 @@ public class GoodSpecPriceController {
     	good.setActivate(1);
     	long  salesVolume=goodSpecPriceList.stream().mapToLong(p->Long.parseLong (  StringUtils.isEmpty(p.getSalesVolume()) ? "0": p.getSalesVolume())).sum();
     	long stocks=goodSpecPriceList.stream().mapToLong(p->  p.getStock()==null?0:p.getStock()).sum();   
-    	GoodAttributeEntity goodAttributeEntity = new GoodAttributeEntity();
+    	EntityWrapper<GoodAttributeEntity> wrapper = new EntityWrapper<GoodAttributeEntity>();
+    	wrapper.eq("good_id", goodId);
+    	GoodAttributeEntity goodAttributeEntity = goodAttributeService.selectOne(wrapper);
+    	if(goodAttributeEntity == null) {
+    		goodAttributeEntity = new GoodAttributeEntity();
+    	}
     	goodAttributeEntity.setSalesVolume(salesVolume);
     	goodAttributeEntity.setStock(stocks);
     	goodAttributeEntity.setGoodId(goodId.longValue());
-    	goodAttributeService.insert(goodAttributeEntity);
+    	goodAttributeService.insertOrUpdate(goodAttributeEntity);
     	
     	goodService.updateById(good);
          goodSpecPriceService.updateAllColumnBatchById(goodSpecPriceList);
