@@ -116,6 +116,7 @@ public class GoodController {
 		EntityWrapper<CategoryGoodEntity> ew = new EntityWrapper<CategoryGoodEntity>();
 		categoryGoodEntity.setGoodId(goodId.longValue());
 		GoodView goodView = new GoodView(good);
+		ew.setEntity(categoryGoodEntity);
 		Long categoryId = categoryGoodService.selectOne(ew).getCategoryId();
 		goodView.setCategoryId(categoryId);
 		EntityWrapper<CategoryEntity> wrapper = new EntityWrapper<CategoryEntity>();
