@@ -63,7 +63,7 @@ SELECT
 			cn_category OWNER
 		WHERE
 			OWNER .category_id = category.parent_id
-	) one_category_id,good_attribute.sales_volume,good_attribute.stock,good_attribute.page_views
+	) one_category_id,good_attribute.sales_volume,good_attribute.stock,good_attribute.page_views,good_attribute.attribute_id
 FROM
 	cn_good good
 LEFT JOIN cn_category_good category_good ON good.good_id = category_good.good_id
