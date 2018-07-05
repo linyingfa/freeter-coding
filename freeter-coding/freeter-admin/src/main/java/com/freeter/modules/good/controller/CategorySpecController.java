@@ -46,7 +46,7 @@ public class CategorySpecController {
 	public R list(@RequestParam Map<String, Object> params, CategorySpecEntity en) {
 		// PageUtils page = categorySpecService.queryPage(params);
 		EntityWrapper<CategorySpecEntity> ew = new EntityWrapper<CategorySpecEntity>();
-		ew.setEntity(en);
+	 
 		Map map = new HashMap();
 		map = BeanUtil.beanToMap(en);
 		ew.allEq(GenUtils.camelToUnderlineMap(map, ""));
