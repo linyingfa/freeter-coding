@@ -1,3 +1,128 @@
+function getchannelList() {//获取频道列表
+ 
+	$.ajax({
+		url : baseURL +"good/channel/getChannelList",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+		// 数据发送方式
+		type : "get",
+		// 接受数据格式
+		dataType : "json",
+		// 要传递的数据
+		data : 'data',
+		
+ 		// 回调函数，接受服务器端返回给客户端的值，即result值
+		success : function(data) {
+			console.info(data);
+			 if(!data.data||data.data.length==0){
+				alert("请先添加频道数据")
+			} 
+			 $('#oneCategory').empty();
+			 $('#twoCategory').empty();
+			$.each(data.data, function(i) {
+				$('#channelId').append(
+						"<option value=" + data.data[i].channelId + ">"
+								+ data.data[i].name + "</option>");
+			});
+  			
+ 		//	$('#channelId').selectpicker('val', '');
+ 			$('#channelId').selectpicker('render');
+ 			  $('#channelId').selectpicker('val', vm.goodInfo.channelId);
+ 			 $('#channelId').selectpicker('refresh');
+ 		 
+ 
+		},
+		error : function(data) {
+
+			alert("查询失败" + data);
+
+		}
+	})
+
+} 
+
+
+/*获取商品一级分类*/
+function getOneCategoryList() {//获取下拉学校列表
+	var channelId =   $('#channelId').selectpicker('val');
+	console.info(channelId);
+ 	$.ajax({
+		url : baseURL +"good/category/getOneCategorylist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+		// 数据发送方式
+		type : "get",
+		// 接受数据格式
+		dataType : "json",
+		// 要传递的数据
+		data : {type:1,status:1,channelId:channelId},
+		// 回调函数，接受服务器端返回给客户端的值，即result值
+		success : function(data) {
+ 			 if(!data.data||data.data.length==0){
+				alert("一级分类一晃而过")
+			} 
+ 			$('#oneCategory').empty();
+ 		 
+			$.each(data.data, function(i) {
+				$('#oneCategory').append(
+						"<option value=" + data.data[i].categoryId   + ">"
+								+ data.data[i].name + "</option>");
+			});
+  			
+   			$('#oneCategory').selectpicker('val', vm.goodInfo.oneCategoryId);
+ 			$('#oneCategory').selectpicker('render');
+ 			$('#oneCategory').selectpicker('refresh');
+ 			$('#twoCategory').empty();
+ 			 
+ 			//getTwoCategoryList();
+		},
+		error : function(data) {
+
+			alert("查询失败" + data);
+
+		}
+	})
+
+}
+
+/*获取商品二级分类数据
+*/function getTwoCategoryList() {//获取下拉列表
+	var oneCategory =   $('#oneCategory').selectpicker('val');
+	$.ajax({
+		url : baseURL +"good/category/getOneCategorylist",//写你自己的方法，返回map，我返回的map包含了两个属性：data：集合，total：集合记录数量，所以后边会有data.data的写法。。。
+		// 数据发送方式
+		type : "get",
+		// 接受数据格式
+		dataType : "json",
+		// 要传递的数据
+		data : {type:2,status:1,parentId:oneCategory},
+		// 回调函数，接受服务器端返回给客户端的值，即result值
+		success : function(data) {
+			console.info(data);
+			 if(!data.data||data.data.length==0){
+				alert("二级分类数据悄悄溜走")
+			} 
+			 
+			 $('#twoCategory').empty();
+			 
+			$.each(data.data, function(i) {
+				$('#twoCategory').append(
+						"<option value=" + data.data[i].categoryId + ">"
+								+ data.data[i].name + "</option>");
+			});
+  		 
+  		 
+ 			$('#twoCategory').selectpicker('val', vm.goodInfo.categoryId);
+ 			$('#twoCategory').selectpicker('refresh');
+ 			$('#twoCategory').selectpicker('render');
+
+		},
+		error : function(data) {
+
+			alert("查询失败" + data);
+
+		}
+	})
+
+}
+
+var editor;
 var vm = new Vue({
 	el:'#rrapp',
     showList: true,
@@ -62,6 +187,9 @@ var vm = new Vue({
 		});
 	}, 
 		goodInfoSaveOrUpdate: function (event) {
+			vm.goodInfo.categoryId = $('#twoCategory').selectpicker('val');
+			vm.goodInfo.categoryName = $('#twoCategory').selectpicker().text();
+			vm.goodInfo.oneCategoryId = $('#oneCategory').selectpicker('val');
 			var url =  "good/good/update";
 			$.ajax({
 				type: "POST",
@@ -86,6 +214,7 @@ var vm = new Vue({
 	    },
 	    saveGoodDetail: function(){
 	    	vm.goodDetail.goodId = vm.goodId;
+	    	vm.goodDetail.description =editor.txt.html();
 	    	$.ajax({
 				type: "POST",
 			    url: baseURL + "good/gooddetail/update",
@@ -149,6 +278,7 @@ var vm = new Vue({
 }) 
 
 function getInfo(){
+	$.ajaxSettings.async = false;
 	$.get(baseURL + "good/good/info/"+vm.goodId, function(r){
         vm.goodInfo = r.good;
         var jsonStr = '{"filePath":"'+vm.goodInfo.picImg+'","goodId":"'+vm.goodInfo.goodId+'"}';
@@ -179,15 +309,17 @@ function getInfo(){
 	    })
         getGoodSpec();
     });
+	$.ajaxSettings.async = true;
 }
 function getDetail(){
 	$.get(baseURL + "good/gooddetail/goodDetail?goodId="+vm.goodId,function(r){
 		if(r.goodDetail){
 			vm.goodDetail = r.goodDetail;
 		}
-		  var editor = new E('#div1')
-		   
-		    editor.txt.html(vm.goodDetail);
+		if(vm.goodDetail){
+	    	  
+	    	  editor.txt.html(vm.goodDetail.description);
+	      }
      });
 }
 function getGoodParam(){
@@ -336,6 +468,38 @@ function getGoodSpec(){
 }
 $(document).on("ready", function() { 
 	getInfo();
+	
+	$("#channelId").selectpicker({  
+	    noneSelectedText : '请选择频道'  ,
+	    liveSearchPlaceholder : "请输入关键字",
+	    noneResultsText : "内容无法匹配"
+	});
+	$("#oneCategory").selectpicker({  
+	    noneSelectedText : '请选择一级分类'  ,
+	    liveSearchPlaceholder : "请输入关键字",
+	    noneResultsText : "内容无法匹配"
+	});
+	$("#twoCategory").selectpicker({  
+	    noneSelectedText : '请选择二级分类'  ,
+	    liveSearchPlaceholder : "请输入关键字",
+	    noneResultsText : "内容无法匹配"
+	});
+	getchannelList();
+	  $('#channelId').on('refreshed.bs.select', function (e) {
+		  getOneCategoryList();
+	  });
+	  $('#channelId').change(function(){ 
+		  getOneCategoryList();  
+	  });
+	  
+	  $('#oneCategory').on('refreshed.bs.select', function (e) {
+		  getTwoCategoryList(); 
+	  });
+	
+	  $('#oneCategory').change(function(){ 
+		  getTwoCategoryList();  
+	  });// 图片上传star
+	
 	getGoodParam();
 	getImage();
 	getDetail();
