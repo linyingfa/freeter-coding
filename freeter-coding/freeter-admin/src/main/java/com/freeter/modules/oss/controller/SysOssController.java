@@ -19,6 +19,7 @@ package com.freeter.modules.oss.controller;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -130,6 +131,32 @@ public class SysOssController {
 		sysOssService.insert(ossEntity);
 
 		return R.ok().put("url", url);
+	}
+
+	/**
+	 * 上传文件
+	 */
+	@RequestMapping("/wangEditorupload")
+	@RequiresPermissions("sys:oss:all")
+	public Map wangEditorupload(@RequestParam("file") MultipartFile file) throws Exception {
+		if (file.isEmpty()) {
+			throw new RRException("上传文件不能为空");
+		}
+
+		// 上传文件
+		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+		String url = OSSFactory.build().uploadSuffix(file.getBytes(), suffix);
+ 		// 保存文件信息
+		SysOssEntity ossEntity = new SysOssEntity();
+		ossEntity.setUrl(url);
+		ossEntity.setCreateDate(new Date());
+		sysOssService.insert(ossEntity);
+		 Map result = new HashMap();
+		 result.put("errno", 0);
+		 List list = new ArrayList();
+		 list.add(url);
+		 result.put("data", list);
+		return result;
 	}
 
 	/**
