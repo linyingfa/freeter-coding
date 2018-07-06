@@ -25,8 +25,7 @@
 
 				</select>
 				<input type="text" class="form-control"  v-model="search.name"  @keyup.enter="query" placeholder="分类名称"     style="width: 17%;display: inline-block;">
- 		
-	 
+	 		</div>
 			<a class="btn btn-default" @click="query">查询</a>
 				<#if shiro.hasPermission("good:category:save")> <a
 					class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
