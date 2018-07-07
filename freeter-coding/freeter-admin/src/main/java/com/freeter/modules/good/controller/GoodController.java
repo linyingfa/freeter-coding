@@ -127,6 +127,8 @@ public class GoodController {
 			CategoryEntity ce = categoryService.selectOne(wrapper);
 			if(ce != null){
 				goodView.setOneCategoryId(ce.getParentId());
+				goodView.setChannelId(Long.valueOf( ce.getChannelId()));
+				
 			}
 		}
 	 
