@@ -12,31 +12,31 @@
 
 	<select id="selectListVO"
 		resultType="${package}.${moduleName}.entity.vo.${className}VO" >
-		SELECT * FROM ${tableName}  ${classname} #foreach($referencedTable in $listReferencedTable)  
+		SELECT * FROM `${tableName}`  ${classname} #foreach($referencedTable in $listReferencedTable)  
 		   
-        left join ${referencedTable.referencedTableName}  ${referencedTable.referencedTableNameJava} on  ${referencedTable.referencedTableNameJava}.${referencedTable.referencedColumnName} = ${referencedTable.tableNameJava}.${referencedTable.columnName} #end
+        left join `${referencedTable.referencedTableName}`  ${referencedTable.referencedTableNameJava} on  ${referencedTable.referencedTableNameJava}.${referencedTable.referencedColumnName} = ${referencedTable.tableNameJava}.${referencedTable.columnName} #end
         
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
 		resultType="${package}.${moduleName}.entity.vo.${className}VO" >
-		SELECT  ${classname}.* FROM ${tableName}  ${classname} 	
+		SELECT  ${classname}.* FROM `${tableName}`  ${classname} 	
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
 		resultType="${package}.${moduleName}.entity.view.${className}View" >
 
-		SELECT  ${classname}.* FROM ${tableName}  ${classname} 	#foreach($referencedTable in $listReferencedTable)  
+		SELECT  ${classname}.* FROM `${tableName}`  ${classname} 	#foreach($referencedTable in $listReferencedTable)  
 		   
-        left join ${referencedTable.referencedTableName}  ${referencedTable.referencedTableNameJava} on  ${referencedTable.referencedTableNameJava}.${referencedTable.referencedColumnName} = ${referencedTable.tableNameJava}.${referencedTable.columnName} #end
+        left join `${referencedTable.referencedTableName}`  ${referencedTable.referencedTableNameJava} on  ${referencedTable.referencedTableNameJava}.${referencedTable.referencedColumnName} = ${referencedTable.tableNameJava}.${referencedTable.columnName} #end
         
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
 		resultType="${package}.${moduleName}.entity.view.${className}View" >
-		SELECT * FROM ${tableName}  ${classname} <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT * FROM `${tableName}`  ${classname} <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 </mapper>
