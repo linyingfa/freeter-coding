@@ -29,8 +29,14 @@ public class FreemarkerUtils {
 			 
 			Configuration cfg = new Configuration(Configuration.getVersion());
 			cfg.setEncoding(Locale.CHINA, "utf-8");
-			 
-			cfg.setDirectoryForTemplateLoading(new File(getClassResources()));
+			File file = new File(ftlName); // 这里表示从jar同级目录加载
+			if (!file.exists()) { // 如果同级目录没有，则去config下面找
+				file = new File("config/" + ftlName);
+			}
+			if (!file.exists()) {
+				file =new File(getClassResources());
+			}
+			cfg.setDirectoryForTemplateLoading(file);
 		 
 			Template temp = cfg.getTemplate(ftlName);
 			return temp;
