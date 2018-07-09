@@ -90,6 +90,12 @@ var vm = new Vue({
 	            });
 			});
  		},
+ 		generatorDoc: function() {
+			 
+			confirm('是否要数据库生成文档，高版本word打开，并另存为doc', function(){
+				location.href = "sys/generator/doc";
+			});
+ 		},
 		update: function() {
 			var tableNames = getSelectedRows();
 			if(tableNames == null){
