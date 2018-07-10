@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -103,9 +104,11 @@ public class GoodSpecPriceController {
     @RequestMapping("/saveGoodSpecPriceEntity")
     public R saveGoodSpecPriceEntity(@RequestBody List<GoodSpecPriceEntity> goodSpecPriceList){
     	//ValidatorUtils.validateEntity(goodSpecPrice);
-    	goodSpecPriceList.sort((u1, u2) -> u1.getPrice().compareTo(u2.getPrice()));
-    	BigDecimal minPrice = goodSpecPriceList.get(0).getPrice();
-    	BigDecimal maxPrice = goodSpecPriceList.get(goodSpecPriceList.size()-1).getPrice();
+    	//排除价格为0的数据
+    	List<GoodSpecPriceEntity> list =goodSpecPriceList.stream().filter(e->  e.getPrice().compareTo(new BigDecimal(0))>0?true:false).collect(Collectors.toList());
+    	list.sort((u1, u2) -> u1.getPrice().compareTo(u2.getPrice()));
+    	BigDecimal minPrice = list.get(0).getPrice();
+    	BigDecimal maxPrice = list.get(list.size()-1).getPrice();
     	Integer goodId = goodSpecPriceList.get(0).getGoodId();
     	GoodEntity good = goodService.selectById(goodId);
     	good.setMinPrice(minPrice);

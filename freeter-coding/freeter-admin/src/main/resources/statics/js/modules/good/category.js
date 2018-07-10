@@ -283,7 +283,7 @@ $(function() {
 	    table.setIdField("categoryId");
 	    table.setCodeField("categoryId");
 	    table.setParentCodeField("parentId");
-	    table.setExpandAll(true);
+	    //table.setExpandAll(true);
 	    table.setData(vm.search);
 	    table.init();
 	    Menu.table = table;
