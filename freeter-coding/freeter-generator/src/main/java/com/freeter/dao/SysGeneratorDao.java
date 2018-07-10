@@ -5,7 +5,9 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.freeter.entity.ColumnEntity;
 import com.freeter.entity.ReferencedTable;
+import com.freeter.entity.TableEntity;
 
 /**
  * 飞特超级代码生成器
@@ -26,4 +28,14 @@ public interface SysGeneratorDao {
 	List<Map<String, String>> queryColumns(String tableName);
 	
 	List<ReferencedTable> queryReferenced(String tableName);
+	
+	String queryDatabaseName();
+	
+	List<TableEntity> queryTableList(Map<String, Object> map);
+	
+	List<ColumnEntity>  selectAllColumns(String tableName);
+	
+	List<TableEntity> queryOracleTableList(Map<String, Object> map);
+	
+	List<ColumnEntity>  selectAllOracleColumns(String tableName);
 }

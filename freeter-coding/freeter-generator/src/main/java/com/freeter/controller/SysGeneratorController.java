@@ -1,10 +1,13 @@
 package com.freeter.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.freeter.service.SysGeneratorService;
-import com.freeter.utils.PageUtils;
-import com.freeter.utils.Query;
-import com.freeter.utils.R;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.StringWriter;
+import java.util.List;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +16,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
+import com.alibaba.fastjson.JSON;
+import com.freeter.service.SysGeneratorService;
+import com.freeter.utils.DocMapFactory;
+import com.freeter.utils.FreemarkerUtils;
+import com.freeter.utils.PageUtils;
+import com.freeter.utils.Query;
+import com.freeter.utils.R;
+
+import freemarker.template.Template;
+import freemarker.template.TemplateException;
 
 /**
  * 飞特超级代码生成器
@@ -46,6 +54,31 @@ public class SysGeneratorController {
 		PageUtils pageUtil = new PageUtils(list, total, query.getLimit(), query.getPage());
 		
 		return R.ok().put("page", pageUtil);
+	}
+	
+	/**
+	 * 生成代码
+	 * @throws Exception 
+	 */
+	@RequestMapping("/doc")
+	public void doc(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		Map map =DocMapFactory.build();
+		
+		Template template = FreemarkerUtils.getTemplate("dbTemplate.ftl"); 
+		// 根据模板生成文件
+		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+		StringWriter sw = new StringWriter();
+ 		template.process(map,sw);
+ 		IOUtils.write(sw.toString(), outputStream, "UTF-8");
+ 		IOUtils.closeQuietly(sw);
+ 		IOUtils.closeQuietly(outputStream);
+ 		byte[] data = outputStream.toByteArray();
+		response.reset();  
+        response.setHeader("Content-Disposition", "attachment; filename=\"doc.doc\"");  
+        response.addHeader("Content-Length", "" + data.length);  
+        response.setContentType("application/octet-stream; charset=UTF-8");  
+  
+        IOUtils.write(data, response.getOutputStream());  
 	}
 	
 	/**

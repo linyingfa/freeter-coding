@@ -30,6 +30,12 @@ public class ColumnEntity {
     //是否为空
     private String isNullable;
     
+    //默认值
+    private String columnDefault;
+    
+    //数据长度
+    private String dataLength;
+    
 	public String getColumnName() {
 		return columnName;
 	}
@@ -83,6 +89,18 @@ public class ColumnEntity {
 	}
 	public void setColumnKey(String columnKey) {
 		this.columnKey = columnKey;
+	}
+	public String getColumnDefault() {
+		return columnDefault;
+	}
+	public void setColumnDefault(String columnDefault) {
+		this.columnDefault = columnDefault;
+	}
+	public String getDataLength() {
+		return dataLength;
+	}
+	public void setDataLength(String dataLength) {
+		this.dataLength = dataLength;
 	}
 	
 	
