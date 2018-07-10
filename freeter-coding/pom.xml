@@ -8,12 +8,12 @@
 	<packaging>pom</packaging>
 
 	<name>freeter-security</name>
-	<url>http://www.cnadmart.com</url>
+	<url>飞特</url>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.2.RELEASE</version>
+		<version>2.0.3.RELEASE</version>
 	</parent>
 
 	<modules>
@@ -79,6 +79,12 @@
 			<dependency>
     <groupId>net.oschina.j2cache</groupId>
     <artifactId>j2cache-spring-boot2-starter</artifactId>
+     <exclusions>
+                <exclusion>
+                 <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-simple</artifactId>
+                </exclusion>
+       </exclusions>
     <version>${j2cache-version}</version>
 		</dependency>
 		<dependency>
