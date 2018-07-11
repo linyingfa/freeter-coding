@@ -163,6 +163,6 @@
 			</plugin>
 		</plugins>
 	</build>
-	<groupId>com.cnadmart</groupId>
+	<groupId>com.freeter</groupId>
 	<version>1.0</version>
 </project>
