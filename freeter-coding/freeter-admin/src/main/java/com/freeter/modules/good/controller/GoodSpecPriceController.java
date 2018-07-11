@@ -105,8 +105,14 @@ public class GoodSpecPriceController {
     public R saveGoodSpecPriceEntity(@RequestBody List<GoodSpecPriceEntity> goodSpecPriceList){
     	//ValidatorUtils.validateEntity(goodSpecPrice);
     	//排除价格为0的数据
+    	
     	List<GoodSpecPriceEntity> list =goodSpecPriceList.stream().filter(e->  e.getPrice().compareTo(new BigDecimal(0))>0?true:false).collect(Collectors.toList());
-    	list.sort((u1, u2) -> u1.getPrice().compareTo(u2.getPrice()));
+    
+    		 if(list.size() == 0) {
+    			  return R.error("价格数据必须大于0");
+    		 }
+    		list.sort((u1, u2) -> u1.getPrice().compareTo(u2.getPrice()));
+    	 
     	BigDecimal minPrice = list.get(0).getPrice();
     	BigDecimal maxPrice = list.get(list.size()-1).getPrice();
     	Integer goodId = goodSpecPriceList.get(0).getGoodId();
