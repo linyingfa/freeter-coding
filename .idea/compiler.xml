@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="freeter-admin" />
+        <module name="freeter-api" />
+        <module name="freeter-common" />
+        <module name="freeter-generator" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="freeter-admin" target="1.8" />
+      <module name="freeter-api" target="1.8" />
+      <module name="freeter-coding" target="1.8" />
+      <module name="freeter-common" target="1.8" />
+      <module name="freeter-generator" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

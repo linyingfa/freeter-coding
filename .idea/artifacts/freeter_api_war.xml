@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="freeter-api:war">
+    <output-path>$PROJECT_DIR$/freeter-coding/freeter-api/target</output-path>
+    <root id="archive" name="freeter-api.war">
+      <element id="artifact" artifact-name="freeter-api:war exploded" />
+    </root>
+  </artifact>
+</component>
