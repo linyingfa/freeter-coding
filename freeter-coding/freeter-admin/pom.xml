@@ -28,6 +28,16 @@
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.freeter</groupId>
+			<artifactId>freeter-good</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.freeter</groupId>
+			<artifactId>freeter-user</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-freemarker</artifactId>
 		</dependency>
@@ -122,7 +132,12 @@
 			<includes> <include>**/*</include> </includes> </resource> &ndash;&gt; <resource> 
 			<directory>src/main/resources</directory> <targetPath>/com/freeter/</targetPath> 
 			</resource> </resources> -->
-
+		<!-- <resources>
+			<resource>
+				<directory>src/main/resources</directory>
+				<filtering>true</filtering>
+			</resource>
+		</resources> -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
@@ -172,4 +187,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	<groupId>com.freeter</groupId>
+	<version>3.2.0</version>
 </project>
