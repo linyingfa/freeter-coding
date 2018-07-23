@@ -21,6 +21,8 @@
 		<module>freeter-admin</module>
 		<module>freeter-api</module>
 		<module>freeter-generator</module>
+		<module>freeter-good</module>
+		<module>freeter-user</module>
 	</modules>
 
 	<properties>
@@ -44,6 +46,7 @@
 		<joda.time.version>2.9.9</joda.time.version>
 		<jwt.version>0.7.0</jwt.version>
 		<j2cache-version>2.3.21-release</j2cache-version>
+		<swagger.version>2.7.0</swagger.version>
 	</properties>
 
 	<dependencies>
@@ -189,6 +192,17 @@
 			<groupId>org.jsoup</groupId>
 			<artifactId>jsoup</artifactId>
 			<version>1.9.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger2</artifactId>
+			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>io.springfox</groupId>
+			<artifactId>springfox-swagger-ui</artifactId>
+			<version>${swagger.version}</version>
 		</dependency>
 	</dependencies>
 
