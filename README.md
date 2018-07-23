@@ -26,12 +26,12 @@
 
  **项目结构** 
 
-———freeter-coding
+———freeter-coding<br>
 ——————freeter-admin 后台管理 <br>
 ——————————freeter-common 公共模块<br>
-——————————freeter-good 商品模块
-——————————freeter-user 会员模块
-——————freeter-api 移动端接口模块
+——————————freeter-good 商品模块<br>
+——————————freeter-user 会员模块<br>
+——————freeter-api 移动端接口模块<br>
 ——————freeter-generator 独立代码生成器模块
 
 <br> 
