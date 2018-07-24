@@ -39,6 +39,9 @@ public class SysGeneratorService {
 			if(DocMapFactory.isMysql()) {
 				return sysGeneratorDao.queryList(map);
 			}
+			Integer rnum = (Integer)map.get("offset")+
+					(Integer) map.get("limit");
+			map.put("rnum", rnum);
 			return sysGeneratorDao.queryOracleTableList(map);
 		} catch (Exception e) {
 			return null;
@@ -46,7 +49,15 @@ public class SysGeneratorService {
 	}
 
 	public int queryTotal(Map<String, Object> map) {
-		return sysGeneratorDao.queryTotal(map);
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.queryTotal(map);
+			}
+		return sysGeneratorDao.queryOracleTotal(map);
+		} catch (Exception e) {
+			return 0;
+		}
+		
 	}
 
 	 
