@@ -47,6 +47,7 @@
 		<jwt.version>0.7.0</jwt.version>
 		<j2cache-version>2.3.21-release</j2cache-version>
 		<swagger.version>2.7.0</swagger.version>
+		<commons.configuration.version>1.10</commons.configuration.version>
 	</properties>
 
 	<dependencies>
@@ -203,6 +204,11 @@
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>${swagger.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>commons-configuration</groupId>
+			<artifactId>commons-configuration</artifactId>
+			<version>${commons.configuration.version}</version>
 		</dependency>
 	</dependencies>
 
