@@ -58,19 +58,19 @@ public class GenUtils {
 	public static List<String> getTemplates() {
 		
 		List<String> templates = new ArrayList<String>();
-		templates.add("template/Entity.java.vm");
-		templates.add("template/Dao.java.vm");
-		templates.add("template/Dao.xml.vm");
-		templates.add("template/Service.java.vm");
-		templates.add("template/ServiceImpl.java.vm");
-		templates.add("template/Controller.java.vm");
-		templates.add("template/list.html.vm");
-		templates.add("template/list.js.vm");
-		templates.add("template/menu.sql.vm");
-		templates.add("template/Api.java.vm");
-		templates.add("template/View.java.vm");
-		templates.add("template/Model.java.vm");
-		templates.add("template/VO.java.vm");
+		templates.add("gen/template/Entity.java.vm");
+		templates.add("gen/template/Dao.java.vm");
+		templates.add("gen/template/Dao.xml.vm");
+		templates.add("gen/template/Service.java.vm");
+		templates.add("gen/template/ServiceImpl.java.vm");
+		templates.add("gen/template/Controller.java.vm");
+		templates.add("gen/template/list.html.vm");
+		templates.add("gen/template/list.js.vm");
+		templates.add("gen/template/menu.sql.vm");
+		templates.add("gen/template/Api.java.vm");
+		templates.add("gen/template/View.java.vm");
+		templates.add("gen/template/Model.java.vm");
+		templates.add("gen/template/VO.java.vm");
 		return templates;
 	}
 
@@ -82,7 +82,7 @@ public class GenUtils {
 				Velocity.init(prop);
 
 				String mainPath = config.getString("mainPath" );
-				mainPath = StringUtils.isBlank(mainPath) ? "com.cnadmart" : mainPath;
+				mainPath = StringUtils.isBlank(mainPath) ? "com.freeter" : mainPath;
 				
 				//封装模板数据
 				Map<String, Object> map = new HashMap<>();
@@ -168,13 +168,63 @@ public class GenUtils {
 		return tableEntity;
 	}
 	
-	
+	//生成渲染表的信息
+		private static TableEntity getTableInfo(Configuration config ,TableEntity table,List<ReferencedTable> listReferencedTable,
+				List<ColumnEntity> columns) {
+	 		boolean hasBigDecimal = false;
+			//表信息
+			 
+			//表名转换成Java类名
+			String className = tableToJava(table.getTableName(), config.getString("tablePrefix"));
+			table.setClassName(className);
+			table.setClassname(StringUtils.uncapitalize(className));
+			
+			//列信息
+ 			for(ColumnEntity column : columns){
+ 			 
+				//列名转换成Java属性名
+				String attrName = columnToJava(column.getColumnName());
+				column.setAttrName(attrName);
+				column.setAttrname(StringUtils.uncapitalize(attrName));
+				
+				//列的数据类型，转换成Java类型
+				String attrType = config.getString(column.getDataType(), "unknowType");
+				column.setAttrType(attrType);
+				if (!hasBigDecimal && attrType.equals("BigDecimal" )) {
+					hasBigDecimal = true;
+				}
+				//是否主键
+				if("P".equalsIgnoreCase(column.getColumnKey()) && table.getPk() == null){
+					table.setPk(column);
+				}
+			}
+			table.setColumns(columns);
+			table.setHasBigDecimal(hasBigDecimal);
+			//没主键，则第一个字段为主键
+			if(table.getPk() == null){
+				table.setPk(table.getColumns().get(0));
+			}
+			//转换驼峰
+			for(ReferencedTable referencedTable :listReferencedTable) {
+			 
+	 			String referencedColumnName = columnToJava(referencedTable.getReferencedColumnName());
+	 			String refTableName = StringUtils.uncapitalize(tableToJava(referencedTable.getTableName(), config.getString("tablePrefix")));
+	 			String referencedTableName = StringUtils.uncapitalize(tableToJava(referencedTable.getReferencedTableName(), config.getString("tablePrefix")));
+	 			String refColumnName =columnToJava(referencedTable.getColumnName());
+	 			referencedTable.setTableNameJava (refTableName);
+				referencedTable.setReferencedColumnNameJava(referencedColumnName);
+				referencedTable.setReferencedTableNameJava(referencedTableName);
+				referencedTable.setColumnNameJava(refColumnName);
+			}
+			table.setListReferencedTable(listReferencedTable);
+			return table;
+		}
 	/**
 	 * 生成代码
 	 * @throws IOException 
 	 */
-	public static void generatorCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
-			List<Map<String, String>> columns, ZipOutputStream zip) throws IOException {
+	public static void generatorCode(TableEntity table,List<ReferencedTable> listReferencedTable,
+			List<ColumnEntity> columns, ZipOutputStream zip) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		TableEntity tableEntity = getTableInfo(config,table,listReferencedTable,columns);
@@ -204,8 +254,8 @@ public class GenUtils {
 	 * 生成代码
 	 * @throws IOException 
 	 */
-	public static void generatorAllCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
-			List<Map<String, String>> columns) throws IOException {
+	public static void generatorAllCode(TableEntity table,List<ReferencedTable> listReferencedTable,
+			List<ColumnEntity> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
@@ -214,7 +264,7 @@ public class GenUtils {
        //获取模板列表
 		List<String> templates = getTemplates();
 		for(String template : templates){
-			if("template/Api.java.vm".equals(template)) {
+			if("gen/template/Api.java.vm".equals(template)) {
 				continue;
 			}
 			//渲染模板
@@ -252,8 +302,8 @@ public class GenUtils {
 	 * 生成接口代码
 	 * @throws IOException 
 	 */
-	public static void generatorApiCode(Map<String, String> table,List<ReferencedTable> listReferencedTable,
-			List<Map<String, String>> columns) throws IOException {
+	public static void generatorApiCode(TableEntity table,List<ReferencedTable> listReferencedTable,
+			List<ColumnEntity> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		
@@ -263,16 +313,16 @@ public class GenUtils {
        //获取模板列表
 		List<String> templates = getTemplates();
 		for(String template : templates){
-			if("template/Controller.java.vm".equals(template)) {
+			if("gen/template/Controller.java.vm".equals(template)) {
 				continue;
 			}
-			if("template/list.html.vm".equals(template)) {
+			if("gen/template/list.html.vm".equals(template)) {
 				continue;
 			}
-			if("template/list.js.vm".equals(template)) {
+			if("gen/template/list.js.vm".equals(template)) {
 				continue;
 			}
-			if("template/menu.sql.vm".equals(template)) {
+			if("gen/template/menu.sql.vm".equals(template)) {
 				continue;
 			}
 			//渲染模板
@@ -310,8 +360,8 @@ public class GenUtils {
 	 * 更新代码
 	 * @throws IOException 
 	 */
-	public static void updateCode(Map<String, String> table, List<ReferencedTable> listReferencedTable,
-			List<Map<String, String>> columns) throws IOException {
+	public static void updateCode(TableEntity table, List<ReferencedTable> listReferencedTable,
+			List<ColumnEntity> columns) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
@@ -323,7 +373,7 @@ public class GenUtils {
 			StringWriter sw = new StringWriter();
 			Template tpl = Velocity.getTemplate(template, "UTF-8");
 			tpl.merge(context, sw);
-			if("template/Entity.java.vm".equals(template) ) {
+			if("gen/template/Entity.java.vm".equals(template) ) {
 				//获取当前项目的根路径 
 				 File directory = new File("");// 参数为空
 		         String courseFile = directory.getCanonicalPath();
