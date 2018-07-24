@@ -21,7 +21,11 @@ public interface SysGeneratorDao {
 	
 	List<TableEntity> queryList(Map<String, Object> map);
 	
+	List<TableEntity> queryOracleList(Map<String, Object> map);
+	
 	int queryTotal(Map<String, Object> map);
+	
+	int queryOracleTotal(Map<String, Object> map);
 	
 	TableEntity queryTable(String tableName);
 		
