@@ -4,13 +4,13 @@ Navicat MySQL Data Transfer
 Source Server         : 47.106.39.83_3306
 Source Server Version : 50720
 Source Host           : 47.106.39.83:3306
-Source Database       : cnadmart
+Source Database       : freeter
 
 Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-07-05 19:23:32
+Date: 2018-07-24 11:47:18
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -141,6 +141,67 @@ INSERT INTO `cn_admart_audit_log` VALUES ('23', '16', null, '1', null, '2018-07-
 INSERT INTO `cn_admart_audit_log` VALUES ('24', '18', null, '2', null, '2018-07-02 14:07:20', 'admin');
 
 -- ----------------------------
+-- Table structure for cn_adverts
+-- ----------------------------
+DROP TABLE IF EXISTS `cn_adverts`;
+CREATE TABLE `cn_adverts` (
+  `adverts_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告位ID',
+  `name` varchar(64) DEFAULT NULL COMMENT '名称',
+  `width` int(11) DEFAULT NULL COMMENT '宽度',
+  `height` int(11) DEFAULT NULL COMMENT '高度',
+  `description` varchar(255) DEFAULT NULL COMMENT '描述',
+  `template` text COMMENT '模版内容',
+  `defult_number` int(11) DEFAULT '0' COMMENT '默认显示个数',
+  `number` int(11) DEFAULT '0' COMMENT '广告数量',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  `status` tinyint(1) DEFAULT '0' COMMENT '启用状态(0:开启，1：关闭)',
+  PRIMARY KEY (`adverts_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='广告位表';
+
+-- ----------------------------
+-- Records of cn_adverts
+-- ----------------------------
+INSERT INTO `cn_adverts` VALUES ('2', '首页-热点广告', '315', '170', '电子商城首页热点广告位', '', '3', '6', null, '', '2018-07-16 16:35:20', 'admin', '1');
+INSERT INTO `cn_adverts` VALUES ('3', '首页-分栏广告', '234', '300', '电子商城首页分栏广告位', null, '2', '6', null, '', '2018-07-09 11:21:59', 'admin', '0');
+INSERT INTO `cn_adverts` VALUES ('4', null, null, null, null, null, '0', '0', '2018-07-23 16:13:20', 'admin', null, null, '0');
+INSERT INTO `cn_adverts` VALUES ('5', '1', '1', '1', '1', null, '0', '1', '2018-07-23 17:19:18', 'admin', null, null, '0');
+
+-- ----------------------------
+-- Table structure for cn_adverts_detail
+-- ----------------------------
+DROP TABLE IF EXISTS `cn_adverts_detail`;
+CREATE TABLE `cn_adverts_detail` (
+  `adverts_detail_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT COMMENT '广告详情ID',
+  `name` varchar(255) DEFAULT NULL COMMENT '广告位置',
+  `adverts_id` bigint(20) DEFAULT NULL COMMENT '广告位ID',
+  `title` varchar(64) DEFAULT NULL COMMENT '标题',
+  `sort` int(9) DEFAULT NULL COMMENT '排序',
+  `href` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '链接地址',
+  `type` tinyint(2) DEFAULT NULL COMMENT '类型(0:图文，1：图片，2：视频）',
+  `status` tinyint(2) DEFAULT '0' COMMENT '状态 0=显示/1=隐藏',
+  `pic_img` varchar(255) DEFAULT NULL COMMENT '展示图片',
+  `create_time` datetime DEFAULT NULL COMMENT '创建时间',
+  `create_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT '' COMMENT '创建者',
+  `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+  `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
+  `remarks` varchar(255) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '备注信息',
+  `begin_time` datetime DEFAULT NULL COMMENT '广告起始时间',
+  `end_time` datetime DEFAULT NULL COMMENT '广告结束时间',
+  `content` varchar(255) DEFAULT NULL COMMENT '广告内容',
+  PRIMARY KEY (`adverts_detail_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='广告位详情';
+
+-- ----------------------------
+-- Records of cn_adverts_detail
+-- ----------------------------
+INSERT INTO `cn_adverts_detail` VALUES ('22', '首页-轮播广告1', '1', 'qwewq', '1', null, '0', '0', null, '2018-07-10 17:39:37', 'admin', '2018-07-11 17:20:12', 'admin', 'w', '2018-07-19 00:00:00', '2018-08-23 00:00:00', 'qwe');
+INSERT INTO `cn_adverts_detail` VALUES ('23', '首页-轮播广告1', '1', 'wqeqw', '1', null, '1', '0', 'http://img.cnadmart.com/20180710/88d704b2929e46cfb4238cf446d87e21.jpg', '2018-07-10 17:39:53', 'admin', '2018-07-11 17:20:12', 'admin', 'qwe', '2018-07-11 00:00:00', '2018-08-09 00:00:00', '');
+INSERT INTO `cn_adverts_detail` VALUES ('24', '首页-轮播广告1', '1', '2', '1', null, '1', '0', 'http://img.cnadmart.com/20180710/f532e46bdde34b1787ead0ebb2fc54d5.jpg', '2018-07-10 17:40:58', 'admin', '2018-07-11 17:20:12', 'admin', '23', '2018-07-20 00:00:00', '2018-08-24 00:00:00', null);
+
+-- ----------------------------
 -- Table structure for cn_cart
 -- ----------------------------
 DROP TABLE IF EXISTS `cn_cart`;
@@ -197,33 +258,32 @@ CREATE TABLE `cn_category` (
   KEY `sort_index` (`sort`) USING BTREE,
   KEY `nav_index` (`show_in_nav`) USING BTREE,
   KEY `hot_index` (`show_in_hot`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=158 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of cn_category
 -- ----------------------------
-INSERT INTO `cn_category` VALUES ('2', '0', '喷绘耗材', null, '1', '1', '1', '1', '1', '1', null, '2017-02-25 21:44:43', '猫宁', '2018-06-21 14:33:27', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('3', '0', '写真耗材', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:24:34', '', '2018-06-19 10:41:24', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('4', '0', '标牌展示', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:30', '', '2018-06-19 10:41:36', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('5', '0', '板材型材', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:28', '', '2018-06-19 10:42:15', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('6', '0', '光电产品', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:24', '', '2018-06-19 10:42:00', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('7', '0', '机器配件', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:19', '', '2018-06-19 10:41:47', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('38', '2', '喷绘布', '1', '2', '1', '1', '1', '0', '1', null, null, '', '2018-06-26 17:37:59', 'admin', '', null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('57', '2', '黑白布', '1', '2', '1', '0', '1', '0', '0', null, '2018-05-29 16:51:48', 'admin', '2018-06-12 09:54:33', 'admin', '', '', '', '', '1');
-INSERT INTO `cn_category` VALUES ('58', '2', '旗帜布', '7', '2', '1', '0', '1', '0', '0', null, '2018-05-29 17:05:34', 'admin', '2018-06-12 09:54:50', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('71', '2', '户外条幅布', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:00:28', 'admin', '2018-06-28 10:01:17', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('72', '2', '网格布', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:01:51', 'admin', '2018-06-12 10:33:27', 'admin', null, null, null, null, '1');
+INSERT INTO `cn_category` VALUES ('2', '0', '喷绘耗材', null, '1', '1', '1', '1', '1', '1', null, '2017-02-25 21:44:43', '猫宁', '2018-07-11 16:15:01', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('3', '0', '写真耗材', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:24:34', '', '2018-07-11 16:15:10', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('4', '0', '标牌展示', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:30', '', '2018-07-11 16:15:23', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('5', '0', '板材型材', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:28', '', '2018-07-11 16:15:34', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('6', '0', '光电产品', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:24', '', '2018-07-10 21:54:27', 'admin', null, null, null, null, '18');
+INSERT INTO `cn_category` VALUES ('7', '0', '机器配件', null, '1', '1', null, '1', '1', null, null, '2018-05-21 11:28:19', '', '2018-07-10 21:54:36', 'admin', null, null, null, null, '18');
+INSERT INTO `cn_category` VALUES ('57', '2', '黑白布', '1', '2', '1', '0', '1', '0', '0', null, '2018-05-29 16:51:48', 'admin', '2018-07-11 16:15:54', 'admin', '', '', '', '', '37');
+INSERT INTO `cn_category` VALUES ('58', '2', '旗帜布', '7', '2', '1', '0', '1', '0', '0', null, '2018-05-29 17:05:34', 'admin', '2018-07-11 16:16:04', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('71', '2', '户外条幅布', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:00:28', 'admin', '2018-07-11 16:16:16', 'admin', null, null, null, null, '37');
+INSERT INTO `cn_category` VALUES ('72', '2', '网格布', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:01:51', 'admin', '2018-07-11 16:16:37', 'admin', null, null, null, null, '37');
 INSERT INTO `cn_category` VALUES ('73', '2', '车身贴', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:02:14', 'admin', '2018-07-05 14:44:45', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('74', '2', '单面透', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:02:56', 'admin', '2018-06-12 10:34:36', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('75', '2', '弱溶剂油画布', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:06:19', 'admin', '2018-06-12 10:34:43', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('76', '2', '弱溶剂PVC片', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:06:41', 'admin', '2018-06-12 10:34:49', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('77', '2', '弱溶剂背胶', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:07:03', 'admin', '2018-06-12 10:34:55', 'admin', null, null, null, null, '1');
+INSERT INTO `cn_category` VALUES ('77', '2', '弱溶剂背胶', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:07:03', 'admin', '2018-07-06 15:13:10', 'admin', null, null, null, null, '18');
 INSERT INTO `cn_category` VALUES ('78', '2', '弱溶剂PP', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:07:19', 'admin', '2018-06-12 10:35:00', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('79', '2', '弱溶剂相纸', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:10:48', 'admin', '2018-06-12 10:35:06', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('80', '2', '玻璃贴', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:11:05', 'admin', '2018-06-12 10:35:12', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('81', '2', '墨水', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:11:28', 'admin', '2018-06-12 10:35:18', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('82', '3', '背胶', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:13:31', 'admin', '2018-06-12 10:35:25', 'admin', null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('83', '3', '冷裱膜', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:13:52', 'admin', '2018-06-12 10:35:30', 'admin', null, null, null, null, '1');
+INSERT INTO `cn_category` VALUES ('82', '3', '背胶', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:13:31', 'admin', '2018-07-07 17:29:19', 'admin', null, null, null, null, '8');
+INSERT INTO `cn_category` VALUES ('83', '3', '冷裱膜', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:13:52', 'admin', '2018-07-11 16:17:03', 'admin', null, null, null, null, '37');
 INSERT INTO `cn_category` VALUES ('84', '3', '合成纸', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:30:34', 'admin', '2018-06-12 10:35:37', 'admin', null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('85', '3', '相纸', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 10:42:35', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('86', '3', 'PVC硬片', null, '2', '1', '0', '1', '0', '0', 'http://img.cnadmart.com/20180621/cefe5f15f0f8437d9f5031297bd3849c.jpg', '2018-06-12 10:42:57', 'admin', '2018-06-21 14:34:47', 'admin', null, null, null, null, '1');
@@ -247,7 +307,6 @@ INSERT INTO `cn_category` VALUES ('103', '4', '促销类', null, '2', '1', '0', 
 INSERT INTO `cn_category` VALUES ('104', '5', '亚力克板', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:15:33', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('105', '5', '双色板', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:15:47', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('106', '5', 'KT板', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:16:04', 'admin', null, null, null, null, null, null, '1');
-INSERT INTO `cn_category` VALUES ('107', '5', 'PS有机板', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:16:23', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('108', '5', 'PVC发泡板', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:16:43', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('109', '6', '灯带', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:17:07', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('110', '6', 'LED贴片模组', null, '2', '1', '0', '1', '0', '0', null, '2018-06-12 11:27:49', 'admin', null, null, null, null, null, null, '1');
@@ -296,6 +355,9 @@ INSERT INTO `cn_category` VALUES ('154', '4', '营业执照框', '0', '2', '1', 
 INSERT INTO `cn_category` VALUES ('155', '4', '电梯广告框', '0', '2', '1', '0', '1', '0', '0', null, '2018-06-21 16:37:54', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('156', '4', '木托奖牌', '0', '2', '1', '0', '1', '0', '0', null, '2018-06-22 09:06:53', 'admin', null, null, null, null, null, null, '1');
 INSERT INTO `cn_category` VALUES ('157', '4', '胸卡', '0', '2', '1', '0', '1', '0', '0', null, '2018-06-22 09:52:43', 'admin', null, null, null, null, null, null, '1');
+INSERT INTO `cn_category` VALUES ('161', '2', null, '0', '2', '1', '0', '0', '0', '0', null, '2018-07-06 15:10:53', 'admin', null, null, 'test', 'test', 'test', 'test', '18');
+INSERT INTO `cn_category` VALUES ('162', '7', 'test', '0', '2', '1', '0', '0', '0', '0', null, '2018-07-06 15:12:51', 'admin', null, null, 'ee', 'ee', 'ee', 'ee', '2');
+INSERT INTO `cn_category` VALUES ('163', '0', '1', '0', '1', '1', '1', '0', '1', '1', null, '2018-07-17 10:08:25', 'admin', null, null, null, null, null, null, '38');
 
 -- ----------------------------
 -- Table structure for cn_category_advert
@@ -339,37 +401,17 @@ CREATE TABLE `cn_category_good` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(255) DEFAULT '' COMMENT '创建者',
   PRIMARY KEY (`category_good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=203 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of cn_category_good
 -- ----------------------------
-INSERT INTO `cn_category_good` VALUES ('87', '38', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水喷绘布黑白布旗帜布', '95', '2018-06-15 08:50:08', 'admin');
-INSERT INTO `cn_category_good` VALUES ('88', '38', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水喷绘布黑白布旗帜布', '96', '2018-06-15 08:59:31', 'admin');
-INSERT INTO `cn_category_good` VALUES ('89', '38', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水喷绘布黑白布旗帜布', '97', '2018-06-15 09:01:56', 'admin');
-INSERT INTO `cn_category_good` VALUES ('91', '73', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水喷绘布黑白布旗帜布', '99', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_category_good` VALUES ('92', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水喷绘布黑白布旗帜布', '100', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_category_good` VALUES ('93', '91', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '101', '2018-06-15 09:38:37', 'admin');
-INSERT INTO `cn_category_good` VALUES ('94', '82', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '102', '2018-06-15 09:44:08', 'admin');
-INSERT INTO `cn_category_good` VALUES ('95', '82', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '103', '2018-06-15 09:52:51', 'admin');
-INSERT INTO `cn_category_good` VALUES ('96', '83', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '104', '2018-06-15 09:58:50', 'admin');
-INSERT INTO `cn_category_good` VALUES ('97', '83', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '105', '2018-06-15 10:06:18', 'admin');
-INSERT INTO `cn_category_good` VALUES ('98', '83', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '106', '2018-06-15 10:13:45', 'admin');
-INSERT INTO `cn_category_good` VALUES ('99', '86', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '107', '2018-06-15 10:21:06', 'admin');
-INSERT INTO `cn_category_good` VALUES ('101', '89', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '109', '2018-06-15 10:30:24', 'admin');
-INSERT INTO `cn_category_good` VALUES ('102', '89', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '110', '2018-06-15 10:35:15', 'admin');
-INSERT INTO `cn_category_good` VALUES ('103', '84', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '111', '2018-06-15 10:59:33', 'admin');
-INSERT INTO `cn_category_good` VALUES ('104', '85', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '112', '2018-06-15 13:36:41', 'admin');
-INSERT INTO `cn_category_good` VALUES ('105', '85', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜', '113', '2018-06-15 13:48:31', 'admin');
-INSERT INTO `cn_category_good` VALUES ('106', '142', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶', '114', '2018-06-15 13:55:04', 'admin');
-INSERT INTO `cn_category_good` VALUES ('107', '143', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透', '115', '2018-06-15 14:03:58', 'admin');
-INSERT INTO `cn_category_good` VALUES ('108', '144', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片', '116', '2018-06-15 14:09:31', 'admin');
-INSERT INTO `cn_category_good` VALUES ('109', '90', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片', '117', '2018-06-15 14:38:54', 'admin');
+INSERT INTO `cn_category_good` VALUES ('108', '82', '背胶', '116', '2018-06-15 14:09:31', 'admin');
 INSERT INTO `cn_category_good` VALUES ('110', '87', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片', '118', '2018-06-15 15:17:42', 'admin');
 INSERT INTO `cn_category_good` VALUES ('111', '88', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片', '119', '2018-06-15 15:26:56', 'admin');
 INSERT INTO `cn_category_good` VALUES ('112', '145', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '120', '2018-06-15 15:31:09', 'admin');
 INSERT INTO `cn_category_good` VALUES ('113', '88', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '121', '2018-06-15 15:34:20', 'admin');
-INSERT INTO `cn_category_good` VALUES ('114', '146', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '122', '2018-06-15 15:38:29', 'admin');
+INSERT INTO `cn_category_good` VALUES ('114', '83', '冷裱膜', '122', '2018-06-15 15:38:29', 'admin');
 INSERT INTO `cn_category_good` VALUES ('115', '106', '亚力克板双色板KT板PS有机板PVC发泡板', '123', '2018-06-19 08:54:10', 'admin');
 INSERT INTO `cn_category_good` VALUES ('116', '106', '亚力克板双色板KT板PS有机板PVC发泡板', '128', '2018-06-19 09:06:19', 'admin');
 INSERT INTO `cn_category_good` VALUES ('117', '106', '亚力克板双色板KT板PS有机板PVC发泡板', '129', '2018-06-19 09:13:03', 'admin');
@@ -441,15 +483,21 @@ INSERT INTO `cn_category_good` VALUES ('190', '72', '户外条幅布网格布车
 INSERT INTO `cn_category_good` VALUES ('191', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '203', '2018-06-27 16:42:49', 'admin');
 INSERT INTO `cn_category_good` VALUES ('192', '98', '标牌易拉宝X展架挂画架注水旗杆立人展架海报架栏杆座告示指示牌促销类抽奖箱意见箱酒水牌营业执照框电梯广告框木托奖牌胸卡', '204', '2018-06-28 16:56:17', 'admin');
 INSERT INTO `cn_category_good` VALUES ('193', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '205', '2018-06-28 16:58:00', 'admin');
-INSERT INTO `cn_category_good` VALUES ('194', '88', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '206', '2018-06-30 22:33:11', 'admin');
-INSERT INTO `cn_category_good` VALUES ('195', '71', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '207', '2018-07-01 01:41:55', 'admin');
 INSERT INTO `cn_category_good` VALUES ('196', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '208', '2018-07-02 08:30:38', 'admin');
 INSERT INTO `cn_category_good` VALUES ('197', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '209', '2018-07-02 10:45:31', 'admin');
-INSERT INTO `cn_category_good` VALUES ('198', '87', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '212', '2018-07-02 15:47:45', 'admin');
 INSERT INTO `cn_category_good` VALUES ('199', '73', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水天花软膜喷绘布黑白布旗帜布', '213', '2018-07-04 14:54:19', 'admin');
-INSERT INTO `cn_category_good` VALUES ('200', '92', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '214', '2018-07-05 15:58:27', 'admin');
 INSERT INTO `cn_category_good` VALUES ('201', '86', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '216', '2018-07-05 17:37:25', 'admin');
 INSERT INTO `cn_category_good` VALUES ('202', '83', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '217', '2018-07-05 18:50:20', 'admin');
+INSERT INTO `cn_category_good` VALUES ('203', '71', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水黑白布旗帜布', '219', '2018-07-05 22:19:43', 'admin');
+INSERT INTO `cn_category_good` VALUES ('204', '86', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '220', '2018-07-05 23:40:19', 'admin');
+INSERT INTO `cn_category_good` VALUES ('205', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水黑白布旗帜布', '221', '2018-07-06 03:02:08', 'admin');
+INSERT INTO `cn_category_good` VALUES ('206', '159', 'test', '222', '2018-07-06 10:37:09', 'admin');
+INSERT INTO `cn_category_good` VALUES ('208', '83', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '238', '2018-07-08 23:59:24', 'admin');
+INSERT INTO `cn_category_good` VALUES ('209', '82', '背胶冷裱膜合成纸相纸PVC硬片写真布油画布灯片地板膜反光膜即时贴转移膜双面胶单孔透胶片艺术布', '240', '2018-07-09 15:28:26', 'admin');
+INSERT INTO `cn_category_good` VALUES ('211', '106', '亚力克板双色板KT板PVC发泡板', '242', '2018-07-09 15:44:24', 'admin');
+INSERT INTO `cn_category_good` VALUES ('212', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '244', '2018-07-11 11:10:58', 'admin');
+INSERT INTO `cn_category_good` VALUES ('213', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '248', '2018-07-11 21:26:35', 'admin');
+INSERT INTO `cn_category_good` VALUES ('214', '71', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '249', '2018-07-12 15:13:42', 'admin');
 
 -- ----------------------------
 -- Table structure for cn_category_spec
@@ -463,12 +511,12 @@ CREATE TABLE `cn_category_spec` (
   `is_show` varchar(10) NOT NULL COMMENT '是否可见 1 可见 0不可见',
   `is_mobile_show` tinyint(1) DEFAULT NULL COMMENT '手机端是否可见 1可见 0不可见',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=76 DEFAULT CHARSET=utf8 COMMENT='分类规格表';
+) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COMMENT='分类规格表';
 
 -- ----------------------------
 -- Records of cn_category_spec
 -- ----------------------------
-INSERT INTO `cn_category_spec` VALUES ('24', '2', '款式', '0', '0', '1');
+INSERT INTO `cn_category_spec` VALUES ('24', '2', '款式', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('25', '2', '规格', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('26', '3', '款式', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('27', '3', '规格', '0', '1', '1');
@@ -519,7 +567,20 @@ INSERT INTO `cn_category_spec` VALUES ('71', '3', '321321', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('72', '4', '321321', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('73', '5', '321321', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('74', '7', '321321', '0', '1', '1');
-INSERT INTO `cn_category_spec` VALUES ('75', null, '33', '330', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('76', '2', '12', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('77', '158', '123123', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('78', null, '1221', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('79', '3', '颜色', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('80', '6', '颜色', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('81', '2', '23', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('82', '3', '23', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('83', '4', '23', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('84', '2', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('85', '3', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('86', '4', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('87', '5', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('88', '6', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('89', '7', 'test', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for cn_channel
@@ -529,25 +590,17 @@ CREATE TABLE `cn_channel` (
   `channel_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL COMMENT '频道名称',
   `sort` int(3) DEFAULT NULL,
-  `is_show` tinyint(1) DEFAULT NULL COMMENT '是否展示（0展示，1不展示）',
+  `is_show` tinyint(1) DEFAULT '0' COMMENT '是否展示（0展示，1不展示）',
   `model` tinyint(1) DEFAULT NULL COMMENT '模式 1:商城 2：服务',
   PRIMARY KEY (`channel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cn_channel
 -- ----------------------------
-INSERT INTO `cn_channel` VALUES ('1', '广告器材', '1', null, null);
-INSERT INTO `cn_channel` VALUES ('2', '素材/模板', '2', null, null);
-INSERT INTO `cn_channel` VALUES ('8', '广告制作', '4', null, null);
-INSERT INTO `cn_channel` VALUES ('10', '自助设计', '6', null, null);
-INSERT INTO `cn_channel` VALUES ('11', '广告金融', '7', null, null);
-INSERT INTO `cn_channel` VALUES ('12', '广告商学院', '8', null, null);
-INSERT INTO `cn_channel` VALUES ('13', '广告设计', '9', null, null);
-INSERT INTO `cn_channel` VALUES ('14', '企业服务', '10', null, null);
-INSERT INTO `cn_channel` VALUES ('15', '技术开发', '11', null, null);
-INSERT INTO `cn_channel` VALUES ('16', '自助视频', '12', null, null);
-INSERT INTO `cn_channel` VALUES ('17', '行业信息', '13', null, null);
+INSERT INTO `cn_channel` VALUES ('38', '今日特卖', '1', '0', null);
+INSERT INTO `cn_channel` VALUES ('39', null, '0', '0', null);
+INSERT INTO `cn_channel` VALUES ('40', '联创', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for cn_express_company
@@ -558,16 +611,15 @@ CREATE TABLE `cn_express_company` (
   `company_number` varchar(255) DEFAULT NULL COMMENT '快递公司编号',
   `company_name` varchar(255) DEFAULT NULL COMMENT '快递公司名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cn_express_company
 -- ----------------------------
-INSERT INTO `cn_express_company` VALUES ('5', 'EMS', 'EMS');
-INSERT INTO `cn_express_company` VALUES ('7', 'HHTT', '天天快递');
-INSERT INTO `cn_express_company` VALUES ('8', 'QFKD', '全峰快递');
-INSERT INTO `cn_express_company` VALUES ('9', 'SF', '顺丰快递');
-INSERT INTO `cn_express_company` VALUES ('10', 'YD4', '韵达快递');
+INSERT INTO `cn_express_company` VALUES ('2', '0002', '顺风');
+INSERT INTO `cn_express_company` VALUES ('3', '111', '远达');
+INSERT INTO `cn_express_company` VALUES ('4', '123', '圆通');
+INSERT INTO `cn_express_company` VALUES ('5', '121', '122');
 
 -- ----------------------------
 -- Table structure for cn_good
@@ -602,41 +654,21 @@ CREATE TABLE `cn_good` (
   `mart_id` bigint(20) DEFAULT NULL COMMENT '商户id',
   `del_flag` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=218 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of cn_good
 -- ----------------------------
-INSERT INTO `cn_good` VALUES ('95', '喷绘布蓝标', null, '3.00', '2.00', '111111', null, '0', '0', '0', '0', '1', '', '平方', '1', '喷绘耗材', '喷绘耗材', '喷绘耗材', '1111111', '2018-06-15 08:50:07', 'admin', null, '', 'admin', '2018-07-05 19:14:15', '1', null);
-INSERT INTO `cn_good` VALUES ('96', '喷绘布绿标', null, '0.00', '0.00', '', 'http://img.cnadmart.com/20180615/7690cefa49db420888ce58cc69e69a5e.png', '0', '0', '0', '0', '0', '', '平方', '1', null, '', '', '', '2018-06-15 08:59:31', 'admin', null, '', 'admin', '2018-07-05 18:53:07', '1', null);
-INSERT INTO `cn_good` VALUES ('97', '喷绘布紫标', null, '2.25', '2.25', '', 'http://img.cnadmart.com/20180615/e9af2bef260a4573ac1452b5f66cb186.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:01:56', 'admin', null, '', 'admin', '2018-07-01 23:29:42', '1', null);
-INSERT INTO `cn_good` VALUES ('99', '车贴', null, '4.60', '2.85', '', 'http://img.cnadmart.com/20180615/798c1e0f98634a6abbe4569531237c9c.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:16:21', 'admin', null, '', 'admin', '2018-07-01 23:30:07', '1', null);
-INSERT INTO `cn_good` VALUES ('100', '网格布', null, '3.70', '3.70', '', 'http://img.cnadmart.com/20180615/dde80de69632402082fe557659554418.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:28:54', 'admin', null, '', 'admin', '2018-06-27 10:00:30', '1', null);
-INSERT INTO `cn_good` VALUES ('101', '可喷绘反光膜', null, '13.00', '13.00', '', 'http://img.cnadmart.com/20180615/55a2471b927b4486ad5cec3e3375ad71.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:38:36', 'admin', null, '', 'admin', '2018-06-15 09:39:50', '1', null);
-INSERT INTO `cn_good` VALUES ('102', '户内背胶', null, '1.65', '2.10', '', 'http://img.cnadmart.com/20180615/275095df3361461cbc2c6872b2c57c0a.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:44:08', 'admin', null, '', 'admin', '2018-06-15 09:45:13', '1', null);
-INSERT INTO `cn_good` VALUES ('103', '户外背胶', null, '0.00', '2.00', '', 'http://img.cnadmart.com/20180615/009118d7e3da4c8b9ec0217ce2eece47.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:52:51', 'admin', null, '', 'admin', '2018-06-26 13:05:12', '1', null);
-INSERT INTO `cn_good` VALUES ('104', '冷裱膜', null, '1.85', '2.10', '', 'http://img.cnadmart.com/20180615/3b46e689bf38405d961dccee61dd0b30.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 09:58:50', 'admin', null, '', 'admin', '2018-06-15 10:01:28', '1', null);
-INSERT INTO `cn_good` VALUES ('105', '覆膜机专用冷裱膜', null, '1.30', '1.30', '', 'http://img.cnadmart.com/20180615/fcc0b3b124684942a6077340c33f330e.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:06:18', 'admin', null, '', 'admin', '2018-06-15 10:07:21', '1', null);
-INSERT INTO `cn_good` VALUES ('106', '十字纹冷裱膜', null, '5.50', '5.50', '', 'http://img.cnadmart.com/20180615/ed4caeac710144aea9907128b096ce58.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:13:45', 'admin', null, '', 'admin', '2018-06-15 10:21:58', '1', null);
-INSERT INTO `cn_good` VALUES ('107', 'PVC硬片', null, '3.50', '4.50', '', 'http://img.cnadmart.com/20180615/ec96b14713b84707a5d9fb5b9149be5e.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:21:06', 'admin', null, '', 'admin', '2018-06-15 10:22:02', '1', null);
-INSERT INTO `cn_good` VALUES ('109', '水性被喷灯片（户内）', null, '3.20', '4.00', '', null, '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:30:24', 'admin', null, '', 'admin', '2018-06-15 11:04:20', '1', null);
-INSERT INTO `cn_good` VALUES ('110', '弱溶剂正喷灯片（户外）', null, '7.00', '7.00', '', 'http://img.cnadmart.com/20180615/729e7a091b0e4139b6cf47ac445c10d0.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:35:15', 'admin', null, '', 'admin', '2018-06-15 10:53:22', '1', null);
-INSERT INTO `cn_good` VALUES ('111', 'PP合成纸', null, '1.90', '3.10', '', 'http://img.cnadmart.com/20180615/d746d903466549319dea00823898a2ea.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 10:59:33', 'admin', null, '', 'admin', '2018-06-15 11:00:43', '1', null);
-INSERT INTO `cn_good` VALUES ('112', '高光相纸（户内）', null, '2.50', '3.00', '', 'http://img.cnadmart.com/20180615/79c993c9b2d04deab197b3d0aed1024c.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 13:36:41', 'admin', null, '', 'admin', '2018-06-15 13:49:55', '1', null);
-INSERT INTO `cn_good` VALUES ('113', '弱溶剂相纸（户外）', null, '5.00', '6.00', '', 'http://img.cnadmart.com/20180615/80e7db82e37643be9e127d71f1e07551.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 13:48:31', 'admin', null, '', 'admin', '2018-06-15 13:49:34', '1', null);
-INSERT INTO `cn_good` VALUES ('114', '透明双面胶', null, '3.80', '3.80', '', 'http://img.cnadmart.com/20180615/fa268208cf7148c09ec5cb72de220cf9.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 13:55:04', 'admin', null, '', 'admin', '2018-06-15 13:56:01', '1', null);
-INSERT INTO `cn_good` VALUES ('115', '单孔透', null, '6.20', '6.20', '', 'http://img.cnadmart.com/20180615/fa06cfd294b148a281871fefae4866f4.png', '0', '0', '0', '0', '0', '', '平方', '1', null, '', '', '', '2018-06-15 14:03:58', 'admin', null, '', 'admin', '2018-06-15 14:05:18', '1', null);
-INSERT INTO `cn_good` VALUES ('116', 'X展架专用胶片', null, '6.50', '6.50', '', 'http://img.cnadmart.com/20180615/84704c2c79744e4d88d59e25e2f5a9c7.png', '0', '0', '0', '0', '1', '', null, '1', null, '', '', '', '2018-06-15 14:09:31', 'admin', null, '', 'admin', '2018-06-15 14:12:49', '1', null);
-INSERT INTO `cn_good` VALUES ('117', '地板膜', null, '6.50', '8.00', '', 'http://img.cnadmart.com/20180615/443d50701a5b4816b96f32d66d018374.jpg', '0', '0', '0', '0', '1', '', 'pfan', '1', null, '', '', '', '2018-06-15 14:38:54', 'admin', null, '', 'admin', '2018-06-15 15:31:45', '1', null);
-INSERT INTO `cn_good` VALUES ('118', '防水写真布', null, '3.00', '3.00', '', 'http://img.cnadmart.com/20180615/37ee00c5e58c4a4e9fe9a8ef5f4bc115.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:17:42', 'admin', null, '', 'admin', '2018-06-15 15:31:48', '1', null);
-INSERT INTO `cn_good` VALUES ('119', '油画布', null, '7.00', '13.00', '', 'http://img.cnadmart.com/20180615/638f7d0642f84f2da1f4f5d7c91727d3.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:26:56', 'admin', null, '', 'admin', '2018-06-15 15:31:51', '1', null);
+INSERT INTO `cn_good` VALUES ('116', 'X展架专用胶片', null, '6.50', '6.50', '', 'http://img.cnadmart.com/20180615/84704c2c79744e4d88d59e25e2f5a9c7.png', '0', '0', '0', '0', '0', '', null, '1', null, '', '', '', '2018-06-15 14:09:31', 'admin', null, '', 'admin', '2018-07-23 21:24:53', '1', null);
+INSERT INTO `cn_good` VALUES ('118', '防水写真布', null, '3.00', '3.00', '', 'http://img.cnadmart.com/20180615/37ee00c5e58c4a4e9fe9a8ef5f4bc115.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:17:42', 'admin', null, '', 'admin', '2018-07-16 11:29:26', '1', null);
+INSERT INTO `cn_good` VALUES ('119', '油画布', null, '7.00', '13.00', '', 'http://img.cnadmart.com/20180615/638f7d0642f84f2da1f4f5d7c91727d3.jpg', '0', '0', '0', '0', '1', '', '平方', '0', null, '', '', '', '2018-06-15 15:26:56', 'admin', null, '', 'admin', '2018-07-24 11:42:12', '1', null);
 INSERT INTO `cn_good` VALUES ('120', '防水艺术布', null, '5.00', '5.00', '', 'http://img.cnadmart.com/20180615/4d721bdacc6840728cc715d58d89a839.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:31:09', 'admin', null, '', 'admin', '2018-06-15 15:31:53', '1', null);
-INSERT INTO `cn_good` VALUES ('121', '防水棉质油画布', null, '15.00', '15.00', '', 'http://img.cnadmart.com/20180615/c4c17fd4aa9d40d29f4908a0d8f0673b.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:34:20', 'admin', null, '', 'admin', '2018-06-19 08:59:24', '1', null);
+INSERT INTO `cn_good` VALUES ('121', '防水棉质油画布', null, '15.00', '15.00', '', 'http://img.cnadmart.com/20180615/c4c17fd4aa9d40d29f4908a0d8f0673b.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:34:20', 'admin', null, '', 'admin', '2018-07-17 18:23:27', '1', null);
 INSERT INTO `cn_good` VALUES ('122', '天花软膜', null, '3.30', '3.30', '', 'http://img.cnadmart.com/20180615/3076feafdd74414e8116fb139553368c.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:38:29', 'admin', null, '', 'admin', '2018-06-19 08:57:46', '1', null);
 INSERT INTO `cn_good` VALUES ('123', 'KT板 普通板（20张/包）', null, '0.00', '0.00', '', 'http://img.cnadmart.com/20180619/7560ad1f14c543309bc839f3232cc3e0.png', '0', '0', '0', '0', '1', '', '张', '0', null, '', '', '', '2018-06-19 08:54:10', 'admin', null, '', 'admin', '2018-06-19 08:57:41', '1', null);
 INSERT INTO `cn_good` VALUES ('128', 'KT板 布纹板（20张/包）', null, '9.00', '10.00', '', 'http://img.cnadmart.com/20180619/ae9f30d642754b25abc4338719395799.png', '0', '0', '0', '0', '0', '', '张', '1', null, '', '', '', '2018-06-19 09:06:19', 'admin', null, '', 'admin', '2018-06-19 09:06:47', '1', null);
 INSERT INTO `cn_good` VALUES ('129', 'KT板 单晶板（10张/包）', null, '9.00', '10.50', '', 'http://img.cnadmart.com/20180619/3609c18bc5234610abd2cd7e1efa3530.jpg', '0', '0', '0', '0', '0', '', '张', '1', null, '', '', '', '2018-06-19 09:13:03', 'admin', null, '', 'admin', '2018-06-19 09:13:36', '1', null);
-INSERT INTO `cn_good` VALUES ('130', '广告灯箱 超薄灯箱', null, '180.00', '180.00', '', 'http://img.cnadmart.com/20180619/d6c969ff69c043dcb860026de8f3df1d.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-19 09:25:34', 'admin', null, '', 'admin', '2018-06-19 09:37:48', '1', null);
+INSERT INTO `cn_good` VALUES ('130', '广告灯箱 超薄灯箱', null, '180.00', '180.00', '', 'http://img.cnadmart.com/20180619/d6c969ff69c043dcb860026de8f3df1d.jpg', '0', '0', '0', '0', '1', '', '平方', '0', null, '', '', '', '2018-06-19 09:25:34', 'admin', null, '', 'admin', '2018-07-16 11:31:31', '1', null);
 INSERT INTO `cn_good` VALUES ('131', '广告灯箱 卡布灯箱', null, '260.00', '300.00', '', 'http://img.cnadmart.com/20180619/eac2f65a808f45609ba1aedd8cad974d.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-19 09:36:54', 'admin', null, '', 'admin', '2018-06-19 09:37:44', '1', null);
 INSERT INTO `cn_good` VALUES ('132', '广告灯箱 吸塑灯箱', null, '60.00', '110.00', '', 'http://img.cnadmart.com/20180619/22485e6da50747cc8a0d3c28c0cec798.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-19 10:52:47', 'admin', null, '', 'admin', '2018-06-19 10:54:22', '1', null);
 INSERT INTO `cn_good` VALUES ('133', '广告灯箱 点餐灯箱', null, '80.00', '80.00', '', 'http://img.cnadmart.com/20180619/8d0549a14769409c838b3f7d0f193d97.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-19 10:55:21', 'admin', null, '', 'admin', '2018-06-19 11:45:01', '1', null);
@@ -647,7 +679,7 @@ INSERT INTO `cn_good` VALUES ('137', '超薄灯箱电源', null, '15.00', '30.00
 INSERT INTO `cn_good` VALUES ('140', '贴片灯5730', null, '0.20', '0.24', '', 'http://img.cnadmart.com/20180619/05c1d120dc85442ca0dda9e6f55fd312.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:55:10', 'admin', null, '', 'admin', '2018-06-19 14:16:28', '1', null);
 INSERT INTO `cn_good` VALUES ('141', '贴片灯5054', null, '0.26', '0.29', '', 'http://img.cnadmart.com/20180619/2ebd50486b0e476791753706e04c069c.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:56:42', 'admin', null, '', 'admin', '2018-06-19 14:16:25', '1', null);
 INSERT INTO `cn_good` VALUES ('142', '穿孔灯', null, '0.10', '0.13', '', 'http://img.cnadmart.com/20180619/06d45b4e702047d8ace4b9993d6f38cc.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:59:45', 'admin', null, '', 'admin', '2018-06-19 14:16:19', '1', null);
-INSERT INTO `cn_good` VALUES ('143', '数码管', null, '12.00', '13.00', '', 'http://img.cnadmart.com/20180619/b9aa3acb9fec4a069ad8d475d78295a9.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 14:07:38', 'admin', null, '', 'admin', '2018-06-19 14:16:16', '1', null);
+INSERT INTO `cn_good` VALUES ('143', '数码管', null, '12.00', '13.00', '', 'http://img.cnadmart.com/20180619/b9aa3acb9fec4a069ad8d475d78295a9.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 14:07:38', 'admin', null, '', 'admin', '2018-07-16 11:32:32', '1', null);
 INSERT INTO `cn_good` VALUES ('145', 'KT板 布纹板（20张/包）', null, '9.00', '10.00', '', 'http://img.cnadmart.com/20180619/2a6f30734f1a4d7a88475bf32dd7e889.png', '0', '0', '0', '0', '1', '', '张', '1', null, '', '', '', '2018-06-19 14:12:19', 'admin', null, '', 'admin', '2018-06-19 14:13:13', '1', null);
 INSERT INTO `cn_good` VALUES ('146', 'KT板 单晶板（10张/包）', null, '9.00', '10.50', '', 'http://img.cnadmart.com/20180619/2206563a4ea446ac8f5e80db754a42b9.jpg', '0', '0', '0', '0', '1', '', '张', '1', null, '', '', '', '2018-06-19 14:15:35', 'admin', null, '', 'admin', '2018-06-19 14:16:11', '1', null);
 INSERT INTO `cn_good` VALUES ('147', 'KT板 双晶板（10张/包）', null, '9.50', '11.50', '', '', '0', '0', '0', '0', '1', '', '张', '1', null, '', '', '', '2018-06-19 14:18:40', 'admin', null, '', 'admin', '2018-06-19 14:28:02', '1', null);
@@ -689,7 +721,7 @@ INSERT INTO `cn_good` VALUES ('187', '22', null, '0.00', '0.00', '22', '', '0', 
 INSERT INTO `cn_good` VALUES ('188', 'df ', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-25 22:49:18', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('189', '德辅道', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-26 10:23:58', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('190', '嗲是打发', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-26 14:27:57', 'admin', null, '', '', null, '1', null);
-INSERT INTO `cn_good` VALUES ('191', 'admin', null, '0.00', '0.00', 'admin', '', '1', '0', '0', '1', '0', '', '1111', '0', 'admin', 'admin', 'admin', 'admin', '2018-06-26 18:13:02', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('191', 'admin', null, '0.00', '0.00', 'admin', '', '1', '0', '0', '1', '0', '', '1111', '1', 'admin', 'admin', 'admin', 'admin', '2018-06-26 18:13:02', 'admin', null, '', 'admin', '2018-07-15 00:17:29', '1', null);
 INSERT INTO `cn_good` VALUES ('192', 'dsafdsf', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-26 18:22:28', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('193', 'aaa', null, '0.00', '0.00', 'aaaa', '', '0', '0', '0', '1', '0', '', '1', '0', null, '', '', '', '2018-06-26 19:06:24', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('194', 'test', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-26 21:39:38', 'admin', null, '', '', null, '1', null);
@@ -704,18 +736,49 @@ INSERT INTO `cn_good` VALUES ('202', '123', null, '0.00', '2.00', '', '', '0', '
 INSERT INTO `cn_good` VALUES ('203', '1', null, '0.00', '0.00', '1', '', '0', '0', '0', '0', '0', '', '1', '0', '1', '1', '1', '1', '2018-06-27 16:42:49', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('204', 'ssss', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-06-28 16:56:17', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('205', 'cfds', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '1', null, '', '', '', '2018-06-28 16:58:00', 'admin', null, '', 'admin', '2018-06-28 16:59:04', '1', null);
-INSERT INTO `cn_good` VALUES ('206', 'tretr', null, '10.00', '10.00', 'tre', '', '0', '0', '0', '0', '0', '', null, '1', null, '', '', '', '2018-06-30 22:33:11', 'admin', null, '', 'admin', '2018-06-30 22:35:30', '1', null);
-INSERT INTO `cn_good` VALUES ('207', '1111', null, '0.00', '0.00', '1111', '', '0', '0', '0', '0', '0', '', null, '1', '111', '111', '111', '111', '2018-07-01 01:41:55', 'admin', null, '', 'admin', '2018-07-01 23:33:23', '1', null);
 INSERT INTO `cn_good` VALUES ('208', 'rer', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-02 08:30:38', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('209', 'dsfdsf', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-02 10:45:31', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('210', '1q', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-02 13:01:16', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('211', '1q', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-02 13:01:19', 'admin', null, '', '', null, '1', null);
-INSERT INTO `cn_good` VALUES ('212', 'sss', null, '1000.00', '1000.00', 'ddd', '', '0', '0', '0', '0', '1', '', 'dd', '0', 'd', 'd', 'd', 'd', '2018-07-02 15:47:44', 'admin', null, '', 'admin', '2018-07-02 15:50:18', '1', null);
 INSERT INTO `cn_good` VALUES ('213', '13123123112312312', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', '123123', '0', null, '', '', '', '2018-07-04 14:54:19', 'admin', null, '', 'admin', '2018-07-05 16:03:24', '1', null);
-INSERT INTO `cn_good` VALUES ('214', 'test', null, '3.00', '1.00', 'test', '', '0', '0', '0', '0', '0', '', '个', '1', null, '', '', '', '2018-07-05 15:58:27', 'admin', null, '', 'admin', '2018-07-05 19:15:06', '1', null);
 INSERT INTO `cn_good` VALUES ('215', '234234', null, '0.00', '0.00', '234234', '', '0', '0', '0', '0', '0', '', '234234', '0', null, '', '', '', '2018-07-05 16:52:46', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('216', '皮皮测试', null, '0.00', '0.00', '皮皮测试皮皮测试皮皮测试皮皮测试皮皮测试皮皮测试皮皮测试皮皮测试皮皮测试', '', '0', '0', '0', '0', '0', '', '问问', '0', '撒打算的', '为', '反反复复反反复复反反复复', '问问', '2018-07-05 17:37:25', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('217', 'jjjjjjjjjj', null, '0.00', '0.00', 'gggggggggggggggggggggg', '', '0', '0', '0', '0', '0', '', 'g', '0', '2222222222222222', '11111111111111', '11111111111111111', '222222222222222', '2018-07-05 18:50:20', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('218', '56454', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-05 22:19:32', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('219', '56454', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-05 22:19:43', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('220', '11', null, '0.00', '0.00', '11', '', '1', '0', '0', '1', '0', '', '11', '0', '11', '11', '11', '11', '2018-07-05 23:40:19', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('221', '测试', null, '0.00', '0.00', '测试', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-06 03:02:08', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('222', 'test', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-06 10:37:09', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('223', '222', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-06 10:49:54', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('224', '131231', null, '0.00', '0.00', '131321', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-06 13:48:24', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('225', '辣酱一瓶', null, '0.00', '0.00', '辣酱一瓶', '', '1', '0', '0', '1', '0', '', null, '0', null, '辣酱一瓶辣酱一瓶', '辣酱一瓶', '辣酱一瓶', '2018-07-06 13:55:43', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('226', '辣酱一瓶', null, '0.00', '0.00', '辣酱一瓶', '', '1', '0', '0', '1', '0', '', null, '0', null, '辣酱一瓶辣酱一瓶', '辣酱一瓶', '辣酱一瓶', '2018-07-06 13:55:55', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('227', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', null, '0', 'test', '', '', '', '2018-07-06 14:49:16', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('228', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', null, '0', 'test', '', '', '', '2018-07-06 15:04:30', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('229', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:04:47', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('230', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:04:53', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('231', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:07:25', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('232', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:07:26', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('233', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:07:26', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('234', 'qwe', null, '0.00', '0.00', 'qwe', '', '1', '0', '0', '1', '0', '', 'qwe', '0', 'qwe', 'qwe', 'qwe', 'qwe', '2018-07-06 15:13:43', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('235', 'qwe', null, '0.00', '0.00', 'qwe', '', '1', '0', '0', '1', '0', '', 'qwe', '0', 'qwe', 'qwe', 'qwe', 'qwe', '2018-07-06 15:13:51', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('236', '111', null, '0.00', '0.00', '111', '', '0', '0', '0', '0', '0', '', '111', '0', '11', '11', '111', '11111', '2018-07-06 17:44:29', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('238', '测试', null, '10.00', '10.00', '111', '', '0', '0', '0', '0', '0', '', '1', '1', '测试11111111', '测试', '测试', '测试', '2018-07-08 23:59:24', 'admin', null, '', 'admin', '2018-07-24 11:42:00', '1', null);
+INSERT INTO `cn_good` VALUES ('239', '123', null, '0.00', '0.00', '123123', '', '0', '0', '0', '0', '0', '', '123213', '0', '123', '123', '123', '123', '2018-07-09 15:16:02', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('240', '22', null, '0.00', '0.00', '222', '', '0', '0', '0', '0', '0', '', '2', '0', '233333333', '3432', '3243', '2432', '2018-07-09 15:28:25', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('242', 'hahahaa', null, '0.00', '0.00', 'hahahaa', '', '1', '0', '0', '0', '0', '', 'hahahaa', '0', 'hahahaa', 'hahahaa', 'hahahaa', 'hahahaa', '2018-07-09 15:44:24', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('243', '13', null, '0.00', '0.00', '123', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-10 17:29:10', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('244', '111', null, '1.00', '1.00', '111', '', '0', '0', '0', '0', '0', '', '11', '1', '11', '11', '11', '11', '2018-07-11 11:10:58', 'admin', null, '', 'admin', '2018-07-12 22:11:26', '1', null);
+INSERT INTO `cn_good` VALUES ('245', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:32:40', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('246', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:33:08', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('247', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:33:18', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('248', 'aaaa', null, '50.00', '50.00', 'aaaq', '', '0', '0', '0', '0', '0', '', '个', '1', '啊啊', '啊啊啊', '啊啊', '啊啊啊', '2018-07-11 21:26:34', 'admin', null, '', 'admin', '2018-07-17 13:35:15', '1', null);
+INSERT INTO `cn_good` VALUES ('249', 'aaaaaaaaaaaaaaaa', null, '0.00', '0.00', 'aaaaa', '', '0', '0', '0', '0', '0', '', 'a', '0', 'a', 'a', 'a', 'a', '2018-07-12 15:13:41', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('250', '111', null, '0.00', '0.00', '1122', '', '0', '0', '0', '0', '0', '', null, '0', '222', '111', '11', '', '2018-07-15 17:23:38', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('251', 'adas', null, '0.00', '0.00', 'da', '', '1', '0', '0', '1', '0', '', '个', '0', '发送到对方是', '发送到啊asdf', '电风扇啊ga', '第三方啊', '2018-07-17 18:22:19', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('252', 'qe ', null, '0.00', '0.00', 'qweq', '', '0', '0', '0', '0', '0', '', 'qwe', '0', 'wqe', 'qwe', 'qwe', 'qwe', '2018-07-18 15:12:19', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('253', '啦啦', null, '0.00', '0.00', '啦啦啦啦啦啦啦啦啦啦啦啦', '', '1', '0', '0', '1', '0', '', '个', '0', '啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '2018-07-18 16:58:55', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('254', '啦啦', null, '0.00', '0.00', '啦啦啦啦啦啦啦啦啦啦啦啦', '', '1', '0', '0', '1', '0', '', '个', '0', '啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '2018-07-18 16:59:09', 'admin', null, '', '', null, '1', null);
 
 -- ----------------------------
 -- Table structure for cn_good_attribute
@@ -733,20 +796,25 @@ CREATE TABLE `cn_good_attribute` (
   `favorite_number` bigint(20) DEFAULT '0' COMMENT '收藏数',
   `question_number` bigint(20) DEFAULT '0' COMMENT '提问数',
   PRIMARY KEY (`attribute_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=55 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of cn_good_attribute
 -- ----------------------------
 INSERT INTO `cn_good_attribute` VALUES ('1', '1', '19887', '500', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('36', '96', '55', '144', '0', '0', '0', '0.00', '0', '0');
-INSERT INTO `cn_good_attribute` VALUES ('37', '206', '35', '444', '0', '0', '0', '0.00', '0', '0');
-INSERT INTO `cn_good_attribute` VALUES ('38', '97', '60112', '7701', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('37', '206', '2', '2', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('38', '97', '0', '0', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('39', '99', '451499', '0', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('40', '207', '0', '0', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('41', '212', '10', '0', '0', '0', '0', '0.00', '0', '0');
-INSERT INTO `cn_good_attribute` VALUES ('43', '214', '7', '7', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('43', '214', '492', '2481', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('54', '95', '7', '7', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('55', '237', '0', '0', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('56', '238', '20', '2', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('57', '241', '400', '4', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('58', '244', '1', '1', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('59', '248', '1', '50', '0', '0', '0', '0.00', '0', '0');
 
 -- ----------------------------
 -- Table structure for cn_good_detail
@@ -761,12 +829,11 @@ CREATE TABLE `cn_good_detail` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`good_detail_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='商品描述表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品描述表';
 
 -- ----------------------------
 -- Records of cn_good_detail
 -- ----------------------------
-INSERT INTO `cn_good_detail` VALUES ('1', '95', '<p>sdfsdafsasdfsdad</p>', '2018-07-05 14:50:58', 'admin', '2018-07-05 14:57:45', 'admin');
 
 -- ----------------------------
 -- Table structure for cn_good_image
@@ -786,57 +853,9 @@ CREATE TABLE `cn_good_image` (
 -- ----------------------------
 -- Records of cn_good_image
 -- ----------------------------
-INSERT INTO `cn_good_image` VALUES ('71', '99', 'http://img.cnadmart.com/20180615/fc8912582ca44444977c64ee2bfa1589.png', null, '1', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_good_image` VALUES ('72', '99', 'http://img.cnadmart.com/20180615/5d812cdd6df849fe8e79b4335587538a.png', null, '1', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_good_image` VALUES ('73', '99', 'http://img.cnadmart.com/20180615/90bff4ab9a8c4bc09a95a1ba60c37f4b.png', null, '1', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_good_image` VALUES ('74', '99', 'http://img.cnadmart.com/20180615/72070abe42e643338389b5e5d001bf4a.jpg', null, '1', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_good_image` VALUES ('75', '99', 'http://img.cnadmart.com/20180615/44987d87f19d46968cfc82475a65de1e.jpg', null, '1', '2018-06-15 09:16:21', 'admin');
-INSERT INTO `cn_good_image` VALUES ('76', '100', 'http://img.cnadmart.com/20180615/7b0666826254423f9aa8611bad0e5fc3.jpg', null, '1', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('77', '100', 'http://img.cnadmart.com/20180615/76387a585b82443c81f3772bd4344619.jpg', null, '1', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('78', '100', 'http://img.cnadmart.com/20180615/06e0b1d44ebe4a7a8764a901db3f710f.jpg', null, '1', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('79', '100', 'http://img.cnadmart.com/20180615/8aacc4b317034f0e82c681c7589c7705.jpg', null, '1', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('80', '100', 'http://img.cnadmart.com/20180615/0b6fafaa1ed44dfd907a23e80fe842b0.jpg', null, '1', '2018-06-15 09:28:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('81', '101', 'http://img.cnadmart.com/20180615/b6a644ff26a34196bbc25523eb18e5d0.png', null, '1', '2018-06-15 09:38:37', 'admin');
-INSERT INTO `cn_good_image` VALUES ('82', '101', 'http://img.cnadmart.com/20180615/b50dd6e500814629b1b9bd2958578ad0.jpg', null, '1', '2018-06-15 09:38:37', 'admin');
-INSERT INTO `cn_good_image` VALUES ('83', '101', 'http://img.cnadmart.com/20180615/0d1da9c7371044ff939e41a44be3fbcf.jpg', null, '1', '2018-06-15 09:38:37', 'admin');
-INSERT INTO `cn_good_image` VALUES ('84', '101', 'http://img.cnadmart.com/20180615/a52ba85fe4d9472f9c63105ad200aabe.jpg', null, '1', '2018-06-15 09:38:37', 'admin');
-INSERT INTO `cn_good_image` VALUES ('85', '102', 'http://img.cnadmart.com/20180615/a80f86f8bf4249b9be264e0958572003.jpg', null, '1', '2018-06-15 09:44:08', 'admin');
-INSERT INTO `cn_good_image` VALUES ('86', '102', 'http://img.cnadmart.com/20180615/03d38fbdc2a044119463d5f748f84deb.jpg', null, '1', '2018-06-15 09:44:08', 'admin');
-INSERT INTO `cn_good_image` VALUES ('87', '102', 'http://img.cnadmart.com/20180615/bcfb8d1be5be4e4c8a69abf9dbcd6209.jpg', null, '1', '2018-06-15 09:44:08', 'admin');
-INSERT INTO `cn_good_image` VALUES ('88', '103', 'http://img.cnadmart.com/20180615/43ef3736473c426a985107461adc2eb0.png', null, '1', '2018-06-15 09:52:51', 'admin');
-INSERT INTO `cn_good_image` VALUES ('89', '104', 'http://img.cnadmart.com/20180615/82cdcc0727764e2c867bbd07f60db768.png', null, '1', '2018-06-15 09:58:50', 'admin');
-INSERT INTO `cn_good_image` VALUES ('90', '105', 'http://img.cnadmart.com/20180615/41b2b2d1a1d343878f36c96af2133e77.png', null, '1', '2018-06-15 10:06:18', 'admin');
-INSERT INTO `cn_good_image` VALUES ('91', '106', 'http://img.cnadmart.com/20180615/a3c4cf36849b4dfa94c11e114a486c11.png', null, '1', '2018-06-15 10:13:45', 'admin');
-INSERT INTO `cn_good_image` VALUES ('92', '107', 'http://img.cnadmart.com/20180615/9a8838c3bd9c4642b8173da67b2de24e.jpg', null, '1', '2018-06-15 10:21:06', 'admin');
-INSERT INTO `cn_good_image` VALUES ('93', '107', 'http://img.cnadmart.com/20180615/f86e7438870e4641918f7254f552e3e7.jpg', null, '1', '2018-06-15 10:21:06', 'admin');
-INSERT INTO `cn_good_image` VALUES ('100', '110', 'http://img.cnadmart.com/20180615/5799789db2eb466db946b0c0627c3bf4.jpg', null, '1', '2018-06-15 10:35:15', 'admin');
-INSERT INTO `cn_good_image` VALUES ('101', '110', 'http://img.cnadmart.com/20180615/abb9724a87824e74866167f873615208.jpg', null, '1', '2018-06-15 10:35:15', 'admin');
-INSERT INTO `cn_good_image` VALUES ('102', '110', 'http://img.cnadmart.com/20180615/645ca01131e94e9d9b705de6b98ba139.jpg', null, '1', '2018-06-15 10:35:15', 'admin');
-INSERT INTO `cn_good_image` VALUES ('103', '111', 'http://img.cnadmart.com/20180615/9d6279aebf6a41169c2a88161cb70af6.jpg', null, '1', '2018-06-15 10:59:33', 'admin');
-INSERT INTO `cn_good_image` VALUES ('104', '111', 'http://img.cnadmart.com/20180615/23db70c132c74e2685e1a1ba3899a0d7.jpg', null, '1', '2018-06-15 10:59:33', 'admin');
-INSERT INTO `cn_good_image` VALUES ('105', '111', 'http://img.cnadmart.com/20180615/9f8941b2b6fb4b229573c33cd8463218.jpg', null, '1', '2018-06-15 10:59:33', 'admin');
-INSERT INTO `cn_good_image` VALUES ('106', '111', 'http://img.cnadmart.com/20180615/171456d1007040098ac71db24aa42f5a.jpg', null, '1', '2018-06-15 10:59:33', 'admin');
-INSERT INTO `cn_good_image` VALUES ('107', '109', 'http://img.cnadmart.com/20180615/dbf11b4eeb8b405a92cddc7692ec89ae.jpg', null, null, '2018-06-15 11:04:49', 'admin');
-INSERT INTO `cn_good_image` VALUES ('108', '109', 'http://img.cnadmart.com/20180615/88dd8d42e38b4e4aaaf3016dda407a89.jpg', null, null, '2018-06-15 11:04:51', 'admin');
-INSERT INTO `cn_good_image` VALUES ('109', '112', 'http://img.cnadmart.com/20180615/d8756675376d4f019d3fbcf7a5db8944.jpg', null, '1', '2018-06-15 13:36:41', 'admin');
-INSERT INTO `cn_good_image` VALUES ('110', '112', 'http://img.cnadmart.com/20180615/f60d0f94f4ae47fda8f5fda0ae14f68b.jpg', null, '1', '2018-06-15 13:36:41', 'admin');
-INSERT INTO `cn_good_image` VALUES ('111', '112', 'http://img.cnadmart.com/20180615/4d20be8e6a404f198a21aff1cce577c8.jpg', null, '1', '2018-06-15 13:36:41', 'admin');
-INSERT INTO `cn_good_image` VALUES ('112', '113', 'http://img.cnadmart.com/20180615/7d4e669a2baf4e0392a7925aaf97d713.jpg', null, '1', '2018-06-15 13:48:32', 'admin');
-INSERT INTO `cn_good_image` VALUES ('113', '113', 'http://img.cnadmart.com/20180615/ebba240eb76e43f897bb656dc2eddd11.jpg', null, '1', '2018-06-15 13:48:32', 'admin');
-INSERT INTO `cn_good_image` VALUES ('114', '113', 'http://img.cnadmart.com/20180615/cc8db101ad4f4c08a55d0fbfde2a9edf.jpg', null, '1', '2018-06-15 13:48:32', 'admin');
-INSERT INTO `cn_good_image` VALUES ('115', '114', 'http://img.cnadmart.com/20180615/ad68935909684ab1b4a94981e67e52b8.jpg', null, '1', '2018-06-15 13:55:04', 'admin');
-INSERT INTO `cn_good_image` VALUES ('116', '114', 'http://img.cnadmart.com/20180615/176ad0d6df074697a2824b8a163f3456.jpg', null, '1', '2018-06-15 13:55:04', 'admin');
-INSERT INTO `cn_good_image` VALUES ('117', '114', 'http://img.cnadmart.com/20180615/005905b7d1ec486cbbe5aca9b3db18d6.jpg', null, '1', '2018-06-15 13:55:04', 'admin');
-INSERT INTO `cn_good_image` VALUES ('118', '114', 'http://img.cnadmart.com/20180615/e10302c9a9674fb1946a22562177b913.jpg', null, '1', '2018-06-15 13:55:04', 'admin');
-INSERT INTO `cn_good_image` VALUES ('119', '115', 'http://img.cnadmart.com/20180615/c8d80393674f401a85256c4749bdb502.png', null, '1', '2018-06-15 14:03:58', 'admin');
-INSERT INTO `cn_good_image` VALUES ('120', '116', 'http://img.cnadmart.com/20180615/5dd16016db1f4b8797ab7d91b3cdb634.png', null, '1', '2018-06-15 14:09:31', 'admin');
-INSERT INTO `cn_good_image` VALUES ('121', '117', 'http://img.cnadmart.com/20180615/cda649d0258f45b6b5d26d51ce00a365.jpg', null, '1', '2018-06-15 14:38:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('122', '117', 'http://img.cnadmart.com/20180615/5309fed5808d4b479a84efd6ef9dacac.jpg', null, '1', '2018-06-15 14:38:54', 'admin');
-INSERT INTO `cn_good_image` VALUES ('123', '117', 'http://img.cnadmart.com/20180615/619c5d7b54cd45e4887e0b35db28df3a.jpg', null, '1', '2018-06-15 14:38:54', 'admin');
 INSERT INTO `cn_good_image` VALUES ('124', '118', 'http://img.cnadmart.com/20180615/f1b1f4a76e8044a685eb733d66d91da6.jpg', null, '1', '2018-06-15 15:17:42', 'admin');
 INSERT INTO `cn_good_image` VALUES ('125', '119', 'http://img.cnadmart.com/20180615/5f0776f5ef3545deabfe2a4ff3e8165a.jpg', null, '1', '2018-06-15 15:26:56', 'admin');
 INSERT INTO `cn_good_image` VALUES ('126', '119', 'http://img.cnadmart.com/20180615/31937d9447b14d5eabcea94aac4d92f6.jpg', null, '1', '2018-06-15 15:26:56', 'admin');
-INSERT INTO `cn_good_image` VALUES ('127', '119', 'http://img.cnadmart.com/20180615/0684620e420947e089392585416f1cf6.jpg', null, '1', '2018-06-15 15:26:56', 'admin');
 INSERT INTO `cn_good_image` VALUES ('128', '120', 'http://img.cnadmart.com/20180615/325d943071594572acc00f80eae68367.png', null, '1', '2018-06-15 15:31:09', 'admin');
 INSERT INTO `cn_good_image` VALUES ('129', '121', 'http://img.cnadmart.com/20180615/06dcb0dbe1374c2bb47e02d8730ca820.png', null, '1', '2018-06-15 15:34:20', 'admin');
 INSERT INTO `cn_good_image` VALUES ('130', '122', 'http://img.cnadmart.com/20180615/19cef6286cbc4e2eb39c1a47f80d4a12.jpg', null, '1', '2018-06-15 15:38:29', 'admin');
@@ -1017,14 +1036,13 @@ CREATE TABLE `cn_good_parameter` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`good_parameter_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='商品参数表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品参数表';
 
 -- ----------------------------
 -- Records of cn_good_parameter
 -- ----------------------------
-INSERT INTO `cn_good_parameter` VALUES ('1', '95', 'asd', '1', null, null, '2018-07-04 16:45:00', 'admin', null, null);
-INSERT INTO `cn_good_parameter` VALUES ('2', '95', '12', '123', null, null, '2018-07-04 16:45:00', 'admin', null, null);
-INSERT INTO `cn_good_parameter` VALUES ('3', '95', '12', '345423', null, null, '2018-07-04 16:45:00', 'admin', null, null);
+INSERT INTO `cn_good_parameter` VALUES ('1', '238', 'asfd', '1', null, null, '2018-07-10 15:26:29', 'admin', null, null);
+INSERT INTO `cn_good_parameter` VALUES ('2', '238', 'asdf', 'sdf', null, null, '2018-07-10 15:26:29', 'admin', null, null);
 
 -- ----------------------------
 -- Table structure for cn_good_spec_price
@@ -1041,18 +1059,11 @@ CREATE TABLE `cn_good_spec_price` (
   `sales_volume` varchar(50) DEFAULT '0' COMMENT '销售量',
   `status` varchar(50) DEFAULT '' COMMENT '状态 0无库存 1 上架 2 下架',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=613 DEFAULT CHARSET=utf8 COMMENT='规格价格表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规格价格表';
 
 -- ----------------------------
 -- Records of cn_good_spec_price
 -- ----------------------------
-INSERT INTO `cn_good_spec_price` VALUES ('597', '95', '1', '679', '2.00', '2', '', '2', '');
-INSERT INTO `cn_good_spec_price` VALUES ('598', '95', '2', '680', '2.00', '2', '', '2', '');
-INSERT INTO `cn_good_spec_price` VALUES ('599', '95', '4', '681', '3.00', '3', '', '3', '');
-INSERT INTO `cn_good_spec_price` VALUES ('609', '214', 'b,2', '688,690', '3.00', '2', '', '2', '');
-INSERT INTO `cn_good_spec_price` VALUES ('610', '214', 'b,3', '688,691', '3.00', '2', '', '2', '');
-INSERT INTO `cn_good_spec_price` VALUES ('611', '214', 'c,2', '689,690', '3.00', '2', '', '2', '');
-INSERT INTO `cn_good_spec_price` VALUES ('612', '214', 'c,3', '689,691', '1.00', '1', '', '1', '');
 
 -- ----------------------------
 -- Table structure for cn_good_spec_value
@@ -1065,18 +1076,11 @@ CREATE TABLE `cn_good_spec_value` (
   `spec_value` varchar(50) NOT NULL COMMENT '商品规格值',
   `status` tinyint(1) DEFAULT '1' COMMENT '使用状态（0使用 1未使用）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=692 DEFAULT CHARSET=utf8 COMMENT='商品规格值表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品规格值表';
 
 -- ----------------------------
 -- Records of cn_good_spec_value
 -- ----------------------------
-INSERT INTO `cn_good_spec_value` VALUES ('679', '95', '25', '1', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('680', '95', '25', '2', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('681', '95', '25', '4', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('688', '214', '26', 'b', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('689', '214', '26', 'c', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('690', '214', '27', '2', '1');
-INSERT INTO `cn_good_spec_value` VALUES ('691', '214', '27', '3', '1');
 
 -- ----------------------------
 -- Table structure for cn_news
@@ -1297,12 +1301,11 @@ CREATE TABLE `cn_user` (
   `idcard_front_img` varchar(200) DEFAULT NULL COMMENT '身份证正面照',
   `idcard_back_img` varchar(200) DEFAULT NULL COMMENT '身份证反面照',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of cn_user
 -- ----------------------------
-INSERT INTO `cn_user` VALUES ('8', null, null, '13485722069', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, '13485722069', null, '0', '2018-06-26', null, '', null, null, '0', '2018-06-09 09:05:16', null, '2018-06-30 09:44:57', 'admin', null, null);
 INSERT INTO `cn_user` VALUES ('9', null, null, '17682153207', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, 'Jack ', null, null, null, null, 'http://img.cnadmart.com/FqiRJH3fOPGLvTN-5xtXR5Eia87D.jpeg', null, null, '0', '2018-06-11 17:13:42', null, '2018-06-26 17:22:28', 'admin', null, null);
 INSERT INTO `cn_user` VALUES ('10', null, null, '18155122471', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', null, '王老板', null, null, null, null, 'http://img.cnadmart.com/STORE/certification/015856820180702155819.jpeg', null, null, '0', '2018-06-11 18:27:41', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('11', null, null, '17755152862', '', null, '17755152862', null, null, null, null, '', null, null, '0', '2018-06-22 11:00:07', null, null, null, null, null);
@@ -1318,6 +1321,7 @@ INSERT INTO `cn_user` VALUES ('20', null, null, '18214832895', '', null, '182148
 INSERT INTO `cn_user` VALUES ('21', null, null, '15609685001', '', null, '15609685001', null, null, null, null, '', '0', null, '0', '2018-06-27 09:42:19', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('22', null, null, '18734804160', '', null, null, null, null, null, null, '', '0', null, '0', '2018-06-27 11:03:52', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('23', null, null, '13033087652', '', null, '13033087652', null, null, null, null, '', '0', null, '0', '2018-06-29 15:34:03', null, null, null, null, null);
+INSERT INTO `cn_user` VALUES ('24', null, null, '18867532860', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, '18867532860', null, null, null, null, '', '0', null, '0', '2018-07-17 11:11:47', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -1477,7 +1481,8 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'Wl-081530789101559', '1530789845557', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'iZez0h0eg9m3spZ1532332863599', '1532404051091', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'Wl-081532402523596', '1532404056729', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -1653,13 +1658,14 @@ CREATE TABLE `sys_config` (
   `remark` varchar(500) DEFAULT NULL COMMENT '备注',
   PRIMARY KEY (`id`),
   UNIQUE KEY `param_key` (`param_key`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统配置信息表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COMMENT='系统配置信息表';
 
 -- ----------------------------
 -- Records of sys_config
 -- ----------------------------
 INSERT INTO `sys_config` VALUES ('1', 'CLOUD_STORAGE_CONFIG_KEY', '{\"type\":1,\"qiniuDomain\":\"http://img.test.com\",\"qiniuPrefix\":\"\",\"qiniuAccessKey\":\"test\",\"qiniuSecretKey\":\"bAE7MROdaMlz1qZZD3dlzEtj4SIiGYez66h8diMj\",\"qiniuBucketName\":\"img-cnadmart-com\",\"aliyunDomain\":\"\",\"aliyunPrefix\":\"\",\"aliyunEndPoint\":\"\",\"aliyunAccessKeyId\":\"\",\"aliyunAccessKeySecret\":\"\",\"aliyunBucketName\":\"\",\"qcloudDomain\":\"\",\"qcloudPrefix\":\"\",\"qcloudSecretId\":\"\",\"qcloudSecretKey\":\"\",\"qcloudBucketName\":\"\"}', '0', '云存储配置信息');
 INSERT INTO `sys_config` VALUES ('2', '3', '3', '1', '3');
+INSERT INTO `sys_config` VALUES ('3', '手动阀', '大师傅', '1', '阿发');
 
 -- ----------------------------
 -- Table structure for sys_dept
@@ -1672,12 +1678,12 @@ CREATE TABLE `sys_dept` (
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
-INSERT INTO `sys_dept` VALUES ('1', '0', '寝室长', '0', '0');
+INSERT INTO `sys_dept` VALUES ('1', '0', '寝室长', '1', '0');
 INSERT INTO `sys_dept` VALUES ('2', '1', '628二哥', '1', '0');
 INSERT INTO `sys_dept` VALUES ('3', '9', '628小四', '2', '0');
 INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', '0');
@@ -1686,8 +1692,24 @@ INSERT INTO `sys_dept` VALUES ('6', '0', null, '0', '-1');
 INSERT INTO `sys_dept` VALUES ('7', '0', '444', '44', '-1');
 INSERT INTO `sys_dept` VALUES ('8', '0', '628老大', '0', '0');
 INSERT INTO `sys_dept` VALUES ('9', '8', '628老五', '0', '0');
-INSERT INTO `sys_dept` VALUES ('10', '0', null, '0', '0');
-INSERT INTO `sys_dept` VALUES ('11', '0', 'alert(\"xss\");', '0', '0');
+INSERT INTO `sys_dept` VALUES ('10', '0', null, '0', '-1');
+INSERT INTO `sys_dept` VALUES ('11', '0', 'alert(\"xss\");', '0', '-1');
+INSERT INTO `sys_dept` VALUES ('12', '0', null, '0', '-1');
+INSERT INTO `sys_dept` VALUES ('13', '0', null, '0', '-1');
+INSERT INTO `sys_dept` VALUES ('14', '0', null, '0', '-1');
+INSERT INTO `sys_dept` VALUES ('15', '0', '区管理员', '0', '0');
+INSERT INTO `sys_dept` VALUES ('16', '15', '街道管理员', '0', '0');
+INSERT INTO `sys_dept` VALUES ('17', '0', '13111111111', '0', '0');
+INSERT INTO `sys_dept` VALUES ('18', '17', '234324', '0', '0');
+INSERT INTO `sys_dept` VALUES ('19', '0', '1', '2', '-1');
+INSERT INTO `sys_dept` VALUES ('20', '0', '1', '2', '-1');
+INSERT INTO `sys_dept` VALUES ('21', '0', '22', '0', '0');
+INSERT INTO `sys_dept` VALUES ('22', '0', '22', '0', '0');
+INSERT INTO `sys_dept` VALUES ('23', '0', '22', '0', '0');
+INSERT INTO `sys_dept` VALUES ('24', '0', '22', '0', '0');
+INSERT INTO `sys_dept` VALUES ('25', '1', '测试部门', '0', '0');
+INSERT INTO `sys_dept` VALUES ('26', '0', null, '0', '0');
+INSERT INTO `sys_dept` VALUES ('27', '18', null, '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -1709,9 +1731,9 @@ CREATE TABLE `sys_dict` (
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
-INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '女', '0', null, '0');
+INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '男', '0', null, '0');
 INSERT INTO `sys_dict` VALUES ('2', '性别', 'sex', '1', '男', '1', null, '0');
-INSERT INTO `sys_dict` VALUES ('3', '性别', 'sex', '2', '未知', '3', null, '0');
+INSERT INTO `sys_dict` VALUES ('3', '性别', 'sex', '2', '未知', '3', null, '-1');
 INSERT INTO `sys_dict` VALUES ('4', '性别	', 'sex', '4', '人妖', '4', null, '0');
 
 -- ----------------------------
@@ -1728,7 +1750,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=96 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -1828,6 +1850,172 @@ INSERT INTO `sys_log` VALUES ('92', 'admin', '删除菜单', 'com.freeter.module
 INSERT INTO `sys_log` VALUES ('93', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '0', '14.221.165.92', '2018-07-05 15:41:06');
 INSERT INTO `sys_log` VALUES ('94', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '0', '14.221.165.92', '2018-07-05 15:41:06');
 INSERT INTO `sys_log` VALUES ('95', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '22', '123.116.246.68', '2018-07-05 15:43:08');
+INSERT INTO `sys_log` VALUES ('96', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '7', '61.157.91.111', '2018-07-05 19:43:05');
+INSERT INTO `sys_log` VALUES ('97', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '0', '61.157.91.111', '2018-07-05 19:43:06');
+INSERT INTO `sys_log` VALUES ('98', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":1,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"系统管理\",\"type\":0,\"icon\":\"fa fa-cog\",\"orderNum\":0}', '3', '119.96.131.4', '2018-07-06 10:04:26');
+INSERT INTO `sys_log` VALUES ('99', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '0', '119.96.131.4', '2018-07-06 10:04:34');
+INSERT INTO `sys_log` VALUES ('100', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '0', '119.96.131.4', '2018-07-06 10:04:35');
+INSERT INTO `sys_log` VALUES ('101', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '0', '119.96.131.4', '2018-07-06 10:04:36');
+INSERT INTO `sys_log` VALUES ('102', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '41', '1.28.208.91', '2018-07-06 10:12:00');
+INSERT INTO `sys_log` VALUES ('103', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '25', '1.28.208.91', '2018-07-06 10:12:00');
+INSERT INTO `sys_log` VALUES ('104', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '17', '1.28.208.91', '2018-07-06 10:12:00');
+INSERT INTO `sys_log` VALUES ('105', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '17', '1.28.208.91', '2018-07-06 10:12:01');
+INSERT INTO `sys_log` VALUES ('106', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":3,\"username\":\"1234\",\"password\":\"d8fa115dcd2b0fd01e45000a1f7e3169ef4bbaf3ab1d1bbaeee3b1fc0afe09b3\",\"salt\":\"RWO7ai3RWuWrcXM0g8bW\",\"email\":\"123123@123.com\",\"mobile\":\"1122222222\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Jul 6, 2018 1:16:30 PM\",\"deptId\":4,\"deptName\":\"技术部\"}', '131', '61.161.250.218', '2018-07-06 13:16:31');
+INSERT INTO `sys_log` VALUES ('107', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[3]', '370', '0:0:0:0:0:0:0:1', '2018-07-06 13:54:07');
+INSERT INTO `sys_log` VALUES ('108', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '28', '183.14.28.120', '2018-07-06 14:19:43');
+INSERT INTO `sys_log` VALUES ('109', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin123\"', '33', '183.14.28.120', '2018-07-06 14:20:17');
+INSERT INTO `sys_log` VALUES ('110', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":4,\"username\":\"lyp\",\"password\":\"e13bbabc60e5f658896ce9bd921af55e589d4202053712bd0ccb77618d8e2689\",\"salt\":\"zCu0dxRQA9rpsSQVPxTk\",\"email\":\"123@qq.com\",\"mobile\":\"18675582025\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jul 6, 2018 5:52:21 PM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '263', '0:0:0:0:0:0:0:1', '2018-07-06 17:52:22');
+INSERT INTO `sys_log` VALUES ('111', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '193', '219.136.95.205', '2018-07-06 18:54:09');
+INSERT INTO `sys_log` VALUES ('112', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"\"}', '67', '219.136.95.205', '2018-07-06 18:54:18');
+INSERT INTO `sys_log` VALUES ('113', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[1]', '8', '112.117.164.116', '2018-07-06 20:33:23');
+INSERT INTO `sys_log` VALUES ('114', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[4]', '39', '112.117.164.116', '2018-07-06 20:33:28');
+INSERT INTO `sys_log` VALUES ('115', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":5,\"username\":\"11\",\"password\":\"83c0bc390c9fa3c3caf0b9c0a96ce2d7c9ad55256ff8b7d4f7d19a67cfe08483\",\"salt\":\"20Fy7bRKF0MPQw2viSv3\",\"email\":\"393253@aa.com\",\"mobile\":\"1598\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jul 6, 2018 11:09:29 PM\",\"deptId\":8,\"deptName\":\"628老大\"}', '78', '119.123.66.49', '2018-07-06 23:09:30');
+INSERT INTO `sys_log` VALUES ('116', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":0,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '81', '222.129.186.14', '2018-07-06 23:47:19');
+INSERT INTO `sys_log` VALUES ('117', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":77,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试\",\"type\":0,\"icon\":\"fa-bath\",\"orderNum\":0}', '369', '0:0:0:0:0:0:0:1', '2018-07-07 17:55:06');
+INSERT INTO `sys_log` VALUES ('118', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":77,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试\",\"type\":0,\"icon\":\"\",\"orderNum\":0}', '333', '0:0:0:0:0:0:0:1', '2018-07-07 17:57:52');
+INSERT INTO `sys_log` VALUES ('119', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":77,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试\",\"type\":0,\"icon\":\"fa fa-bath\",\"orderNum\":0}', '346', '0:0:0:0:0:0:0:1', '2018-07-07 17:59:40');
+INSERT INTO `sys_log` VALUES ('120', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":62,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"商品管理\",\"type\":0,\"icon\":\"fa fa-shopping-basket\",\"orderNum\":0}', '340', '0:0:0:0:0:0:0:1', '2018-07-07 18:00:41');
+INSERT INTO `sys_log` VALUES ('121', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[2]', '55', '14.23.9.60', '2018-07-07 20:27:14');
+INSERT INTO `sys_log` VALUES ('122', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[5]', '41', '14.23.9.60', '2018-07-07 20:27:19');
+INSERT INTO `sys_log` VALUES ('123', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[1]', '0', '14.23.9.60', '2018-07-07 20:27:22');
+INSERT INTO `sys_log` VALUES ('124', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"password\":\"6ae43fdda4413c365ce5974da2bf25daf2c5110ed13dfbe02cc2e6d9299ce70c\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '77', '14.23.9.60', '2018-07-07 20:27:39');
+INSERT INTO `sys_log` VALUES ('125', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"password\":\"e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '90', '14.23.9.60', '2018-07-07 20:28:25');
+INSERT INTO `sys_log` VALUES ('126', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":2,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"管理员管理\",\"url\":\"modules/sys/user.html\",\"type\":1,\"icon\":\"fa fa-user\",\"orderNum\":2}', '262', '0:0:0:0:0:0:0:1', '2018-07-08 00:00:04');
+INSERT INTO `sys_log` VALUES ('127', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '19', '122.97.174.162', '2018-07-08 08:49:12');
+INSERT INTO `sys_log` VALUES ('128', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":7,\"username\":\"cc\",\"password\":\"03344a56bd04d08b06369cb88785b34551ac918b21c2d680b4b3a2e257759a13\",\"salt\":\"4n4LK6qDliE561Eaprt7\",\"email\":\"cc@163.com\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jul 8, 2018 9:06:08 PM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '68', '183.192.13.237', '2018-07-08 21:06:09');
+INSERT INTO `sys_log` VALUES ('129', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":8,\"username\":\"test001\",\"password\":\"d6330029b3bccb83308424875155ffd3ebb6a4d95c43357dd7c0bd65332c2da9\",\"salt\":\"q2R4eOg7cPrO50JKwYI6\",\"email\":\"111225544@qq.com\",\"mobile\":\"15770900555\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jul 8, 2018 9:42:15 PM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '71', '220.112.121.154', '2018-07-08 21:42:16');
+INSERT INTO `sys_log` VALUES ('130', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '19', '1.192.214.168', '2018-07-09 08:44:20');
+INSERT INTO `sys_log` VALUES ('131', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '1', '119.97.224.2', '2018-07-09 08:49:30');
+INSERT INTO `sys_log` VALUES ('132', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '0', '119.97.224.2', '2018-07-09 08:49:31');
+INSERT INTO `sys_log` VALUES ('133', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '0', '119.97.224.2', '2018-07-09 08:49:32');
+INSERT INTO `sys_log` VALUES ('134', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '0', '119.97.224.2', '2018-07-09 08:49:32');
+INSERT INTO `sys_log` VALUES ('135', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '0', '119.97.224.2', '2018-07-09 08:49:33');
+INSERT INTO `sys_log` VALUES ('136', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":15,\"parentId\":2,\"parentName\":\"管理员管理\",\"name\":\"查看\",\"perms\":\"sys:user:list,sys:user:info\",\"type\":0,\"orderNum\":0}', '0', '119.97.224.2', '2018-07-09 08:49:33');
+INSERT INTO `sys_log` VALUES ('137', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"2\"', '54', '36.7.67.84', '2018-07-09 14:28:45');
+INSERT INTO `sys_log` VALUES ('138', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:00');
+INSERT INTO `sys_log` VALUES ('139', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:09');
+INSERT INTO `sys_log` VALUES ('140', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:10');
+INSERT INTO `sys_log` VALUES ('141', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:40');
+INSERT INTO `sys_log` VALUES ('142', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:41');
+INSERT INTO `sys_log` VALUES ('143', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:41');
+INSERT INTO `sys_log` VALUES ('144', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:42');
+INSERT INTO `sys_log` VALUES ('145', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:42');
+INSERT INTO `sys_log` VALUES ('146', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:42');
+INSERT INTO `sys_log` VALUES ('147', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:42');
+INSERT INTO `sys_log` VALUES ('148', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:53');
+INSERT INTO `sys_log` VALUES ('149', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('150', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('151', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('152', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('153', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '1', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('154', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:54');
+INSERT INTO `sys_log` VALUES ('155', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:55');
+INSERT INTO `sys_log` VALUES ('156', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:55');
+INSERT INTO `sys_log` VALUES ('157', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:55');
+INSERT INTO `sys_log` VALUES ('158', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":0,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:39:58');
+INSERT INTO `sys_log` VALUES ('159', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":0,\"icon\":\"1231\",\"orderNum\":0}', '1', '183.226.132.38', '2018-07-09 23:40:10');
+INSERT INTO `sys_log` VALUES ('160', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":0,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:11');
+INSERT INTO `sys_log` VALUES ('161', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":0,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:11');
+INSERT INTO `sys_log` VALUES ('162', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":0,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:11');
+INSERT INTO `sys_log` VALUES ('163', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:13');
+INSERT INTO `sys_log` VALUES ('164', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:13');
+INSERT INTO `sys_log` VALUES ('165', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:13');
+INSERT INTO `sys_log` VALUES ('166', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"2级菜单\",\"url\":\"123\",\"perms\":\"123\",\"type\":1,\"icon\":\"1231\",\"orderNum\":0}', '0', '183.226.132.38', '2018-07-09 23:40:13');
+INSERT INTO `sys_log` VALUES ('167', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":1,\"roleName\":\"管理员角色\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[1,2,15,16,17,18,3,19,20,21,22,4,23,24,25,26,70,71,72,73,74],\"deptIdList\":[1,2,4,5,14,16,18,19,20],\"createTime\":\"May 14, 2018 4:33:20 PM\"}', '291', '183.226.132.38', '2018-07-09 23:41:15');
+INSERT INTO `sys_log` VALUES ('168', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":9,\"username\":\"111\",\"password\":\"78fca66af83bd69548c2180c92f5655b70a2bc0adc4712904c67319b46f0bab8\",\"salt\":\"Vsi274BsRCLp38Ya9K73\",\"email\":\"123@123.com\",\"mobile\":\"123123123123\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Jul 10, 2018 8:48:02 AM\",\"deptId\":15,\"deptName\":\"区管理员\"}', '86', '175.10.25.181', '2018-07-10 08:48:03');
+INSERT INTO `sys_log` VALUES ('169', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试一下而已\",\"url\":\"a\",\"type\":1,\"orderNum\":0}', '0', '118.112.73.140', '2018-07-10 10:50:39');
+INSERT INTO `sys_log` VALUES ('170', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试一下而已\",\"url\":\"a\",\"type\":1,\"orderNum\":0}', '0', '118.112.73.140', '2018-07-10 10:50:42');
+INSERT INTO `sys_log` VALUES ('171', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试一下而已\",\"url\":\"a\",\"type\":1,\"orderNum\":0}', '0', '118.112.73.140', '2018-07-10 10:50:45');
+INSERT INTO `sys_log` VALUES ('172', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试一下而已\",\"url\":\"a\",\"type\":1,\"orderNum\":0}', '0', '118.112.73.140', '2018-07-10 10:50:46');
+INSERT INTO `sys_log` VALUES ('173', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"测试一下而已\",\"url\":\"a\",\"type\":1,\"orderNum\":0}', '0', '118.112.73.140', '2018-07-10 10:50:46');
+INSERT INTO `sys_log` VALUES ('174', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:02');
+INSERT INTO `sys_log` VALUES ('175', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:03');
+INSERT INTO `sys_log` VALUES ('176', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:03');
+INSERT INTO `sys_log` VALUES ('177', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:04');
+INSERT INTO `sys_log` VALUES ('178', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:04');
+INSERT INTO `sys_log` VALUES ('179', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '29', '0', '118.112.73.140', '2018-07-10 10:51:04');
+INSERT INTO `sys_log` VALUES ('180', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '55', '0', '118.112.73.140', '2018-07-10 11:11:15');
+INSERT INTO `sys_log` VALUES ('181', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '55', '0', '118.112.73.140', '2018-07-10 11:11:16');
+INSERT INTO `sys_log` VALUES ('182', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '55', '0', '118.112.73.140', '2018-07-10 11:11:16');
+INSERT INTO `sys_log` VALUES ('183', 'admin', '保存角色', 'com.freeter.modules.sys.controller.SysRoleController.save()', '{\"roleId\":3,\"roleName\":\"数据权限测试\",\"remark\":\"22\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[],\"deptIdList\":[2],\"createTime\":\"Jul 10, 2018 5:49:53 PM\"}', '91', '113.240.250.185', '2018-07-10 17:49:54');
+INSERT INTO `sys_log` VALUES ('184', 'admin', '保存角色', 'com.freeter.modules.sys.controller.SysRoleController.save()', '{\"roleId\":4,\"roleName\":\"数据权限测试\",\"remark\":\"22\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[],\"deptIdList\":[2],\"createTime\":\"Jul 10, 2018 5:50:12 PM\"}', '65', '113.240.250.185', '2018-07-10 17:50:13');
+INSERT INTO `sys_log` VALUES ('185', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":2,\"roleName\":\"加盟商\",\"deptId\":8,\"deptName\":\"628老大\",\"menuIdList\":[1,2,15,16,18,6,8,9,12,70,72,73],\"deptIdList\":[20,22],\"createTime\":\"Jun 7, 2018 4:29:40 PM\"}', '140', '121.234.7.65', '2018-07-11 11:40:01');
+INSERT INTO `sys_log` VALUES ('186', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"menuId\":84,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"广告位管理\",\"type\":0,\"orderNum\":0}', '200', '127.0.0.1', '2018-07-11 16:57:49');
+INSERT INTO `sys_log` VALUES ('187', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":85,\"parentId\":84,\"parentName\":\"广告位管理\",\"name\":\"广告位管理\",\"url\":\"modules/adverts/adverts.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6}', '353', '127.0.0.1', '2018-07-11 16:59:33');
+INSERT INTO `sys_log` VALUES ('188', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '90', '33', '127.0.0.1', '2018-07-11 17:01:26');
+INSERT INTO `sys_log` VALUES ('189', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '92', '321', '127.0.0.1', '2018-07-11 17:01:36');
+INSERT INTO `sys_log` VALUES ('190', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '92', '304', '127.0.0.1', '2018-07-11 17:01:36');
+INSERT INTO `sys_log` VALUES ('191', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '91', '285', '127.0.0.1', '2018-07-11 17:01:53');
+INSERT INTO `sys_log` VALUES ('192', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '93', '765', '127.0.0.1', '2018-07-11 17:02:17');
+INSERT INTO `sys_log` VALUES ('193', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '93', '252', '127.0.0.1', '2018-07-11 17:02:17');
+INSERT INTO `sys_log` VALUES ('194', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '94', '446', '127.0.0.1', '2018-07-11 17:02:32');
+INSERT INTO `sys_log` VALUES ('195', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '90', '329', '127.0.0.1', '2018-07-11 17:02:44');
+INSERT INTO `sys_log` VALUES ('196', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":95,\"parentId\":84,\"parentName\":\"广告位管理\",\"name\":\"广告位详情\",\"url\":\"modules/adverts/advertsdetail.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6}', '345', '127.0.0.1', '2018-07-11 17:03:08');
+INSERT INTO `sys_log` VALUES ('197', 'admin', '保存角色', 'com.freeter.modules.sys.controller.SysRoleController.save()', '{\"roleId\":5,\"roleName\":\"admin\",\"remark\":\"admin\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[1,4,23,24,25,26],\"deptIdList\":[],\"createTime\":\"Jul 11, 2018 9:55:58 PM\"}', '222', '49.221.62.112', '2018-07-11 21:55:59');
+INSERT INTO `sys_log` VALUES ('198', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":5,\"roleName\":\"admin\",\"remark\":\"admin\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[1,3,19,20,21,22,4,23,24,25,26],\"deptIdList\":[],\"createTime\":\"Jul 11, 2018 9:55:58 PM\"}', '142', '49.221.62.215', '2018-07-11 21:56:20');
+INSERT INTO `sys_log` VALUES ('199', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":10,\"username\":\"test123\",\"password\":\"bc65eef5f18219958fe00f0c811b222a89f3d08257be072536c32cfbc10c520d\",\"salt\":\"CJdy9dSFZenBYkCXcW0k\",\"email\":\"1212@11.com\",\"status\":1,\"roleIdList\":[5],\"createTime\":\"Jul 11, 2018 9:56:57 PM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '127', '49.221.62.112', '2018-07-11 21:56:57');
+INSERT INTO `sys_log` VALUES ('200', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '4', '119.139.199.192', '2018-07-12 14:30:36');
+INSERT INTO `sys_log` VALUES ('201', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '1', '119.139.199.192', '2018-07-12 14:30:37');
+INSERT INTO `sys_log` VALUES ('202', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '0', '119.139.199.192', '2018-07-12 14:30:37');
+INSERT INTO `sys_log` VALUES ('203', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '0', '119.139.199.192', '2018-07-12 14:30:37');
+INSERT INTO `sys_log` VALUES ('204', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '0', '119.139.199.192', '2018-07-12 14:30:37');
+INSERT INTO `sys_log` VALUES ('205', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '1', '0', '119.139.199.192', '2018-07-12 14:30:37');
+INSERT INTO `sys_log` VALUES ('206', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '62', '0', '119.139.199.192', '2018-07-12 14:30:40');
+INSERT INTO `sys_log` VALUES ('207', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '62', '0', '119.139.199.192', '2018-07-12 14:30:40');
+INSERT INTO `sys_log` VALUES ('208', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '62', '0', '119.139.199.192', '2018-07-12 14:30:41');
+INSERT INTO `sys_log` VALUES ('209', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '17', '0', '119.139.199.192', '2018-07-12 14:30:49');
+INSERT INTO `sys_log` VALUES ('210', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '17', '0', '119.139.199.192', '2018-07-12 14:30:49');
+INSERT INTO `sys_log` VALUES ('211', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '17', '0', '119.139.199.192', '2018-07-12 14:30:49');
+INSERT INTO `sys_log` VALUES ('212', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '17', '0', '119.139.199.192', '2018-07-12 14:30:49');
+INSERT INTO `sys_log` VALUES ('213', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[1,6,7,8,9,10]', '7', '221.215.31.50', '2018-07-12 14:31:49');
+INSERT INTO `sys_log` VALUES ('214', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":2,\"roleName\":\"加盟商\",\"deptId\":8,\"menuIdList\":[1,2,15,16,17,18,3,20,21,6,8,9,12,70,72,73],\"deptIdList\":[],\"createTime\":\"Jun 7, 2018 4:29:40 PM\"}', '326', '111.17.208.72', '2018-07-12 14:52:34');
+INSERT INTO `sys_log` VALUES ('215', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":0,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '224', '58.221.146.34', '2018-07-12 15:55:27');
+INSERT INTO `sys_log` VALUES ('216', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000000\",\"status\":1,\"roleIdList\":[1],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '70', '58.221.146.34', '2018-07-12 15:55:38');
+INSERT INTO `sys_log` VALUES ('217', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"212\"', '27', '183.14.28.195', '2018-07-12 16:30:10');
+INSERT INTO `sys_log` VALUES ('218', 'admin', '删除角色', 'com.freeter.modules.sys.controller.SysRoleController.delete()', '[1]', '90', '61.141.254.187', '2018-07-12 20:37:29');
+INSERT INTO `sys_log` VALUES ('219', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":76,\"parentName\":\"快递公司列表\",\"name\":\"快递下级\",\"url\":\"test\",\"type\":1,\"orderNum\":0}', '0', '223.98.173.151', '2018-07-13 09:25:06');
+INSERT INTO `sys_log` VALUES ('220', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":76,\"parentName\":\"快递公司列表\",\"name\":\"快递下级\",\"url\":\"test\",\"type\":1,\"orderNum\":0}', '0', '223.98.173.151', '2018-07-13 09:25:09');
+INSERT INTO `sys_log` VALUES ('221', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":77,\"parentName\":\"测试\",\"name\":\"test\",\"url\":\"test\",\"type\":1,\"orderNum\":0}', '0', '223.98.173.151', '2018-07-13 09:26:01');
+INSERT INTO `sys_log` VALUES ('222', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":77,\"parentName\":\"测试\",\"name\":\"test\",\"url\":\"test\",\"type\":0,\"orderNum\":0}', '0', '223.98.173.151', '2018-07-13 09:26:07');
+INSERT INTO `sys_log` VALUES ('223', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":77,\"parentName\":\"测试\",\"name\":\"test\",\"url\":\"test\",\"type\":2,\"orderNum\":0}', '0', '223.98.173.151', '2018-07-13 09:26:10');
+INSERT INTO `sys_log` VALUES ('224', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '51', '117.181.33.170', '2018-07-14 13:51:54');
+INSERT INTO `sys_log` VALUES ('225', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":1,\"username\":\"admin\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"root@cnadmart.com\",\"mobile\":\"136000001\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Nov 11, 2016 11:11:11 AM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '140', '122.238.71.8', '2018-07-15 15:19:55');
+INSERT INTO `sys_log` VALUES ('226', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":6,\"username\":\"test\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"6666@163.com\",\"mobile\":\"\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Jul 8, 2018 6:56:22 PM\",\"deptId\":1,\"deptName\":\"寝室长\"}', '48', '122.238.71.8', '2018-07-15 15:21:19');
+INSERT INTO `sys_log` VALUES ('227', 'admin', '保存配置', 'com.freeter.modules.sys.controller.SysConfigController.save()', '{\"id\":3,\"paramKey\":\"手动阀\",\"paramValue\":\"大师傅\",\"remark\":\"阿发\"}', '225', '113.122.114.198', '2018-07-17 16:46:31');
+INSERT INTO `sys_log` VALUES ('228', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '1', '36.7.84.213', '2018-07-18 09:15:57');
+INSERT INTO `sys_log` VALUES ('229', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:01');
+INSERT INTO `sys_log` VALUES ('230', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:07');
+INSERT INTO `sys_log` VALUES ('231', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:07');
+INSERT INTO `sys_log` VALUES ('232', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '1', '36.7.84.213', '2018-07-18 09:16:07');
+INSERT INTO `sys_log` VALUES ('233', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:07');
+INSERT INTO `sys_log` VALUES ('234', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:08');
+INSERT INTO `sys_log` VALUES ('235', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:08');
+INSERT INTO `sys_log` VALUES ('236', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:08');
+INSERT INTO `sys_log` VALUES ('237', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:08');
+INSERT INTO `sys_log` VALUES ('238', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:09');
+INSERT INTO `sys_log` VALUES ('239', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '1', '36.7.84.213', '2018-07-18 09:16:09');
+INSERT INTO `sys_log` VALUES ('240', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:09');
+INSERT INTO `sys_log` VALUES ('241', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:09');
+INSERT INTO `sys_log` VALUES ('242', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:09');
+INSERT INTO `sys_log` VALUES ('243', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:10');
+INSERT INTO `sys_log` VALUES ('244', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:10');
+INSERT INTO `sys_log` VALUES ('245', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:10');
+INSERT INTO `sys_log` VALUES ('246', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:10');
+INSERT INTO `sys_log` VALUES ('247', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:10');
+INSERT INTO `sys_log` VALUES ('248', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:11');
+INSERT INTO `sys_log` VALUES ('249', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"文件上传\",\"url\":\"modules/pc/11111.html\",\"perms\":\"sss\",\"type\":1,\"icon\":\"http://www.fontawesome.com.cn/faicons/\",\"orderNum\":0}', '0', '36.7.84.213', '2018-07-18 09:16:11');
+INSERT INTO `sys_log` VALUES ('250', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":2,\"roleName\":\"加盟商\",\"deptId\":16,\"deptName\":\"街道管理员\",\"menuIdList\":[1,2,15,16,17,18,3,20,21,6,8,9,12,70,72,73],\"deptIdList\":[],\"createTime\":\"Jun 7, 2018 4:29:40 PM\"}', '188', '119.62.105.157', '2018-07-18 10:41:20');
+INSERT INTO `sys_log` VALUES ('251', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '77', '367', '127.0.0.1', '2018-07-19 21:29:02');
+INSERT INTO `sys_log` VALUES ('252', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '85', '32', '127.0.0.1', '2018-07-19 21:29:12');
+INSERT INTO `sys_log` VALUES ('253', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '88', '276', '127.0.0.1', '2018-07-19 21:29:19');
+INSERT INTO `sys_log` VALUES ('254', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '86', '276', '127.0.0.1', '2018-07-19 21:29:30');
+INSERT INTO `sys_log` VALUES ('255', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '96', '275', '127.0.0.1', '2018-07-19 21:29:40');
+INSERT INTO `sys_log` VALUES ('256', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '97', '273', '127.0.0.1', '2018-07-19 21:29:54');
+INSERT INTO `sys_log` VALUES ('257', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '99', '278', '127.0.0.1', '2018-07-19 21:30:07');
+INSERT INTO `sys_log` VALUES ('258', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"menuId\":99,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"超级代码生成器\",\"url\":\"modules/sys/generator.html\",\"type\":1,\"orderNum\":0}', '266', '127.0.0.1', '2018-07-24 10:45:40');
+INSERT INTO `sys_log` VALUES ('259', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[7]', '43', '110.53.179.135', '2018-07-24 11:40:28');
+INSERT INTO `sys_log` VALUES ('260', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":9,\"username\":\"111111\",\"password\":\"57059743cd9f7da534707879fde5ce16691d25b646fa252829275a2e0ec88937\",\"salt\":\"Vsi274BsRCLp38Ya9K73\",\"email\":\"123@123.com\",\"mobile\":\"123123123123\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Jul 10, 2018 8:48:03 AM\",\"deptId\":15,\"deptName\":\"区管理员\"}', '152', '110.53.179.135', '2018-07-24 11:40:38');
+INSERT INTO `sys_log` VALUES ('261', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":11,\"username\":\"laox\",\"password\":\"18ce5d55331cbaa4fef3a4f8cc991cd544e03ddab0f54e76f1b93c4d83e0915f\",\"salt\":\"dMxkzLTW53yMQXuOZp7L\",\"email\":\"111111@qq.com\",\"mobile\":\"15114112231\",\"status\":1,\"roleIdList\":[2],\"createTime\":\"Jul 24, 2018 11:41:21 AM\",\"deptId\":4,\"deptName\":\"技术部\"}', '86', '110.53.179.135', '2018-07-24 11:41:22');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -1843,13 +2031,13 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=84 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
 -- ----------------------------
 INSERT INTO `sys_menu` VALUES ('1', '0', '系统管理', null, null, '0', 'fa fa-cog', '0');
-INSERT INTO `sys_menu` VALUES ('2', '1', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '1');
+INSERT INTO `sys_menu` VALUES ('2', '1', '管理员管理', 'modules/sys/user.html', null, '1', 'fa fa-user', '2');
 INSERT INTO `sys_menu` VALUES ('3', '1', '角色管理', 'modules/sys/role.html', null, '1', 'fa fa-user-secret', '2');
 INSERT INTO `sys_menu` VALUES ('4', '1', '菜单管理', 'modules/sys/menu.html', null, '1', 'fa fa-th-list', '3');
 INSERT INTO `sys_menu` VALUES ('5', '1', 'SQL监控', 'druid/sql.html', null, '1', 'fa fa-bug', '4');
@@ -1897,7 +2085,7 @@ INSERT INTO `sys_menu` VALUES ('58', '57', '查看', null, 'good:channel:list,go
 INSERT INTO `sys_menu` VALUES ('59', '57', '新增', null, 'good:channel:save', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('60', '57', '修改', null, 'good:channel:update', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('61', '57', '删除', null, 'good:channel:delete', '2', null, '6');
-INSERT INTO `sys_menu` VALUES ('62', '0', '商品管理', null, null, '0', null, '0');
+INSERT INTO `sys_menu` VALUES ('62', '0', '商品管理', null, null, '0', 'fa fa-shopping-basket', '0');
 INSERT INTO `sys_menu` VALUES ('63', '62', '商品发布', 'modules/good/good.html', 'good:good:list,good:good:info,good:good:save,good:good:update,good:good:delete', '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('64', '62', '商品规格', 'modules/good/categoryspec.html', 'good:categoryspec:list,good:categoryspec:info,good:categoryspec:save,good:categoryspec:update,good:categoryspec:delete', '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('70', '0', '订单管理', null, null, '0', null, '3');
@@ -1906,13 +2094,19 @@ INSERT INTO `sys_menu` VALUES ('72', '70', '订单发货', 'modules/order/orderS
 INSERT INTO `sys_menu` VALUES ('73', '70', '我的订单', 'modules/order/myOrderList.html', null, '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('74', '0', '快递公司管理', 'modules/expressCompany/expresscompany.html', null, '0', null, '4');
 INSERT INTO `sys_menu` VALUES ('76', '74', '快递公司列表', 'modules/expressCompany/expresscompany.html', 'expressCompany:expresscompany:save,expressCompany:expresscompany:update,expressCompany:expresscompany:delete,expressCompany:expresscompany:list', '1', null, '0');
-INSERT INTO `sys_menu` VALUES ('77', '0', '测试', null, null, '0', null, '0');
 INSERT INTO `sys_menu` VALUES ('78', '83', '用户管理', 'modules/user/user.html', null, '1', 'fa fa-file-code-o', '6');
 INSERT INTO `sys_menu` VALUES ('79', '78', '查看', null, 'user:user:list,user:user:info', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('80', '78', '新增', null, 'user:user:save', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('81', '78', '修改', null, 'user:user:update', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('82', '78', '删除', null, 'user:user:delete', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('83', '0', '会员管理', null, null, '0', null, '0');
+INSERT INTO `sys_menu` VALUES ('84', '0', '广告位管理', null, null, '0', null, '0');
+INSERT INTO `sys_menu` VALUES ('85', '84', '广告位管理', 'modules/adverts/adverts.html', null, '1', 'fa fa-file-code-o', '6');
+INSERT INTO `sys_menu` VALUES ('87', '85', '新增', null, 'adverts:adverts:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('89', '85', '删除', null, 'adverts:adverts:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('95', '84', '广告位详情', 'modules/adverts/advertsdetail.html', null, '1', 'fa fa-file-code-o', '6');
+INSERT INTO `sys_menu` VALUES ('98', '95', '修改', null, 'adverts:advertsdetail:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('99', '1', '超级代码生成器', 'modules/sys/generator.html', null, '1', null, '0');
 
 -- ----------------------------
 -- Table structure for sys_oss
@@ -1928,20 +2122,6 @@ CREATE TABLE `sys_oss` (
 -- ----------------------------
 -- Records of sys_oss
 -- ----------------------------
-INSERT INTO `sys_oss` VALUES ('4', 'http://img.cnadmart.com/20180605/f49f6d5cadd242568b4342ba7daa38c5.jpg', '2018-06-05 11:12:45');
-INSERT INTO `sys_oss` VALUES ('5', 'http://img.cnadmart.com/20180605/69f428161f4e4230b2db8f3b82c1c4ab.jpg', '2018-06-05 11:13:46');
-INSERT INTO `sys_oss` VALUES ('6', 'http://img.cnadmart.com/20180605/cb37514906b447f3bd624eef495712e6.png', '2018-06-05 11:21:35');
-INSERT INTO `sys_oss` VALUES ('7', 'http://img.cnadmart.com/20180605/5e11fdd394bb4cabb8d2e801dbd83392.png', '2018-06-05 11:23:56');
-INSERT INTO `sys_oss` VALUES ('8', 'http://img.cnadmart.com/20180605/b898e0d3be854dfa8123d3e1a742b3f0.png', '2018-06-05 11:24:25');
-INSERT INTO `sys_oss` VALUES ('9', 'http://img.cnadmart.com/20180605/cf57929da23c441e92f4fe6dc7dc8a6c.png', '2018-06-05 11:24:52');
-INSERT INTO `sys_oss` VALUES ('10', 'http://img.cnadmart.com/20180605/adfb58d3765745bd897a57200b7256b2.png', '2018-06-05 11:25:10');
-INSERT INTO `sys_oss` VALUES ('11', 'http://img.cnadmart.com/20180605/a02ac0cf95444cb2b0f8ddc11e17758f.jpg', '2018-06-05 11:30:50');
-INSERT INTO `sys_oss` VALUES ('12', 'http://img.cnadmart.com/20180605/dee36d3f398b45ac9678887e32f4b12a.png', '2018-06-05 11:31:02');
-INSERT INTO `sys_oss` VALUES ('13', 'http://img.cnadmart.com/20180605/25b4506d608c4f0eb76e9043d226c1d5.png', '2018-06-05 11:31:10');
-INSERT INTO `sys_oss` VALUES ('14', 'http://img.cnadmart.com/20180605/2ecbe903b4ce4eed97c507dce21d9bd0.png', '2018-06-05 11:32:31');
-INSERT INTO `sys_oss` VALUES ('15', 'http://img.cnadmart.com/20180605/6c92d0fcfeae43df9b4c1925d30e3f80.png', '2018-06-05 11:34:12');
-INSERT INTO `sys_oss` VALUES ('16', 'http://img.cnadmart.com/20180605/53ec3dad38c340a0ac973c7cd6480e15.png', '2018-06-05 11:34:37');
-INSERT INTO `sys_oss` VALUES ('17', 'http://img.cnadmart.com/20180605/abb5aab73a41473fa3a18fcbb0d63cd6.png', '2018-06-05 11:36:22');
 INSERT INTO `sys_oss` VALUES ('18', 'http://img.cnadmart.com/20180605/efdacdca39244d41b2f0e6cc7005c4f4.png', '2018-06-05 11:37:59');
 INSERT INTO `sys_oss` VALUES ('19', 'http://img.cnadmart.com/20180605/3a4a96fa3fe2430281d09aaeb9af03e7.png', '2018-06-05 11:41:48');
 INSERT INTO `sys_oss` VALUES ('20', 'http://img.cnadmart.com/20180605/ef4c4f9654cd4baea537e6b58d44b695.png', '2018-06-05 11:43:05');
@@ -1981,13 +2161,15 @@ CREATE TABLE `sys_role` (
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`role_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='角色';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='角色';
 
 -- ----------------------------
 -- Records of sys_role
 -- ----------------------------
-INSERT INTO `sys_role` VALUES ('1', '管理员角色', null, '1', '2018-05-14 16:33:20');
-INSERT INTO `sys_role` VALUES ('2', '加盟商', null, '8', '2018-06-07 16:29:40');
+INSERT INTO `sys_role` VALUES ('2', '加盟商', null, '16', '2018-06-07 16:29:40');
+INSERT INTO `sys_role` VALUES ('3', '数据权限测试', '22', '1', '2018-07-10 17:49:54');
+INSERT INTO `sys_role` VALUES ('4', '数据权限测试', '22', '1', '2018-07-10 17:50:13');
+INSERT INTO `sys_role` VALUES ('5', 'admin', 'admin', '1', '2018-07-11 21:55:58');
 
 -- ----------------------------
 -- Table structure for sys_role_dept
@@ -1998,11 +2180,13 @@ CREATE TABLE `sys_role_dept` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
+INSERT INTO `sys_role_dept` VALUES ('10', '3', '2');
+INSERT INTO `sys_role_dept` VALUES ('11', '4', '2');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -2013,35 +2197,38 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=75 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
 -- ----------------------------
-INSERT INTO `sys_role_menu` VALUES ('51', '1', '1');
-INSERT INTO `sys_role_menu` VALUES ('52', '1', '2');
-INSERT INTO `sys_role_menu` VALUES ('53', '1', '15');
-INSERT INTO `sys_role_menu` VALUES ('54', '1', '16');
-INSERT INTO `sys_role_menu` VALUES ('55', '1', '17');
-INSERT INTO `sys_role_menu` VALUES ('56', '1', '18');
-INSERT INTO `sys_role_menu` VALUES ('57', '1', '3');
-INSERT INTO `sys_role_menu` VALUES ('58', '1', '19');
-INSERT INTO `sys_role_menu` VALUES ('59', '1', '20');
-INSERT INTO `sys_role_menu` VALUES ('60', '1', '21');
-INSERT INTO `sys_role_menu` VALUES ('61', '1', '22');
-INSERT INTO `sys_role_menu` VALUES ('62', '1', '4');
-INSERT INTO `sys_role_menu` VALUES ('63', '1', '23');
-INSERT INTO `sys_role_menu` VALUES ('64', '1', '24');
-INSERT INTO `sys_role_menu` VALUES ('65', '1', '25');
-INSERT INTO `sys_role_menu` VALUES ('66', '1', '26');
-INSERT INTO `sys_role_menu` VALUES ('67', '1', '70');
-INSERT INTO `sys_role_menu` VALUES ('68', '1', '71');
-INSERT INTO `sys_role_menu` VALUES ('69', '1', '72');
-INSERT INTO `sys_role_menu` VALUES ('70', '1', '73');
-INSERT INTO `sys_role_menu` VALUES ('71', '1', '74');
-INSERT INTO `sys_role_menu` VALUES ('72', '2', '70');
-INSERT INTO `sys_role_menu` VALUES ('73', '2', '72');
-INSERT INTO `sys_role_menu` VALUES ('74', '2', '73');
+INSERT INTO `sys_role_menu` VALUES ('114', '5', '1');
+INSERT INTO `sys_role_menu` VALUES ('115', '5', '3');
+INSERT INTO `sys_role_menu` VALUES ('116', '5', '19');
+INSERT INTO `sys_role_menu` VALUES ('117', '5', '20');
+INSERT INTO `sys_role_menu` VALUES ('118', '5', '21');
+INSERT INTO `sys_role_menu` VALUES ('119', '5', '22');
+INSERT INTO `sys_role_menu` VALUES ('120', '5', '4');
+INSERT INTO `sys_role_menu` VALUES ('121', '5', '23');
+INSERT INTO `sys_role_menu` VALUES ('122', '5', '24');
+INSERT INTO `sys_role_menu` VALUES ('123', '5', '25');
+INSERT INTO `sys_role_menu` VALUES ('124', '5', '26');
+INSERT INTO `sys_role_menu` VALUES ('141', '2', '1');
+INSERT INTO `sys_role_menu` VALUES ('142', '2', '2');
+INSERT INTO `sys_role_menu` VALUES ('143', '2', '15');
+INSERT INTO `sys_role_menu` VALUES ('144', '2', '16');
+INSERT INTO `sys_role_menu` VALUES ('145', '2', '17');
+INSERT INTO `sys_role_menu` VALUES ('146', '2', '18');
+INSERT INTO `sys_role_menu` VALUES ('147', '2', '3');
+INSERT INTO `sys_role_menu` VALUES ('148', '2', '20');
+INSERT INTO `sys_role_menu` VALUES ('149', '2', '21');
+INSERT INTO `sys_role_menu` VALUES ('150', '2', '6');
+INSERT INTO `sys_role_menu` VALUES ('151', '2', '8');
+INSERT INTO `sys_role_menu` VALUES ('152', '2', '9');
+INSERT INTO `sys_role_menu` VALUES ('153', '2', '12');
+INSERT INTO `sys_role_menu` VALUES ('154', '2', '70');
+INSERT INTO `sys_role_menu` VALUES ('155', '2', '72');
+INSERT INTO `sys_role_menu` VALUES ('156', '2', '73');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -2059,13 +2246,17 @@ CREATE TABLE `sys_user` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`user_id`),
   UNIQUE KEY `username` (`username`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='系统用户';
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='系统用户';
 
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@cnadmart.com', '136000000', '1', '1', '2016-11-11 11:11:11');
-INSERT INTO `sys_user` VALUES ('2', 'fuyang', '2ba789379d577b4c649e8419393acd85124ab8da1ff8163e76848f34b37f7c48', 'mTN50NIevjz53gIMUuf7', '111@111.com', '1300001', '1', '9', '2018-06-07 16:31:27');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@cnadmart.com', '136000001', '1', '1', '2016-11-11 11:11:11');
+INSERT INTO `sys_user` VALUES ('6', 'test', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', '6666@163.com', null, '1', '1', '2018-07-08 18:56:22');
+INSERT INTO `sys_user` VALUES ('8', 'test001', 'd6330029b3bccb83308424875155ffd3ebb6a4d95c43357dd7c0bd65332c2da9', 'q2R4eOg7cPrO50JKwYI6', '111225544@qq.com', '15770900555', '1', '1', '2018-07-08 21:42:16');
+INSERT INTO `sys_user` VALUES ('9', '111111', '57059743cd9f7da534707879fde5ce16691d25b646fa252829275a2e0ec88937', 'Vsi274BsRCLp38Ya9K73', '123@123.com', '123123123123', '1', '15', '2018-07-10 08:48:03');
+INSERT INTO `sys_user` VALUES ('10', 'test123', 'bc65eef5f18219958fe00f0c811b222a89f3d08257be072536c32cfbc10c520d', 'CJdy9dSFZenBYkCXcW0k', '1212@11.com', null, '1', '1', '2018-07-11 21:56:57');
+INSERT INTO `sys_user` VALUES ('11', 'laox', '18ce5d55331cbaa4fef3a4f8cc991cd544e03ddab0f54e76f1b93c4d83e0915f', 'dMxkzLTW53yMQXuOZp7L', '111111@qq.com', '15114112231', '1', '4', '2018-07-24 11:41:22');
 
 -- ----------------------------
 -- Table structure for sys_user_role
@@ -2076,11 +2267,11 @@ CREATE TABLE `sys_user_role` (
   `user_id` bigint(20) DEFAULT NULL COMMENT '用户ID',
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8 COMMENT='用户与角色对应关系';
 
 -- ----------------------------
 -- Records of sys_user_role
 -- ----------------------------
 INSERT INTO `sys_user_role` VALUES ('3', '2', '2');
-INSERT INTO `sys_user_role` VALUES ('8', '3', '2');
-INSERT INTO `sys_user_role` VALUES ('9', '1', '1');
+INSERT INTO `sys_user_role` VALUES ('20', '10', '5');
+INSERT INTO `sys_user_role` VALUES ('21', '11', '2');

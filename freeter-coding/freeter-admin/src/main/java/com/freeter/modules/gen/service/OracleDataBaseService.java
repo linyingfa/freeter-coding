@@ -40,7 +40,7 @@ public class OracleDataBaseService extends DataBaseInfo {
 
 	@Override
 	public List<TableEntity> getTableList() {
-		List<TableEntity> tables = sysGeneratorDao.queryOracleTableList(null);
+		List<TableEntity> tables = sysGeneratorDao.queryOracleList(null);
 		 
 		 
 		tables.stream().forEach((tableInfo) -> {

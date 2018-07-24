@@ -19,14 +19,16 @@ import com.freeter.modules.gen.entity.TableEntity;
 @Mapper
 public interface SysGeneratorDao {
 	
-	List<Map<String, Object>> queryList(Map<String, Object> map);
+	List<TableEntity> queryList(Map<String, Object> map);
+	
+	List<TableEntity> queryOracleList(Map<String, Object> map);
 	
 	int queryTotal(Map<String, Object> map);
 	
-	Map<String, String> queryTable(String tableName);
+	int queryOracleTotal(Map<String, Object> map);
 	
-	List<Map<String, String>> queryColumns(String tableName);
-	
+	TableEntity queryTable(String tableName);
+		
 	List<ReferencedTable> queryReferenced(String tableName);
 	
 	String queryDatabaseName();
@@ -38,4 +40,6 @@ public interface SysGeneratorDao {
 	List<TableEntity> queryOracleTableList(Map<String, Object> map);
 	
 	List<ColumnEntity>  selectAllOracleColumns(String tableName);
+	
+	TableEntity queryOracleTable(String tableName);
 }

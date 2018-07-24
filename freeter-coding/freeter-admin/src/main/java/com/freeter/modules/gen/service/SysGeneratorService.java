@@ -1,18 +1,24 @@
 package com.freeter.modules.gen.service;
 
-import org.apache.commons.io.IOUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
-import com.freeter.modules.gen.dao.SysGeneratorDao;
-import com.freeter.modules.gen.entity.ReferencedTable;
-import com.freeter.modules.gen.utils.GenUtils;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.zip.ZipOutputStream;
+
+import javax.sql.DataSource;
+
+import org.apache.commons.io.IOUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.freeter.common.utils.SpringContextUtils;
+import com.freeter.modules.gen.dao.SysGeneratorDao;
+import com.freeter.modules.gen.entity.ColumnEntity;
+import com.freeter.modules.gen.entity.ReferencedTable;
+import com.freeter.modules.gen.entity.TableEntity;
+import com.freeter.modules.gen.utils.DocMapFactory;
+import com.freeter.modules.gen.utils.GenUtils;
 
 /**
  * 飞特超级代码生成器
@@ -26,39 +32,76 @@ public class SysGeneratorService {
 	@Autowired
 	private SysGeneratorDao sysGeneratorDao;
 
-	public List<Map<String, Object>> queryList(Map<String, Object> map) {
-		return sysGeneratorDao.queryList(map);
+	public List<TableEntity> queryList(Map<String, Object> map) {
+
+	
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.queryList(map);
+			}
+			Integer rnum = (Integer)map.get("offset")+
+					(Integer) map.get("limit");
+			map.put("rnum", rnum);
+			return sysGeneratorDao.queryOracleTableList(map);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	public int queryTotal(Map<String, Object> map) {
-		return sysGeneratorDao.queryTotal(map);
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.queryTotal(map);
+			}
+		return sysGeneratorDao.queryOracleTotal(map);
+		} catch (Exception e) {
+			return 0;
+		}
+		
 	}
 
-	public Map<String, String> queryTable(String tableName) {
-		return sysGeneratorDao.queryTable(tableName);
+	 
+	
+	public TableEntity queryTable(String tableName) {
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.queryTable(tableName);
+			}
+			return sysGeneratorDao.queryOracleTable(tableName);
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
-	public List<Map<String, String>> queryColumns(String tableName) {
-		return sysGeneratorDao.queryColumns(tableName);
+	public List<ColumnEntity> queryColumns(String tableName) {
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.selectAllColumns(tableName);
+
+			}
+			return	sysGeneratorDao.selectAllOracleColumns(tableName);
+		}catch (Exception e) {
+			return null;
+		}
 	}
- 
+
 	public List<ReferencedTable> queryReferenced(String tableName) {
 		return sysGeneratorDao.queryReferenced(tableName);
 	}
-	
+
 	public byte[] generatorCode(String[] tableNames) throws IOException {
 		ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
 		ZipOutputStream zip = new ZipOutputStream(outputStream);
 
 		for (String tableName : tableNames) {
 			// 查询表信息
-			Map<String, String> table = queryTable(tableName);
+			TableEntity table = queryTable(tableName);
 			// 查询列信息
-			List<Map<String, String>> columns = queryColumns(tableName);
-			//查询关联表的信息
-			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
+			List<ColumnEntity> columns = queryColumns(tableName);
+			// 查询关联表的信息
+			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorCode(table,listReferencedTable, columns, zip);
+			GenUtils.generatorCode(table, listReferencedTable, columns, zip);
 		}
 		IOUtils.closeQuietly(zip);
 		return outputStream.toByteArray();
@@ -68,13 +111,13 @@ public class SysGeneratorService {
 
 		for (String tableName : tableNames) {
 			// 查询表信息
-			Map<String, String> table = queryTable(tableName);
+			TableEntity table = queryTable(tableName);
 			// 查询列信息
-			List<Map<String, String>> columns = queryColumns(tableName);
-			//查询关联表的信息
-			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
+			List<ColumnEntity> columns = queryColumns(tableName);
+			// 查询关联表的信息
+			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorAllCode(table,listReferencedTable, columns);
+			GenUtils.generatorAllCode(table, listReferencedTable, columns);
 		}
 	}
 
@@ -82,13 +125,13 @@ public class SysGeneratorService {
 
 		for (String tableName : tableNames) {
 			// 查询表信息
-			Map<String, String> table = queryTable(tableName);
+			TableEntity table = queryTable(tableName);
 			// 查询列信息
-			List<Map<String, String>> columns = queryColumns(tableName);
-			//查询关联表的信息
-			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
+			List<ColumnEntity> columns = queryColumns(tableName);
+			// 查询关联表的信息
+			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorApiCode(table,listReferencedTable, columns);
+			GenUtils.generatorApiCode(table, listReferencedTable, columns);
 		}
 	}
 
@@ -96,13 +139,13 @@ public class SysGeneratorService {
 
 		for (String tableName : tableNames) {
 			// 查询表信息
-			Map<String, String> table = queryTable(tableName);
+			TableEntity table = queryTable(tableName);
 			// 查询列信息
-			List<Map<String, String>> columns = queryColumns(tableName);
-			//查询关联表的信息
-			List<ReferencedTable> listReferencedTable =  queryReferenced(tableName);
+			List<ColumnEntity> columns = queryColumns(tableName);
+			// 查询关联表的信息
+			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
 			// 生成代码
-			GenUtils.updateCode(table,listReferencedTable, columns);
+			GenUtils.updateCode(table, listReferencedTable, columns);
 		}
 
 	}

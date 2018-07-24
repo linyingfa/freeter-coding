@@ -24,6 +24,7 @@ public class TableEntity {
 	//类名(第一个字母小写)，如：sys_user => sysUser
 	private String classname;
 	
+	private String engine;
 	//判断是否存在
 	private Boolean hasBigDecimal;
 	
@@ -77,6 +78,12 @@ public class TableEntity {
 	}
 	public void setListReferencedTable(List<ReferencedTable> listReferencedTable) {
 		this.listReferencedTable = listReferencedTable;
+	}
+	public String getEngine() {
+		return engine;
+	}
+	public void setEngine(String engine) {
+		this.engine = engine;
 	}
 	
 	

@@ -54,7 +54,7 @@ var vm = new Vue({
 			if(tableNames == null){
 				return ;
 			}
-			location.href = baseURL +"sys/generator/code?tables=" + JSON.stringify(tableNames);
+			location.href = baseURL +"sys/generator/code?tables=" +  encodeURIComponent(JSON.stringify(tableNames));
 		},
 		generatorAll: function() {
 			var tableNames = getSelectedRows();
@@ -62,7 +62,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否覆盖后端接口代码', function(){
-			 $.get( baseURL +"sys/generator/allcode?tables=" + JSON.stringify(tableNames), function(r){
+			 $.get( baseURL +"sys/generator/allcode?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                          vm.reload();
@@ -79,7 +79,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否覆盖移动端接口代码', function(){
-			 $.get( baseURL +"sys/generator/apicode?tables=" + JSON.stringify(tableNames), function(r){
+			 $.get( baseURL +"sys/generator/apicode?tables=" + encodeURIComponent(JSON.stringify(tableNames)), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                          vm.reload();
@@ -101,7 +101,7 @@ var vm = new Vue({
 			if(tableNames == null){
 				return ;
 			}
-			  $.get( baseURL +"sys/generator/update?tables=" + JSON.stringify(tableNames), function(r){
+			  $.get( baseURL +"sys/generator/update?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                           vm.reload();

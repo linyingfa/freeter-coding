@@ -20,6 +20,7 @@ import com.alibaba.fastjson.JSON;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.Query;
 import com.freeter.common.utils.R;
+import com.freeter.modules.gen.entity.TableEntity;
 import com.freeter.modules.gen.service.SysGeneratorService;
 import com.freeter.modules.gen.utils.DocMapFactory;
 import com.freeter.modules.gen.utils.FreemarkerUtils;
@@ -47,7 +48,7 @@ public class SysGeneratorController {
 	public R list(@RequestParam Map<String, Object> params){
 		//查询列表数据
 		Query query = new Query(params);
-		List<Map<String, Object>> list = sysGeneratorService.queryList(query);
+		List<TableEntity> list = sysGeneratorService.queryList(query);
 		int total = sysGeneratorService.queryTotal(query);
 		
 		PageUtils pageUtil = new PageUtils(list, total, query.getLimit(), query.getCurrPage());
