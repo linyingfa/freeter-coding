@@ -2,9 +2,12 @@
  
 **项目说明** 
 
-- 采用SpringBoot、MyBatis、Shiro、mybaits-plus黄金搭档。
+- 采用SpringBoot、MyBatis、Shiro、并整合了很多优秀的开源组如mybaits-plus、J2Cache。
 - 有单独的后台，还有单独的接口框架，可以实现前后端分离协作开发，还有火爆的商场功能模块，jwt
-- 提供了超级代码生成器，可以生成验证注解，swagger-ui注解，多表分页查询sql,只需编写30%左右代码，其余的代码交给系统自动生成，可快速完成开发任务
+- 提供了超级代码生成器，可以生成hibernate-validtor验证注解如非空字段的验证，swagger-ui注解，
+多表分页查询sql,后端模块代码 （控制器 到 视图），移动端模块代码（接口）只需编写30%左右代码，
+其余的代码交给系统自动生成，可快速完成开发任务。现已支持mysql、oracle代码生成。 
+飞特的目标是接近人工智能。
 - 支持MySQL、Oracle、SQL Server、PostgreSQL等主流数据库
 - 支持j2cache 二级缓存
 <br>
