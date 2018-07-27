@@ -31,7 +31,7 @@ import com.freeter.modules.gen.utils.GenUtils;
 public class SysGeneratorService {
 	@Autowired
 	private SysGeneratorDao sysGeneratorDao;
-
+	
 	public List<TableEntity> queryList(Map<String, Object> map) {
 
 	
