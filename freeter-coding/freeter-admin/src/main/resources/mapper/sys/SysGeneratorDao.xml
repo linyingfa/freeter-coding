@@ -71,12 +71,12 @@
 	</select>
 
 
-select ucc2.column_name,tableo.* from user_cons_columns ucc2,(SELECT uc.table_name, ucc.table_name outer_table,ucc.column_name outer_name,ucc.constraint_name from user_cons_columns ucc,user_constraints uc  where ucc.constraint_name = uc.r_constraint_name and constraint_type = 'R') tableo
-where ucc2.constraint_name = tableo.constraint_name and tableo.table_name = #{tableName}
 	<select id="queryOracleReferenced" resultType="com.freeter.modules.gen.entity.ReferencedTable">
-		select table_name tableName,column_name columnName,REFERENCED_TABLE_NAME referencedTableName,REFERENCED_column_name
-		 referencedColumnName from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where table_schema = (select
-		database()) and table_name = #{tableName} and constraint_name != 'PRIMARY'
+		
+		
+		select ucc2.column_name,tableo.* from user_cons_columns ucc2,(SELECT uc.table_name, ucc.table_name referenced_table_name,ucc.column_name referenced_column_name,ucc.constraint_name from user_cons_columns ucc,user_constraints uc  where ucc.constraint_name = uc.r_constraint_name and constraint_type = 'R') tableo
+where ucc2.constraint_name = tableo.constraint_name and tableo.table_name = #{tableName}
+
 	</select>
 	
 	<select id="queryReferenced" resultType="com.freeter.modules.gen.entity.ReferencedTable">
@@ -134,7 +134,7 @@ where ucc2.constraint_name = tableo.constraint_name and tableo.table_name = #{ta
 	and a.column_name = z.column_name) COLUMN_KEY from
 	( select t4.column_name ,
 	t1.comments comments,
-	data_default COLUMN_DEFAULT,
+	<!-- data_default COLUMN_DEFAULT, -->
 	nullable IS_NULLABLE,
 	data_type || '(' || data_length || ')' COLUMN_TYPE, data_type,data_length,
 	'' as EXTRA from user_col_comments t1, user_tab_columns t4 where

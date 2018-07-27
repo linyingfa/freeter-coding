@@ -31,7 +31,7 @@ public class ColumnEntity {
     private String isNullable;
     
     //默认值
-    private String columnDefault;
+    private Object columnDefault;
     
     //数据长度
     private String dataLength;
@@ -90,10 +90,10 @@ public class ColumnEntity {
 	public void setColumnKey(String columnKey) {
 		this.columnKey = columnKey;
 	}
-	public String getColumnDefault() {
-		return columnDefault;
+	public Object getColumnDefault() {
+		return  columnDefault;
 	}
-	public void setColumnDefault(String columnDefault) {
+	public void setColumnDefault(Object columnDefault) {
 		this.columnDefault = columnDefault;
 	}
 	public String getDataLength() {

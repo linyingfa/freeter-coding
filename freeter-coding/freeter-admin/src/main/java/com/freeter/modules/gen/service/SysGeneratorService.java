@@ -79,14 +79,23 @@ public class SysGeneratorService {
 				return sysGeneratorDao.selectAllColumns(tableName);
 
 			}
-			return	sysGeneratorDao.selectAllOracleColumns(tableName);
+			return sysGeneratorDao.selectAllOracleColumns(tableName);
+		//	return	sysGeneratorDao.selectAllOracleColumns(tableName);
 		}catch (Exception e) {
 			return null;
 		}
 	}
 
 	public List<ReferencedTable> queryReferenced(String tableName) {
-		return sysGeneratorDao.queryReferenced(tableName);
+		try {
+			if(DocMapFactory.isMysql()) {
+				return sysGeneratorDao.queryReferenced(tableName);
+
+			}
+		return sysGeneratorDao.queryOracleReferenced(tableName);
+		}catch (Exception e) {
+			return null;
+		}
 	}
 
 	public byte[] generatorCode(String[] tableNames) throws IOException {

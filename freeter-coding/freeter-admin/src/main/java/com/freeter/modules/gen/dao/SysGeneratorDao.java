@@ -31,6 +31,7 @@ public interface SysGeneratorDao {
 		
 	List<ReferencedTable> queryReferenced(String tableName);
 	
+	List<ReferencedTable> queryOracleReferenced(String tableName); 
 	String queryDatabaseName();
 	
 	List<TableEntity> queryTableList(Map<String, Object> map);
