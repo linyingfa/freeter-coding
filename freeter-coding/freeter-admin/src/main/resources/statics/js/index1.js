@@ -36,7 +36,7 @@ isquery=true;
 var vm = new Vue({
     el: '#layui_layout',
     data: {
-    	system:'飞特',
+    	system:'广品会',
         user: {},
         menuList: {},
         password: '',
