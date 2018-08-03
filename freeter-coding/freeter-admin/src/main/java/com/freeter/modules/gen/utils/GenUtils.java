@@ -242,10 +242,12 @@ public class GenUtils {
 				zip.putNextEntry(new ZipEntry(getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"))));
 				IOUtils.write(sw.toString(), zip, "UTF-8");
 				
-				IOUtils.closeQuietly(sw);
-				zip.closeEntry();
+				
 			} catch (IOException e) {
 				throw new RRException("渲染模板失败，表名：" + tableEntity.getTableName(), e);
+			}finally{
+				IOUtils.closeQuietly(sw);
+				zip.closeEntry();
 			}
 		}
 	}

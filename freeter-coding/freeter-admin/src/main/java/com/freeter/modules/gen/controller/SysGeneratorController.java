@@ -98,6 +98,7 @@ public class SysGeneratorController {
         response.setContentType("application/octet-stream; charset=UTF-8");  
   
         IOUtils.write(data, response.getOutputStream());  
+        IOUtils.closeQuietly( response.getOutputStream());
 	}
 	
 	/**
