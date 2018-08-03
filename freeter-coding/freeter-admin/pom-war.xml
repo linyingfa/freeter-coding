@@ -26,6 +26,16 @@
 			<version>3.2.0</version>
 		</dependency>
 		<dependency>
+			<groupId>com.freeter</groupId>
+			<artifactId>freeter-good</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
+			<groupId>com.freeter</groupId>
+			<artifactId>freeter-user</artifactId>
+			<version>3.2.0</version>
+		</dependency>
+		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
