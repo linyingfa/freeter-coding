@@ -37,15 +37,24 @@ public class SysPageController {
 
 	@RequestMapping(value = {"index.html"})
 	public String index(){
-		return "index1";
+		return "index2";
 	}
-	
+	/*
 	@RequestMapping(value = {"/"})
 	public String mobile(){
 		return "redirect:mobile/index.html";
+	}*/
+
+	@RequestMapping(value = {"/"})
+	public String mobile(){
+		return "redirect:index2.html";
 	}
-
-
+	
+	@RequestMapping("index2.html")
+	public String index2(){
+		return "index2";
+	}
+	
 	@RequestMapping("index1.html")
 	public String index1(){
 		return "index1";
