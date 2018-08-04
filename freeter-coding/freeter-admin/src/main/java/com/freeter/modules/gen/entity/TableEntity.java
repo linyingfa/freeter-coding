@@ -1,6 +1,11 @@
 package com.freeter.modules.gen.entity;
 
+import java.util.Date;
 import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 /**
  * 表数据
@@ -31,6 +36,9 @@ public class TableEntity {
 	//关联的字段
 	private List<ReferencedTable> listReferencedTable;
 	
+	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
+	@DateTimeFormat 	
+	private Date createTime;
 	public String getTableName() {
 		return tableName;
 	}
@@ -84,6 +92,12 @@ public class TableEntity {
 	}
 	public void setEngine(String engine) {
 		this.engine = engine;
+	}
+	public Date getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
 	}
 	
 	

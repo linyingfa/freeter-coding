@@ -80,16 +80,16 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
 		</dependency>
-			<dependency>
-    <groupId>net.oschina.j2cache</groupId>
-    <artifactId>j2cache-spring-boot2-starter</artifactId>
-     <exclusions>
-                <exclusion>
-                 <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-                </exclusion>
-       </exclusions>
-    <version>${j2cache-version}</version>
+		<dependency>
+			<groupId>net.oschina.j2cache</groupId>
+			<artifactId>j2cache-spring-boot2-starter</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>org.slf4j</groupId>
+					<artifactId>slf4j-simple</artifactId>
+				</exclusion>
+			</exclusions>
+			<version>${j2cache-version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -111,11 +111,13 @@
 		<!-- <dependency> <groupId>org.springframework.boot</groupId> <artifactId>spring-boot-devtools</artifactId> 
 			<optional>true</optional> </dependency> -->
 		<!-- oracle驱动 -->
-		<dependency >
-	 <groupId>com.oracle</groupId>  
-		<artifactId>ojdbc6</artifactId>
-		<version>${oracle.version}</version>
-		</dependency> 
+
+		<dependency>
+			<groupId>com.oracle</groupId>
+			<artifactId>ojdbc6</artifactId>
+			<version>${oracle.version}</version>
+		</dependency>
+
 		<!-- mssql驱动 -->
 		<!--<dependency> -->
 		<!--<groupId>com.microsoft.sqlserver</groupId> -->
@@ -194,7 +196,7 @@
 			<artifactId>jsoup</artifactId>
 			<version>1.9.2</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>io.springfox</groupId>
 			<artifactId>springfox-swagger2</artifactId>

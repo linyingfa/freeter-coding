@@ -3,8 +3,6 @@ package com.freeter.modules.gen.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.annotations.Mapper;
-
 import com.freeter.modules.gen.entity.ColumnEntity;
 import com.freeter.modules.gen.entity.ReferencedTable;
 import com.freeter.modules.gen.entity.TableEntity;
@@ -16,7 +14,6 @@ import com.freeter.modules.gen.entity.TableEntity;
  * @email 171998110@qq.com
  * @date 2018年06月20日 上午9:12:58
  */
-@Mapper
 public interface SysGeneratorDao {
 	
 	List<TableEntity> queryList(Map<String, Object> map);
