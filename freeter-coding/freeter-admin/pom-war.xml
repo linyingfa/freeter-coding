@@ -1,4 +1,6 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>com.freeter</groupId>
 		<artifactId>freeter-coding</artifactId>
@@ -17,6 +19,7 @@
 		<aliyun.oss.version>2.5.0</aliyun.oss.version>
 		<qcloud.cos.version>4.4</qcloud.cos.version>
 		<swagger.version>2.7.0</swagger.version>
+		<velocity.version>1.7</velocity.version>
 	</properties>
 
 	<dependencies>
@@ -110,7 +113,11 @@
 			<artifactId>hutool-all</artifactId>
 			<version>4.0.12</version>
 		</dependency>
-
+		<dependency>
+			<artifactId>velocity</artifactId>
+			<groupId>org.apache.velocity</groupId>
+			<version>${velocity.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.freeter</groupId>
@@ -119,7 +126,7 @@
 			<scope>system</scope>
 			<systemPath>${pom.basedir}/libs/FYOpenApi.jar</systemPath>
 		</dependency>
-		
+
 	</dependencies>
 
 	<build>
