@@ -23,6 +23,7 @@
 		<module>freeter-generator</module>
 		<module>freeter-good</module>
 		<module>freeter-user</module>
+		<module>freeter-job</module>
 	</modules>
 
 	<properties>
