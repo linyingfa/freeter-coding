@@ -31,8 +31,10 @@ freeter-coding 此项目会持续更新
 |--freeter-admin 后台管理 <br>
 |--freeter-api 移动端接口<br>
 |--freeter-common 公共模块<br>
-|--freeter-generator 代码生成<br>
-
+|--freeter-generator 代码生成已经重构并现已经集成到freeter-admin模块<br>
+|--freeter-good 商品模块<br>
+|--freeter-user 用户会员模块<br>
+|--freeter-job 定时任务模块<br>
 <br> 
 
  **商城模块** 
