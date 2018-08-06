@@ -20,7 +20,7 @@
 		<qcloud.cos.version>4.4</qcloud.cos.version>
 		<swagger.version>2.7.0</swagger.version>
 		<velocity.version>1.7</velocity.version>
-		
+
 	</properties>
 
 	<dependencies>
@@ -112,8 +112,8 @@
 		<dependency>
 			<artifactId>velocity</artifactId>
 			<groupId>org.apache.velocity</groupId>
- 		<version>${velocity.version}</version>
- 	</dependency>
+			<version>${velocity.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>com.freeter</groupId>
@@ -138,12 +138,8 @@
 			<includes> <include>**/*</include> </includes> </resource> &ndash;&gt; <resource> 
 			<directory>src/main/resources</directory> <targetPath>/com/freeter/</targetPath> 
 			</resource> </resources> -->
-		<!-- <resources>
-			<resource>
-				<directory>src/main/resources</directory>
-				<filtering>true</filtering>
-			</resource>
-		</resources> -->
+		<!-- <resources> <resource> <directory>src/main/resources</directory> <filtering>true</filtering> 
+			</resource> </resources> -->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
