@@ -26,8 +26,8 @@ import java.util.Properties;
 /**
  * 定时任务配置
  *
- * @author Mark sunlightcs@gmail.com
- * @since 2.0.0 2017-04-20
+ * @author freeter 171998110@qq.com
+ * @since   2018-08-06
  */
 @Configuration
 public class ScheduleConfig {
@@ -39,7 +39,7 @@ public class ScheduleConfig {
 
         //quartz参数
         Properties prop = new Properties();
-        prop.put("org.quartz.scheduler.instanceName", "RenrenScheduler");
+        prop.put("org.quartz.scheduler.instanceName", "FreeterScheduler");
         prop.put("org.quartz.scheduler.instanceId", "AUTO");
         //线程池配置
         prop.put("org.quartz.threadPool.class", "org.quartz.simpl.SimpleThreadPool");
@@ -51,9 +51,10 @@ public class ScheduleConfig {
         prop.put("org.quartz.jobStore.isClustered", "true");
         prop.put("org.quartz.jobStore.clusterCheckinInterval", "15000");
         prop.put("org.quartz.jobStore.maxMisfiresToHandleAtATime", "1");
-
+        prop.put("org.quartz.jobStore.txIsolationLevelSerializable", "true");
         prop.put("org.quartz.jobStore.misfireThreshold", "12000");
         prop.put("org.quartz.jobStore.tablePrefix", "QRTZ_");
+        //默认执行
         prop.put("org.quartz.jobStore.selectWithLockSQL", "SELECT * FROM {0}LOCKS UPDLOCK WHERE LOCK_NAME = ?");
 
         //PostgreSQL数据库，需要打开此注释
@@ -61,9 +62,9 @@ public class ScheduleConfig {
 
         factory.setQuartzProperties(prop);
 
-        factory.setSchedulerName("RenrenScheduler");
+        factory.setSchedulerName("FreeterScheduler");
         //延时启动
-        factory.setStartupDelay(30);
+        factory.setStartupDelay(20);
         factory.setApplicationContextSchedulerContextKey("applicationContextKey");
         //可选，QuartzScheduler 启动时更新己存在的Job，这样就不用每次修改targetObject后删除qrtz_job_details表对应记录了
         factory.setOverwriteExistingJobs(true);

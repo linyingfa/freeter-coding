@@ -22,6 +22,7 @@ import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.freeter.common.utils.Constant;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.Query;
+import com.freeter.common.utils.R;
 import com.freeter.modules.job.dao.ScheduleJobDao;
 import com.freeter.modules.job.entity.ScheduleJobEntity;
 import com.freeter.modules.job.service.ScheduleJobService;
@@ -37,6 +38,12 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.PostConstruct;
 import java.util.*;
 
+/**
+ * 定时任务配置BUG修改
+ *
+ * @author freeter 171998110@qq.com
+ * @since   2018-08-06
+ */
 @Service("scheduleJobService")
 public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, ScheduleJobEntity> implements ScheduleJobService {
 	@Autowired
@@ -85,9 +92,10 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 	@Override
 	@Transactional(rollbackFor = Exception.class)
 	public void update(ScheduleJobEntity scheduleJob) {
-        ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
-                
-        this.updateById(scheduleJob);
+		 
+         ScheduleUtils.updateScheduleJob(scheduler, scheduleJob);
+          
+        this.updateAllColumnById(scheduleJob);
     }
 
 	@Override
@@ -104,7 +112,7 @@ public class ScheduleJobServiceImpl extends ServiceImpl<ScheduleJobDao, Schedule
 	@Override
     public int updateBatch(Long[] jobIds, int status){
     	Map<String, Object> map = new HashMap<>();
-    	map.put("list", jobIds);
+    	map.put("jobIds", jobIds);
     	map.put("status", status);
     	return baseMapper.updateBatch(map);
     }

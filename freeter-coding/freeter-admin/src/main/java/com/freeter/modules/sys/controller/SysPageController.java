@@ -44,7 +44,11 @@ public class SysPageController {
 	public String mobile(){
 		return "redirect:mobile/index.html";
 	}*/
-
+	@RequestMapping("/{index}.html")
+	public String toIndex( @PathVariable("index") String index){
+		return index;
+	}
+	
 	@RequestMapping(value = {"/"})
 	public String mobile(){
 		return "redirect:index2.html";
