@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50720
 File Encoding         : 65001
 
-Date: 2018-07-24 11:47:18
+Date: 2018-08-06 14:35:46
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -159,15 +159,15 @@ CREATE TABLE `cn_adverts` (
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   `status` tinyint(1) DEFAULT '0' COMMENT '启用状态(0:开启，1：关闭)',
   PRIMARY KEY (`adverts_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='广告位表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='广告位表';
 
 -- ----------------------------
 -- Records of cn_adverts
 -- ----------------------------
-INSERT INTO `cn_adverts` VALUES ('2', '首页-热点广告', '315', '170', '电子商城首页热点广告位', '', '3', '6', null, '', '2018-07-16 16:35:20', 'admin', '1');
-INSERT INTO `cn_adverts` VALUES ('3', '首页-分栏广告', '234', '300', '电子商城首页分栏广告位', null, '2', '6', null, '', '2018-07-09 11:21:59', 'admin', '0');
-INSERT INTO `cn_adverts` VALUES ('4', null, null, null, null, null, '0', '0', '2018-07-23 16:13:20', 'admin', null, null, '0');
-INSERT INTO `cn_adverts` VALUES ('5', '1', '1', '1', '1', null, '0', '1', '2018-07-23 17:19:18', 'admin', null, null, '0');
+INSERT INTO `cn_adverts` VALUES ('1', '首页-轮播广告', '1226', '460', '电子商城首页轮播广告位', '', '6', '7', null, '', '2018-07-09 16:39:45', 'admin', '0');
+INSERT INTO `cn_adverts` VALUES ('2', '首页-热点广告', '315', '170', '电子商城首页热点广告位', '', '3', '6', null, '', '2018-07-11 17:36:13', 'admin', '0');
+INSERT INTO `cn_adverts` VALUES ('3', '首页-分类广告', '234', '300', '电子商城首页分类广告位', null, '2', '6', null, '', '2018-07-28 14:25:16', 'admin', '0');
+INSERT INTO `cn_adverts` VALUES ('4', '专题', null, null, null, null, '0', '0', '2018-07-28 14:56:43', 'admin', null, null, '0');
 
 -- ----------------------------
 -- Table structure for cn_adverts_detail
@@ -192,14 +192,14 @@ CREATE TABLE `cn_adverts_detail` (
   `end_time` datetime DEFAULT NULL COMMENT '广告结束时间',
   `content` varchar(255) DEFAULT NULL COMMENT '广告内容',
   PRIMARY KEY (`adverts_detail_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='广告位详情';
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COMMENT='广告位详情';
 
 -- ----------------------------
 -- Records of cn_adverts_detail
 -- ----------------------------
-INSERT INTO `cn_adverts_detail` VALUES ('22', '首页-轮播广告1', '1', 'qwewq', '1', null, '0', '0', null, '2018-07-10 17:39:37', 'admin', '2018-07-11 17:20:12', 'admin', 'w', '2018-07-19 00:00:00', '2018-08-23 00:00:00', 'qwe');
-INSERT INTO `cn_adverts_detail` VALUES ('23', '首页-轮播广告1', '1', 'wqeqw', '1', null, '1', '0', 'http://img.cnadmart.com/20180710/88d704b2929e46cfb4238cf446d87e21.jpg', '2018-07-10 17:39:53', 'admin', '2018-07-11 17:20:12', 'admin', 'qwe', '2018-07-11 00:00:00', '2018-08-09 00:00:00', '');
-INSERT INTO `cn_adverts_detail` VALUES ('24', '首页-轮播广告1', '1', '2', '1', null, '1', '0', 'http://img.cnadmart.com/20180710/f532e46bdde34b1787ead0ebb2fc54d5.jpg', '2018-07-10 17:40:58', 'admin', '2018-07-11 17:20:12', 'admin', '23', '2018-07-20 00:00:00', '2018-08-24 00:00:00', null);
+INSERT INTO `cn_adverts_detail` VALUES ('22', '首页-轮播广告', '1', 'qwewq', '1', null, '1', '0', 'http://img.cnadmart.com/20180801/f029977a0c6e4a7f89814fcddaf277d7.png', '2018-07-10 17:39:37', 'admin', '2018-08-01 17:34:28', 'admin', 'w', '2018-07-19 00:00:00', '2018-08-23 00:00:00', 'qwe');
+INSERT INTO `cn_adverts_detail` VALUES ('23', '首页-轮播广告', '1', 'wqeqw', '1', null, '1', '0', 'http://img.cnadmart.com/20180801/45f30a8ef9944b0ba97cc49d1cdda219.png', '2018-07-10 17:39:53', 'admin', '2018-08-01 17:29:48', 'admin', 'qwe', '2018-07-11 00:00:00', '2018-08-09 00:00:00', '');
+INSERT INTO `cn_adverts_detail` VALUES ('24', '首页-轮播广告', '1', '2', '1', null, '1', '0', 'http://img.cnadmart.com/20180801/ebb28004dc3b4f1da66998c47161561d.png', '2018-07-10 17:40:58', 'admin', '2018-08-01 17:31:19', 'admin', '23', '2018-07-20 00:00:00', '2018-08-24 00:00:00', '');
 
 -- ----------------------------
 -- Table structure for cn_cart
@@ -258,7 +258,7 @@ CREATE TABLE `cn_category` (
   KEY `sort_index` (`sort`) USING BTREE,
   KEY `nav_index` (`show_in_nav`) USING BTREE,
   KEY `hot_index` (`show_in_hot`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=164 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=171 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of cn_category
@@ -358,6 +358,13 @@ INSERT INTO `cn_category` VALUES ('157', '4', '胸卡', '0', '2', '1', '0', '1',
 INSERT INTO `cn_category` VALUES ('161', '2', null, '0', '2', '1', '0', '0', '0', '0', null, '2018-07-06 15:10:53', 'admin', null, null, 'test', 'test', 'test', 'test', '18');
 INSERT INTO `cn_category` VALUES ('162', '7', 'test', '0', '2', '1', '0', '0', '0', '0', null, '2018-07-06 15:12:51', 'admin', null, null, 'ee', 'ee', 'ee', 'ee', '2');
 INSERT INTO `cn_category` VALUES ('163', '0', '1', '0', '1', '1', '1', '0', '1', '1', null, '2018-07-17 10:08:25', 'admin', null, null, null, null, null, null, '38');
+INSERT INTO `cn_category` VALUES ('164', '0', 'bb', '0', '1', '1', '0', '0', '0', '0', null, '2018-07-25 14:31:22', 'admin', null, null, null, null, null, null, '40');
+INSERT INTO `cn_category` VALUES ('165', '163', '2', '0', '2', '1', '0', '0', '0', '0', null, '2018-07-25 14:31:50', 'admin', null, null, null, null, null, null, '40');
+INSERT INTO `cn_category` VALUES ('166', '164', 'cc', '0', '2', '1', '0', '0', '0', '0', null, '2018-07-25 14:32:40', 'admin', null, null, null, null, null, null, null);
+INSERT INTO `cn_category` VALUES ('167', '164', 'cc', '0', '2', '1', '0', '0', '0', '0', null, '2018-07-25 14:33:04', 'admin', null, null, null, null, null, null, null);
+INSERT INTO `cn_category` VALUES ('168', '0', '服装', '0', '1', '1', '1', '0', '1', '1', null, '2018-07-25 14:33:24', 'admin', null, null, null, null, null, null, '39');
+INSERT INTO `cn_category` VALUES ('169', '0', 'ceshi', '0', '1', '1', '1', '0', '1', '1', null, '2018-08-04 06:27:17', 'admin', null, null, 'dddd', 'dddd', 'dddd', 'dddd', '1');
+INSERT INTO `cn_category` VALUES ('170', '169', 'dfdfdfd', '0', '2', '1', '1', '1', '1', '1', null, '2018-08-04 06:28:47', 'admin', null, null, 'sdfsdfs', 'dfsdfsd', 'fsdfsdf', 'sdfsdfsdf', null);
 
 -- ----------------------------
 -- Table structure for cn_category_advert
@@ -401,7 +408,7 @@ CREATE TABLE `cn_category_good` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   `create_by` varchar(255) DEFAULT '' COMMENT '创建者',
   PRIMARY KEY (`category_good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=215 DEFAULT CHARSET=utf8 COMMENT='分类表';
+) ENGINE=InnoDB AUTO_INCREMENT=217 DEFAULT CHARSET=utf8 COMMENT='分类表';
 
 -- ----------------------------
 -- Records of cn_category_good
@@ -498,6 +505,8 @@ INSERT INTO `cn_category_good` VALUES ('211', '106', '亚力克板双色板KT板
 INSERT INTO `cn_category_good` VALUES ('212', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '244', '2018-07-11 11:10:58', 'admin');
 INSERT INTO `cn_category_good` VALUES ('213', '72', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '248', '2018-07-11 21:26:35', 'admin');
 INSERT INTO `cn_category_good` VALUES ('214', '71', '户外条幅布网格布车身贴单面透弱溶剂油画布弱溶剂PVC片弱溶剂背胶弱溶剂PP弱溶剂相纸玻璃贴墨水null黑白布旗帜布', '249', '2018-07-12 15:13:42', 'admin');
+INSERT INTO `cn_category_good` VALUES ('215', '166', 'cc', '256', '2018-07-25 14:32:52', 'admin');
+INSERT INTO `cn_category_good` VALUES ('216', '170', 'dfdfdfd', '270', '2018-08-04 06:30:20', 'admin');
 
 -- ----------------------------
 -- Table structure for cn_category_spec
@@ -511,14 +520,14 @@ CREATE TABLE `cn_category_spec` (
   `is_show` varchar(10) NOT NULL COMMENT '是否可见 1 可见 0不可见',
   `is_mobile_show` tinyint(1) DEFAULT NULL COMMENT '手机端是否可见 1可见 0不可见',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=90 DEFAULT CHARSET=utf8 COMMENT='分类规格表';
+) ENGINE=InnoDB AUTO_INCREMENT=91 DEFAULT CHARSET=utf8 COMMENT='分类规格表';
 
 -- ----------------------------
 -- Records of cn_category_spec
 -- ----------------------------
-INSERT INTO `cn_category_spec` VALUES ('24', '2', '款式', '0', '1', '1');
-INSERT INTO `cn_category_spec` VALUES ('25', '2', '规格', '0', '1', '1');
-INSERT INTO `cn_category_spec` VALUES ('26', '3', '款式', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('24', '168', '款式', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('25', '164', '规格', '0', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('26', '3', '款式', '0', '0', '1');
 INSERT INTO `cn_category_spec` VALUES ('27', '3', '规格', '0', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('28', '5', '款式', '1', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('29', '6', '款式', '1', '1', '1');
@@ -581,6 +590,7 @@ INSERT INTO `cn_category_spec` VALUES ('86', '4', 'test', '1', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('87', '5', 'test', '1', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('88', '6', 'test', '1', '1', '1');
 INSERT INTO `cn_category_spec` VALUES ('89', '7', 'test', '1', '1', '1');
+INSERT INTO `cn_category_spec` VALUES ('90', '163', '热热热', '0', '1', '1');
 
 -- ----------------------------
 -- Table structure for cn_channel
@@ -593,14 +603,23 @@ CREATE TABLE `cn_channel` (
   `is_show` tinyint(1) DEFAULT '0' COMMENT '是否展示（0展示，1不展示）',
   `model` tinyint(1) DEFAULT NULL COMMENT '模式 1:商城 2：服务',
   PRIMARY KEY (`channel_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cn_channel
 -- ----------------------------
-INSERT INTO `cn_channel` VALUES ('38', '今日特卖', '1', '0', null);
-INSERT INTO `cn_channel` VALUES ('39', null, '0', '0', null);
-INSERT INTO `cn_channel` VALUES ('40', '联创', '0', '0', null);
+INSERT INTO `cn_channel` VALUES ('1', '广告器材', '1', '0', null);
+INSERT INTO `cn_channel` VALUES ('2', '素材/模板', '5', '0', null);
+INSERT INTO `cn_channel` VALUES ('7', '广告礼品', '6', '0', null);
+INSERT INTO `cn_channel` VALUES ('8', '广告制作', '3', '0', null);
+INSERT INTO `cn_channel` VALUES ('9', '广告发布', '4', '0', null);
+INSERT INTO `cn_channel` VALUES ('11', '广告金融', '11', '0', null);
+INSERT INTO `cn_channel` VALUES ('12', '商学院', '12', '0', null);
+INSERT INTO `cn_channel` VALUES ('13', '广告设计', '2', '0', null);
+INSERT INTO `cn_channel` VALUES ('14', '企业服务', '9', '0', null);
+INSERT INTO `cn_channel` VALUES ('15', '技术开发', '7', '0', null);
+INSERT INTO `cn_channel` VALUES ('16', '自助视频', '8', '0', null);
+INSERT INTO `cn_channel` VALUES ('17', '行业信息', '10', '0', null);
 
 -- ----------------------------
 -- Table structure for cn_express_company
@@ -611,15 +630,21 @@ CREATE TABLE `cn_express_company` (
   `company_number` varchar(255) DEFAULT NULL COMMENT '快递公司编号',
   `company_name` varchar(255) DEFAULT NULL COMMENT '快递公司名称',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cn_express_company
 -- ----------------------------
-INSERT INTO `cn_express_company` VALUES ('2', '0002', '顺风');
-INSERT INTO `cn_express_company` VALUES ('3', '111', '远达');
-INSERT INTO `cn_express_company` VALUES ('4', '123', '圆通');
-INSERT INTO `cn_express_company` VALUES ('5', '121', '122');
+INSERT INTO `cn_express_company` VALUES ('1', 'YTO', '圆通速递');
+INSERT INTO `cn_express_company` VALUES ('2', 'YZPY', '邮政平邮/小包');
+INSERT INTO `cn_express_company` VALUES ('3', 'STO', '申通快递');
+INSERT INTO `cn_express_company` VALUES ('4', 'BTWL', '百世快运');
+INSERT INTO `cn_express_company` VALUES ('5', 'EMS', 'EMS');
+INSERT INTO `cn_express_company` VALUES ('6', 'FAST', '快捷速递');
+INSERT INTO `cn_express_company` VALUES ('7', 'HHTT', '天天快递');
+INSERT INTO `cn_express_company` VALUES ('8', 'QFKD', '全峰快递');
+INSERT INTO `cn_express_company` VALUES ('9', 'SF', '顺丰快递');
+INSERT INTO `cn_express_company` VALUES ('10', 'YD', '韵达快递');
 
 -- ----------------------------
 -- Table structure for cn_good
@@ -654,14 +679,14 @@ CREATE TABLE `cn_good` (
   `mart_id` bigint(20) DEFAULT NULL COMMENT '商户id',
   `del_flag` tinyint(1) DEFAULT NULL,
   PRIMARY KEY (`good_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=255 DEFAULT CHARSET=utf8 COMMENT='商品表';
+) ENGINE=InnoDB AUTO_INCREMENT=271 DEFAULT CHARSET=utf8 COMMENT='商品表';
 
 -- ----------------------------
 -- Records of cn_good
 -- ----------------------------
 INSERT INTO `cn_good` VALUES ('116', 'X展架专用胶片', null, '6.50', '6.50', '', 'http://img.cnadmart.com/20180615/84704c2c79744e4d88d59e25e2f5a9c7.png', '0', '0', '0', '0', '0', '', null, '1', null, '', '', '', '2018-06-15 14:09:31', 'admin', null, '', 'admin', '2018-07-23 21:24:53', '1', null);
-INSERT INTO `cn_good` VALUES ('118', '防水写真布', null, '3.00', '3.00', '', 'http://img.cnadmart.com/20180615/37ee00c5e58c4a4e9fe9a8ef5f4bc115.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:17:42', 'admin', null, '', 'admin', '2018-07-16 11:29:26', '1', null);
-INSERT INTO `cn_good` VALUES ('119', '油画布', null, '7.00', '13.00', '', 'http://img.cnadmart.com/20180615/638f7d0642f84f2da1f4f5d7c91727d3.jpg', '0', '0', '0', '0', '1', '', '平方', '0', null, '', '', '', '2018-06-15 15:26:56', 'admin', null, '', 'admin', '2018-07-24 11:42:12', '1', null);
+INSERT INTO `cn_good` VALUES ('118', '防水写真布', null, '3.00', '3.00', '', 'http://img.cnadmart.com/20180615/37ee00c5e58c4a4e9fe9a8ef5f4bc115.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:17:42', 'admin', null, '', 'admin', '2018-07-27 15:06:43', '1', null);
+INSERT INTO `cn_good` VALUES ('119', '油画布', null, '7.00', '13.00', '', 'http://img.cnadmart.com/20180615/638f7d0642f84f2da1f4f5d7c91727d3.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:26:56', 'admin', null, '', 'admin', '2018-07-24 17:12:32', '1', null);
 INSERT INTO `cn_good` VALUES ('120', '防水艺术布', null, '5.00', '5.00', '', 'http://img.cnadmart.com/20180615/4d721bdacc6840728cc715d58d89a839.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:31:09', 'admin', null, '', 'admin', '2018-06-15 15:31:53', '1', null);
 INSERT INTO `cn_good` VALUES ('121', '防水棉质油画布', null, '15.00', '15.00', '', 'http://img.cnadmart.com/20180615/c4c17fd4aa9d40d29f4908a0d8f0673b.png', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:34:20', 'admin', null, '', 'admin', '2018-07-17 18:23:27', '1', null);
 INSERT INTO `cn_good` VALUES ('122', '天花软膜', null, '3.30', '3.30', '', 'http://img.cnadmart.com/20180615/3076feafdd74414e8116fb139553368c.jpg', '0', '0', '0', '0', '1', '', '平方', '1', null, '', '', '', '2018-06-15 15:38:29', 'admin', null, '', 'admin', '2018-06-19 08:57:46', '1', null);
@@ -678,7 +703,7 @@ INSERT INTO `cn_good` VALUES ('136', '卡布灯箱电源', null, '53.00', '60.00
 INSERT INTO `cn_good` VALUES ('137', '超薄灯箱电源', null, '15.00', '30.00', '', 'http://img.cnadmart.com/20180619/8f0946480ef548f8bef32d2ced65de4d.png', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:47:07', 'admin', null, '', 'admin', '2018-06-19 14:16:31', '1', null);
 INSERT INTO `cn_good` VALUES ('140', '贴片灯5730', null, '0.20', '0.24', '', 'http://img.cnadmart.com/20180619/05c1d120dc85442ca0dda9e6f55fd312.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:55:10', 'admin', null, '', 'admin', '2018-06-19 14:16:28', '1', null);
 INSERT INTO `cn_good` VALUES ('141', '贴片灯5054', null, '0.26', '0.29', '', 'http://img.cnadmart.com/20180619/2ebd50486b0e476791753706e04c069c.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:56:42', 'admin', null, '', 'admin', '2018-06-19 14:16:25', '1', null);
-INSERT INTO `cn_good` VALUES ('142', '穿孔灯', null, '0.10', '0.13', '', 'http://img.cnadmart.com/20180619/06d45b4e702047d8ace4b9993d6f38cc.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 13:59:45', 'admin', null, '', 'admin', '2018-06-19 14:16:19', '1', null);
+INSERT INTO `cn_good` VALUES ('142', '穿孔灯', null, '0.10', '0.13', '', 'http://img.cnadmart.com/20180619/06d45b4e702047d8ace4b9993d6f38cc.jpg', '0', '0', '0', '0', '0', '', '个', '1', null, '', '', '', '2018-06-19 13:59:45', 'admin', null, '', 'admin', '2018-07-25 11:05:07', '1', null);
 INSERT INTO `cn_good` VALUES ('143', '数码管', null, '12.00', '13.00', '', 'http://img.cnadmart.com/20180619/b9aa3acb9fec4a069ad8d475d78295a9.jpg', '0', '0', '0', '0', '1', '', '个', '1', null, '', '', '', '2018-06-19 14:07:38', 'admin', null, '', 'admin', '2018-07-16 11:32:32', '1', null);
 INSERT INTO `cn_good` VALUES ('145', 'KT板 布纹板（20张/包）', null, '9.00', '10.00', '', 'http://img.cnadmart.com/20180619/2a6f30734f1a4d7a88475bf32dd7e889.png', '0', '0', '0', '0', '1', '', '张', '1', null, '', '', '', '2018-06-19 14:12:19', 'admin', null, '', 'admin', '2018-06-19 14:13:13', '1', null);
 INSERT INTO `cn_good` VALUES ('146', 'KT板 单晶板（10张/包）', null, '9.00', '10.50', '', 'http://img.cnadmart.com/20180619/2206563a4ea446ac8f5e80db754a42b9.jpg', '0', '0', '0', '0', '1', '', '张', '1', null, '', '', '', '2018-06-19 14:15:35', 'admin', null, '', 'admin', '2018-06-19 14:16:11', '1', null);
@@ -762,13 +787,13 @@ INSERT INTO `cn_good` VALUES ('232', 'test', null, '0.00', '0.00', 'test', '', '
 INSERT INTO `cn_good` VALUES ('233', 'test', null, '0.00', '0.00', 'test', '', '1', '0', '0', '1', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-06 15:07:26', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('234', 'qwe', null, '0.00', '0.00', 'qwe', '', '1', '0', '0', '1', '0', '', 'qwe', '0', 'qwe', 'qwe', 'qwe', 'qwe', '2018-07-06 15:13:43', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('235', 'qwe', null, '0.00', '0.00', 'qwe', '', '1', '0', '0', '1', '0', '', 'qwe', '0', 'qwe', 'qwe', 'qwe', 'qwe', '2018-07-06 15:13:51', 'admin', null, '', '', null, '1', null);
-INSERT INTO `cn_good` VALUES ('236', '111', null, '0.00', '0.00', '111', '', '0', '0', '0', '0', '0', '', '111', '0', '11', '11', '111', '11111', '2018-07-06 17:44:29', 'admin', null, '', '', null, '1', null);
-INSERT INTO `cn_good` VALUES ('238', '测试', null, '10.00', '10.00', '111', '', '0', '0', '0', '0', '0', '', '1', '1', '测试11111111', '测试', '测试', '测试', '2018-07-08 23:59:24', 'admin', null, '', 'admin', '2018-07-24 11:42:00', '1', null);
+INSERT INTO `cn_good` VALUES ('236', '111', null, '0.00', '0.00', '111', '', '0', '0', '0', '0', '1', '', '111', '0', '11', '11', '111', '11111', '2018-07-06 17:44:29', 'admin', null, '', 'admin', '2018-07-26 10:04:39', '1', null);
+INSERT INTO `cn_good` VALUES ('238', '测试', null, '10.00', '10.00', '111', '', '0', '0', '0', '0', '0', '', '1', '1', '测试11111111', '测试', '测试', '测试', '2018-07-08 23:59:24', 'admin', null, '', 'admin', '2018-07-31 11:25:46', '1', null);
 INSERT INTO `cn_good` VALUES ('239', '123', null, '0.00', '0.00', '123123', '', '0', '0', '0', '0', '0', '', '123213', '0', '123', '123', '123', '123', '2018-07-09 15:16:02', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('240', '22', null, '0.00', '0.00', '222', '', '0', '0', '0', '0', '0', '', '2', '0', '233333333', '3432', '3243', '2432', '2018-07-09 15:28:25', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('242', 'hahahaa', null, '0.00', '0.00', 'hahahaa', '', '1', '0', '0', '0', '0', '', 'hahahaa', '0', 'hahahaa', 'hahahaa', 'hahahaa', 'hahahaa', '2018-07-09 15:44:24', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('243', '13', null, '0.00', '0.00', '123', '', '0', '0', '0', '0', '0', '', null, '0', null, '', '', '', '2018-07-10 17:29:10', 'admin', null, '', '', null, '1', null);
-INSERT INTO `cn_good` VALUES ('244', '111', null, '1.00', '1.00', '111', '', '0', '0', '0', '0', '0', '', '11', '1', '11', '11', '11', '11', '2018-07-11 11:10:58', 'admin', null, '', 'admin', '2018-07-12 22:11:26', '1', null);
+INSERT INTO `cn_good` VALUES ('244', '111', null, '1.00', '1.00', '111', '', '0', '0', '0', '0', '1', '', '11', '1', '11', '11', '11', '11', '2018-07-11 11:10:58', 'admin', null, '', 'admin', '2018-08-01 11:01:38', '1', null);
 INSERT INTO `cn_good` VALUES ('245', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:32:40', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('246', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:33:08', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('247', '测试', null, '0.00', '0.00', '咑大', '', '0', '0', '0', '0', '0', '', '盒', '0', '方法', '方法', '方法', '烦烦烦', '2018-07-11 16:33:18', 'admin', null, '', '', null, '1', null);
@@ -779,6 +804,22 @@ INSERT INTO `cn_good` VALUES ('251', 'adas', null, '0.00', '0.00', 'da', '', '1'
 INSERT INTO `cn_good` VALUES ('252', 'qe ', null, '0.00', '0.00', 'qweq', '', '0', '0', '0', '0', '0', '', 'qwe', '0', 'wqe', 'qwe', 'qwe', 'qwe', '2018-07-18 15:12:19', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('253', '啦啦', null, '0.00', '0.00', '啦啦啦啦啦啦啦啦啦啦啦啦', '', '1', '0', '0', '1', '0', '', '个', '0', '啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '2018-07-18 16:58:55', 'admin', null, '', '', null, '1', null);
 INSERT INTO `cn_good` VALUES ('254', '啦啦', null, '0.00', '0.00', '啦啦啦啦啦啦啦啦啦啦啦啦', '', '1', '0', '0', '1', '0', '', '个', '0', '啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '啦啦啦啦啦啦', '2018-07-18 16:59:09', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('255', '2', null, '0.00', '0.00', '3', '', '0', '0', '0', '0', '0', '', '4', '0', '5', '6', '7', '8', '2018-07-25 14:30:46', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('256', '2', null, '2.00', '2.00', '3', '', '0', '0', '0', '0', '0', '', '4', '1', '5', '6', '7', '8', '2018-07-25 14:32:52', 'admin', null, '', 'admin', '2018-07-25 14:33:33', '1', null);
+INSERT INTO `cn_good` VALUES ('257', 'hello', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:11:52', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('258', 'hello', null, '0.00', '0.00', '', '', '0', '0', '0', '0', '0', '', null, '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:11:59', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('259', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:07', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('260', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:32', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('261', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:32', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('262', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:35', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('263', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:42', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('264', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:52', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('265', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:12:59', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('266', 'hello', null, '0.00', '0.00', '333', '', '0', '0', '0', '0', '0', '', '1', '0', 'test', 'test', '222`wqwe', '3233', '2018-07-26 14:13:17', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('267', '1', null, '0.00', '0.00', '1', '', '0', '0', '0', '0', '0', '', null, '0', '1', '1', '1', '1', '2018-07-27 18:46:34', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('268', 'test', null, '0.00', '0.00', 'test', '', '0', '0', '0', '0', '0', '', 'test', '0', 'test', 'test', 'test', 'test', '2018-07-29 17:35:26', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('269', '23423', null, '0.00', '0.00', '2342', '', '0', '0', '0', '0', '0', '', '234', '0', '23423', '2342', '3423', '4234', '2018-07-29 20:33:59', 'admin', null, '', '', null, '1', null);
+INSERT INTO `cn_good` VALUES ('270', 'dsfsdfs', null, '0.00', '0.00', 'dfsdfsdfsd', '', '1', '0', '0', '1', '0', '', 'sdfsdf', '0', 'sdfsdf', 'sdfsdfsd', 'fsdfsdfsdf', 'sdfsdfsdf', '2018-08-04 06:30:20', 'admin', null, '', '', null, '1', null);
 
 -- ----------------------------
 -- Table structure for cn_good_attribute
@@ -796,7 +837,7 @@ CREATE TABLE `cn_good_attribute` (
   `favorite_number` bigint(20) DEFAULT '0' COMMENT '收藏数',
   `question_number` bigint(20) DEFAULT '0' COMMENT '提问数',
   PRIMARY KEY (`attribute_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
+) ENGINE=InnoDB AUTO_INCREMENT=61 DEFAULT CHARSET=utf8 COMMENT='商品属性表';
 
 -- ----------------------------
 -- Records of cn_good_attribute
@@ -815,6 +856,7 @@ INSERT INTO `cn_good_attribute` VALUES ('56', '238', '20', '2', '0', '0', '0', '
 INSERT INTO `cn_good_attribute` VALUES ('57', '241', '400', '4', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('58', '244', '1', '1', '0', '0', '0', '0.00', '0', '0');
 INSERT INTO `cn_good_attribute` VALUES ('59', '248', '1', '50', '0', '0', '0', '0.00', '0', '0');
+INSERT INTO `cn_good_attribute` VALUES ('60', '256', '1', '3', '0', '0', '0', '0.00', '0', '0');
 
 -- ----------------------------
 -- Table structure for cn_good_detail
@@ -853,9 +895,6 @@ CREATE TABLE `cn_good_image` (
 -- ----------------------------
 -- Records of cn_good_image
 -- ----------------------------
-INSERT INTO `cn_good_image` VALUES ('124', '118', 'http://img.cnadmart.com/20180615/f1b1f4a76e8044a685eb733d66d91da6.jpg', null, '1', '2018-06-15 15:17:42', 'admin');
-INSERT INTO `cn_good_image` VALUES ('125', '119', 'http://img.cnadmart.com/20180615/5f0776f5ef3545deabfe2a4ff3e8165a.jpg', null, '1', '2018-06-15 15:26:56', 'admin');
-INSERT INTO `cn_good_image` VALUES ('126', '119', 'http://img.cnadmart.com/20180615/31937d9447b14d5eabcea94aac4d92f6.jpg', null, '1', '2018-06-15 15:26:56', 'admin');
 INSERT INTO `cn_good_image` VALUES ('128', '120', 'http://img.cnadmart.com/20180615/325d943071594572acc00f80eae68367.png', null, '1', '2018-06-15 15:31:09', 'admin');
 INSERT INTO `cn_good_image` VALUES ('129', '121', 'http://img.cnadmart.com/20180615/06dcb0dbe1374c2bb47e02d8730ca820.png', null, '1', '2018-06-15 15:34:20', 'admin');
 INSERT INTO `cn_good_image` VALUES ('130', '122', 'http://img.cnadmart.com/20180615/19cef6286cbc4e2eb39c1a47f80d4a12.jpg', null, '1', '2018-06-15 15:38:29', 'admin');
@@ -1036,13 +1075,15 @@ CREATE TABLE `cn_good_parameter` (
   `update_time` datetime DEFAULT NULL COMMENT '更新时间',
   `update_by` varchar(64) CHARACTER SET utf8mb4 DEFAULT NULL COMMENT '更新者',
   PRIMARY KEY (`good_parameter_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品参数表';
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='商品参数表';
 
 -- ----------------------------
 -- Records of cn_good_parameter
 -- ----------------------------
 INSERT INTO `cn_good_parameter` VALUES ('1', '238', 'asfd', '1', null, null, '2018-07-10 15:26:29', 'admin', null, null);
 INSERT INTO `cn_good_parameter` VALUES ('2', '238', 'asdf', 'sdf', null, null, '2018-07-10 15:26:29', 'admin', null, null);
+INSERT INTO `cn_good_parameter` VALUES ('3', '116', '这些', '阿萨德', null, null, '2018-07-25 15:55:18', 'admin', null, null);
+INSERT INTO `cn_good_parameter` VALUES ('4', '116', '撒', 'as', null, null, '2018-07-25 15:55:18', 'admin', null, null);
 
 -- ----------------------------
 -- Table structure for cn_good_spec_price
@@ -1059,11 +1100,12 @@ CREATE TABLE `cn_good_spec_price` (
   `sales_volume` varchar(50) DEFAULT '0' COMMENT '销售量',
   `status` varchar(50) DEFAULT '' COMMENT '状态 0无库存 1 上架 2 下架',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='规格价格表';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='规格价格表';
 
 -- ----------------------------
 -- Records of cn_good_spec_price
 -- ----------------------------
+INSERT INTO `cn_good_spec_price` VALUES ('1', '256', '大小,怎么', '1,2', '2.00', '1', '', '03', '');
 
 -- ----------------------------
 -- Table structure for cn_good_spec_value
@@ -1076,11 +1118,13 @@ CREATE TABLE `cn_good_spec_value` (
   `spec_value` varchar(50) NOT NULL COMMENT '商品规格值',
   `status` tinyint(1) DEFAULT '1' COMMENT '使用状态（0使用 1未使用）',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商品规格值表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='商品规格值表';
 
 -- ----------------------------
 -- Records of cn_good_spec_value
 -- ----------------------------
+INSERT INTO `cn_good_spec_value` VALUES ('1', '256', '36', '大小', '1');
+INSERT INTO `cn_good_spec_value` VALUES ('2', '256', '37', '怎么', '1');
 
 -- ----------------------------
 -- Table structure for cn_news
@@ -1108,6 +1152,7 @@ DROP TABLE IF EXISTS `cn_order`;
 CREATE TABLE `cn_order` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
   `order_no` varchar(50) NOT NULL COMMENT '订单编号',
+  `parent_order_no` varchar(255) NOT NULL DEFAULT '0' COMMENT '父订单编号',
   `total_money` decimal(16,2) NOT NULL DEFAULT '0.00' COMMENT '订单总额',
   `order_status` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '订单状态 0:待支付 1:待支付关闭 2:已付款，待发货  3:待收货 4:已收货 5:待评价 6:申请退款 7:退款完成 8:已完成订单',
   `user_id` int(11) NOT NULL DEFAULT '1' COMMENT '用户id',
@@ -1133,31 +1178,218 @@ CREATE TABLE `cn_order` (
   `freight` decimal(10,0) DEFAULT NULL COMMENT '运费',
   `vir_del` int(10) DEFAULT '0' COMMENT '虚拟删除 0：未删除 1：删除',
   `consignor_id` int(11) DEFAULT NULL COMMENT '发货代理商id',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=151 DEFAULT CHARSET=utf8 COMMENT='订单主表';
+  `payment_method` tinyint(1) DEFAULT '0' COMMENT '付款方式 0：微信支付 1：支付宝支付',
+  `real_collection` decimal(11,2) NOT NULL DEFAULT '0.00' COMMENT '实收款',
+  `modify_reason` varchar(200) DEFAULT '' COMMENT '修改价格原因',
+  PRIMARY KEY (`id`),
+  KEY `order_no` (`order_no`) USING BTREE,
+  KEY `parent_order_no` (`parent_order_no`) USING BTREE,
+  KEY `user_id` (`user_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8 COMMENT='订单主表';
 
 -- ----------------------------
 -- Records of cn_order
 -- ----------------------------
-INSERT INTO `cn_order` VALUES ('132', '20180627103520f6ahi', '702.00', '1', '9', '2018-06-27 10:35:21', null, null, null, null, null, '上海市人民政府办公厅组织', '卢湾区', '上海市', '上海市', '李五', '147852', '17698522148', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('133', '20180627020101tzmlz', '75.00', '3', '10', '2018-06-27 14:01:02', null, '2018-06-30 15:12:15', null, null, null, '明发商业广场13楼', '包河区', '合肥市', '安徽省', '广品汇', '000000', '18888888888', '12345', 'YD4', '韵达快递', '1', null, null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('134', '20180627020213mgp3o', '328.00', '1', '22', '2018-06-27 14:02:13', null, null, null, null, null, '龙与虎', '延庆县', '县', '北京市', '嘛事', '653458', '15635856874', '0', '', null, null, null, null, '0', '1', null);
-INSERT INTO `cn_order` VALUES ('135', '20180627022041ubw3k', '1745.00', '3', '22', '2018-06-27 14:20:42', '2018-06-27 14:20:52', '2018-06-30 22:37:50', null, null, null, '今生今世看手机', '卢湾区', '上海市', '上海市', '卡夹', '805234', '18856582519', 'tttt', 'QFKD', '全峰快递', '1', null, null, '0', '1', '1');
-INSERT INTO `cn_order` VALUES ('136', '20180628090035eznfs', '1300.00', '0', '9', '2018-06-28 09:00:35', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '测试', '0', '0', null);
-INSERT INTO `cn_order` VALUES ('137', '20180628100445qvfaf', '584.00', '1', '9', '2018-06-28 10:04:58', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '20', '0', null);
-INSERT INTO `cn_order` VALUES ('138', '20180628043653r0oca', '2541.00', '3', '10', '2018-06-28 16:36:53', '2018-06-29 15:57:37', '2018-07-02 15:36:37', null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '11', 'EMS', 'EMS', '1', null, null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('139', '20180628044439nj8d1', '2112.00', '0', '13', '2018-06-28 16:44:40', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('140', '20180629025711udagv', '134.00', '3', '22', '2018-06-29 14:57:12', '2018-06-29 16:24:06', '2018-07-02 17:28:55', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '基本技能', 'EMS', 'EMS', '1', null, null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('141', '201806290257541e2f7', '114.00', '3', '22', '2018-06-29 14:57:55', '2018-06-29 16:30:30', '2018-06-29 16:32:30', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, '0', '123456', null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('142', '20180629025902qzzcw', '75.00', '3', '22', '2018-06-29 14:59:02', '2018-06-29 16:29:35', '2018-07-04 15:36:32', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, '0', '888', null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('143', '20180629025920puvly', '75.00', '0', '22', '2018-06-29 14:59:20', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('144', '20180629030145ka340', '130.00', '4', '22', '2018-06-29 15:01:46', '2018-06-29 15:02:59', '2018-06-29 15:03:47', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, '0', '123456', null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('145', '20180629041308lmyr8', '234.00', '3', '10', '2018-06-29 16:13:09', '2018-06-29 16:24:19', '2018-07-05 12:43:29', null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', 'sssssssss', 'QFKD', '全峰快递', '1', null, null, '0', '0', '1');
-INSERT INTO `cn_order` VALUES ('146', '20180629041736i12e0', '405.00', '0', '22', '2018-06-29 16:17:37', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('147', '20180629042435crv43', '468.00', '0', '10', '2018-06-29 16:24:35', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('148', '20180629042557xb43b', '75.00', '0', '22', '2018-06-29 16:25:58', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('149', '20180629090829ciyzz', '912.00', '0', '10', '2018-06-29 21:08:29', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null);
-INSERT INTO `cn_order` VALUES ('150', '20180630111829h7j0o', '234.00', '3', '22', '2018-06-30 11:18:30', '2018-06-30 11:18:36', '2018-07-05 16:51:15', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '11111111111', 'EMS', 'EMS', '1', null, null, '0', '0', '1');
+INSERT INTO `cn_order` VALUES ('132', '20180627103520f6ahi', '0', '702.00', '1', '9', '2018-06-27 10:35:21', null, null, '2018-07-19 14:26:22', null, null, '上海市人民政府办公厅组织', '卢湾区', '上海市', '上海市', '李五', '147852', '17698522148', '0', '', null, null, null, null, '0', '1', null, null, '702.00', null);
+INSERT INTO `cn_order` VALUES ('133', '20180627020101tzmlz', '0', '75.00', '4', '10', '2018-06-27 14:01:02', null, '2018-07-06 16:29:16', null, null, null, '明发商业广场13楼', '包河区', '合肥市', '安徽省', '广品汇', '000000', '18888888888', '84546', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '75.00', null);
+INSERT INTO `cn_order` VALUES ('134', '20180627020213mgp3o', '0', '328.00', '1', '22', '2018-06-27 14:02:13', null, null, null, null, null, '龙与虎', '延庆县', '县', '北京市', '嘛事', '653458', '15635856874', '0', '', null, null, null, null, '0', '1', null, null, '328.00', null);
+INSERT INTO `cn_order` VALUES ('135', '20180627022041ubw3k', '0', '1745.00', '2', '22', '2018-06-27 14:20:42', '2018-06-27 14:20:52', null, null, null, null, '今生今世看手机', '卢湾区', '上海市', '上海市', '卡夹', '805234', '18856582519', '0', '', null, null, null, null, '0', '1', null, null, '1745.00', null);
+INSERT INTO `cn_order` VALUES ('136', '20180628090035eznfs', '0', '1300.00', '4', '9', '2018-06-28 09:00:35', '2018-07-02 15:11:24', '2018-07-02 15:17:33', null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, '0', '17682153207', '测试', '0', '0', '1', null, '1300.00', null);
+INSERT INTO `cn_order` VALUES ('137', '20180628100445qvfaf', '0', '584.00', '1', '9', '2018-06-28 10:04:58', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '20', '0', null, null, '584.00', null);
+INSERT INTO `cn_order` VALUES ('138', '20180628043653r0oca', '0', '2541.00', '3', '10', '2018-06-28 16:36:53', '2018-06-29 15:57:37', '2018-07-19 17:37:52', null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '3101612437986', 'YD', '韵达快递', '1', null, null, '0', '0', '1', null, '2541.00', null);
+INSERT INTO `cn_order` VALUES ('139', '20180628044439nj8d1', '0', '2112.00', '0', '13', '2018-06-28 16:44:40', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '2112.00', null);
+INSERT INTO `cn_order` VALUES ('140', '20180629025711udagv', '0', '134.00', '2', '22', '2018-06-29 14:57:12', '2018-06-29 16:24:06', null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '134.00', null);
+INSERT INTO `cn_order` VALUES ('141', '201806290257541e2f7', '0', '114.00', '3', '22', '2018-06-29 14:57:55', '2018-06-29 16:30:30', '2018-06-29 16:32:30', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, '0', '123456', null, '0', '0', '1', null, '114.00', null);
+INSERT INTO `cn_order` VALUES ('142', '20180629025902qzzcw', '0', '75.00', '2', '22', '2018-06-29 14:59:02', '2018-06-29 16:29:35', null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '75.00', null);
+INSERT INTO `cn_order` VALUES ('143', '20180629025920puvly', '0', '75.00', '0', '22', '2018-06-29 14:59:20', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '75.00', null);
+INSERT INTO `cn_order` VALUES ('144', '20180629030145ka340', '0', '130.00', '4', '22', '2018-06-29 15:01:46', '2018-06-29 15:02:59', '2018-06-29 15:03:47', null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, '0', '123456', null, '0', '0', '1', null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('145', '20180629041308lmyr8', '0', '234.00', '3', '10', '2018-06-29 16:13:09', '2018-06-29 16:24:19', '2018-07-19 17:38:30', null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '7701180832430', 'STO', '申通快递', '1', null, null, '0', '0', '1', null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('146', '20180629041736i12e0', '0', '405.00', '0', '22', '2018-06-29 16:17:37', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '405.00', null);
+INSERT INTO `cn_order` VALUES ('147', '20180629042435crv43', '0', '468.00', '2', '10', '2018-06-29 16:24:35', '2018-07-02 17:03:11', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '468.00', null);
+INSERT INTO `cn_order` VALUES ('148', '20180629042557xb43b', '0', '75.00', '0', '22', '2018-06-29 16:25:58', null, null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '75.00', null);
+INSERT INTO `cn_order` VALUES ('149', '20180629090829ciyzz', '0', '912.00', '2', '10', '2018-06-29 21:08:29', '2018-07-02 17:07:24', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '912.00', null);
+INSERT INTO `cn_order` VALUES ('150', '20180630111829h7j0o', '0', '234.00', '2', '22', '2018-06-30 11:18:30', '2018-06-30 11:18:36', null, null, null, null, '静默', '大观区', '安庆市', '安徽省', '一周\nSOHO', '6582588', '18564804168', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('151', '20180630034929c13zj', '0', '234.00', '2', '10', '2018-06-30 15:49:29', '2018-07-02 17:30:33', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('152', '20180630040351hn6lh', '0', '468.00', '2', '10', '2018-06-30 16:03:52', '2018-07-02 17:33:55', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '468.00', null);
+INSERT INTO `cn_order` VALUES ('153', '20180630040439ftqwn', '0', '468.00', '2', '10', '2018-06-30 16:04:39', '2018-07-02 17:35:39', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '468.00', null);
+INSERT INTO `cn_order` VALUES ('154', '201806300406019wa73', '0', '234.00', '2', '10', '2018-06-30 16:06:01', '2018-07-02 17:46:04', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('155', '20180630044300f879q', '0', '468.00', '2', '10', '2018-06-30 16:43:00', '2018-07-02 17:46:26', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '468.00', null);
+INSERT INTO `cn_order` VALUES ('156', '201806300447260w8tu', '0', '234.00', '2', '10', '2018-06-30 16:47:26', '2018-07-02 17:46:47', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('157', '20180630045005xr62t', '0', '1714.00', '2', '10', '2018-06-30 16:50:06', '2018-07-06 11:49:13', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '1714.00', null);
+INSERT INTO `cn_order` VALUES ('158', '20180701105232wbf9s', '0', '176.00', '1', '9', '2018-07-01 22:52:32', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '176.00', null);
+INSERT INTO `cn_order` VALUES ('159', '20180702094152wnwzc', '0', '257.00', '4', '19', '2018-07-02 09:41:53', '2018-07-02 09:42:01', '2018-07-03 09:21:04', null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '6364554545343', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('160', '20180702094340s3wji', '0', '234.00', '1', '19', '2018-07-02 09:43:40', null, null, null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, null, null, null, '0', '1', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('161', '201807020149012lr8g', '0', '96.00', '4', '19', '2018-07-02 13:49:02', '2018-07-02 13:49:54', '2018-07-05 13:57:10', null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '898999', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '96.00', null);
+INSERT INTO `cn_order` VALUES ('162', '20180703085829xvf45', '0', '234.00', '4', '19', '2018-07-03 08:58:30', '2018-07-03 08:58:36', '2018-07-05 14:00:44', null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '898999', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('163', '20180703090753f7r70', '0', '234.00', '4', '19', '2018-07-03 09:07:53', '2018-07-03 09:08:05', '2018-07-06 10:05:38', null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, '0', '13256487598', null, '0', '0', '1', null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('164', '20180703090831mfk3w', '0', '234.00', '1', '19', '2018-07-03 09:08:32', null, null, null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, null, null, null, '0', '1', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('165', '20180703090836wfodz', '0', '234.00', '1', '19', '2018-07-03 09:08:36', null, null, null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('166', '20180703090931a5up2', '0', '234.00', '1', '19', '2018-07-03 09:09:32', null, null, null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('167', '20180703091020vpnlo', '0', '234.00', '1', '19', '2018-07-03 09:10:20', null, null, null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('168', '201807030912492rhao', '0', '234.00', '1', '9', '2018-07-03 09:12:49', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('169', '20180703102345j5wxq', '0', '234.00', '1', '9', '2018-07-03 10:23:45', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('170', '20180703102520tauhm', '0', '234.00', '1', '9', '2018-07-03 10:25:20', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('171', '201807031026087ivdp', '0', '234.00', '1', '9', '2018-07-03 10:26:09', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('172', '20180703102609u29jz', '0', '234.00', '1', '9', '2018-07-03 10:26:09', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('173', '201807031026453eg48', '0', '234.00', '1', '9', '2018-07-03 10:26:46', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('174', '20180703102744lyi1k', '0', '234.00', '1', '9', '2018-07-03 10:27:45', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('175', '20180703024716ew7zr', '0', '170.00', '1', '9', '2018-07-03 14:47:26', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '170.00', null);
+INSERT INTO `cn_order` VALUES ('176', '201807030541534wub8', '0', '257.00', '2', '11', '2018-07-03 17:41:53', '2018-07-03 17:42:08', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('177', '201807040854557dcca', '0', '257.00', '2', '11', '2018-07-04 08:54:55', '2018-07-04 08:55:07', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('178', '201807041025297dtbk', '0', '257.00', '2', '11', '2018-07-04 10:25:29', '2018-07-04 10:25:49', null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('179', '20180704110653va5qi', '0', '257.00', '2', '11', '2018-07-04 11:06:53', '2018-07-04 11:07:10', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('180', '20180704022044c3oht', '0', '554.00', '2', '11', '2018-07-04 14:20:44', '2018-07-04 14:21:02', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '554.00', null);
+INSERT INTO `cn_order` VALUES ('181', '20180705092515msv59', '0', '234.00', '1', '9', '2018-07-05 09:25:19', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('182', '2018070509441966psl', '0', '679.00', '1', '9', '2018-07-05 09:44:37', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '679.00', null);
+INSERT INTO `cn_order` VALUES ('183', '20180705094947offf5', '0', '177.00', '1', '9', '2018-07-05 09:49:50', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '177.00', null);
+INSERT INTO `cn_order` VALUES ('184', '201807050954549whpu', '0', '177.00', '1', '9', '2018-07-05 09:55:20', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '177.00', null);
+INSERT INTO `cn_order` VALUES ('185', '20180705095619j52n8', '201807050954549whpu', '12.00', '1', '9', '2018-07-05 09:56:23', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '12.00', null);
+INSERT INTO `cn_order` VALUES ('186', '201807050956364kty7', '201807050954549whpu', '165.00', '1', '9', '2018-07-05 09:56:37', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '订单提交测试', '24', '0', null, null, '165.00', null);
+INSERT INTO `cn_order` VALUES ('187', '20180705032439slgzx', '0', '885.00', '4', '10', '2018-07-05 15:24:50', '2018-07-05 16:26:14', '2018-07-05 16:29:08', null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '455454', 'YTO', '圆通速递', '1', null, '32144', '0', '0', '1', null, '885.00', null);
+INSERT INTO `cn_order` VALUES ('188', '20180705033542vixhu', '0', '169.00', '2', '11', '2018-07-05 15:35:43', '2018-07-05 15:35:56', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('189', '201807050351097m5t5', '0', '169.00', '2', '11', '2018-07-05 15:51:09', '2018-07-05 15:51:24', null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('190', '20180705045418akwxc', '0', '130.00', '4', '19', '2018-07-05 16:54:19', '2018-07-05 16:55:14', '2018-07-05 16:56:56', null, null, null, '那看看', '黄浦区', '上海市', '上海市', '马思宇', '135896', '18734804160', '01321', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('191', '20180705045831kn8eq', '0', '130.00', '1', '9', '2018-07-05 16:58:31', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('192', '20180705050503tkpnr', '0', '130.00', '1', '9', '2018-07-05 17:05:03', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('193', '20180705052045z2ax9', '0', '399.00', '1', '9', '2018-07-05 17:20:46', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '399.00', null);
+INSERT INTO `cn_order` VALUES ('194', '20180705052045139bn', '20180705052045z2ax9', '234.00', '1', '9', '2018-07-05 17:20:46', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('195', '20180705052045ngjsg', '20180705052045z2ax9', '165.00', '1', '9', '2018-07-05 17:20:46', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '165.00', null);
+INSERT INTO `cn_order` VALUES ('196', '20180705052835ojhqq', '0', '902.00', '1', '9', '2018-07-05 17:28:36', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '902.00', null);
+INSERT INTO `cn_order` VALUES ('197', '201807050528354adgw', '20180705052835ojhqq', '737.00', '1', '9', '2018-07-05 17:28:36', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('198', '20180705052835pkuyt', '20180705052835ojhqq', '165.00', '1', '9', '2018-07-05 17:28:36', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, '34253425', '0', '0', null, null, '165.00', null);
+INSERT INTO `cn_order` VALUES ('199', '201807050556431zpzp', '0', '3443.00', '0', '11', '2018-07-05 17:56:43', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '3443.00', null);
+INSERT INTO `cn_order` VALUES ('200', '20180705072327dhqzk', '20180705072251rja6b', '130.00', '0', '10', '2018-07-05 19:23:29', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '20170705', '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('201', '20180705072338kgrp2', '20180705072251rja6b', '165.00', '0', '10', '2018-07-05 19:23:39', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, '20170705', '0', '0', null, null, '165.00', null);
+INSERT INTO `cn_order` VALUES ('202', '20180706104944jke7z', '20180706104944ywpd5', '144.00', '0', '19', '2018-07-06 10:49:44', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '144.00', null);
+INSERT INTO `cn_order` VALUES ('203', '20180706104944nzd0p', '20180706104944ywpd5', '826.00', '0', '19', '2018-07-06 10:49:44', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '826.00', null);
+INSERT INTO `cn_order` VALUES ('204', '2018070610532007p34', '0', '130.00', '4', '19', '2018-07-06 10:53:21', '2018-07-06 10:53:28', '2018-07-06 13:41:43', null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '01', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('205', '20180706105819opjb6', '0', '538.00', '4', '9', '2018-07-06 10:58:20', '2018-07-06 10:59:00', '2018-07-07 09:05:45', null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, '0', '17682153207', null, '0', '0', '1', null, '538.00', null);
+INSERT INTO `cn_order` VALUES ('206', '20180706110058clg07', '201807061100586002r', '169.00', '0', '19', '2018-07-06 11:00:59', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('207', '20180706110058ol902', '201807061100586002r', '826.00', '0', '19', '2018-07-06 11:00:59', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '826.00', null);
+INSERT INTO `cn_order` VALUES ('208', '201807061105290gdym', '0', '130.00', '0', '19', '2018-07-06 11:05:30', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('209', '20180706110534khr9j', '0', '130.00', '0', '19', '2018-07-06 11:05:35', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('210', '201807060437187cr46', '0', '574.00', '2', '11', '2018-07-06 16:37:18', '2018-07-06 16:37:35', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '574.00', null);
+INSERT INTO `cn_order` VALUES ('211', '20180706044030av9pt', '0', '974.00', '2', '11', '2018-07-06 16:40:31', '2018-07-06 16:40:54', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '974.00', null);
+INSERT INTO `cn_order` VALUES ('212', '20180706044959aw8zs', '20180706044959yimv0', '234.00', '0', '11', '2018-07-06 16:49:59', null, null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('213', '20180706044959ou95g', '20180706044959yimv0', '740.00', '0', '11', '2018-07-06 16:49:59', null, null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '740.00', null);
+INSERT INTO `cn_order` VALUES ('214', '201807060517265ux9e', '2018070605172622qog', '257.00', '0', '11', '2018-07-06 17:17:27', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '257.00', null);
+INSERT INTO `cn_order` VALUES ('215', '20180706051727xqoyf', '2018070605172622qog', '651.00', '0', '11', '2018-07-06 17:17:27', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('216', '201807060530275xa80', '20180706053026i0ybp', '234.00', '2', '11', '2018-07-06 17:30:27', '2018-07-06 17:30:39', null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('217', '20180706053027o25iy', '20180706053026i0ybp', '651.00', '2', '11', '2018-07-06 17:30:27', '2018-07-06 17:30:39', null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('218', '20180707103846n6982', '0', '292.00', '0', '13', '2018-07-07 10:38:46', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '292.00', null);
+INSERT INTO `cn_order` VALUES ('219', '20180707104005sl554', '0', '169.00', '0', '13', '2018-07-07 10:40:06', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('220', '20180707104016u48i5', '0', '169.00', '0', '13', '2018-07-07 10:40:17', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('221', '201807071040239tvgd', '0', '246.00', '0', '13', '2018-07-07 10:40:24', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '246.00', null);
+INSERT INTO `cn_order` VALUES ('222', '20180707104045vgci0', '0', '234.00', '0', '8', '2018-07-07 10:40:45', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '2300001', '13000001111', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('223', '201807071040584r1x2', '0', '210.00', '0', '13', '2018-07-07 10:40:59', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '210.00', null);
+INSERT INTO `cn_order` VALUES ('224', '20180707104135wfx1d', '0', '651.00', '0', '13', '2018-07-07 10:41:35', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('225', '201807071042024b50t', '0', '829.00', '0', '13', '2018-07-07 10:42:02', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '829.00', null);
+INSERT INTO `cn_order` VALUES ('226', '20180707104301j0et2', '0', '651.00', '0', '8', '2018-07-07 10:43:02', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '2300001', '13000001111', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('227', '20180707104326m890w', '0', '169.00', '0', '13', '2018-07-07 10:43:27', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('228', '20180707104350a7ylq', '0', '651.00', '0', '8', '2018-07-07 10:43:51', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '2300001', '13000001111', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('229', '20180707104708mvcme', '0', '740.00', '0', '13', '2018-07-07 10:47:09', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '740.00', null);
+INSERT INTO `cn_order` VALUES ('230', '20180707105134ph54o', '0', '16.00', '3', '19', '2018-07-07 10:51:35', '2018-07-07 10:51:45', '2018-07-19 15:30:37', null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '123000', '130000000', '12233336', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', null, '16.00', null);
+INSERT INTO `cn_order` VALUES ('231', '20180707105202c0jq2', '0', '320.00', '0', '8', '2018-07-07 10:52:03', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '2300001', '13000001111', '0', '', null, null, null, null, '0', '0', null, null, '320.00', null);
+INSERT INTO `cn_order` VALUES ('232', '20180707110032p2gjt', '0', '234.00', '0', '12', '2018-07-07 11:00:32', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('233', '20180707111142uhi99', '0', '130.00', '0', '10', '2018-07-07 11:11:43', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('234', '201807071112110qxc7', '0', '702.00', '0', '12', '2018-07-07 11:12:12', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '702.00', null);
+INSERT INTO `cn_order` VALUES ('235', '20180707111639tmgyu', '0', '16.00', '0', '10', '2018-07-07 11:16:40', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '16.00', null);
+INSERT INTO `cn_order` VALUES ('236', '20180707112129riou8', '0', '130.00', '0', '10', '2018-07-07 11:21:30', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('237', '20180707113750q4bae', '0', '737.00', '0', '10', '2018-07-07 11:37:51', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('238', '20180707114353y1sgi', '0', '737.00', '0', '10', '2018-07-07 11:43:53', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('239', '20180707114850d0m22', '0', '737.00', '0', '10', '2018-07-07 11:48:50', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('240', '20180707115524hsnnb', '0', '130.00', '0', '10', '2018-07-07 11:55:25', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('241', '201807071159279976g', '0', '169.00', '0', '13', '2018-07-07 11:59:27', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('242', '20180707115952kf030', '0', '169.00', '0', '13', '2018-07-07 11:59:53', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('243', '201807071200178pt5q', '0', '169.00', '0', '13', '2018-07-07 12:00:17', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('244', '20180707120018l2yon', '0', '737.00', '0', '10', '2018-07-07 12:00:18', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('245', '20180707120210vgum8', '0', '169.00', '0', '13', '2018-07-07 12:02:10', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('246', '20180707120838qc1mz', '0', '292.00', '0', '13', '2018-07-07 12:08:38', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '292.00', null);
+INSERT INTO `cn_order` VALUES ('247', '20180707121203805hl', '0', '130.00', '0', '10', '2018-07-07 12:12:04', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('248', '201807071219131qeog', '0', '737.00', '0', '10', '2018-07-07 12:19:13', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('249', '20180707121937h7rrw', '0', '737.00', '0', '10', '2018-07-07 12:19:37', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('250', '201807070143442f96p', '0', '130.00', '0', '10', '2018-07-07 13:43:44', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('251', '20180707015157bl7ou', '0', '737.00', '0', '13', '2018-07-07 13:51:57', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '737.00', null);
+INSERT INTO `cn_order` VALUES ('252', '2018070701534644683', '0', '169.00', '0', '13', '2018-07-07 13:53:47', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('253', '2018070701535879na4', '0', '178.00', '0', '10', '2018-07-07 13:53:59', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '178.00', null);
+INSERT INTO `cn_order` VALUES ('254', '201807070154124ag0s', '0', '234.00', '0', '12', '2018-07-07 13:54:12', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('255', '2018070701543022xrt', '0', '154.00', '0', '13', '2018-07-07 13:54:31', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '154.00', null);
+INSERT INTO `cn_order` VALUES ('256', '201807070154394lnjc', '0', '154.00', '0', '13', '2018-07-07 13:54:40', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '154.00', null);
+INSERT INTO `cn_order` VALUES ('257', '20180707015645birfc', '0', '234.00', '2', '12', '2018-07-07 13:56:46', '2018-07-07 13:56:55', null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('258', '20180707020120b0mgv', '0', '169.00', '0', '13', '2018-07-07 14:01:21', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('259', '201807070202284xlme', '0', '130.00', '1', '13', '2018-07-07 14:02:28', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('260', '20180707020229i57rj', '0', '234.00', '0', '10', '2018-07-07 14:02:29', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('261', '2018070702025085io5', '0', '234.00', '0', '10', '2018-07-07 14:02:50', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('262', '20180707020456v4gtm', '0', '187.00', '1', '13', '2018-07-07 14:04:56', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '187.00', null);
+INSERT INTO `cn_order` VALUES ('263', '201807070205145v516', '0', '22.00', '1', '13', '2018-07-07 14:05:14', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '22.00', null);
+INSERT INTO `cn_order` VALUES ('264', '2018070702060259wto', '0', '169.00', '1', '13', '2018-07-07 14:06:02', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('265', '201807070206239gzgx', '0', '169.00', '1', '13', '2018-07-07 14:06:23', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('266', '201807090850277imkp', '0', '480.00', '0', '10', '2018-07-09 08:50:28', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '000000', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '480.00', null);
+INSERT INTO `cn_order` VALUES ('267', '20180709085239fogxp', '0', '160.00', '0', '11', '2018-07-09 08:52:40', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '222222', '17755152862', '0', '', null, null, null, null, '0', '0', null, null, '160.00', null);
+INSERT INTO `cn_order` VALUES ('268', '201807091044192iyq3', '0', '2960.00', '0', '12', '2018-07-09 10:44:19', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '2960.00', null);
+INSERT INTO `cn_order` VALUES ('269', '20180709104640rarru', '0', '1280.00', '0', '12', '2018-07-09 10:46:40', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '1280.00', null);
+INSERT INTO `cn_order` VALUES ('270', '20180709104723sp9y9', '0', '169.00', '1', '13', '2018-07-09 10:47:23', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('271', '2018070911412030b4j', '0', '4706.00', '1', '9', '2018-07-09 11:41:20', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '340000', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '4706.00', null);
+INSERT INTO `cn_order` VALUES ('272', '20180709115412idqfs', '0', '1480.00', '0', '12', '2018-07-09 11:54:12', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '1480.00', null);
+INSERT INTO `cn_order` VALUES ('273', '20180710101550qo54a', '0', '169.00', '1', '13', '2018-07-10 10:15:51', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('274', '20180710101603v8irl', '0', '169.00', '1', '13', '2018-07-10 10:16:03', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '12358', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('275', '20180710024019g5uiv', '0', '651.00', '0', '12', '2018-07-10 14:40:19', null, null, null, null, null, '紫桐新村', '大观区', '安庆市', '安徽省', '原子弹', '331600', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '651.00', null);
+INSERT INTO `cn_order` VALUES ('276', '201807111037238edjc', '0', '160.00', '0', '19', '2018-07-11 10:37:23', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '160.00', null);
+INSERT INTO `cn_order` VALUES ('277', '20180711103750hqw75', '0', '160.00', '0', '19', '2018-07-11 10:37:50', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '160.00', null);
+INSERT INTO `cn_order` VALUES ('278', '20180711103808swxhi', '0', '160.00', '0', '19', '2018-07-11 10:38:09', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '160.00', null);
+INSERT INTO `cn_order` VALUES ('279', '20180711104159dahu3', '0', '85.00', '0', '19', '2018-07-11 10:42:00', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '85.00', null);
+INSERT INTO `cn_order` VALUES ('280', '201807110148205ulww', '0', '304.00', '0', '19', '2018-07-11 13:48:20', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '304.00', null);
+INSERT INTO `cn_order` VALUES ('281', '20180711015301unuj6', '0', '297.00', '0', '19', '2018-07-11 13:53:01', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '297.00', null);
+INSERT INTO `cn_order` VALUES ('282', '201807110153385nouz', '0', '297.00', '0', '19', '2018-07-11 13:53:39', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, null, '297.00', null);
+INSERT INTO `cn_order` VALUES ('283', '20180711021613plqnb', '0', '16.00', '0', '12', '2018-07-11 14:16:14', null, null, null, null, null, '请选择请选择', '庐阳区', '合肥市', '安徽省', '嘻嘻', '0', 'qsqsqqs', '0', '', null, null, null, null, '0', '0', null, null, '16.00', null);
+INSERT INTO `cn_order` VALUES ('284', '20180711023143z3mvg', '0', '130.00', '0', '10', '2018-07-11 14:31:44', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('285', '20180711023210cbmem', '0', '152.00', '4', '10', '2018-07-11 14:32:10', '2018-07-11 14:32:19', '2018-07-19 16:26:49', '2018-07-27 17:11:23', null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '15605655945', 'STO', '申通快递', '1', null, null, '0', '0', '1', null, '152.00', null);
+INSERT INTO `cn_order` VALUES ('286', '20180711023323t9gd5', '0', '152.00', '2', '9', '2018-07-11 14:33:23', '2018-07-11 14:33:32', null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '152.00', null);
+INSERT INTO `cn_order` VALUES ('287', '20180711041305wr0jl', '0', '234.00', '2', '17', '2018-07-11 16:13:05', '2018-07-11 16:14:11', null, null, null, null, '明发广场一号楼', '庐阳区', '合肥市', '安徽省', '刘昌霖', '8888888', '13093381314', '0', '', null, null, null, null, '0', '0', null, null, '234.00', null);
+INSERT INTO `cn_order` VALUES ('288', '20180711043811qrd5i', '0', '169.00', '0', '10', '2018-07-11 16:38:11', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('289', '20180711043833w7vpx', '0', '169.00', '0', '10', '2018-07-11 16:38:34', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '169.00', null);
+INSERT INTO `cn_order` VALUES ('290', '2018071104385197ghp', '0', '210.00', '0', '10', '2018-07-11 16:38:52', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, null, '210.00', null);
+INSERT INTO `cn_order` VALUES ('291', '20180711043910lnzob', '0', '44.00', '2', '10', '2018-07-11 16:39:10', '2018-07-21 10:46:21', null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '44.00', null);
+INSERT INTO `cn_order` VALUES ('292', '20180711045442w9z5y', '0', '2056.00', '0', '8', '2018-07-11 16:54:42', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '8888888', '13000001111', '0', '', null, null, null, null, '0', '0', null, null, '2056.00', null);
+INSERT INTO `cn_order` VALUES ('293', '20180711052108l6jop', '0', '0.02', '0', '11', '2018-07-11 17:21:09', null, null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '0.02', null);
+INSERT INTO `cn_order` VALUES ('294', '201807110521496se2p', '0', '0.02', '0', '11', '2018-07-11 17:21:50', null, null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '0.02', null);
+INSERT INTO `cn_order` VALUES ('295', '20180711053608isfhx', '0', '0.02', '1', '11', '2018-07-11 17:36:09', '2018-07-11 17:36:39', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '0.02', null);
+INSERT INTO `cn_order` VALUES ('296', '201807110540101xuem', '0', '6.00', '2', '11', '2018-07-11 17:40:10', '2018-07-11 17:40:24', null, null, null, null, '四里河路明发商业广场', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, null, '6.00', null);
+INSERT INTO `cn_order` VALUES ('298', '20180712110321ilfy8', '0', '130.00', '0', '9', '2018-07-12 11:03:21', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, '事务测试', '0', '0', null, null, '130.00', null);
+INSERT INTO `cn_order` VALUES ('299', '20180713104701at8uf', '0', '0.02', '4', '8', '2018-07-13 10:47:02', '2018-07-19 15:19:33', '2018-07-19 15:40:14', '2018-07-20 09:17:32', null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '8888888', '13000001111', '15605655945', 'YTO', '圆通速递', '1', null, null, '0', '0', '1', '0', '0.02', null);
+INSERT INTO `cn_order` VALUES ('300', '20180713104817hy0iv', '0', '825.00', '1', '8', '2018-07-13 10:48:18', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '8888888', '13000001111', '0', '', null, null, null, null, '0', '1', null, null, '825.00', null);
+INSERT INTO `cn_order` VALUES ('301', '2018071304593064fy7', '0', '0.11', '0', '12', '2018-07-13 16:59:30', null, null, null, null, null, '东京', '旺泉街道', '顺义区', '北京', '嘻嘻嘻', '15458464', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '0.11', null);
+INSERT INTO `cn_order` VALUES ('302', '20180713055301h9okl', '201807130553012tv1w', '0.11', '0', '12', '2018-07-13 17:53:02', null, null, null, null, null, '东京', '旺泉街道', '顺义区', '北京', '嘻嘻嘻', '15458464', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '0.11', null);
+INSERT INTO `cn_order` VALUES ('303', '20180713055301xg48e', '201807130553012tv1w', '740.00', '0', '12', '2018-07-13 17:53:02', null, null, null, null, null, '东京', '旺泉街道', '顺义区', '北京', '嘻嘻嘻', '15458464', '15256036352', '0', '', null, null, null, null, '0', '0', null, null, '740.00', null);
+INSERT INTO `cn_order` VALUES ('304', '201807151231082dyu5', '201807151231078ptyq', '480.00', '1', '28', '2018-07-15 12:31:08', null, null, null, null, null, 'vghk', '河东区', '天津市', '天津市', 'vggq', '552886', '13866652805', '0', '', null, null, null, null, '0', '1', null, null, '480.00', null);
+INSERT INTO `cn_order` VALUES ('305', '201807151231081dbid', '201807151231078ptyq', '3375.00', '1', '28', '2018-07-15 12:31:08', null, null, null, null, null, 'vghk', '河东区', '天津市', '天津市', 'vggq', '552886', '13866652805', '0', '', null, null, null, null, '0', '1', null, null, '3375.00', null);
+INSERT INTO `cn_order` VALUES ('306', '20180716101900lbj17', '0', '246.00', '1', '13', '2018-07-16 10:19:01', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '8888888', '1300000000', '0', '', null, null, null, null, '0', '0', null, null, '246.00', null);
+INSERT INTO `cn_order` VALUES ('307', '2018071705294527v8c', '0', '0.10', '2', '12', '2018-07-17 17:29:45', '2018-07-17 17:29:57', null, null, null, null, '东京', '旺泉街道', '顺义区', '北京', '嘻嘻嘻', '15458464', '15256036352', '0', '', null, null, null, null, '0', '0', null, '0', '0.10', null);
+INSERT INTO `cn_order` VALUES ('308', '20180718033949kqi13', '0', '6124.00', '0', '8', '2018-07-18 15:39:49', null, null, null, null, null, '2222222222', '2222222', '222222222', '2222222222', '2222222222', '88888', '2222222222', '0', '', null, null, null, null, '0', '0', null, '0', '6124.00', null);
+INSERT INTO `cn_order` VALUES ('309', '20180719085350lc4t3', '0', '1466.00', '0', '12', '2018-07-19 08:53:51', null, null, null, null, null, '明发广场', '庐阳区大杨镇', '合肥市', '安徽', '原子弹', '231605', '15256036352', '0', '', null, null, null, null, '0', '0', null, '0', '1466.00', null);
+INSERT INTO `cn_order` VALUES ('310', '20180719025712e5o0m', '0', '234.00', '0', '17', '2018-07-19 14:57:12', null, null, null, null, null, '明发广场一号楼', '庐阳区', '合肥市', '安徽省', '刘昌霖', '8888888', '13093381314', '0', '', null, null, null, null, '0', '0', null, '0', '234.00', null);
+INSERT INTO `cn_order` VALUES ('311', '20180720091630xlo1a', '0', '428.00', '0', '12', '2018-07-20 09:16:31', null, null, null, null, null, '明发广场', '庐阳区大杨镇', '合肥市', '安徽', '原子弹', '231605', '15256036352', '0', '', null, null, null, null, '0', '0', null, '0', '428.00', null);
+INSERT INTO `cn_order` VALUES ('312', '20180720092837uclad', '0', '0.13', '3', '8', '2018-07-20 09:28:38', '2018-07-20 09:33:36', '2018-07-20 10:08:35', null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '222222', '13000001111', '7701180832430', 'STO', '申通快递', '1', null, null, '0', '0', '1', '0', '0.13', null);
+INSERT INTO `cn_order` VALUES ('313', '20180721042139nhn3j', '0', '130.00', '0', '19', '2018-07-21 16:21:39', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, '0', '130.00', '');
+INSERT INTO `cn_order` VALUES ('314', '20180721043528bkwzq', '0', '88.00', '0', '19', '2018-07-21 16:35:28', null, null, null, null, null, '哈哈', '旺泉街道', '顺义区', '北京', '哈哈', '8888888', '130000000', '0', '', null, null, null, null, '0', '0', null, '0', '88.00', '');
+INSERT INTO `cn_order` VALUES ('315', '20180722091034e3x1u', '0', '1.40', '2', '31', '2018-07-22 09:10:35', '2018-07-22 09:10:53', null, null, null, null, '曹集北路(亿通广告)', '阜南县', '阜阳市', '安徽省', '刘光', '236300', '13865840008', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('316', '201807220921295hb7m', '0', '33.00', '0', '33', '2018-07-22 09:21:30', null, null, null, null, null, '京九办事处城建祥和', '颍州区城区', '阜阳市', '安徽', '王子峰', '2363000', '18269996288', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('317', '201807271031487lzl4', '0', '608.00', '0', '11', '2018-07-27 10:31:48', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '8888888', '17755152862', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('318', '20180727103207oalmu', '0', '88.00', '0', '11', '2018-07-27 10:32:08', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '8888888', '17755152862', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('319', '20180727041247mcndy', '0', '181.00', '0', '9', '2018-07-27 16:12:48', null, null, null, null, null, '四里河路明发商业广场13楼1325室', '庐阳区', '合肥市', '安徽省', '宋许超', '8888888', '17682153207', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('320', '20180727042226rm9za', '20180727042226otf4y', '281.00', '0', '10', '2018-07-27 16:22:27', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('321', '20180727042226yonm8', '20180727042226otf4y', '608.00', '0', '10', '2018-07-27 16:22:27', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('322', '20180727044552452cj', '0', '260.00', '0', '10', '2018-07-27 16:45:53', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('323', '20180728103951yfazk', '0', '88.00', '1', '11', '2018-07-28 10:39:51', null, null, null, null, null, '明发', '庐阳区', '合肥市', '安徽省', '李', '8888888', '17755152862', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('324', '20180801023018cwini', '0', '187.00', '0', '8', '2018-08-01 14:30:18', null, null, null, null, null, '西二环', '蜀山', '武汉', '湖北', '哈哥', '222222', '13000001111', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('325', '20180801030158i53aj', '0', '234.00', '0', '10', '2018-08-01 15:01:59', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('326', '20180801031542p1hgx', '0', '234.00', '0', '10', '2018-08-01 15:15:42', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('327', '20180801045101vehk0', '0', '10.00', '0', '39', '2018-08-01 16:51:01', null, null, null, null, null, '淮河路商之都1806', '庐阳区', '合肥市', '安徽省', '张龙', '230031', '13866191585', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('328', '20180801060246acx2i', '2018080106024664x6n', '234.00', '0', '10', '2018-08-01 18:02:46', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('329', '20180801060246o6t7l', '2018080106024664x6n', '3005.00', '0', '10', '2018-08-01 18:02:46', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('330', '20180801060246ymtea', '2018080106024664x6n', '304.00', '0', '10', '2018-08-01 18:02:46', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('331', '20180802091809prd9s', '0', '234.00', '0', '10', '2018-08-02 09:18:09', null, null, null, null, null, '歌手是谁世界上那你', '大观区', '安庆市', '安徽省', '哈哈哈', '8888888', '15605655945', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
+INSERT INTO `cn_order` VALUES ('332', '20180802030514j5sm6', '0', '22.00', '1', '13', '2018-08-02 15:05:15', null, null, null, null, null, '哈哈', '大观区', '安庆市', '安徽省', '哈哈', '8888888', '1300000000', '0', '', null, null, null, null, '0', '0', null, '0', '0.00', '');
 
 -- ----------------------------
 -- Table structure for cn_order_good
@@ -1169,110 +1401,239 @@ CREATE TABLE `cn_order_good` (
   `good_id` int(11) NOT NULL,
   `good_spec_price_id` int(11) NOT NULL COMMENT '商品规格价格id',
   `amount` int(10) NOT NULL COMMENT '商品购买数量',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`id`),
+  KEY `order_no` (`order_no`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=395 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of cn_order_good
 -- ----------------------------
-INSERT INTO `cn_order_good` VALUES ('1', '1', '1', '45', '2');
-INSERT INTO `cn_order_good` VALUES ('2', '20180530024541r6ps1', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('3', '20180530024541r6ps1', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('4', '201805300247146hxqz', '40', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('5', '201805300247146hxqz', '40', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('6', '20180530024803h52n5', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('7', '20180530024803h52n5', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('8', '20180530030155rpl7t', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('9', '20180530030155rpl7t', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('10', '20180530030438vgnr7', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('11', '20180530030438vgnr7', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('12', '20180530032302qzqos', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('13', '20180530032302qzqos', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('14', '20180530033415h8plw', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('15', '20180530033415h8plw', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('16', '20180530033651ykleb', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('17', '20180530033651ykleb', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('18', '201805300338552u6uh', '44', '46', '5');
-INSERT INTO `cn_order_good` VALUES ('19', '201805300338552u6uh', '45', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('20', '20180530040030ihszd', '1', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('21', '20180530040030ihszd', '1', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('22', '201805300752298tuh1', '42', '48', '5');
-INSERT INTO `cn_order_good` VALUES ('23', '201805300752298tuh1', '43', '45', '8');
-INSERT INTO `cn_order_good` VALUES ('24', '201805310858305ip6l', '40', '48', '3');
-INSERT INTO `cn_order_good` VALUES ('25', '201805310858305ip6l', '41', '45', '45');
-INSERT INTO `cn_order_good` VALUES ('26', '20180613050624z1l79', '41', '47', '5');
-INSERT INTO `cn_order_good` VALUES ('27', '20180613050808j2t8r', '41', '47', '5');
-INSERT INTO `cn_order_good` VALUES ('28', '20180613051214a845k', '41', '47', '5');
-INSERT INTO `cn_order_good` VALUES ('29', '20180613052400ocnbo', '41', '3', '2');
-INSERT INTO `cn_order_good` VALUES ('30', '201806130804156e0sk', '41', '42', '5');
-INSERT INTO `cn_order_good` VALUES ('31', '20180614085149fj7p2', '41', '42', '5555');
-INSERT INTO `cn_order_good` VALUES ('32', '20180614085307z74kr', '41', '45', '1');
-INSERT INTO `cn_order_good` VALUES ('33', '201806140911438ovlt', '41', '41', '3');
-INSERT INTO `cn_order_good` VALUES ('34', '201806140911438ovlt', '41', '41', '1');
-INSERT INTO `cn_order_good` VALUES ('35', '20180614105922wu4f5', '41', '46', '5');
-INSERT INTO `cn_order_good` VALUES ('36', '20180614041123ww0sb', '90', '153', '2');
-INSERT INTO `cn_order_good` VALUES ('37', '20180614045054pumvu', '90', '153', '1');
-INSERT INTO `cn_order_good` VALUES ('38', '20180620064115zwklx', '96', '195', '1');
-INSERT INTO `cn_order_good` VALUES ('39', '20180621093757u3cfh', '95', '181', '1');
-INSERT INTO `cn_order_good` VALUES ('40', '20180621093913cn2wp', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('41', '20180621094037vpd33', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('42', '20180621095229ymmbu', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('43', '201806210954238qatv', '95', '185', '1');
-INSERT INTO `cn_order_good` VALUES ('44', '20180621101441f93l5', '95', '175', '1');
-INSERT INTO `cn_order_good` VALUES ('45', '20180621102734nuav9', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('46', '20180621103901xqhzl', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('47', '20180621104048386hl', '96', '194', '1');
-INSERT INTO `cn_order_good` VALUES ('48', '20180621114409e4ux6', '95', '181', '1');
-INSERT INTO `cn_order_good` VALUES ('49', '20180621022218o4qas', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('50', '20180621022218dwc45', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('51', '20180621022218co7tn', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('52', '20180621022218h04ek', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('53', '20180621022218ehri5', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('54', '20180621022218qc9kw', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('55', '20180621022218m9fks', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('56', '20180621022238rpzpr', '95', '176', '1');
-INSERT INTO `cn_order_good` VALUES ('57', '2018062102361285mod', '95', '175', '1');
-INSERT INTO `cn_order_good` VALUES ('58', '20180621023816knz46', '96', '191', '1');
-INSERT INTO `cn_order_good` VALUES ('59', '20180621024152dq2h6', '96', '192', '1');
-INSERT INTO `cn_order_good` VALUES ('60', '20180621024427hpgw4', '96', '191', '1');
-INSERT INTO `cn_order_good` VALUES ('61', '20180621030905rakeb', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('62', '20180621031033cmfnt', '96', '191', '1');
-INSERT INTO `cn_order_good` VALUES ('63', '20180621031145b5hwp', '95', '176', '3');
-INSERT INTO `cn_order_good` VALUES ('64', '201806210311563ng9s', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('65', '20180621031221zcja0', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('66', '20180621031747igpes', '96', '195', '1');
-INSERT INTO `cn_order_good` VALUES ('67', '20180621031806y649c', '95', '178', '4');
-INSERT INTO `cn_order_good` VALUES ('68', '20180621031904behdx', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('69', '201806210322397h7bb', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('70', '20180621032425i2q4g', '95', '179', '2');
-INSERT INTO `cn_order_good` VALUES ('71', '20180621032449yh4j9', '96', '195', '1');
-INSERT INTO `cn_order_good` VALUES ('72', '2018062103482036134', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('73', '20180621042032hd78x', '95', '180', '1');
-INSERT INTO `cn_order_good` VALUES ('74', '20180621042803ppyzz', '95', '174', '1');
-INSERT INTO `cn_order_good` VALUES ('75', '20180621043207x1ri4', '95', '178', '1');
-INSERT INTO `cn_order_good` VALUES ('76', '20180621043749wiime', '95', '179', '4');
-INSERT INTO `cn_order_good` VALUES ('77', '20180621044422k49j2', '95', '176', '2');
-INSERT INTO `cn_order_good` VALUES ('78', '20180621044643uh5l5', '95', '185', '1');
-INSERT INTO `cn_order_good` VALUES ('79', '201806210448509u6sa', '95', '176', '1');
-INSERT INTO `cn_order_good` VALUES ('80', '20180621045022bumbb', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('81', '20180621045659z40uq', '95', '176', '2');
-INSERT INTO `cn_order_good` VALUES ('82', '20180621050349to05m', '95', '174', '1');
-INSERT INTO `cn_order_good` VALUES ('83', '20180621051326slkok', '95', '176', '1');
-INSERT INTO `cn_order_good` VALUES ('84', '20180621051823s1jn4', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('85', '20180621052149f0obo', '95', '185', '1');
-INSERT INTO `cn_order_good` VALUES ('86', '201806210526187b2m7', '95', '179', '1');
-INSERT INTO `cn_order_good` VALUES ('87', '20180621053209rav7e', '95', '176', '1');
-INSERT INTO `cn_order_good` VALUES ('88', '20180621054214jf674', '95', '184', '1');
-INSERT INTO `cn_order_good` VALUES ('89', '20180621055208s2ivm', '95', '185', '1');
-INSERT INTO `cn_order_good` VALUES ('90', '20180621055852vc9pt', '95', '185', '1');
-INSERT INTO `cn_order_good` VALUES ('91', '20180621060023avrg1', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('92', '20180621060256lo511', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('93', '20180621060410w9xwh', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('94', '20180622091816gqvyl', '95', '181', '1');
-INSERT INTO `cn_order_good` VALUES ('95', '20180622101326c4l5u', '95', '182', '1');
-INSERT INTO `cn_order_good` VALUES ('96', '20180622110232ys54k', '96', '195', '1');
-INSERT INTO `cn_order_good` VALUES ('97', '20180622111951y7dtc', '95', '175', '1');
-INSERT INTO `cn_order_good` VALUES ('98', '201806221120000qekn', '95', '175', '1');
+INSERT INTO `cn_order_good` VALUES ('169', '20180627103520f6ahi', '213', '757', '3');
+INSERT INTO `cn_order_good` VALUES ('170', '20180627020101tzmlz', '214', '889', '1');
+INSERT INTO `cn_order_good` VALUES ('171', '20180627020213mgp3o', '213', '761', '1');
+INSERT INTO `cn_order_good` VALUES ('172', '20180627022041ubw3k', '213', '758', '4');
+INSERT INTO `cn_order_good` VALUES ('173', '20180627022041ubw3k', '99', '233', '3');
+INSERT INTO `cn_order_good` VALUES ('174', '20180628090035eznfs', '99', '226', '10');
+INSERT INTO `cn_order_good` VALUES ('175', '20180628092339etiw7', '107', '270', '1');
+INSERT INTO `cn_order_good` VALUES ('176', '20180628093548w89yw', '111', '289', '1');
+INSERT INTO `cn_order_good` VALUES ('177', '20180628100445qvfaf', '99', '236', '2');
+INSERT INTO `cn_order_good` VALUES ('178', '20180628043653r0oca', '111', '289', '5');
+INSERT INTO `cn_order_good` VALUES ('179', '20180628043653r0oca', '213', '757', '9');
+INSERT INTO `cn_order_good` VALUES ('180', '20180628044439nj8d1', '122', '348', '2');
+INSERT INTO `cn_order_good` VALUES ('181', '20180629025711udagv', '214', '894', '1');
+INSERT INTO `cn_order_good` VALUES ('182', '201806290257541e2f7', '214', '893', '1');
+INSERT INTO `cn_order_good` VALUES ('183', '20180629025902qzzcw', '214', '889', '1');
+INSERT INTO `cn_order_good` VALUES ('184', '20180629025920puvly', '214', '889', '1');
+INSERT INTO `cn_order_good` VALUES ('185', '20180629030145ka340', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('186', '20180629041308lmyr8', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('187', '20180629041736i12e0', '213', '848', '1');
+INSERT INTO `cn_order_good` VALUES ('188', '20180629042435crv43', '213', '757', '2');
+INSERT INTO `cn_order_good` VALUES ('189', '20180629042557xb43b', '214', '889', '1');
+INSERT INTO `cn_order_good` VALUES ('190', '20180629090829ciyzz', '213', '760', '3');
+INSERT INTO `cn_order_good` VALUES ('191', '20180630111829h7j0o', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('192', '20180630034929c13zj', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('193', '20180630040351hn6lh', '213', '757', '2');
+INSERT INTO `cn_order_good` VALUES ('194', '20180630040439ftqwn', '213', '757', '2');
+INSERT INTO `cn_order_good` VALUES ('195', '201806300406019wa73', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('196', '20180630044300f879q', '213', '757', '2');
+INSERT INTO `cn_order_good` VALUES ('197', '201806300447260w8tu', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('198', '20180630045005xr62t', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('199', '20180630045005xr62t', '211', '622', '2');
+INSERT INTO `cn_order_good` VALUES ('200', '20180701105232wbf9s', '214', '890', '2');
+INSERT INTO `cn_order_good` VALUES ('201', '20180702094152wnwzc', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('202', '20180702094340s3wji', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('203', '201807020149012lr8g', '236', '2201', '8');
+INSERT INTO `cn_order_good` VALUES ('204', '20180703085829xvf45', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('205', '20180703090753f7r70', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('206', '20180703090831mfk3w', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('207', '20180703090836wfodz', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('208', '20180703090931a5up2', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('209', '20180703091020vpnlo', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('210', '201807030912492rhao', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('211', '20180703102345j5wxq', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('212', '20180703102520tauhm', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('213', '201807031026087ivdp', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('214', '20180703102609u29jz', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('215', '201807031026453eg48', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('216', '20180703102744lyi1k', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('217', '20180703024716ew7zr', '215', '897', '2');
+INSERT INTO `cn_order_good` VALUES ('218', '201807030541534wub8', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('219', '201807040854557dcca', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('220', '201807041025297dtbk', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('221', '20180704110653va5qi', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('222', '20180704022044c3oht', '213', '807', '1');
+INSERT INTO `cn_order_good` VALUES ('223', '20180705092515msv59', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('224', '2018070509441966psl', '213', '758', '2');
+INSERT INTO `cn_order_good` VALUES ('225', '2018070509441966psl', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('226', '20180705094523vw2eg', '213', '758', '2');
+INSERT INTO `cn_order_good` VALUES ('227', '20180705094537fetlw', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('228', '20180705094947offf5', '179', '507', '1');
+INSERT INTO `cn_order_good` VALUES ('229', '20180705094947offf5', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('230', '20180705094959bzfrp', '179', '507', '1');
+INSERT INTO `cn_order_good` VALUES ('231', '20180705095003iie7z', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('232', '201807050954549whpu', '179', '507', '1');
+INSERT INTO `cn_order_good` VALUES ('233', '201807050954549whpu', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('234', '20180705095619j52n8', '179', '507', '1');
+INSERT INTO `cn_order_good` VALUES ('235', '201807050956364kty7', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('236', '20180705032439slgzx', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('237', '20180705032439slgzx', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('238', '20180705033542vixhu', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('239', '201807050351097m5t5', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('240', '20180705045418akwxc', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('241', '20180705045831kn8eq', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('242', '20180705050503tkpnr', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('243', '20180705052045z2ax9', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('244', '20180705052045z2ax9', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('245', '20180705052045139bn', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('246', '20180705052045ngjsg', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('247', '20180705052835ojhqq', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('248', '20180705052835ojhqq', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('249', '201807050528354adgw', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('250', '20180705052835pkuyt', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('251', '201807050556431zpzp', '99', '236', '5');
+INSERT INTO `cn_order_good` VALUES ('252', '201807050556431zpzp', '99', '235', '6');
+INSERT INTO `cn_order_good` VALUES ('253', '201807050556431zpzp', '99', '231', '3');
+INSERT INTO `cn_order_good` VALUES ('254', '20180705072327dhqzk', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('255', '20180705072338kgrp2', '225', '1137', '1');
+INSERT INTO `cn_order_good` VALUES ('256', '20180706104944jke7z', '99', '230', '1');
+INSERT INTO `cn_order_good` VALUES ('257', '20180706104944nzd0p', '117', '314', '2');
+INSERT INTO `cn_order_good` VALUES ('258', '2018070610532007p34', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('259', '20180706105819opjb6', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('260', '20180706105819opjb6', '216', '941', '1');
+INSERT INTO `cn_order_good` VALUES ('261', '20180706110058clg07', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('262', '20180706110058ol902', '117', '314', '2');
+INSERT INTO `cn_order_good` VALUES ('263', '201807061105290gdym', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('264', '20180706110534khr9j', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('265', '201807060437187cr46', '213', '808', '1');
+INSERT INTO `cn_order_good` VALUES ('266', '20180706044030av9pt', '211', '622', '1');
+INSERT INTO `cn_order_good` VALUES ('267', '20180706044030av9pt', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('268', '20180706044959aw8zs', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('269', '20180706044959ou95g', '211', '622', '1');
+INSERT INTO `cn_order_good` VALUES ('270', '201807060517265ux9e', '213', '758', '1');
+INSERT INTO `cn_order_good` VALUES ('271', '20180706051727xqoyf', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('272', '201807060530275xa80', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('273', '20180706053027o25iy', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('274', '20180707103846n6982', '99', '236', '1');
+INSERT INTO `cn_order_good` VALUES ('275', '20180707104005sl554', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('276', '20180707104016u48i5', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('277', '201807071040239tvgd', '99', '235', '1');
+INSERT INTO `cn_order_good` VALUES ('278', '20180707104045vgci0', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('279', '201807071040584r1x2', '99', '234', '1');
+INSERT INTO `cn_order_good` VALUES ('280', '20180707104135wfx1d', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('281', '201807071042024b50t', '211', '623', '1');
+INSERT INTO `cn_order_good` VALUES ('282', '20180707104301j0et2', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('283', '20180707104326m890w', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('284', '20180707104350a7ylq', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('285', '20180707104708mvcme', '211', '622', '1');
+INSERT INTO `cn_order_good` VALUES ('286', '20180707105134ph54o', '161', '468', '1');
+INSERT INTO `cn_order_good` VALUES ('287', '20180707105202c0jq2', '161', '468', '1');
+INSERT INTO `cn_order_good` VALUES ('288', '20180707105202c0jq2', '99', '227', '2');
+INSERT INTO `cn_order_good` VALUES ('289', '20180707110032p2gjt', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('290', '20180707111142uhi99', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('291', '201807071112110qxc7', '213', '757', '3');
+INSERT INTO `cn_order_good` VALUES ('292', '20180707111639tmgyu', '161', '468', '1');
+INSERT INTO `cn_order_good` VALUES ('293', '20180707112129riou8', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('294', '20180707113750q4bae', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('295', '20180707114353y1sgi', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('296', '20180707114850d0m22', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('297', '20180707115524hsnnb', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('298', '201807071159279976g', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('299', '20180707115952kf030', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('300', '201807071200178pt5q', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('301', '20180707120018l2yon', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('302', '20180707120210vgum8', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('303', '20180707120838qc1mz', '99', '236', '1');
+INSERT INTO `cn_order_good` VALUES ('304', '20180707121203805hl', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('305', '201807071219131qeog', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('306', '20180707121937h7rrw', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('307', '201807070143442f96p', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('308', '20180707015157bl7ou', '101', '246', '1');
+INSERT INTO `cn_order_good` VALUES ('309', '2018070701534644683', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('310', '2018070701535879na4', '99', '238', '1');
+INSERT INTO `cn_order_good` VALUES ('311', '201807070154124ag0s', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('312', '2018070701543022xrt', '161', '469', '7');
+INSERT INTO `cn_order_good` VALUES ('313', '201807070154394lnjc', '161', '469', '7');
+INSERT INTO `cn_order_good` VALUES ('314', '20180707015645birfc', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('315', '20180707020120b0mgv', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('316', '201807070202284xlme', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('317', '20180707020229i57rj', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('318', '2018070702025085io5', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('319', '20180707020456v4gtm', '107', '271', '1');
+INSERT INTO `cn_order_good` VALUES ('320', '201807070205145v516', '161', '469', '1');
+INSERT INTO `cn_order_good` VALUES ('321', '2018070702060259wto', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('322', '201807070206239gzgx', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('323', '201807090850277imkp', '107', '270', '3');
+INSERT INTO `cn_order_good` VALUES ('324', '20180709085239fogxp', '215', '911', '1');
+INSERT INTO `cn_order_good` VALUES ('325', '201807091044192iyq3', '211', '622', '4');
+INSERT INTO `cn_order_good` VALUES ('326', '20180709104640rarru', '107', '270', '8');
+INSERT INTO `cn_order_good` VALUES ('327', '20180709104723sp9y9', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('328', '2018070911412030b4j', '99', '226', '2');
+INSERT INTO `cn_order_good` VALUES ('329', '2018070911412030b4j', '213', '757', '19');
+INSERT INTO `cn_order_good` VALUES ('330', '20180709115412idqfs', '211', '622', '2');
+INSERT INTO `cn_order_good` VALUES ('331', '20180710101550qo54a', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('332', '20180710101603v8irl', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('333', '20180710024019g5uiv', '211', '621', '1');
+INSERT INTO `cn_order_good` VALUES ('334', '201807111037238edjc', '107', '270', '1');
+INSERT INTO `cn_order_good` VALUES ('335', '20180711103750hqw75', '107', '270', '1');
+INSERT INTO `cn_order_good` VALUES ('336', '20180711103808swxhi', '107', '270', '1');
+INSERT INTO `cn_order_good` VALUES ('337', '20180711104159dahu3', '215', '897', '1');
+INSERT INTO `cn_order_good` VALUES ('338', '201807110148205ulww', '216', '941', '1');
+INSERT INTO `cn_order_good` VALUES ('339', '20180711015301unuj6', '117', '312', '1');
+INSERT INTO `cn_order_good` VALUES ('340', '201807110153385nouz', '117', '312', '1');
+INSERT INTO `cn_order_good` VALUES ('341', '20180711021613plqnb', '161', '468', '1');
+INSERT INTO `cn_order_good` VALUES ('342', '20180711023143z3mvg', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('343', '20180711023210cbmem', '99', '227', '1');
+INSERT INTO `cn_order_good` VALUES ('344', '20180711023323t9gd5', '99', '227', '1');
+INSERT INTO `cn_order_good` VALUES ('345', '20180711041305wr0jl', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('346', '20180711043811qrd5i', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('347', '20180711043833w7vpx', '99', '231', '1');
+INSERT INTO `cn_order_good` VALUES ('348', '2018071104385197ghp', '99', '234', '1');
+INSERT INTO `cn_order_good` VALUES ('349', '20180711043910lnzob', '161', '469', '2');
+INSERT INTO `cn_order_good` VALUES ('350', '20180711045442w9z5y', '213', '758', '8');
+INSERT INTO `cn_order_good` VALUES ('351', '20180711052108l6jop', '229', '1221', '1');
+INSERT INTO `cn_order_good` VALUES ('352', '201807110521496se2p', '229', '1221', '1');
+INSERT INTO `cn_order_good` VALUES ('353', '20180711053608isfhx', '168', '479', '1');
+INSERT INTO `cn_order_good` VALUES ('354', '201807110540101xuem', '234', '1820', '1');
+INSERT INTO `cn_order_good` VALUES ('355', '20180712110321ilfy8', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('356', '20180713104701at8uf', '229', '1221', '1');
+INSERT INTO `cn_order_good` VALUES ('357', '20180713104817hy0iv', '122', '346', '1');
+INSERT INTO `cn_order_good` VALUES ('358', '2018071304593064fy7', '142', '393', '1');
+INSERT INTO `cn_order_good` VALUES ('359', '20180713055301h9okl', '142', '393', '1');
+INSERT INTO `cn_order_good` VALUES ('360', '20180713055301xg48e', '211', '622', '1');
+INSERT INTO `cn_order_good` VALUES ('361', '201807151231082dyu5', '220', '1001', '4');
+INSERT INTO `cn_order_good` VALUES ('362', '201807151231081dbid', '117', '317', '9');
+INSERT INTO `cn_order_good` VALUES ('363', '20180716101900lbj17', '99', '235', '1');
+INSERT INTO `cn_order_good` VALUES ('364', '2018071705294527v8c', '142', '398', '1');
+INSERT INTO `cn_order_good` VALUES ('365', '20180718033949kqi13', '213', '758', '5');
+INSERT INTO `cn_order_good` VALUES ('366', '20180718033949kqi13', '213', '757', '17');
+INSERT INTO `cn_order_good` VALUES ('367', '20180718033949kqi13', '99', '226', '2');
+INSERT INTO `cn_order_good` VALUES ('368', '20180718033949kqi13', '122', '344', '1');
+INSERT INTO `cn_order_good` VALUES ('369', '20180719085350lc4t3', '214', '890', '14');
+INSERT INTO `cn_order_good` VALUES ('370', '20180719085350lc4t3', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('371', '20180719025712e5o0m', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('372', '20180720091630xlo1a', '214', '894', '2');
+INSERT INTO `cn_order_good` VALUES ('373', '20180720091630xlo1a', '214', '892', '1');
+INSERT INTO `cn_order_good` VALUES ('374', '20180720092837uclad', '142', '396', '1');
+INSERT INTO `cn_order_good` VALUES ('375', '20180721042139nhn3j', '99', '226', '1');
+INSERT INTO `cn_order_good` VALUES ('376', '20180721043528bkwzq', '290', '2341', '1');
+INSERT INTO `cn_order_good` VALUES ('377', '20180722091034e3x1u', '252', '2222', '1');
+INSERT INTO `cn_order_good` VALUES ('378', '201807220921295hb7m', '227', '1177', '1');
+INSERT INTO `cn_order_good` VALUES ('379', '201807271031487lzl4', '213', '840', '1');
+INSERT INTO `cn_order_good` VALUES ('380', '20180727103207oalmu', '290', '2341', '1');
+INSERT INTO `cn_order_good` VALUES ('381', '20180727041247mcndy', '99', '228', '1');
+INSERT INTO `cn_order_good` VALUES ('382', '20180727042226rm9za', '213', '759', '1');
+INSERT INTO `cn_order_good` VALUES ('383', '20180727042226yonm8', '216', '941', '2');
+INSERT INTO `cn_order_good` VALUES ('384', '20180727044552452cj', '99', '226', '2');
+INSERT INTO `cn_order_good` VALUES ('385', '20180728103951yfazk', '290', '2341', '1');
+INSERT INTO `cn_order_good` VALUES ('386', '20180801023018cwini', '107', '271', '1');
+INSERT INTO `cn_order_good` VALUES ('387', '20180801030158i53aj', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('388', '20180801031542p1hgx', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('389', '20180801045101vehk0', '289', '2339', '1');
+INSERT INTO `cn_order_good` VALUES ('390', '20180801060246acx2i', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('391', '20180801060246o6t7l', '122', '344', '5');
+INSERT INTO `cn_order_good` VALUES ('392', '20180801060246ymtea', '216', '941', '1');
+INSERT INTO `cn_order_good` VALUES ('393', '20180802091809prd9s', '213', '757', '1');
+INSERT INTO `cn_order_good` VALUES ('394', '20180802030514j5sm6', '161', '469', '1');
 
 -- ----------------------------
 -- Table structure for cn_user
@@ -1301,13 +1662,13 @@ CREATE TABLE `cn_user` (
   `idcard_front_img` varchar(200) DEFAULT NULL COMMENT '身份证正面照',
   `idcard_back_img` varchar(200) DEFAULT NULL COMMENT '身份证反面照',
   PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8 COMMENT='用户表';
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COMMENT='用户表';
 
 -- ----------------------------
 -- Records of cn_user
 -- ----------------------------
-INSERT INTO `cn_user` VALUES ('9', null, null, '17682153207', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, 'Jack ', null, null, null, null, 'http://img.cnadmart.com/FqiRJH3fOPGLvTN-5xtXR5Eia87D.jpeg', null, null, '0', '2018-06-11 17:13:42', null, '2018-06-26 17:22:28', 'admin', null, null);
-INSERT INTO `cn_user` VALUES ('10', null, null, '18155122471', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', null, '王老板', null, null, null, null, 'http://img.cnadmart.com/STORE/certification/015856820180702155819.jpeg', null, null, '0', '2018-06-11 18:27:41', null, null, null, null, null);
+INSERT INTO `cn_user` VALUES ('9', null, null, '17682153208', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, 'Jack ', null, null, null, null, 'http://img.cnadmart.com/FqiRJH3fOPGLvTN-5xtXR5Eia87D.jpeg', null, null, '0', '2018-06-11 17:13:42', null, '2018-08-05 11:01:22', 'admin', null, null);
+INSERT INTO `cn_user` VALUES ('10', null, null, '18155122471', '15e2b0d3c33891ebb0f1ef609ec419420c20e320ce94c65fbc8c3312448eb225', null, '王老板', null, null, null, null, 'http://img.cnadmart.com/STORE/certification/015856820180702155819.jpeg', '1', null, '0', '2018-06-11 18:27:41', null, '2018-07-25 18:36:06', 'admin', null, null);
 INSERT INTO `cn_user` VALUES ('11', null, null, '17755152862', '', null, '17755152862', null, null, null, null, '', null, null, '0', '2018-06-22 11:00:07', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('12', null, null, '15256036352', '', null, '原子弹', null, null, null, null, '', null, null, '0', '2018-06-25 11:28:38', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('13', null, null, '18356087258', '', null, '18356087258', null, null, null, null, '', null, null, '0', '2018-06-25 11:38:47', null, null, null, null, null);
@@ -1322,6 +1683,7 @@ INSERT INTO `cn_user` VALUES ('21', null, null, '15609685001', '', null, '156096
 INSERT INTO `cn_user` VALUES ('22', null, null, '18734804160', '', null, null, null, null, null, null, '', '0', null, '0', '2018-06-27 11:03:52', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('23', null, null, '13033087652', '', null, '13033087652', null, null, null, null, '', '0', null, '0', '2018-06-29 15:34:03', null, null, null, null, null);
 INSERT INTO `cn_user` VALUES ('24', null, null, '18867532860', '8d969eef6ecad3c29a3a629280e686cf0c3f5d5a86aff3ca12020c923adc6c92', null, '18867532860', null, null, null, null, '', '0', null, '0', '2018-07-17 11:11:47', null, null, null, null, null);
+INSERT INTO `cn_user` VALUES ('25', null, null, 'string', '473287f8298dba7163a897908958f7c0eae733e25d2e027992ea2edc9bed2fa8', null, 'string', null, null, null, null, '', '0', null, '0', '2018-07-24 15:05:25', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for qrtz_blob_triggers
@@ -1373,9 +1735,8 @@ CREATE TABLE `qrtz_cron_triggers` (
 -- ----------------------------
 -- Records of qrtz_cron_triggers
 -- ----------------------------
-INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_2', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_3', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
-INSERT INTO `qrtz_cron_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('FreeterScheduler', 'TASK_7', 'DEFAULT', '0 0 12 * * ?', 'Asia/Shanghai');
+INSERT INTO `qrtz_cron_triggers` VALUES ('FreeterScheduler', 'TASK_8', 'DEFAULT', '0 0/30 * * * ?', 'Asia/Shanghai');
 
 -- ----------------------------
 -- Table structure for qrtz_fired_triggers
@@ -1431,10 +1792,8 @@ CREATE TABLE `qrtz_job_details` (
 -- ----------------------------
 -- Records of qrtz_job_details
 -- ----------------------------
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_1', 'DEFAULT', null, 'com.cnadmart.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597372002E696F2E72656E72656E2E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000017400047465737474000672656E72656E74000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000007800);
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_2', 'DEFAULT', null, 'com.cnadmart.modules.job.utils.ScheduleJob', '0', '0', '0', '1', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597372002E696F2E72656E72656E2E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000274000574657374327074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_3', 'DEFAULT', null, 'com.cnadmart.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597372002E696F2E72656E72656E2E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000037400047465737474000672656E72656E74000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
-INSERT INTO `qrtz_job_details` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', null, 'com.cnadmart.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B45597372002E696F2E72656E72656E2E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000474000574657374327074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+INSERT INTO `qrtz_job_details` VALUES ('FreeterScheduler', 'TASK_7', 'DEFAULT', null, 'com.freeter.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720030636F6D2E667265657465722E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B59741903000078707708000001650D513C407874000C302030203132202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000007740004746573747070737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000007800);
+INSERT INTO `qrtz_job_details` VALUES ('FreeterScheduler', 'TASK_8', 'DEFAULT', null, 'com.freeter.modules.job.utils.ScheduleJob', '0', '0', '0', '0', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720030636F6D2E667265657465722E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B59741903000078707708000001650D51DBC87874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000874000574657374327400076672656574657270737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000007800);
 
 -- ----------------------------
 -- Table structure for qrtz_locks
@@ -1449,8 +1808,8 @@ CREATE TABLE `qrtz_locks` (
 -- ----------------------------
 -- Records of qrtz_locks
 -- ----------------------------
-INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'STATE_ACCESS');
-INSERT INTO `qrtz_locks` VALUES ('RenrenScheduler', 'TRIGGER_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('FreeterScheduler', 'STATE_ACCESS');
+INSERT INTO `qrtz_locks` VALUES ('FreeterScheduler', 'TRIGGER_ACCESS');
 
 -- ----------------------------
 -- Table structure for qrtz_paused_trigger_grps
@@ -1481,8 +1840,8 @@ CREATE TABLE `qrtz_scheduler_state` (
 -- ----------------------------
 -- Records of qrtz_scheduler_state
 -- ----------------------------
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'iZez0h0eg9m3spZ1532332863599', '1532404051091', '15000');
-INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'Wl-081532402523596', '1532404056729', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('FreeterScheduler', 'Wl-081533536350015', '1533537356458', '15000');
+INSERT INTO `qrtz_scheduler_state` VALUES ('RenrenScheduler', 'iZez0h0eg9m3spZ1533353876511', '1533537361772', '15000');
 
 -- ----------------------------
 -- Table structure for qrtz_simple_triggers
@@ -1570,9 +1929,8 @@ CREATE TABLE `qrtz_triggers` (
 -- ----------------------------
 -- Records of qrtz_triggers
 -- ----------------------------
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_2', 'DEFAULT', 'TASK_2', 'DEFAULT', null, '1524454200000', '-1', '5', 'PAUSED', 'CRON', '1524453910000', '0', null, '2', null);
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_3', 'DEFAULT', 'TASK_3', 'DEFAULT', null, '1526275800000', '-1', '5', 'PAUSED', 'CRON', '1526275341000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720031636F6D2E636E61646D6172742E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158BAF593307874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B020000787000000000000000037400047465737474000672656E72656E74000FE69C89E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
-INSERT INTO `qrtz_triggers` VALUES ('RenrenScheduler', 'TASK_4', 'DEFAULT', 'TASK_4', 'DEFAULT', null, '1526275800000', '-1', '5', 'PAUSED', 'CRON', '1526275423000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720031636F6D2E636E61646D6172742E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B5974190300007870770800000158C377C4607874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B0200007870000000000000000474000574657374327074000FE697A0E58F82E695B0E6B58BE8AF95737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+INSERT INTO `qrtz_triggers` VALUES ('FreeterScheduler', 'TASK_7', 'DEFAULT', 'TASK_7', 'DEFAULT', null, '1533614400000', '-1', '5', 'PAUSED', 'CRON', '1533526752000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720030636F6D2E667265657465722E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B59741903000078707708000001650D513B007874000C302030203132202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000007740004746573747400076672656574657270737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000017800);
+INSERT INTO `qrtz_triggers` VALUES ('FreeterScheduler', 'TASK_8', 'DEFAULT', 'TASK_8', 'DEFAULT', null, '1533537000000', '1533535200000', '5', 'PAUSED', 'CRON', '1533526793000', '0', null, '2', 0xACED0005737200156F72672E71756172747A2E4A6F62446174614D61709FB083E8BFA9B0CB020000787200266F72672E71756172747A2E7574696C732E537472696E674B65794469727479466C61674D61708208E8C3FBC55D280200015A0013616C6C6F77735472616E7369656E74446174617872001D6F72672E71756172747A2E7574696C732E4469727479466C61674D617013E62EAD28760ACE0200025A000564697274794C00036D617074000F4C6A6176612F7574696C2F4D61703B787001737200116A6176612E7574696C2E486173684D61700507DAC1C31660D103000246000A6C6F6164466163746F724900097468726573686F6C6478703F4000000000000C7708000000100000000174000D4A4F425F504152414D5F4B455973720030636F6D2E667265657465722E6D6F64756C65732E6A6F622E656E746974792E5363686564756C654A6F62456E7469747900000000000000010200084C00086265616E4E616D657400124C6A6176612F6C616E672F537472696E673B4C000A63726561746554696D657400104C6A6176612F7574696C2F446174653B4C000E63726F6E45787072657373696F6E71007E00094C00056A6F6249647400104C6A6176612F6C616E672F4C6F6E673B4C000A6D6574686F644E616D6571007E00094C0006706172616D7371007E00094C000672656D61726B71007E00094C00067374617475737400134C6A6176612F6C616E672F496E74656765723B7870740008746573745461736B7372000E6A6176612E7574696C2E44617465686A81014B59741903000078707708000001650D51DB287874000E3020302F3330202A202A202A203F7372000E6A6176612E6C616E672E4C6F6E673B8BE490CC8F23DF0200014A000576616C7565787200106A6176612E6C616E672E4E756D62657286AC951D0B94E08B02000078700000000000000008740005746573743274000070737200116A6176612E6C616E672E496E746567657212E2A0A4F781873802000149000576616C75657871007E0013000000007800);
 
 -- ----------------------------
 -- Table structure for schedule_job
@@ -1588,13 +1946,13 @@ CREATE TABLE `schedule_job` (
   `remark` varchar(255) DEFAULT NULL COMMENT '备注',
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='定时任务';
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COMMENT='定时任务';
 
 -- ----------------------------
 -- Records of schedule_job
 -- ----------------------------
-INSERT INTO `schedule_job` VALUES ('3', 'testTask', 'test', 'renren', '0 0/30 * * * ?', '1', '有参数测试', '2016-12-01 23:16:46');
-INSERT INTO `schedule_job` VALUES ('4', 'testTask', 'test2', null, '0 0/30 * * * ?', '1', '无参数测试', '2016-12-03 14:55:56');
+INSERT INTO `schedule_job` VALUES ('7', 'testTask', 'test', 'freeter', '0 0 12 * * ?', '1', null, '2018-08-06 11:39:12');
+INSERT INTO `schedule_job` VALUES ('8', 'testTask', 'test2', '', '0 0/30 * * * ?', '1', null, '2018-08-06 11:39:53');
 
 -- ----------------------------
 -- Table structure for schedule_job_log
@@ -1612,39 +1970,22 @@ CREATE TABLE `schedule_job_log` (
   `create_time` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`log_id`),
   KEY `job_id` (`job_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COMMENT='定时任务日志';
 
 -- ----------------------------
 -- Records of schedule_job_log
 -- ----------------------------
-INSERT INTO `schedule_job_log` VALUES ('1', '1', 'testTask', 'test', 'renren', '0', null, '1068', '2018-04-23 11:30:00');
-INSERT INTO `schedule_job_log` VALUES ('2', '1', 'testTask', 'test', 'renren', '0', null, '1053', '2018-04-23 12:00:00');
-INSERT INTO `schedule_job_log` VALUES ('3', '1', 'testTask', 'test', 'renren', '0', null, '1026', '2018-04-23 12:30:00');
-INSERT INTO `schedule_job_log` VALUES ('4', '1', 'testTask', 'test', 'renren', '0', null, '1018', '2018-04-23 13:00:00');
-INSERT INTO `schedule_job_log` VALUES ('5', '1', 'testTask', 'test', 'renren', '0', null, '1054', '2018-04-23 13:30:00');
-INSERT INTO `schedule_job_log` VALUES ('6', '1', 'testTask', 'test', 'renren', '0', null, '1009', '2018-04-23 14:00:00');
-INSERT INTO `schedule_job_log` VALUES ('7', '1', 'testTask', 'test', 'renren', '0', null, '1093', '2018-04-23 15:00:00');
-INSERT INTO `schedule_job_log` VALUES ('8', '1', 'testTask', 'test', 'renren', '0', null, '1014', '2018-04-23 15:30:00');
-INSERT INTO `schedule_job_log` VALUES ('9', '1', 'testTask', 'test', 'renren', '0', null, '1026', '2018-04-23 16:00:00');
-INSERT INTO `schedule_job_log` VALUES ('10', '1', 'testTask', 'test', 'renren', '0', null, '1033', '2018-04-23 16:30:00');
-INSERT INTO `schedule_job_log` VALUES ('11', '1', 'testTask', 'test', 'renren', '0', null, '1227', '2018-04-23 17:00:00');
-INSERT INTO `schedule_job_log` VALUES ('12', '1', 'testTask', 'test', 'renren', '0', null, '1108', '2018-04-23 17:30:00');
-INSERT INTO `schedule_job_log` VALUES ('13', '1', 'testTask', 'test', 'renren', '0', null, '1054', '2018-04-24 14:00:00');
-INSERT INTO `schedule_job_log` VALUES ('14', '1', 'testTask', 'test', 'renren', '0', null, '1007', '2018-04-24 14:30:00');
-INSERT INTO `schedule_job_log` VALUES ('15', '1', 'testTask', 'test', 'renren', '0', null, '1013', '2018-04-24 15:00:00');
-INSERT INTO `schedule_job_log` VALUES ('16', '1', 'testTask', 'test', 'renren', '0', null, '1009', '2018-04-24 15:30:00');
-INSERT INTO `schedule_job_log` VALUES ('17', '1', 'testTask', 'test', 'renren', '0', null, '1011', '2018-04-24 16:00:00');
-INSERT INTO `schedule_job_log` VALUES ('18', '1', 'testTask', 'test', 'renren', '0', null, '1028', '2018-04-24 16:30:00');
-INSERT INTO `schedule_job_log` VALUES ('19', '1', 'testTask', 'test', 'renren', '0', null, '1007', '2018-04-24 17:00:00');
-INSERT INTO `schedule_job_log` VALUES ('20', '1', 'testTask', 'test', 'renren', '0', null, '1005', '2018-04-24 17:30:00');
-INSERT INTO `schedule_job_log` VALUES ('21', '1', 'testTask', 'test', 'renren', '0', null, '1014', '2018-04-24 18:00:00');
-INSERT INTO `schedule_job_log` VALUES ('22', '1', 'testTask', 'test', 'renren', '0', null, '1007', '2018-04-24 18:30:00');
-INSERT INTO `schedule_job_log` VALUES ('23', '1', 'testTask', 'test', 'renren', '0', null, '1051', '2018-04-25 12:00:00');
-INSERT INTO `schedule_job_log` VALUES ('24', '1', 'testTask', 'test', 'renren', '0', null, '1048', '2018-04-25 12:30:00');
-INSERT INTO `schedule_job_log` VALUES ('25', '1', 'testTask', 'test', 'renren', '0', null, '1009', '2018-04-25 13:00:00');
-INSERT INTO `schedule_job_log` VALUES ('26', '1', 'testTask', 'test', 'renren', '0', null, '1080', '2018-04-25 13:30:00');
-INSERT INTO `schedule_job_log` VALUES ('27', '1', 'testTask', 'test', 'renren', '0', null, '1170', '2018-04-26 16:00:00');
-INSERT INTO `schedule_job_log` VALUES ('28', '1', 'testTask', 'test', 'renren', '0', null, '1018', '2018-04-26 16:30:00');
+INSERT INTO `schedule_job_log` VALUES ('37', '7', 'testTask', 'test', null, '1', 'java.lang.NoSuchMethodException: com.freeter.modules.job.task.TestTask.test()', '1', '2018-08-06 12:28:41');
+INSERT INTO `schedule_job_log` VALUES ('38', '8', 'testTask', 'test2', null, '0', null, '3', '2018-08-06 12:28:41');
+INSERT INTO `schedule_job_log` VALUES ('39', '7', 'testTask', 'test', null, '1', 'java.lang.NoSuchMethodException: com.freeter.modules.job.task.TestTask.test()', '1', '2018-08-06 12:28:41');
+INSERT INTO `schedule_job_log` VALUES ('40', '8', 'testTask', 'test2', null, '0', null, '1', '2018-08-06 12:28:41');
+INSERT INTO `schedule_job_log` VALUES ('41', '8', 'testTask', 'test2', null, '0', null, '3', '2018-08-06 12:30:15');
+INSERT INTO `schedule_job_log` VALUES ('42', '8', 'testTask', 'test2', null, '0', null, '1', '2018-08-06 12:31:06');
+INSERT INTO `schedule_job_log` VALUES ('43', '7', 'testTask', 'test', 'freeter', '0', null, '1121', '2018-08-06 12:31:06');
+INSERT INTO `schedule_job_log` VALUES ('44', '8', 'testTask', 'test2', null, '0', null, '15', '2018-08-06 13:00:07');
+INSERT INTO `schedule_job_log` VALUES ('45', '8', 'testTask', 'test2', null, '0', null, '3', '2018-08-06 14:00:00');
+INSERT INTO `schedule_job_log` VALUES ('46', '8', 'testTask', 'test2', null, '0', null, '1', '2018-08-06 14:00:59');
+INSERT INTO `schedule_job_log` VALUES ('47', '7', 'testTask', 'test', 'freeter', '0', null, '1099', '2018-08-06 14:01:00');
 
 -- ----------------------------
 -- Table structure for sys_config
@@ -1678,14 +2019,14 @@ CREATE TABLE `sys_dept` (
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   `del_flag` tinyint(4) DEFAULT '0' COMMENT '是否删除  -1：已删除  0：正常',
   PRIMARY KEY (`dept_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=28 DEFAULT CHARSET=utf8 COMMENT='部门管理';
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COMMENT='部门管理';
 
 -- ----------------------------
 -- Records of sys_dept
 -- ----------------------------
 INSERT INTO `sys_dept` VALUES ('1', '0', '寝室长', '1', '0');
 INSERT INTO `sys_dept` VALUES ('2', '1', '628二哥', '1', '0');
-INSERT INTO `sys_dept` VALUES ('3', '9', '628小四', '2', '0');
+INSERT INTO `sys_dept` VALUES ('3', '15', '628小四', '2', '0');
 INSERT INTO `sys_dept` VALUES ('4', '3', '技术部', '0', '0');
 INSERT INTO `sys_dept` VALUES ('5', '3', '销售部', '1', '0');
 INSERT INTO `sys_dept` VALUES ('6', '0', null, '0', '-1');
@@ -1710,6 +2051,9 @@ INSERT INTO `sys_dept` VALUES ('24', '0', '22', '0', '0');
 INSERT INTO `sys_dept` VALUES ('25', '1', '测试部门', '0', '0');
 INSERT INTO `sys_dept` VALUES ('26', '0', null, '0', '0');
 INSERT INTO `sys_dept` VALUES ('27', '18', null, '0', '0');
+INSERT INTO `sys_dept` VALUES ('28', '0', null, '0', '0');
+INSERT INTO `sys_dept` VALUES ('29', '0', null, '0', '0');
+INSERT INTO `sys_dept` VALUES ('30', '15', 'dfgdfgdfgdf', '0', '0');
 
 -- ----------------------------
 -- Table structure for sys_dict
@@ -1726,15 +2070,17 @@ CREATE TABLE `sys_dict` (
   `del_flag` tinyint(4) DEFAULT '0' COMMENT '删除标记  -1：已删除  0：正常',
   PRIMARY KEY (`id`),
   UNIQUE KEY `type` (`type`,`code`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COMMENT='数据字典表';
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='数据字典表';
 
 -- ----------------------------
 -- Records of sys_dict
 -- ----------------------------
-INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '男', '0', null, '0');
-INSERT INTO `sys_dict` VALUES ('2', '性别', 'sex', '1', '男', '1', null, '0');
+INSERT INTO `sys_dict` VALUES ('1', '性别', 'sex', '0', '男', '0', null, '-1');
+INSERT INTO `sys_dict` VALUES ('2', '性别', 'sex', '1', '男', '1', null, '-1');
 INSERT INTO `sys_dict` VALUES ('3', '性别', 'sex', '2', '未知', '3', null, '-1');
-INSERT INTO `sys_dict` VALUES ('4', '性别	', 'sex', '4', '人妖', '4', null, '0');
+INSERT INTO `sys_dict` VALUES ('4', '性别	', 'sex', '4', '人妖', '4', null, '-1');
+INSERT INTO `sys_dict` VALUES ('5', '大大大', '2', '1', '1', '1', '1', '-1');
+INSERT INTO `sys_dict` VALUES ('6', 'ads', 'ppppp', '12312312', '31111', '1', null, '0');
 
 -- ----------------------------
 -- Table structure for sys_log
@@ -1750,7 +2096,7 @@ CREATE TABLE `sys_log` (
   `ip` varchar(64) DEFAULT NULL COMMENT 'IP地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=262 DEFAULT CHARSET=utf8 COMMENT='系统日志';
+) ENGINE=InnoDB AUTO_INCREMENT=321 DEFAULT CHARSET=utf8 COMMENT='系统日志';
 
 -- ----------------------------
 -- Records of sys_log
@@ -2016,6 +2362,65 @@ INSERT INTO `sys_log` VALUES ('258', 'admin', '保存菜单', 'com.freeter.modul
 INSERT INTO `sys_log` VALUES ('259', 'admin', '删除用户', 'com.freeter.modules.sys.controller.SysUserController.delete()', '[7]', '43', '110.53.179.135', '2018-07-24 11:40:28');
 INSERT INTO `sys_log` VALUES ('260', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":9,\"username\":\"111111\",\"password\":\"57059743cd9f7da534707879fde5ce16691d25b646fa252829275a2e0ec88937\",\"salt\":\"Vsi274BsRCLp38Ya9K73\",\"email\":\"123@123.com\",\"mobile\":\"123123123123\",\"status\":1,\"roleIdList\":[],\"createTime\":\"Jul 10, 2018 8:48:03 AM\",\"deptId\":15,\"deptName\":\"区管理员\"}', '152', '110.53.179.135', '2018-07-24 11:40:38');
 INSERT INTO `sys_log` VALUES ('261', 'admin', '保存用户', 'com.freeter.modules.sys.controller.SysUserController.save()', '{\"userId\":11,\"username\":\"laox\",\"password\":\"18ce5d55331cbaa4fef3a4f8cc991cd544e03ddab0f54e76f1b93c4d83e0915f\",\"salt\":\"dMxkzLTW53yMQXuOZp7L\",\"email\":\"111111@qq.com\",\"mobile\":\"15114112231\",\"status\":1,\"roleIdList\":[2],\"createTime\":\"Jul 24, 2018 11:41:21 AM\",\"deptId\":4,\"deptName\":\"技术部\"}', '86', '110.53.179.135', '2018-07-24 11:41:22');
+INSERT INTO `sys_log` VALUES ('262', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '34', '183.238.79.11', '2018-07-24 19:51:29');
+INSERT INTO `sys_log` VALUES ('263', 'admin', '修改用户', 'com.freeter.modules.sys.controller.SysUserController.update()', '{\"userId\":6,\"username\":\"test\",\"salt\":\"YzcmCZNvbXocrsz9dm8e\",\"email\":\"6666@163.com\",\"status\":0,\"roleIdList\":[],\"createTime\":\"Jul 8, 2018 6:56:22 PM\",\"deptId\":15,\"deptName\":\"区管理员\"}', '75', '27.19.46.43', '2018-07-25 13:56:41');
+INSERT INTO `sys_log` VALUES ('264', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":3,\"parentName\":\"角色管理\",\"name\":\"dsfa\",\"type\":0,\"orderNum\":0}', '1', '124.78.87.223', '2018-07-25 18:12:59');
+INSERT INTO `sys_log` VALUES ('265', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"parentId\":3,\"parentName\":\"角色管理\",\"name\":\"dsfa\",\"type\":0,\"orderNum\":0}', '0', '124.78.87.223', '2018-07-25 18:13:00');
+INSERT INTO `sys_log` VALUES ('266', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":2,\"roleName\":\"加盟商\",\"deptId\":16,\"deptName\":\"街道管理员\",\"menuIdList\":[1,2,15,16,17,18,3,20,21,6,8,9,12,70,72,73],\"deptIdList\":[4,5],\"createTime\":\"Jun 7, 2018 4:29:40 PM\"}', '412', '117.101.207.129', '2018-07-26 12:11:50');
+INSERT INTO `sys_log` VALUES ('267', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":62,\"parentId\":78,\"parentName\":\"用户管理\",\"name\":\"商品管理\",\"type\":0,\"icon\":\"fa fa-shopping-basket\",\"orderNum\":0}', '0', '117.101.207.129', '2018-07-26 12:12:10');
+INSERT INTO `sys_log` VALUES ('268', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":62,\"parentId\":78,\"parentName\":\"用户管理\",\"name\":\"商品管理\",\"type\":0,\"icon\":\"fa fa-shopping-basket\",\"orderNum\":0}', '0', '117.101.207.129', '2018-07-26 12:12:12');
+INSERT INTO `sys_log` VALUES ('269', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"admin\"', '21', '49.77.233.52', '2018-07-27 15:59:07');
+INSERT INTO `sys_log` VALUES ('270', 'admin', '修改密码', 'com.freeter.modules.sys.controller.SysUserController.password()', '\"123456\"', '16', '49.77.233.52', '2018-07-27 15:59:59');
+INSERT INTO `sys_log` VALUES ('271', 'admin', '修改角色', 'com.freeter.modules.sys.controller.SysRoleController.update()', '{\"roleId\":3,\"roleName\":\"数据权限测试\",\"remark\":\"22\",\"deptId\":1,\"deptName\":\"寝室长\",\"menuIdList\":[1,2,15,16,17,18],\"deptIdList\":[2],\"createTime\":\"Jul 10, 2018 5:49:54 PM\"}', '151', '183.156.76.155', '2018-07-27 23:44:06');
+INSERT INTO `sys_log` VALUES ('272', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":3,\"parentId\":1,\"parentName\":\"系统管理\",\"name\":\"角色管理\",\"url\":\"modules/sys/role.html\",\"type\":1,\"icon\":\"fa fa-user-secret\",\"orderNum\":2}', '0', '113.208.136.18', '2018-08-01 10:48:09');
+INSERT INTO `sys_log` VALUES ('273', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":70,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"订单管理\",\"type\":0,\"icon\":\"fa fa-bars\",\"orderNum\":3}', '106', '0:0:0:0:0:0:0:1', '2018-08-05 10:21:40');
+INSERT INTO `sys_log` VALUES ('274', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":83,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"会员管理\",\"type\":0,\"icon\":\"fa fa-user-o\",\"orderNum\":0}', '75', '0:0:0:0:0:0:0:1', '2018-08-05 10:22:22');
+INSERT INTO `sys_log` VALUES ('275', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":74,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"快递公司管理\",\"url\":\"modules/expressCompany/expresscompany.html\",\"type\":0,\"icon\":\"fa fa-wpexplorer\",\"orderNum\":4}', '72', '0:0:0:0:0:0:0:1', '2018-08-05 10:22:46');
+INSERT INTO `sys_log` VALUES ('276', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":84,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"广告位管理\",\"type\":0,\"icon\":\"fa fa-superpowers\",\"orderNum\":0}', '82', '0:0:0:0:0:0:0:1', '2018-08-05 10:23:23');
+INSERT INTO `sys_log` VALUES ('277', 'admin', '暂停定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.pause()', '[3]', '358', '127.0.0.1', '2018-08-06 11:25:55');
+INSERT INTO `sys_log` VALUES ('278', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[3,4]', '594', '127.0.0.1', '2018-08-06 11:26:03');
+INSERT INTO `sys_log` VALUES ('279', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[3,4]', '591', '127.0.0.1', '2018-08-06 11:30:31');
+INSERT INTO `sys_log` VALUES ('280', 'admin', '暂停定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.pause()', '[3,4]', '821', '127.0.0.1', '2018-08-06 11:30:56');
+INSERT INTO `sys_log` VALUES ('281', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[3,4]', '487', '127.0.0.1', '2018-08-06 11:31:04');
+INSERT INTO `sys_log` VALUES ('282', 'admin', '保存定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.save()', '{\"jobId\":7,\"beanName\":\"testTask\",\"methodName\":\"test\",\"cronExpression\":\"0 0 12 * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:12 AM\"}', '584', '127.0.0.1', '2018-08-06 11:39:13');
+INSERT INTO `sys_log` VALUES ('283', 'admin', '删除定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.delete()', '[4,3]', '2518', '127.0.0.1', '2018-08-06 11:39:35');
+INSERT INTO `sys_log` VALUES ('284', 'admin', '保存定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.save()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"freeter\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '492', '127.0.0.1', '2018-08-06 11:39:54');
+INSERT INTO `sys_log` VALUES ('285', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '431', '127.0.0.1', '2018-08-06 11:40:04');
+INSERT INTO `sys_log` VALUES ('286', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '2007', '127.0.0.1', '2018-08-06 11:40:25');
+INSERT INTO `sys_log` VALUES ('287', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '558', '127.0.0.1', '2018-08-06 11:42:34');
+INSERT INTO `sys_log` VALUES ('288', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '513', '127.0.0.1', '2018-08-06 11:51:02');
+INSERT INTO `sys_log` VALUES ('289', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '1639', '127.0.0.1', '2018-08-06 11:53:27');
+INSERT INTO `sys_log` VALUES ('290', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '871', '127.0.0.1', '2018-08-06 11:54:19');
+INSERT INTO `sys_log` VALUES ('291', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '464', '127.0.0.1', '2018-08-06 11:54:30');
+INSERT INTO `sys_log` VALUES ('292', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '804', '127.0.0.1', '2018-08-06 11:54:50');
+INSERT INTO `sys_log` VALUES ('293', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '1334', '127.0.0.1', '2018-08-06 11:55:16');
+INSERT INTO `sys_log` VALUES ('294', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '16176', '127.0.0.1', '2018-08-06 11:57:57');
+INSERT INTO `sys_log` VALUES ('295', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '3256', '127.0.0.1', '2018-08-06 11:59:40');
+INSERT INTO `sys_log` VALUES ('296', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '391', '127.0.0.1', '2018-08-06 11:59:48');
+INSERT INTO `sys_log` VALUES ('297', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '394', '127.0.0.1', '2018-08-06 12:01:18');
+INSERT INTO `sys_log` VALUES ('298', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '400', '127.0.0.1', '2018-08-06 12:04:43');
+INSERT INTO `sys_log` VALUES ('299', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":8,\"beanName\":\"testTask\",\"methodName\":\"test2\",\"params\":\"\",\"cronExpression\":\"0 0/30 * * * ?\",\"status\":0,\"createTime\":\"Aug 6, 2018 11:39:53 AM\"}', '5282', '127.0.0.1', '2018-08-06 12:05:11');
+INSERT INTO `sys_log` VALUES ('300', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '417', '127.0.0.1', '2018-08-06 12:05:21');
+INSERT INTO `sys_log` VALUES ('301', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '449', '127.0.0.1', '2018-08-06 12:06:00');
+INSERT INTO `sys_log` VALUES ('302', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '968', '127.0.0.1', '2018-08-06 12:07:00');
+INSERT INTO `sys_log` VALUES ('303', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '434', '127.0.0.1', '2018-08-06 12:24:25');
+INSERT INTO `sys_log` VALUES ('304', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[8]', '394', '127.0.0.1', '2018-08-06 12:25:54');
+INSERT INTO `sys_log` VALUES ('305', 'admin', '暂停定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.pause()', '[7,8]', '670', '127.0.0.1', '2018-08-06 12:28:07');
+INSERT INTO `sys_log` VALUES ('306', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[7,8]', '774', '127.0.0.1', '2018-08-06 12:28:28');
+INSERT INTO `sys_log` VALUES ('307', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[7,8]', '754', '127.0.0.1', '2018-08-06 12:28:39');
+INSERT INTO `sys_log` VALUES ('308', 'admin', '修改定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.update()', '{\"jobId\":7,\"beanName\":\"testTask\",\"methodName\":\"test\",\"params\":\"freeter\",\"cronExpression\":\"0 0 12 * * ?\",\"status\":1,\"createTime\":\"Aug 6, 2018 11:39:12 AM\"}', '3764', '127.0.0.1', '2018-08-06 12:29:02');
+INSERT INTO `sys_log` VALUES ('309', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[7,8]', '873', '127.0.0.1', '2018-08-06 12:29:17');
+INSERT INTO `sys_log` VALUES ('310', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[7,8]', '1024', '127.0.0.1', '2018-08-06 12:29:54');
+INSERT INTO `sys_log` VALUES ('311', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[7,8]', '690', '127.0.0.1', '2018-08-06 12:30:44');
+INSERT INTO `sys_log` VALUES ('312', 'admin', '暂停定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.pause()', '[7,8]', '732', '127.0.0.1', '2018-08-06 14:00:39');
+INSERT INTO `sys_log` VALUES ('313', 'admin', '立即执行任务', 'com.freeter.modules.job.controller.ScheduleJobController.run()', '[7,8]', '788', '127.0.0.1', '2018-08-06 14:00:58');
+INSERT INTO `sys_log` VALUES ('314', 'admin', '恢复定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.resume()', '[8]', '520', '127.0.0.1', '2018-08-06 14:14:45');
+INSERT INTO `sys_log` VALUES ('315', 'admin', '暂停定时任务', 'com.freeter.modules.job.controller.ScheduleJobController.pause()', '[8]', '507', '127.0.0.1', '2018-08-06 14:14:49');
+INSERT INTO `sys_log` VALUES ('316', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '105', '39', '127.0.0.1', '2018-08-06 14:26:30');
+INSERT INTO `sys_log` VALUES ('317', 'admin', '删除菜单', 'com.freeter.modules.sys.controller.SysMenuController.delete()', '106', '303', '127.0.0.1', '2018-08-06 14:26:35');
+INSERT INTO `sys_log` VALUES ('318', 'admin', '保存菜单', 'com.freeter.modules.sys.controller.SysMenuController.save()', '{\"menuId\":115,\"parentId\":0,\"parentName\":\"一级菜单\",\"name\":\"广告位管理\",\"type\":0,\"orderNum\":4}', '940', '127.0.0.1', '2018-08-06 14:29:13');
+INSERT INTO `sys_log` VALUES ('319', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":100,\"parentId\":115,\"parentName\":\"广告位管理\",\"name\":\"广告位表\",\"url\":\"modules/adverts/adverts.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6}', '212', '127.0.0.1', '2018-08-06 14:29:41');
+INSERT INTO `sys_log` VALUES ('320', 'admin', '修改菜单', 'com.freeter.modules.sys.controller.SysMenuController.update()', '{\"menuId\":110,\"parentId\":115,\"parentName\":\"广告位管理\",\"name\":\"广告位详情\",\"url\":\"modules/adverts/advertsdetail.html\",\"type\":1,\"icon\":\"fa fa-file-code-o\",\"orderNum\":6}', '212', '127.0.0.1', '2018-08-06 14:29:52');
 
 -- ----------------------------
 -- Table structure for sys_menu
@@ -2031,7 +2436,7 @@ CREATE TABLE `sys_menu` (
   `icon` varchar(50) DEFAULT NULL COMMENT '菜单图标',
   `order_num` int(11) DEFAULT NULL COMMENT '排序',
   PRIMARY KEY (`menu_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=100 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8 COMMENT='菜单管理';
 
 -- ----------------------------
 -- Records of sys_menu
@@ -2088,25 +2493,30 @@ INSERT INTO `sys_menu` VALUES ('61', '57', '删除', null, 'good:channel:delete'
 INSERT INTO `sys_menu` VALUES ('62', '0', '商品管理', null, null, '0', 'fa fa-shopping-basket', '0');
 INSERT INTO `sys_menu` VALUES ('63', '62', '商品发布', 'modules/good/good.html', 'good:good:list,good:good:info,good:good:save,good:good:update,good:good:delete', '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('64', '62', '商品规格', 'modules/good/categoryspec.html', 'good:categoryspec:list,good:categoryspec:info,good:categoryspec:save,good:categoryspec:update,good:categoryspec:delete', '1', null, '0');
-INSERT INTO `sys_menu` VALUES ('70', '0', '订单管理', null, null, '0', null, '3');
+INSERT INTO `sys_menu` VALUES ('70', '0', '订单管理', null, null, '0', 'fa fa-bars', '3');
 INSERT INTO `sys_menu` VALUES ('71', '70', '订单列表', 'modules/order/orderList.html', null, '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('72', '70', '订单发货', 'modules/order/orderSelect.html', null, '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('73', '70', '我的订单', 'modules/order/myOrderList.html', null, '1', null, '0');
-INSERT INTO `sys_menu` VALUES ('74', '0', '快递公司管理', 'modules/expressCompany/expresscompany.html', null, '0', null, '4');
+INSERT INTO `sys_menu` VALUES ('74', '0', '快递公司管理', 'modules/expressCompany/expresscompany.html', null, '0', 'fa fa-wpexplorer', '4');
 INSERT INTO `sys_menu` VALUES ('76', '74', '快递公司列表', 'modules/expressCompany/expresscompany.html', 'expressCompany:expresscompany:save,expressCompany:expresscompany:update,expressCompany:expresscompany:delete,expressCompany:expresscompany:list', '1', null, '0');
 INSERT INTO `sys_menu` VALUES ('78', '83', '用户管理', 'modules/user/user.html', null, '1', 'fa fa-file-code-o', '6');
 INSERT INTO `sys_menu` VALUES ('79', '78', '查看', null, 'user:user:list,user:user:info', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('80', '78', '新增', null, 'user:user:save', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('81', '78', '修改', null, 'user:user:update', '2', null, '6');
 INSERT INTO `sys_menu` VALUES ('82', '78', '删除', null, 'user:user:delete', '2', null, '6');
-INSERT INTO `sys_menu` VALUES ('83', '0', '会员管理', null, null, '0', null, '0');
-INSERT INTO `sys_menu` VALUES ('84', '0', '广告位管理', null, null, '0', null, '0');
-INSERT INTO `sys_menu` VALUES ('85', '84', '广告位管理', 'modules/adverts/adverts.html', null, '1', 'fa fa-file-code-o', '6');
-INSERT INTO `sys_menu` VALUES ('87', '85', '新增', null, 'adverts:adverts:save', '2', null, '6');
-INSERT INTO `sys_menu` VALUES ('89', '85', '删除', null, 'adverts:adverts:delete', '2', null, '6');
-INSERT INTO `sys_menu` VALUES ('95', '84', '广告位详情', 'modules/adverts/advertsdetail.html', null, '1', 'fa fa-file-code-o', '6');
-INSERT INTO `sys_menu` VALUES ('98', '95', '修改', null, 'adverts:advertsdetail:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('83', '0', '会员管理', null, null, '0', 'fa fa-user-o', '0');
 INSERT INTO `sys_menu` VALUES ('99', '1', '超级代码生成器', 'modules/sys/generator.html', null, '1', null, '0');
+INSERT INTO `sys_menu` VALUES ('100', '115', '广告位表', 'modules/adverts/adverts.html', null, '1', 'fa fa-file-code-o', '6');
+INSERT INTO `sys_menu` VALUES ('101', '100', '查看', null, 'adverts:adverts:list,adverts:adverts:info', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('102', '100', '新增', null, 'adverts:adverts:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('103', '100', '修改', null, 'adverts:adverts:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('104', '100', '删除', null, 'adverts:adverts:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('110', '115', '广告位详情', 'modules/adverts/advertsdetail.html', null, '1', 'fa fa-file-code-o', '6');
+INSERT INTO `sys_menu` VALUES ('111', '110', '查看', null, 'adverts:advertsdetail:list,test:advertsdetail:info', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('112', '110', '新增', null, 'adverts:advertsdetail:save', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('113', '110', '修改', null, 'adverts:advertsdetail:update', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('114', '110', '删除', null, 'adverts:advertsdetail:delete', '2', null, '6');
+INSERT INTO `sys_menu` VALUES ('115', '0', '广告位管理', null, null, '0', null, '4');
 
 -- ----------------------------
 -- Table structure for sys_oss
@@ -2117,38 +2527,11 @@ CREATE TABLE `sys_oss` (
   `url` varchar(200) DEFAULT NULL COMMENT 'URL地址',
   `create_date` datetime DEFAULT NULL COMMENT '创建时间',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8 COMMENT='文件上传';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='文件上传';
 
 -- ----------------------------
 -- Records of sys_oss
 -- ----------------------------
-INSERT INTO `sys_oss` VALUES ('18', 'http://img.cnadmart.com/20180605/efdacdca39244d41b2f0e6cc7005c4f4.png', '2018-06-05 11:37:59');
-INSERT INTO `sys_oss` VALUES ('19', 'http://img.cnadmart.com/20180605/3a4a96fa3fe2430281d09aaeb9af03e7.png', '2018-06-05 11:41:48');
-INSERT INTO `sys_oss` VALUES ('20', 'http://img.cnadmart.com/20180605/ef4c4f9654cd4baea537e6b58d44b695.png', '2018-06-05 11:43:05');
-INSERT INTO `sys_oss` VALUES ('21', 'http://img.cnadmart.com/20180605/5239bc4ffeb244d1a58befaa84c196bd.jpg', '2018-06-05 11:43:15');
-INSERT INTO `sys_oss` VALUES ('22', 'http://img.cnadmart.com/20180605/efe0764ad7af4bc59ee70dafa9733d8f.png', '2018-06-05 11:43:21');
-INSERT INTO `sys_oss` VALUES ('23', 'http://img.cnadmart.com/20180605/c580255e108d479ca86f1bcec7b698ab.png', '2018-06-05 11:46:26');
-INSERT INTO `sys_oss` VALUES ('24', 'http://img.cnadmart.com/20180605/83b9dbc71cf747f7a1db108a8cf9c3c8.jpg', '2018-06-05 11:47:21');
-INSERT INTO `sys_oss` VALUES ('25', 'http://img.cnadmart.com/20180605/f92e75489ccc43b4b1c2c2f8a02c9d22.jpg', '2018-06-05 13:27:41');
-INSERT INTO `sys_oss` VALUES ('26', 'http://img.cnadmart.com/20180605/c34001d84ed54a8f830be2500f780d21.png', '2018-06-05 13:28:04');
-INSERT INTO `sys_oss` VALUES ('27', 'http://img.cnadmart.com/20180605/776c458999d942f4b72fd02bda5716db.png', '2018-06-05 13:30:03');
-INSERT INTO `sys_oss` VALUES ('28', 'http://img.cnadmart.com/20180605/f78848de7df04acba3f39b1ed0d3bfd9.png', '2018-06-05 13:35:52');
-INSERT INTO `sys_oss` VALUES ('29', 'http://img.cnadmart.com/20180605/a7a31ac6ad8a4d7c84dc3c291287ae8b.png', '2018-06-05 14:11:21');
-INSERT INTO `sys_oss` VALUES ('30', 'http://img.cnadmart.com/20180605/6c860f313b294495a12d4dea3c49fc87.png', '2018-06-05 14:11:22');
-INSERT INTO `sys_oss` VALUES ('31', 'http://img.cnadmart.com/20180605/57fd33c949884d8bbe3d1896b288fafe.png', '2018-06-05 14:12:30');
-INSERT INTO `sys_oss` VALUES ('32', 'http://img.cnadmart.com/20180605/caa1d898682a4b0e8e5dbac220b9e853.jpg', '2018-06-05 14:12:30');
-INSERT INTO `sys_oss` VALUES ('33', 'http://img.cnadmart.com/20180605/e9c5b531a57c43e1b1f9116e26122fa9.png', '2018-06-05 14:12:52');
-INSERT INTO `sys_oss` VALUES ('34', 'http://img.cnadmart.com/20180605/e8f2f678d0e841a09b17076a7cf1ab4e.png', '2018-06-05 14:12:53');
-INSERT INTO `sys_oss` VALUES ('35', 'http://img.cnadmart.com/20180605/97f0cf96dec64e8e977e7a48d154e9b6.png', '2018-06-05 14:24:04');
-INSERT INTO `sys_oss` VALUES ('36', 'http://img.cnadmart.com/20180605/74fe971154ae4a95bb4e9b6d6bf88fb9.png', '2018-06-05 14:51:35');
-INSERT INTO `sys_oss` VALUES ('37', 'http://img.cnadmart.com/20180605/a44d9e0046294695af1f9e9c37b958d1.png', '2018-06-05 14:59:58');
-INSERT INTO `sys_oss` VALUES ('38', 'http://img.cnadmart.com/20180621/a48bde2c7fe14b39a825849626404799.jpg', '2018-06-21 10:27:14');
-INSERT INTO `sys_oss` VALUES ('39', 'http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg', '2018-06-21 10:42:00');
-INSERT INTO `sys_oss` VALUES ('40', 'http://img.cnadmart.com/20180621/9b7b21a26bb74536985b073488eae307.png', '2018-06-21 10:46:30');
-INSERT INTO `sys_oss` VALUES ('41', 'http://img.cnadmart.com/20180621/d5d9635baf644d26ac80e04c8a122668.jpg', '2018-06-21 14:21:00');
-INSERT INTO `sys_oss` VALUES ('42', 'http://img.cnadmart.com/20180623/8ed6b37c0e354b219a76a2389fa733f5.png', '2018-06-23 00:16:35');
-INSERT INTO `sys_oss` VALUES ('43', 'http://img.cnadmart.com/20180623/e1732d3dd44e4513a88cf4589b4960df.png', '2018-06-23 00:23:48');
-INSERT INTO `sys_oss` VALUES ('44', 'http://img.cnadmart.com/20180623/87fc8c561d02475db2008b1bf6963cf0.png', '2018-06-23 00:24:27');
 
 -- ----------------------------
 -- Table structure for sys_role
@@ -2180,13 +2563,15 @@ CREATE TABLE `sys_role_dept` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `dept_id` bigint(20) DEFAULT NULL COMMENT '部门ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='角色与部门对应关系';
 
 -- ----------------------------
 -- Records of sys_role_dept
 -- ----------------------------
-INSERT INTO `sys_role_dept` VALUES ('10', '3', '2');
 INSERT INTO `sys_role_dept` VALUES ('11', '4', '2');
+INSERT INTO `sys_role_dept` VALUES ('12', '2', '4');
+INSERT INTO `sys_role_dept` VALUES ('13', '2', '5');
+INSERT INTO `sys_role_dept` VALUES ('14', '3', '2');
 
 -- ----------------------------
 -- Table structure for sys_role_menu
@@ -2197,7 +2582,7 @@ CREATE TABLE `sys_role_menu` (
   `role_id` bigint(20) DEFAULT NULL COMMENT '角色ID',
   `menu_id` bigint(20) DEFAULT NULL COMMENT '菜单ID',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=157 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
+) ENGINE=InnoDB AUTO_INCREMENT=179 DEFAULT CHARSET=utf8 COMMENT='角色与菜单对应关系';
 
 -- ----------------------------
 -- Records of sys_role_menu
@@ -2213,22 +2598,28 @@ INSERT INTO `sys_role_menu` VALUES ('121', '5', '23');
 INSERT INTO `sys_role_menu` VALUES ('122', '5', '24');
 INSERT INTO `sys_role_menu` VALUES ('123', '5', '25');
 INSERT INTO `sys_role_menu` VALUES ('124', '5', '26');
-INSERT INTO `sys_role_menu` VALUES ('141', '2', '1');
-INSERT INTO `sys_role_menu` VALUES ('142', '2', '2');
-INSERT INTO `sys_role_menu` VALUES ('143', '2', '15');
-INSERT INTO `sys_role_menu` VALUES ('144', '2', '16');
-INSERT INTO `sys_role_menu` VALUES ('145', '2', '17');
-INSERT INTO `sys_role_menu` VALUES ('146', '2', '18');
-INSERT INTO `sys_role_menu` VALUES ('147', '2', '3');
-INSERT INTO `sys_role_menu` VALUES ('148', '2', '20');
-INSERT INTO `sys_role_menu` VALUES ('149', '2', '21');
-INSERT INTO `sys_role_menu` VALUES ('150', '2', '6');
-INSERT INTO `sys_role_menu` VALUES ('151', '2', '8');
-INSERT INTO `sys_role_menu` VALUES ('152', '2', '9');
-INSERT INTO `sys_role_menu` VALUES ('153', '2', '12');
-INSERT INTO `sys_role_menu` VALUES ('154', '2', '70');
-INSERT INTO `sys_role_menu` VALUES ('155', '2', '72');
-INSERT INTO `sys_role_menu` VALUES ('156', '2', '73');
+INSERT INTO `sys_role_menu` VALUES ('157', '2', '1');
+INSERT INTO `sys_role_menu` VALUES ('158', '2', '2');
+INSERT INTO `sys_role_menu` VALUES ('159', '2', '15');
+INSERT INTO `sys_role_menu` VALUES ('160', '2', '16');
+INSERT INTO `sys_role_menu` VALUES ('161', '2', '17');
+INSERT INTO `sys_role_menu` VALUES ('162', '2', '18');
+INSERT INTO `sys_role_menu` VALUES ('163', '2', '3');
+INSERT INTO `sys_role_menu` VALUES ('164', '2', '20');
+INSERT INTO `sys_role_menu` VALUES ('165', '2', '21');
+INSERT INTO `sys_role_menu` VALUES ('166', '2', '6');
+INSERT INTO `sys_role_menu` VALUES ('167', '2', '8');
+INSERT INTO `sys_role_menu` VALUES ('168', '2', '9');
+INSERT INTO `sys_role_menu` VALUES ('169', '2', '12');
+INSERT INTO `sys_role_menu` VALUES ('170', '2', '70');
+INSERT INTO `sys_role_menu` VALUES ('171', '2', '72');
+INSERT INTO `sys_role_menu` VALUES ('172', '2', '73');
+INSERT INTO `sys_role_menu` VALUES ('173', '3', '1');
+INSERT INTO `sys_role_menu` VALUES ('174', '3', '2');
+INSERT INTO `sys_role_menu` VALUES ('175', '3', '15');
+INSERT INTO `sys_role_menu` VALUES ('176', '3', '16');
+INSERT INTO `sys_role_menu` VALUES ('177', '3', '17');
+INSERT INTO `sys_role_menu` VALUES ('178', '3', '18');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -2252,7 +2643,7 @@ CREATE TABLE `sys_user` (
 -- Records of sys_user
 -- ----------------------------
 INSERT INTO `sys_user` VALUES ('1', 'admin', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', 'root@cnadmart.com', '136000001', '1', '1', '2016-11-11 11:11:11');
-INSERT INTO `sys_user` VALUES ('6', 'test', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', '6666@163.com', null, '1', '1', '2018-07-08 18:56:22');
+INSERT INTO `sys_user` VALUES ('6', 'test', 'e1153123d7d180ceeb820d577ff119876678732a68eef4e6ffc0b1f06a01f91b', 'YzcmCZNvbXocrsz9dm8e', '6666@163.com', null, '0', '15', '2018-07-08 18:56:22');
 INSERT INTO `sys_user` VALUES ('8', 'test001', 'd6330029b3bccb83308424875155ffd3ebb6a4d95c43357dd7c0bd65332c2da9', 'q2R4eOg7cPrO50JKwYI6', '111225544@qq.com', '15770900555', '1', '1', '2018-07-08 21:42:16');
 INSERT INTO `sys_user` VALUES ('9', '111111', '57059743cd9f7da534707879fde5ce16691d25b646fa252829275a2e0ec88937', 'Vsi274BsRCLp38Ya9K73', '123@123.com', '123123123123', '1', '15', '2018-07-10 08:48:03');
 INSERT INTO `sys_user` VALUES ('10', 'test123', 'bc65eef5f18219958fe00f0c811b222a89f3d08257be072536c32cfbc10c520d', 'CJdy9dSFZenBYkCXcW0k', '1212@11.com', null, '1', '1', '2018-07-11 21:56:57');
