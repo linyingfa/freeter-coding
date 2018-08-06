@@ -83,7 +83,7 @@
             	_icon = options.expanderExpandedClass;
         	}else if(options.expandFirst&&lv<2){
             	tr.css("display","table");
-            	_icon=(lv==1)?options.expanderExpandedClass:options.expanderCollapsedClass;
+            	_icon=(lv==1)?options.expanderCollapsedClass:options.expanderExpandedClass;
         	}else{
             	tr.css("display","none");
             	_icon = options.expanderCollapsedClass;
