@@ -29,13 +29,14 @@
 
  **项目结构** 
 
-———freeter-coding<br>
-——————freeter-admin 后台管理 <br>
-——————————freeter-common 公共模块<br>
-——————————freeter-good 商品模块<br>
-——————————freeter-user 会员模块<br>
-——————freeter-api 移动端接口模块<br>
-——————freeter-generator 独立代码生成器模块
+:fa-minus: freeter-coding<br>
+:fa-minus: freeter-admin 后台管理 <br>
+:fa-minus: freeter-common 公共模块<br>
+:fa-minus: freeter-good 商品模块<br>
+:fa-minus: freeter-user 会员模块<br>
+:fa-minus: freeter-job  定时任务模块<br>
+:fa-minus: freeter-api 移动端接口模块<br>
+:fa-minus: freeter-generator 独立代码生成器模块 
 
 <br> 
 
@@ -90,14 +91,14 @@
     config-location: /cache/j2cache-no.properties     
     open-spring-cache: true  
 
-j2cache-no.properties    就是不用缓存
-j2cache-redis.properties redis 包括二级缓存
-j2cache-caffeine.properties 一级缓存
+ :fa-star: j2cache-no.properties    就是不使用缓存 <br>
+ :fa-star: j2cache-redis.properties redis 使用二级缓存<br>
+ :fa-star:j2cache-caffeine.properties 使用一级缓存<br>
 
 7.在freeter-coding目录下，执行mvn clean install
 <br>
-
-- Eclipse、IDEA运行AdminApplication.java，则可启动项目【freeter-admin】
+8、如何运行
+- Eclipse或IDEA运行AdminApplication.java，则可启动项目【freeter-admin】
 - freeter-admin访问路径：http://localhost:8080/freeter-admin/index.html
 - 账号密码：admin/admin
 
