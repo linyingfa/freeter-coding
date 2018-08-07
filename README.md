@@ -104,12 +104,12 @@ j2cache-caffeine.properties 一级缓存
 <br>
 
 - Eclipse、IDEA运行ApiApplication.java，则可启动项目【freeter-api】
-- renren-api访问路径：http://localhost:8081/freeter-api/swagger-ui.html
+- freeter-api访问路径：http://localhost:8081/freeter-api/swagger-ui.html
 
 <br>
 
 - Eclipse、IDEA运行GeneratorApplication.java，则可启动项目【freeter-generator】
-- renren-generator访问路径：http://localhost:8082/freeter-generator
+- freeter-generator访问路径：http://localhost:8082/freeter-generator
 
 
 <br>
