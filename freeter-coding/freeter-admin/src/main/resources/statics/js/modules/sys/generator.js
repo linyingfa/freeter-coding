@@ -73,13 +73,13 @@ var vm = new Vue({
 	            });
 			});
  		},
- 		generatorApi: function() {
+ 		genAPI: function() {
 			var tableNames = getSelectedRows();
 			if(tableNames == null){
 				return ;
 			}
 			confirm('是否覆盖移动端接口代码', function(){
-			 $.get( baseURL +"sys/generator/apicode?tables=" + encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			 $.get( baseURL +"sys/generator/genAPI?tables=" + encodeURIComponent(JSON.stringify(tableNames)), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                          vm.reload();
@@ -96,12 +96,13 @@ var vm = new Vue({
 				location.href = "sys/generator/doc";
 			});
  		},
-		update: function() {
+ 		genVO: function() {
 			var tableNames = getSelectedRows();
 			if(tableNames == null){
 				return ;
 			}
-			  $.get( baseURL +"sys/generator/update?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			confirm('是否生成VO实体类代码', function(){
+			  $.get( baseURL +"sys/generator/genVO?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                           vm.reload();
@@ -110,7 +111,41 @@ var vm = new Vue({
                       alert(r.msg);
                   }
 	            });
-			 
+			});
+		},
+ 		genEntity: function() {
+			var tableNames = getSelectedRows();
+			if(tableNames == null){
+				return ;
+			}
+			confirm('是否只生成实体类代码', function(){
+			  $.get( baseURL +"sys/generator/genEntity?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+				  if(r.code == 0){
+					  alert(r.msg, function(){
+                          vm.reload();
+                      });
+                  }else{
+                      alert(r.msg);
+                  }
+	            });
+			});
+		},
+		genController: function() {
+			var tableNames = getSelectedRows();
+			if(tableNames == null){
+				return ;
+			}
+			confirm('是否只生成后端controller代码', function(){
+			  $.get( baseURL +"sys/generator/genController?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+				  if(r.code == 0){
+					  alert(r.msg, function(){
+                          vm.reload();
+                      });
+                  }else{
+                      alert(r.msg);
+                  }
+	            });
+			  }); 
 		}
 	}
 });
