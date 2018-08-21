@@ -24,6 +24,7 @@ import com.freeter.modules.gen.entity.TableEntity;
 import com.freeter.modules.gen.service.SysGeneratorService;
 import com.freeter.modules.gen.utils.DocMapFactory;
 import com.freeter.modules.gen.utils.FreemarkerUtils;
+import com.freeter.modules.gen.utils.GenUtils;
 
 import freemarker.template.Template;
 
@@ -111,7 +112,7 @@ public class SysGeneratorController {
 		String tables = request.getParameter("tables");
 		tableNames = JSON.parseArray(tables).toArray(tableNames);
 		
-		sysGeneratorService.generatorAllCode(tableNames);
+		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getTemplates());
 		
 		return R.ok("后端代码全部更新成功，请刷新IDE");
 	}
@@ -119,30 +120,55 @@ public class SysGeneratorController {
 	/**
 	 * 更新全部api接口代码
 	 */
-	@RequestMapping("/apicode")
+	@RequestMapping("/genAPI")
 	@ResponseBody
-	public R  apicode(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public R  genAPI(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String[] tableNames = new String[]{};
 		String tables = request.getParameter("tables");
 		tableNames = JSON.parseArray(tables).toArray(tableNames);
-		
-		sysGeneratorService.generatorApiCode(tableNames);
+		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getAPITemplates());
 		
 		return R.ok("移动端接口全部更新成功，请刷新IDE");
 	}
 	
-	
 	/**
-	 * 更新代码
+	 * 更新controller接口代码
 	 */
+	@RequestMapping("/genController")
 	@ResponseBody
-	@RequestMapping("/update")
-	public R update(HttpServletRequest request, HttpServletResponse response) throws IOException{
+	public R  genController(HttpServletRequest request, HttpServletResponse response) throws IOException{
 		String[] tableNames = new String[]{};
 		String tables = request.getParameter("tables");
 		tableNames = JSON.parseArray(tables).toArray(tableNames);
+		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getControllerTemplates());
 		
-		sysGeneratorService.updateCode(tableNames);
+		return R.ok("移动端接口全部更新成功，请刷新IDE");
+	}
+	
+	/**
+	 * 更新vo代码
+	 */
+	@ResponseBody
+	@RequestMapping("/genVO")
+	public R genVO(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String[] tableNames = new String[]{};
+		String tables = request.getParameter("tables");
+		tableNames = JSON.parseArray(tables).toArray(tableNames);
+		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getVOTemplates());
+		return R.ok("代码更新成功，请刷新IDE");
+		 
+	}
+	
+	/**
+	 * 更新Entity代码
+	 */
+	@ResponseBody
+	@RequestMapping("/genEntity")
+	public R genEntity(HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String[] tableNames = new String[]{};
+		String tables = request.getParameter("tables");
+		tableNames = JSON.parseArray(tables).toArray(tableNames);
+		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getEntityTemplates());
 		return R.ok("代码更新成功，请刷新IDE");
 		 
 	}

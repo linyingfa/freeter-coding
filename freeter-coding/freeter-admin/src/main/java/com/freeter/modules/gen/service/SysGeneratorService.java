@@ -116,7 +116,7 @@ public class SysGeneratorService {
 		return outputStream.toByteArray();
 	}
 
-	public void generatorAllCode(String[] tableNames) throws IOException {
+	public void generatorAllCode(String[] tableNames,List<String> templates) throws IOException {
 
 		for (String tableName : tableNames) {
 			// 查询表信息
@@ -126,36 +126,9 @@ public class SysGeneratorService {
 			// 查询关联表的信息
 			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
 			// 生成代码
-			GenUtils.generatorAllCode(table, listReferencedTable, columns);
+			GenUtils.generatorAllCode(table, listReferencedTable, columns,templates);
 		}
 	}
 
-	public void generatorApiCode(String[] tableNames) throws IOException {
-
-		for (String tableName : tableNames) {
-			// 查询表信息
-			TableEntity table = queryTable(tableName);
-			// 查询列信息
-			List<ColumnEntity> columns = queryColumns(tableName);
-			// 查询关联表的信息
-			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
-			// 生成代码
-			GenUtils.generatorApiCode(table, listReferencedTable, columns);
-		}
-	}
-
-	public void updateCode(String[] tableNames) throws IOException {
-
-		for (String tableName : tableNames) {
-			// 查询表信息
-			TableEntity table = queryTable(tableName);
-			// 查询列信息
-			List<ColumnEntity> columns = queryColumns(tableName);
-			// 查询关联表的信息
-			List<ReferencedTable> listReferencedTable = queryReferenced(tableName);
-			// 生成代码
-			GenUtils.updateCode(table, listReferencedTable, columns);
-		}
-
-	}
+	
 }

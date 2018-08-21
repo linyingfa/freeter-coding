@@ -56,7 +56,6 @@ import cn.hutool.core.io.FileUtil;
 public class GenUtils {
 	public static final char UNDERLINE = '_';
 	public static List<String> getTemplates() {
-		
 		List<String> templates = new ArrayList<String>();
 		templates.add("gen/template/Entity.java.vm");
 		templates.add("gen/template/Dao.java.vm");
@@ -74,6 +73,44 @@ public class GenUtils {
 		templates.add("gen/template/Query.java.vm");
 		return templates;
 	}
+	public static List<String> getAPITemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("gen/template/Api.java.vm");
+		return templates;
+	}
+	public static List<String> getEntityTemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("gen/template/Entity.java.vm");
+		return templates;
+	}
+	public static List<String> getVOTemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("gen/template/Entity.java.vm");
+		templates.add("gen/template/View.java.vm");
+		templates.add("gen/template/Model.java.vm");
+		templates.add("gen/template/VO.java.vm");
+		templates.add("gen/template/Query.java.vm");
+		return templates;
+	}
+	public static List<String> getControllerTemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("gen/template/Api.java.vm");
+		return templates;
+	}
+	
+/*	public static List<String> getPageTemplates() {
+		List<String> templates = new ArrayList<String>();
+		templates.add("gen/template/list.html.vm");
+		templates.add("gen/template/list.js.vm");
+		templates.add("gen/template/menu.sql.vm");
+		templates.add("gen/template/Api.java.vm");
+		templates.add("gen/template/View.java.vm");
+		templates.add("gen/template/Model.java.vm");
+		templates.add("gen/template/VO.java.vm");
+		templates.add("gen/template/Query.java.vm");
+		return templates;
+	}*/
+
 
 	private static VelocityContext getVelocityContext(Configuration config ,TableEntity tableEntity) {
 		 
@@ -258,18 +295,13 @@ public class GenUtils {
 	 * @throws IOException 
 	 */
 	public static void generatorAllCode(TableEntity table,List<ReferencedTable> listReferencedTable,
-			List<ColumnEntity> columns) throws IOException {
+			List<ColumnEntity> columns,List<String> templates) throws IOException {
 		//配置信息
 		Configuration config = getConfig();
 		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
         VelocityContext context = getVelocityContext(config,tableEntity);
-       
-       //获取模板列表
-		List<String> templates = getTemplates();
 		for(String template : templates){
-			if("gen/template/Api.java.vm".equals(template)) {
-				continue;
-			}
+			 
 			//渲染模板
 			StringWriter sw = new StringWriter();
 			Template tpl = Velocity.getTemplate(template, "UTF-8");
@@ -301,147 +333,7 @@ public class GenUtils {
 		}
 	}
 	
-	/*
-	 * 生成接口代码
-	 * @throws IOException 
-	 */
-	public static void generatorApiCode(TableEntity table,List<ReferencedTable> listReferencedTable,
-			List<ColumnEntity> columns) throws IOException {
-		//配置信息
-		Configuration config = getConfig();
-		
-		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
-        VelocityContext context = getVelocityContext(config,tableEntity);
-       
-       //获取模板列表
-		List<String> templates = getTemplates();
-		for(String template : templates){
-			if("gen/template/Controller.java.vm".equals(template)) {
-				continue;
-			}
-			if("gen/template/list.html.vm".equals(template)) {
-				continue;
-			}
-			if("gen/template/list.js.vm".equals(template)) {
-				continue;
-			}
-			if("gen/template/menu.sql.vm".equals(template)) {
-				continue;
-			}
-			if("gen/template/View.java.vm".equals(template)) {
-				continue;
-
-			}
-			if("gen/template/Model.java.vm".equals(template)) {
-				continue;
-
-			}
-			if("gen/template/VO.java.vm".equals(template)) {
-				continue;
-
-			}
-			if("gen/template/Query.java.vm".equals(template)) {
-				continue;
-
-			}
-			if("gen/template/Entity.java.vm".equals(template)) {
-				continue;
-
-			}
-			//渲染模板
-			StringWriter sw = new StringWriter();
-			Template tpl = Velocity.getTemplate(template, "UTF-8");
-			tpl.merge(context, sw);
-		 
-				//获取当前项目的根路径 
-				 File directory = new File("");// 参数为空
-		         String courseFile = directory.getCanonicalPath();
- 		        String ide = config.getString("ide");
-		         String project = config.getString("apiproject");
-		         if( StringUtils.isNotEmpty(project)){
-		        	  
-		        	 int i=  StringUtils.lastIndexOf(courseFile, "\\");
-		        	 if("eclipse".equals(ide)) {
-		        		 courseFile=  courseFile.substring(0, StringUtils.lastIndexOf(courseFile, "\\"))+"\\"+project; 
-		        	 }else {
-		        		 courseFile +="\\"+project;
-		        	 }
-		        	 
-		         }
-		        
-				String entityFileName = getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"));
-				 
-				FileUtil.writeString(sw.toString(),FileUtil.touch( courseFile+"\\src\\"+entityFileName), "UTF-8");
-				//FileUtil.file(s)
-			 
-		 
-		}
-	}
-	
-	
-	/**
-	 * 更新代码
-	 * @throws IOException 
-	 */
-	public static void updateCode(TableEntity table, List<ReferencedTable> listReferencedTable,
-			List<ColumnEntity> columns) throws IOException {
-		//配置信息
-		Configuration config = getConfig();
-		TableEntity tableEntity = getTableInfo(config,table, listReferencedTable,columns);
-        VelocityContext context = getVelocityContext(config,tableEntity);
-        //获取模板列表
-		List<String> templates = getTemplates();
-		for(String template : templates){
-			//渲染模板
-			StringWriter sw = new StringWriter();
-			Template tpl = Velocity.getTemplate(template, "UTF-8");
-			tpl.merge(context, sw);
-			if("gen/template/Entity.java.vm".equals(template) ) {
-				//获取当前项目的根路径 
-				 File directory = new File("");// 参数为空
-		         String courseFile = directory.getCanonicalPath();
- 		         String project = config.getString("adminproject");
- 		        String ide = config.getString("ide");
-		         if( StringUtils.isNotEmpty(project)){
-		        	  
-		        	 int i=  StringUtils.lastIndexOf(courseFile, "\\");
-		        	 if("eclipse".equals(ide)) {
-		        		 courseFile=  courseFile.substring(0, StringUtils.lastIndexOf(courseFile, "\\"))+"\\"+project; 
-		        	 }else {
-		        		 courseFile +="\\"+project;
-		        	 }
-		        	 
-		         }
-		       
-		        
-				String entityFileName = getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"));
-				 
-				FileUtil.writeString(sw.toString(),FileUtil.touch( courseFile+"\\src\\"+entityFileName), "UTF-8");
- 				
-				   project = config.getString("apiproject");
-	 		       
-			         if( StringUtils.isNotEmpty(project)){
-			        	  
-			        	 int i=  StringUtils.lastIndexOf(courseFile, "\\");
-			        	 if("eclipse".equals(ide)) {
-			        		 courseFile=  courseFile.substring(0, StringUtils.lastIndexOf(courseFile, "\\"))+"\\"+project; 
-			        	 }else {
-			        		 courseFile +="\\"+project;
-			        	 }
-			        	 
-			         }
-			       
-			        
-					entityFileName = getFileName(template, tableEntity.getClassName(), config.getString("package"), config.getString("moduleName"));
-					 
-					FileUtil.writeString(sw.toString(),FileUtil.touch( courseFile+"\\src\\"+entityFileName), "UTF-8");
-	 				
-				
-				//FileUtil.file(s)
-			}
-			 
-		}
-	}
+	 
 
 	/**
 	 * 列名转换成Java属性名
