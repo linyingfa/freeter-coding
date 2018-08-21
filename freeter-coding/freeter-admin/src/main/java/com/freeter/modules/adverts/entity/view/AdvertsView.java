@@ -17,7 +17,7 @@ import java.io.Serializable;
  * （通常后端关联的表或者自定义的字段需要返回使用）
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:18
+ * @date 2018-08-21 12:36:59
  */
 @TableName("cn_adverts")
 @ApiModel(value = "Adverts")

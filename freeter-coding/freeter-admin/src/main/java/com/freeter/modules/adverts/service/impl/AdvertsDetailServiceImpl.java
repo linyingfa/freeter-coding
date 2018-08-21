@@ -9,31 +9,22 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.service.impl.ServiceImpl;
 import com.freeter.common.utils.PageUtils;
-import com.freeter.common.utils.Query;
 
 import com.freeter.modules.adverts.dao.AdvertsDetailDao;
 import com.freeter.modules.adverts.entity.AdvertsDetailEntity;
 import com.freeter.modules.adverts.service.AdvertsDetailService;
 import com.freeter.modules.adverts.entity.vo.AdvertsDetailVO;
 import com.freeter.modules.adverts.entity.view.AdvertsDetailView;
+import com.freeter.common.utils.PageInfo;
 
 
 @Service("advertsDetailService")
 public class AdvertsDetailServiceImpl extends ServiceImpl<AdvertsDetailDao, AdvertsDetailEntity> implements AdvertsDetailService {
 
-    @Override
-    public PageUtils queryPage(Map<String, Object> params) {
-        Page<AdvertsDetailEntity> page = this.selectPage(
-                new Query<AdvertsDetailEntity>(params).getPage(),
-                new EntityWrapper<AdvertsDetailEntity>()
-        );
 
-        return new PageUtils(page);
-    }
-    
     @Override
-	public PageUtils queryPage(Map<String, Object> params, Wrapper<AdvertsDetailEntity> wrapper) {
-		  Page<AdvertsDetailView> page =new Query<AdvertsDetailView>(params).getPage();
+	public PageUtils queryPage(PageInfo pageInfo, Wrapper<AdvertsDetailEntity> wrapper) {
+		  	Page<AdvertsDetailView> page =pageInfo.getPage();
 	        page.setRecords(baseMapper.selectListView(page,wrapper));
 	    	PageUtils pageUtil = new PageUtils(page);
 	    	return pageUtil;

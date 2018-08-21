@@ -16,7 +16,7 @@ import com.freeter.modules.adverts.entity.view.AdvertsDetailView;
  * 
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:19
+ * @date 2018-08-21 12:36:59
  */
 public interface AdvertsDetailDao extends BaseMapper<AdvertsDetailEntity> {
 	

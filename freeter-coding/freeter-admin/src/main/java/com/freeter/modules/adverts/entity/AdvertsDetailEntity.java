@@ -27,7 +27,7 @@ import com.baomidou.mybatisplus.enums.FieldFill;
  * 数据库通用操作实体类（普通增删改查）
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:19
+ * @date 2018-08-21 12:36:59
  */
 @TableName("cn_adverts_detail")
 @ApiModel(value = "AdvertsDetail")

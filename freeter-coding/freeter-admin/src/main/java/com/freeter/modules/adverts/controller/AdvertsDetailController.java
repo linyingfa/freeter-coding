@@ -12,9 +12,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.freeter.common.utils.JQPageInfo;
+import com.freeter.common.mpextend.parser.ParseWrapper;
+import com.freeter.common.utils.PageInfo;
+
 
 import com.freeter.modules.adverts.entity.AdvertsDetailEntity;
 import com.freeter.modules.adverts.entity.view.AdvertsDetailView;
+import com.freeter.modules.adverts.entity.model.AdvertsDetailModel;
 
 import com.freeter.modules.adverts.service.AdvertsDetailService;
 import com.freeter.common.utils.PageUtils;
@@ -28,7 +33,7 @@ import com.freeter.common.utils.MPUtil;
  * 后端接口
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:19
+ * @date 2018-08-21 12:36:59
  */
 @RestController
 @RequestMapping("adverts/advertsdetail")
@@ -41,11 +46,10 @@ public class AdvertsDetailController {
      */
     @RequestMapping("/page")
     @RequiresPermissions("adverts:advertsdetail:list")
-    public R page(@RequestParam Map<String, Object> params,AdvertsDetailEntity advertsDetail){
- 
-        EntityWrapper< AdvertsDetailEntity> ew = new EntityWrapper< AdvertsDetailEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( advertsDetail, "advertsDetail")); 
-    	PageUtils page = advertsDetailService.queryPage(params, ew);
+    public R page(JQPageInfo jqPageInfo,AdvertsDetailModel advertsDetail){
+        EntityWrapper< AdvertsDetailEntity> ew = ParseWrapper.parseWrapper(advertsDetail);
+     	PageInfo pageInfo = new PageInfo(jqPageInfo);
+     	PageUtils page = advertsDetailService.queryPage(pageInfo, ew);
     
         return R.ok().put("page", page);
         
@@ -56,9 +60,8 @@ public class AdvertsDetailController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("adverts:advertsdetail:list")
-    public R list( AdvertsDetailEntity advertsDetail){
-       	EntityWrapper<  AdvertsDetailEntity> ew = new EntityWrapper<  AdvertsDetailEntity>();
-      	ew.allEq(MPUtil.allEQMapPre( advertsDetail, "advertsDetail")); 
+    public R list( AdvertsDetailModel advertsDetail){
+       	EntityWrapper< AdvertsDetailEntity> ew = ParseWrapper.parseWrapper(advertsDetail);
         return R.ok().put("data",  advertsDetailService.selectListView(ew));
     }
 

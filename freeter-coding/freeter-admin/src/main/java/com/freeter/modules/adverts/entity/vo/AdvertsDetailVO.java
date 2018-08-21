@@ -18,7 +18,7 @@ import java.io.Serializable;
  * （主要作用去除一些不必要的字段）
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:19
+ * @date 2018-08-21 12:36:59
  */
 @ApiModel(value = "AdvertsDetailVO")
 public class AdvertsDetailVO  implements Serializable {

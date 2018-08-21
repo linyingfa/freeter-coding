@@ -9,6 +9,7 @@ import java.util.Map;
 import com.freeter.modules.adverts.entity.vo.AdvertsVO;
 import org.apache.ibatis.annotations.Param;
 import com.freeter.modules.adverts.entity.view.AdvertsView;
+import com.freeter.common.utils.PageInfo;
 
 
 /**
@@ -16,11 +17,10 @@ import com.freeter.modules.adverts.entity.view.AdvertsView;
  *
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-07-11 16:44:18
+ * @date 2018-08-21 12:36:59
  */
 public interface AdvertsService extends IService<AdvertsEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
     
    	List<AdvertsVO> selectListVO(Wrapper<AdvertsEntity> wrapper);
    	
@@ -30,6 +30,6 @@ public interface AdvertsService extends IService<AdvertsEntity> {
    	
    	AdvertsView selectView(@Param("ew") Wrapper<AdvertsEntity> wrapper);
    	
-   	PageUtils queryPage(Map<String, Object> params,Wrapper<AdvertsEntity> wrapper);
+   	PageUtils queryPage(PageInfo pageInfo,Wrapper<AdvertsEntity> wrapper);
 }
 
