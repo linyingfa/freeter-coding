@@ -142,7 +142,7 @@ public class SysGeneratorController {
 		tableNames = JSON.parseArray(tables).toArray(tableNames);
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getControllerTemplates());
 		
-		return R.ok("移动端接口全部更新成功，请刷新IDE");
+		return R.ok("接口更新成功，请刷新IDE");
 	}
 	
 	/**

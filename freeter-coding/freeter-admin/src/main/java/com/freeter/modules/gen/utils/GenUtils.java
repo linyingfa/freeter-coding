@@ -94,7 +94,7 @@ public class GenUtils {
 	}
 	public static List<String> getControllerTemplates() {
 		List<String> templates = new ArrayList<String>();
-		templates.add("gen/template/Api.java.vm");
+		templates.add("gen/template/Controller.java.vm");
 		return templates;
 	}
 	
