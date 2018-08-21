@@ -9,6 +9,7 @@ import java.util.Map;
 import ${package}.${moduleName}.entity.vo.${className}VO;
 import org.apache.ibatis.annotations.Param;
 import ${package}.${moduleName}.entity.view.${className}View;
+import ${mainPath}.common.utils.PageInfo;
 
 
 /**
@@ -20,7 +21,6 @@ import ${package}.${moduleName}.entity.view.${className}View;
  */
 public interface ${className}Service extends IService<${className}Entity> {
 
-    PageUtils queryPage(Map<String, Object> params);
     
    	List<${className}VO> selectListVO(Wrapper<${className}Entity> wrapper);
    	
@@ -30,6 +30,6 @@ public interface ${className}Service extends IService<${className}Entity> {
    	
    	${className}View selectView(@Param("ew") Wrapper<${className}Entity> wrapper);
    	
-   	PageUtils queryPage(Map<String, Object> params,Wrapper<${className}Entity> wrapper);
+   	PageUtils queryPage(PageInfo pageInfo,Wrapper<${className}Entity> wrapper);
 }
 

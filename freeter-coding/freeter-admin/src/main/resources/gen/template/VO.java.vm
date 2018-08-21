@@ -4,7 +4,6 @@ import ${package}.${moduleName}.entity.${className}Entity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.baomidou.mybatisplus.annotations.TableName;
 import java.util.Date;
 #if(${hasBigDecimal})
 import java.math.BigDecimal;

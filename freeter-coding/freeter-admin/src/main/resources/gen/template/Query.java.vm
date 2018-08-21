@@ -1,4 +1,4 @@
-package ${package}.${moduleName}.entity.model;
+package ${package}.${moduleName}.entity.query;
 
 import ${package}.${moduleName}.entity.${className}Entity;
 
@@ -13,23 +13,24 @@ import org.springframework.format.annotation.DateTimeFormat;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import java.io.Serializable;
 import ${mainPath}.common.annotation.OwnerTable;
- 
+
 
 /**
  * ${comments}
  * 接收传参的实体类  
- *（后台接收参数） 
+ *（实际开发中配合移动端接口开发手动去掉些没用的字段， 后端一般用entity就够用了） 
  * 取自ModelAndView 的model名称
  * @author ${author}
  * @email ${email}
  * @date ${datetime}
  */
 @OwnerTable(${className}Entity.class)
-@ApiModel(value = "${className}Model")
-public class ${className}Model  implements Serializable {
+@ApiModel(value = "${className}Query")
+public class ${className}Query  implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	 #foreach ($column in $columns)
+	#if($column.columnName != $pk.columnName && $column.attrname != 'updateBy' && $column.attrname != 'createBy' && $column.attrname != 'updateTime' && $column.attrname != 'createTime' && $column.attrname != 'sort')
 	
 	/**
 	 * $column.comments
@@ -41,10 +42,11 @@ public class ${className}Model  implements Serializable {
 
 	@ApiModelProperty(value = "${column.comments}") 
 	private $column.attrType $column.attrname;
-
+#end
 #end
 #foreach ($column in $columns)
- 	
+	#if($column.columnName != $pk.columnName && $column.attrname != 'updateBy' && $column.attrname != 'createBy' && $column.attrname != 'updateTime' && $column.attrname != 'createTime' && $column.attrname != 'sort')
+	
 	
 	/**
 	 * 设置：${column.comments}
@@ -60,6 +62,7 @@ public class ${className}Model  implements Serializable {
 	public $column.attrType get${column.attrName}() {
 		return $column.attrname;
 	}
- 	#end
+	#end 
+	#end
 	
 }
