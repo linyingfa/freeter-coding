@@ -24,9 +24,14 @@ public class ParseLikeWrapper {
 			tables = outer.value();
 		}
 
-		String[] classRealNameArr = fieldAnno.value();
-		int realNameLength = classRealNameArr.length;
-		if (realNameLength > 0) {
+ 		int realNameLength = 0;
+		String[] classRealNameArr = new String[]{};
+		if(fieldAnno != null) {
+			
+			classRealNameArr = fieldAnno.value();
+			realNameLength = classRealNameArr.length;
+		}
+ 		if (realNameLength > 0) {
 			if (realNameLength > 1) {
 				wrapper.eq("1", 1);
 				wrapper.andNew();

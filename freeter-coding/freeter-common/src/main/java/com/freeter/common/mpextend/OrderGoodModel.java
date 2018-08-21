@@ -33,7 +33,7 @@ public class OrderGoodModel {
 	@MpEQ({ "goodDname", "dfDsdf" })
 	private String goodSpec; // 商品规格
 
-	@MpLike({ "12", "34" })
+	@MpLike({ "column1", "column12" })
 	@OuterTable({ OrderGoodModel.class, OrderGoodModel.class })
 	private Integer goodCount; // 商品数量
 	private BigDecimal unitPrice;// 商品单价

@@ -17,7 +17,7 @@ import cn.hutool.core.util.ReflectUtil;
 
 public class ParseWrapper {
 
-	public static <T> EntityWrapper parseWrapper(T t) throws Exception {
+	public static <T> EntityWrapper parseWrapper(T t)  {
 		EntityWrapper wrapper = new EntityWrapper();
 		 
 		Field[] fArr = ReflectUtil.getFields(t.getClass());
@@ -33,7 +33,13 @@ public class ParseWrapper {
  		
  		for (Field field : fArr) {
 			field.setAccessible(true);
-			if (field.get(t) == null) {
+			try {
+				if (field.get(t) == null) {
+					continue;
+				}
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				// TODO Auto-generated catch block
+				//return null
 				continue;
 			}
 

@@ -25,8 +25,13 @@ public class ParseEQWrapper {
 		if (outer != null) {
 			tables = outer.value();
 		}
-		String[] classRealNameArr = fieldEQAnno.value();
-		int realNameLength = classRealNameArr.length;
+		int realNameLength = 0;
+		String[] classRealNameArr = new String[]{};
+		if(fieldEQAnno != null) {
+			
+			classRealNameArr = fieldEQAnno.value();
+			realNameLength = classRealNameArr.length;
+		}
 		if(realNameLength == 1) {
 			camelFieldName = MPUtil.camelToUnderline(classRealNameArr[0]);
 		}
