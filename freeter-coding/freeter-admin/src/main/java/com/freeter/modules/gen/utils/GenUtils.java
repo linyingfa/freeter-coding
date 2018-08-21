@@ -71,6 +71,7 @@ public class GenUtils {
 		templates.add("gen/template/View.java.vm");
 		templates.add("gen/template/Model.java.vm");
 		templates.add("gen/template/VO.java.vm");
+		templates.add("gen/template/Query.java.vm");
 		return templates;
 	}
 
@@ -327,6 +328,26 @@ public class GenUtils {
 			if("gen/template/menu.sql.vm".equals(template)) {
 				continue;
 			}
+			if("gen/template/View.java.vm".equals(template)) {
+				continue;
+
+			}
+			if("gen/template/Model.java.vm".equals(template)) {
+				continue;
+
+			}
+			if("gen/template/VO.java.vm".equals(template)) {
+				continue;
+
+			}
+			if("gen/template/Query.java.vm".equals(template)) {
+				continue;
+
+			}
+			if("gen/template/Entity.java.vm".equals(template)) {
+				continue;
+
+			}
 			//渲染模板
 			StringWriter sw = new StringWriter();
 			Template tpl = Velocity.getTemplate(template, "UTF-8");
@@ -556,6 +577,11 @@ public class GenUtils {
 		if (template.contains("VO.java.vm")) {
 			return packagePath + "entity" + File.separator+"vo"+ File.separator + className
 					+ "VO.java";
+		}
+		
+		if (template.contains("Query.java.vm")) {
+			return packagePath + "entity" + File.separator+"query"+ File.separator + className
+					+ "Query.java";
 		}
 
 		return null;
