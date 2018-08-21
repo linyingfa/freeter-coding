@@ -18,6 +18,7 @@ import com.freeter.modules.adverts.entity.view.AdvertsDetailView;
 import com.freeter.common.utils.PageInfo;
 
 
+@SuppressWarnings("rawtypes")
 @Service("advertsDetailService")
 public class AdvertsDetailServiceImpl extends ServiceImpl<AdvertsDetailDao, AdvertsDetailEntity> implements AdvertsDetailService {
 
