@@ -4,7 +4,6 @@ import com.freeter.modules.user.entity.UserEntity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.baomidou.mybatisplus.annotations.TableName;
 import org.apache.commons.beanutils.BeanUtils;
 import java.lang.reflect.InvocationTargetException;
 
@@ -17,9 +16,8 @@ import java.io.Serializable;
  * （通常后端关联的表或者自定义的字段需要返回使用）
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-06-30 13:40:24
+ * @date 2018-08-21 13:55:47
  */
-@TableName("cn_user")
 @ApiModel(value = "User")
 public class UserView  extends UserEntity implements Serializable {
 	private static final long serialVersionUID = 1L;

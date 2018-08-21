@@ -16,7 +16,7 @@ import com.freeter.modules.user.entity.view.UserView;
  * 
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-06-30 13:40:24
+ * @date 2018-08-21 13:55:47
  */
 public interface UserDao extends BaseMapper<UserEntity> {
 	

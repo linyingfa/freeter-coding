@@ -30,25 +30,25 @@
 
 	<select id="selectListVO"
 		resultType="com.freeter.modules.user.entity.vo.UserVO" >
-		SELECT * FROM cn_user  user         
+		SELECT * FROM `cn_user`  user         
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectVO"
 		resultType="com.freeter.modules.user.entity.vo.UserVO" >
-		SELECT  user.* FROM cn_user  user 	
+		SELECT  user.* FROM `cn_user`  user 	
  		<where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 
     <select id="selectListView"
 		resultType="com.freeter.modules.user.entity.view.UserView" >
 
-		SELECT  user.* FROM cn_user  user 	        
+		SELECT  user.* FROM `cn_user`  user 	        
         <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 	
 	<select id="selectView"
 		resultType="com.freeter.modules.user.entity.view.UserView" >
-		SELECT * FROM cn_user  user <where> 1=1 ${ew.sqlSegment}</where>
+		SELECT * FROM `cn_user`  user <where> 1=1 ${ew.sqlSegment}</where>
 	</select>
 </mapper>

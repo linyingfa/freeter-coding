@@ -4,7 +4,6 @@ import com.freeter.modules.user.entity.UserEntity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import com.baomidou.mybatisplus.annotations.TableName;
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -18,7 +17,7 @@ import java.io.Serializable;
  * （主要作用去除一些不必要的字段）
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-06-30 13:40:24
+ * @date 2018-08-21 13:55:47
  */
 @ApiModel(value = "UserVO")
 public class UserVO  implements Serializable {

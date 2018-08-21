@@ -4,13 +4,12 @@ import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.modules.user.entity.UserEntity;
-import com.freeter.modules.user.entity.model.UserModel;
-
 import java.util.List;
 import java.util.Map;
 import com.freeter.modules.user.entity.vo.UserVO;
 import org.apache.ibatis.annotations.Param;
 import com.freeter.modules.user.entity.view.UserView;
+import com.freeter.common.utils.PageInfo;
 
 
 /**
@@ -18,11 +17,10 @@ import com.freeter.modules.user.entity.view.UserView;
  *
  * @author xuchen
  * @email 171998110@qq.com
- * @date 2018-06-30 13:40:24
+ * @date 2018-08-21 13:55:47
  */
 public interface UserService extends IService<UserEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
     
    	List<UserVO> selectListVO(Wrapper<UserEntity> wrapper);
    	
@@ -32,8 +30,6 @@ public interface UserService extends IService<UserEntity> {
    	
    	UserView selectView(@Param("ew") Wrapper<UserEntity> wrapper);
    	
-   	PageUtils queryPage(Map<String, Object> params,Wrapper<UserEntity> wrapper);
-
-	PageUtils queryPage(Map<String, Object> params, UserModel userModel);
+   	PageUtils queryPage(PageInfo pageInfo,Wrapper<UserEntity> wrapper);
 }
 
