@@ -132,8 +132,6 @@
 - 官方免费QQ群：806251058<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=4469c242246546fbe5548083e31b154f5f27df10c777c9ace61b094fbf7d922f"><img border="0" src="//pub.idqqimg.com/wpa/images/group.png" alt="飞特开源技术交流" title="飞特开源技术交流"></a>
 - gitee仓库：https://gitee.com/xcOschina/freeter-admin.git![输入图片说明]
 
-- 通过注解可以实现like查询并支持多表
-(https://images.gitee.com/uploads/images/2018/0822/091350_d526e23a_728634.png "屏幕截图.png")
 - github仓库：暂不考虑，支持国产
 - 如需关注项目最新动态，请Watch、Star项目，同时也是对项目最好的支持
 - 技术讨论、二次开发等咨询、问题和建议，请移步到官方免费QQ群，我会在第一时间进行解答和回复！
@@ -145,26 +143,16 @@
 <br>
 
 **代码生成器：**
-![
-**商城移动端接口：**
-![输入图片说明](http://img.cnadmart.com/20180623/8ed6b37c0e354b219a76a2389fa733f5.png "在这里输入图片标题")
-<br>输入图片说明](http://img.cnadmart.com/20180621/9b7b21a26bb74536985b073488eae307.png "在这里输入图片标题")
+ **- 项目结构** 
+![输入图片说明](https://images.gitee.com/uploads/images/2018/0822/091848_caa9c86a_728634.png "在这里输入图片标题")
 
 <br>
 
+ **- 通过注解可以实现like查询并支持多表** 
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/0822/091350_1abba2da_728634.png "屏幕截图.png")
 
-**商城后端：商城图片演示**
-![输入图片说明](http://img.cnadmart.com/20180623/e1732d3dd44e4513a88cf4589b4960df.png "在这里输入图片标题")
-<br>
-![输入图片说明](http://img.cnadmart.com/20180623/87fc8c561d02475db2008b1bf6963cf0.png "在这里输入图片标题")
-<br>
 
-![商城图片演示](http://img.cnadmart.com/20180626/0ddb036d612f4271b59984543e7f9555.jpg "在这里输入图片标题")
 
-![商城图片演示](http://img.cnadmart.com/20180626/6deb7f146d32440db019012f5475a3cd.jpg "在这里输入图片标题")
-
-![商城图片演示](http://img.cnadmart.com/20180626/09e0f2cbe22943308e40f06286905d40.jpg "在这里输入图片标题")
 
 <br>
 
@@ -209,14 +197,20 @@
 
 **mapper 有外键自动生成多表关联语句：**
 
-`<select id="selectListView"  
-resultType="com.freeter.modules.pc.entity.view.StudentView"`>
-	
-SELECT  student.* FROM t_student  student 			   
-        left join t_professional  professional on  professional.professional_id = student.professional_id 		   
-        left join t_school  school on  school.school_id = student.school_id         
+`<select id="selectListView"  `
+
+resultType="com.freeter.modules.pc.entity.view.StudentView"`>`
+
+`SELECT  student.* FROM t_student  student `			   
+        left join  t_professional  professional on `
+
+ professional.professional_id = student.professional_id 	`	   
+        left join t_school  school on  school.school_id = student.school_id   `
+      
         <where> 1=1 ${ew.sqlSegment}</where>
-	</select>
+	</select>`
+	
+
 
 
 特别鸣谢：
@@ -226,4 +220,4 @@ baomidou / mybatis-plus
 
  红薯 / J2Cache
 
-![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") 
+![捐赠](http://img.cnadmart.com/20180621/f4bb4447a6894653b2da80fcd745390a.jpg "捐赠") !
