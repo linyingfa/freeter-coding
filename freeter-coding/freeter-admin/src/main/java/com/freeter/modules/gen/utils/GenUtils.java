@@ -66,7 +66,7 @@ public class GenUtils {
 		templates.add("gen/template/list.html.vm");
 		templates.add("gen/template/list.js.vm");
 		templates.add("gen/template/menu.sql.vm");
-		templates.add("gen/template/Api.java.vm");
+		//templates.add("gen/template/Api.java.vm");
 		templates.add("gen/template/View.java.vm");
 		templates.add("gen/template/Model.java.vm");
 		templates.add("gen/template/VO.java.vm");
@@ -312,6 +312,9 @@ public class GenUtils {
 		         String courseFile = directory.getCanonicalPath();
 		         String ide = config.getString("ide");
 		         String project = config.getString("adminproject");
+		     	if("gen/template/Api.java.vm".equals(template)) {
+					 project = config.getString("apiproject");
+				}
 		         if( StringUtils.isNotEmpty(project)){
 		        	  
 		        	 int i=  StringUtils.lastIndexOf(courseFile, "\\");
