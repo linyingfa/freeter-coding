@@ -83,6 +83,7 @@ where ucc2.constraint_name = tableo.constraint_name and tableo.table_name = #{ta
 		select table_name tableName,column_name columnName,REFERENCED_TABLE_NAME referencedTableName,REFERENCED_column_name
 		 referencedColumnName from INFORMATION_SCHEMA.KEY_COLUMN_USAGE where table_schema = (select
 		database()) and table_name = #{tableName} and constraint_name != 'PRIMARY'
+		AND REFERENCED_TABLE_NAME != ''
 	</select>
 	<select id="queryTotal" resultType="int">
 		select count(*) from information_schema.tables where table_schema =
