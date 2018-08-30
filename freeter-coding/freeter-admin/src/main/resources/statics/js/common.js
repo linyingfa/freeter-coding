@@ -51,6 +51,21 @@ window.confirm = function(msg, callback){
 //选择一条记录
 function getSelectedRow() {
     var grid = $("#jqGrid");
+    var bootstrapTable= $("#bootstrap-table") 
+    if(bootstrapTable.length === 1){
+    	var rows = bootstrapTable.bootstrapTable('getSelections');
+    	console.info(rows);
+    	  if(rows.length == 0){
+    	    	alert("请选择一条记录");
+    	    	return ;
+    	    }
+    	  if(rows.length > 1){
+    	    	alert("只能选择一条记录");
+    	    	return ;
+    	    }
+    	  return rows[0];
+    }
+    
     var rowKey = grid.getGridParam("selrow");
     if(!rowKey){
     	alert("请选择一条记录");
@@ -69,6 +84,15 @@ function getSelectedRow() {
 //选择多条记录
 function getSelectedRows() {
     var grid = $("#jqGrid");
+    var bootstrapTable= $("#bootstrap-table") 
+    if(bootstrapTable.length === 1){
+    	var rows = bootstrapTable.bootstrapTable('getSelections');
+    	 if(rows.length == 0){
+ 	    	alert("请选择一条记录");
+ 	    	return ;
+ 	    }
+    	  return rows;
+    }
     var rowKey = grid.getGridParam("selrow");
     if(!rowKey){
     	alert("请选择一条记录");
@@ -77,7 +101,6 @@ function getSelectedRows() {
     
     return grid.getGridParam("selarrrow");
 }
-
 //判断是否为空
 function isBlank(value) {
     return !value || !/\S/.test(value)
