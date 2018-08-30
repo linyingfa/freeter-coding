@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 
 public class JQPageInfo{
 
+
+	
 	private Integer page;
 	
 	private Integer limit;
@@ -11,6 +13,8 @@ public class JQPageInfo{
 	private String sidx;
 	
 	private String order;
+	
+	private  Integer offset;
 
 	public Integer getPage() {
 		return page;
@@ -42,6 +46,14 @@ public class JQPageInfo{
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public Integer getOffset() {
+		return offset;
+	}
+
+	public void setOffset(Integer offset) {
+		this.offset = offset;
 	}
 	
 	

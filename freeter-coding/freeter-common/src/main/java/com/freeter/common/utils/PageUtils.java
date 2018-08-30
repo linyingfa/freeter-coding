@@ -32,6 +32,8 @@ import com.baomidou.mybatisplus.plugins.Page;
 public class PageUtils implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//总记录数
+	private long total;
+	//总记录数
 	private long totalCount;
 	//每页记录数
 	private int pageSize;
@@ -41,6 +43,8 @@ public class PageUtils implements Serializable {
 	private int currPage;
 	//列表数据
 	private List<?> list;
+	//列表数据
+	private List<?> rows;
 	
 	/**
 	 * 分页
@@ -51,7 +55,9 @@ public class PageUtils implements Serializable {
 	 */
 	public PageUtils(List<?> list, int totalCount, int pageSize, int currPage) {
 		this.list = list;
+		this.rows = this.list;
 		this.totalCount = totalCount;
+		this.total = totalCount;
 		this.pageSize = pageSize;
 		this.currPage = currPage;
 		this.totalPage = (int)Math.ceil((double)totalCount/pageSize);
@@ -62,7 +68,9 @@ public class PageUtils implements Serializable {
 	 */
 	public PageUtils(Page<?> page) {
 		this.list = page.getRecords();
+		this.rows = this.list;
 		this.totalCount = page.getTotal();
+		this.total = this.totalCount;
 		this.pageSize = page.getSize();
 		this.currPage = page.getCurrent();
 		this.totalPage = page.getPages();
@@ -115,6 +123,22 @@ public class PageUtils implements Serializable {
 
 	public void setTotalPage(long totalPage) {
 		this.totalPage = totalPage;
+	}
+
+	public long getTotal() {
+		return total;
+	}
+
+	public void setTotal(long total) {
+		this.total = total;
+	}
+
+	public List<?> getRows() {
+		return rows;
+	}
+
+	public void setRows(List<?> rows) {
+		this.rows = rows;
 	}
 	
 	

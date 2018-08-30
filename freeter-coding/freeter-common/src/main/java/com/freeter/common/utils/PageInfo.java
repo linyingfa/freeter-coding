@@ -31,6 +31,10 @@ public class PageInfo<T> {
             limit = pageInfo.getLimit();
         }
 
+        if(pageInfo.getOffset() != null) {
+    		int offset =  pageInfo.getOffset();
+    		currPage = offset / limit + 1;
+    	}
     
         //防止SQL注入（因为sidx、order是通过拼接SQL实现排序的，会有SQL注入风险）
         String sidx = SQLFilter.sqlInject(pageInfo.getSidx());
