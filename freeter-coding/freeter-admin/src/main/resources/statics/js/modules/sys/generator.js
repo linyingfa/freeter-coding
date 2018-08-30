@@ -54,7 +54,7 @@ var vm = new Vue({
 			if(tableNames == null){
 				return ;
 			}
-			location.href = baseURL +"sys/generator/code?tables=" +  encodeURIComponent(JSON.stringify(tableNames));
+			location.href = baseURL +"sys/generator/code?tables=" +   tableNames.join();
 		},
 		generatorAll: function() {
 			var tableNames = getSelectedRows();
@@ -62,7 +62,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否覆盖后端接口代码', function(){
-			 $.get( baseURL +"sys/generator/allcode?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			 $.get( baseURL +"sys/generator/allcode?tables=" +  tableNames.join(), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                          vm.reload();
@@ -79,7 +79,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否覆盖移动端接口代码', function(){
-			 $.get( baseURL +"sys/generator/genAPI?tables=" + encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			 $.get( baseURL +"sys/generator/genAPI?tables=" +  tableNames.join(), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                          vm.reload();
@@ -102,7 +102,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否生成VO实体类代码', function(){
-			  $.get( baseURL +"sys/generator/genVO?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			  $.get( baseURL +"sys/generator/genVO?tables=" +   tableNames.join(), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                           vm.reload();
@@ -119,7 +119,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否只生成实体类代码', function(){
-			  $.get( baseURL +"sys/generator/genEntity?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			  $.get( baseURL +"sys/generator/genEntity?tables=" +  tableNames.join(), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                           vm.reload();
@@ -136,7 +136,7 @@ var vm = new Vue({
 				return ;
 			}
 			confirm('是否只生成后端controller代码', function(){
-			  $.get( baseURL +"sys/generator/genController?tables=" +  encodeURIComponent(JSON.stringify(tableNames)), function(r){
+			  $.get( baseURL +"sys/generator/genController?tables=" +   tableNames.join(), function(r){
 				  if(r.code == 0){
 					  alert(r.msg, function(){
                           vm.reload();
