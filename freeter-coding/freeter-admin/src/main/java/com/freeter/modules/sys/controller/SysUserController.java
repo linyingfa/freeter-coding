@@ -17,12 +17,23 @@
 package com.freeter.modules.sys.controller;
 
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.freeter.common.annotation.SysLog;
+import com.freeter.common.mpextend.parser.ParseWrapper;
+import com.freeter.common.utils.JQPageInfo;
+import com.freeter.common.utils.PageInfo;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.Assert;
@@ -30,13 +41,11 @@ import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.common.validator.group.AddGroup;
 import com.freeter.common.validator.group.UpdateGroup;
 import com.freeter.modules.sys.entity.SysUserEntity;
+import com.freeter.modules.sys.entity.model.SysUserModel;
+import com.freeter.modules.sys.service.SysDeptService;
 import com.freeter.modules.sys.service.SysUserRoleService;
 import com.freeter.modules.sys.service.SysUserService;
 import com.freeter.modules.sys.shiro.ShiroUtils;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
 
 /**
  * 系统用户
@@ -52,16 +61,18 @@ public class SysUserController extends AbstractController {
 	private SysUserService sysUserService;
 	@Autowired
 	private SysUserRoleService sysUserRoleService;
-	
+	@Autowired
+	private SysDeptService sysDeptService;
+
 	/**
 	 * 所有用户列表
 	 */
 	@RequestMapping("/list")
 	@RequiresPermissions("sys:user:list")
-	public R list(@RequestParam Map<String, Object> params){
-		PageUtils page = sysUserService.queryPage(params);
-
-		return R.ok().put("page", page);
+	public PageUtils list(JQPageInfo pageInfo,SysUserModel sysUserModel){
+		PageUtils page = sysUserService.queryPage(new PageInfo(pageInfo),sysUserModel);
+		
+		return page;
 	}
 	
 	/**
