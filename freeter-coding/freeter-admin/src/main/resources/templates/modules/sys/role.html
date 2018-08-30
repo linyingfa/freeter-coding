@@ -73,9 +73,122 @@
 
 <!-- 选择部门 -->
 <div id="deptLayer" style="display: none;padding:10px;">
-	<ul id="deptTree" class="ztree"></ul>
+		<div class="wrapper">
+	<div class="treeShowHideButton" onclick="search();">
+		<label id="btnShow" title="显示搜索" style="display:none;">︾</label>
+		<label id="btnHide" title="隐藏搜索">︽</label>
+	</div>
+	<div class="treeSearchInput" id="search">
+		<label for="keyword">关键字：</label><input type="text" class="empty" id="keyword" maxlength="50">
+		<button class="btn" id="btn" onclick="searchNode()"> 搜索 </button>
+	</div>
+	<div class="treeExpandCollapse">
+		<a href="javascript:" id="btnExpand">展开</a> /
+		<a href="javascript:" id="btnCollapse">折叠</a>
+	</div>
+	<div id="deptTree" class="ztree"></div>
+	</div>
 </div>
-
 <script src="${request.contextPath}/statics/js/modules/sys/role.js?_${.now?long}"></script>
+<script>
+var lastValue = "", nodeList = [], key = $("#keyword");
+key.bind("focus", focusKey).bind("blur", blurKey).bind("change cut input propertychange", searchNode);
+key.bind("keydown", function (e){if(e.which == 13){searchNode();}});
+
+function focusKey(e) {
+	if (key.hasClass("empty")) {
+		key.removeClass("empty");
+	}
+}
+
+function blurKey(e) {
+	if (key.get(0).value === "") {
+		key.addClass("empty");
+	}
+	searchNode(e);
+}
+
+function searchNode() {
+	var value = $.trim(key.get(0).value);
+	var keyType = "name";
+	if (lastValue === value) {
+		return;
+	}
+	lastValue = value;
+	var nodes = dept_ztree.getNodes();
+	if (value == "") {
+		showAllNode(nodes);
+		return;
+	}
+	hideAllNode(nodes);
+	nodeList = dept_ztree.getNodesByParamFuzzy(keyType, value);
+	updateNodes(nodeList);
+}
+
+function hideAllNode(nodes){
+	//var ztree = $.fn.zTree.getZTreeObj("deptTree");
+	nodes = dept_ztree.transformToArray(nodes);
+	for(var i=nodes.length-1; i>=0; i--) {
+		dept_ztree.hideNode(nodes[i]);
+	}
+}
+
+function showAllNode(nodes){
+	nodes = dept_ztree.transformToArray(nodes);
+	for(var i=nodes.length-1; i>=0; i--) {
+		if(nodes[i].getParentNode()!=null){
+			dept_ztree.expandNode(nodes[i],false,false,false,false);
+		}else{
+			dept_ztree.expandNode(nodes[i],true,true,false,false);
+		}
+		dept_ztree.showNode(nodes[i]);
+		showAllNode(nodes[i].children);
+	}
+}
+
+function updateNodes(nodeList) {
+	dept_ztree.showNodes(nodeList);
+	for(var i=0, l=nodeList.length; i<l; i++) {
+		var treeNode = nodeList[i];
+		showChildren(treeNode);
+		showParent(treeNode)
+	}
+}
+
+function showChildren(treeNode){
+	if (treeNode.isParent){
+		for(var idx in treeNode.children){
+			var node = treeNode.children[idx];
+			dept_ztree.showNode(node);
+			showChildren(node);
+		}
+	}
+}
+function showParent(treeNode){
+	var parentNode;
+	while((parentNode = treeNode.getParentNode()) != null){
+		dept_ztree.showNode(parentNode);
+		dept_ztree.expandNode(parentNode, true, false, false);
+		treeNode = parentNode;
+	}
+}
+
+function search($this) {
+	$('#search').slideToggle(200);
+	$('#btnShow').toggle();
+	$('#btnHide').toggle();
+	$('#keyword').focus();
+}
+
+$(function () {
+    
+    $('#btnExpand').click(function() {
+    	dept_ztree.expandAll(true);
+	});
+	$('#btnCollapse').click(function() {
+		dept_ztree.expandAll(false);
+	});
+});
+</script>
 </body>
 </html>
