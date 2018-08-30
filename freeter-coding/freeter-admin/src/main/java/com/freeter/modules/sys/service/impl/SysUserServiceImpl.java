@@ -17,30 +17,34 @@
 package com.freeter.modules.sys.service.impl;
 
 
-import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.baomidou.mybatisplus.plugins.Page;
-import com.baomidou.mybatisplus.service.impl.ServiceImpl;
-import com.freeter.common.annotation.DataFilter;
-import com.freeter.common.utils.Constant;
-import com.freeter.common.utils.PageUtils;
-import com.freeter.common.utils.Query;
-import com.freeter.modules.sys.dao.SysUserDao;
-import com.freeter.modules.sys.entity.SysDeptEntity;
-import com.freeter.modules.sys.entity.SysUserEntity;
-import com.freeter.modules.sys.service.SysDeptService;
-import com.freeter.modules.sys.service.SysUserRoleService;
-import com.freeter.modules.sys.service.SysUserService;
-import com.freeter.modules.sys.shiro.ShiroUtils;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.context.request.RequestAttributes;
+import org.springframework.web.context.request.RequestContextHolder;
 
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.service.impl.ServiceImpl;
+import com.freeter.common.annotation.DataFilter;
+import com.freeter.common.mpextend.parser.ParseWrapper;
+import com.freeter.common.utils.Constant;
+import com.freeter.common.utils.PageInfo;
+import com.freeter.common.utils.PageUtils;
+import com.freeter.modules.sys.dao.SysUserDao;
+import com.freeter.modules.sys.entity.SysDeptEntity;
+import com.freeter.modules.sys.entity.SysUserEntity;
+import com.freeter.modules.sys.entity.model.SysUserModel;
+import com.freeter.modules.sys.service.SysDeptService;
+import com.freeter.modules.sys.service.SysUserRoleService;
+import com.freeter.modules.sys.service.SysUserService;
+import com.freeter.modules.sys.shiro.ShiroUtils;
 
 
 /**
@@ -64,14 +68,22 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUserEntity> i
 
 	@Override
 	@DataFilter(subDept = true, user = false)
-	public PageUtils queryPage(Map<String, Object> params) {
-		String username = (String)params.get("username");
-
+	public PageUtils queryPage(PageInfo pageInfo,SysUserModel sysUserModel) {
+		EntityWrapper<SysUserEntity> ew =  ParseWrapper.parseWrapper(sysUserModel);
+		List deptList = new ArrayList();
+		if(sysUserModel.getDeptId() != null) {
+			deptList.add( sysUserModel.getDeptId());
+			List subDeptList = sysDeptService.getSubDeptIdList(sysUserModel.getDeptId() );
+			if(subDeptList!= null){
+				deptList.addAll(subDeptList);
+			}
+		}
+		ew.in((sysUserModel.getDeptId())!=null,"dept_id",deptList);
+		System.out.println(ew.getSqlSegment());
+	 
 		Page<SysUserEntity> page = this.selectPage(
-			new Query<SysUserEntity>(params).getPage(),
-			new EntityWrapper<SysUserEntity>()
-				.like(StringUtils.isNotBlank(username),"username", username)
-				.addFilterIfNeed(params.get(Constant.SQL_FILTER) != null, (String)params.get(Constant.SQL_FILTER))
+			pageInfo.getPage(),
+			ew.addFilterIfNeed(RequestContextHolder.currentRequestAttributes().getAttribute(Constant.SQL_FILTER, RequestAttributes.SCOPE_REQUEST ) != null, (String)RequestContextHolder.currentRequestAttributes().getAttribute(Constant.SQL_FILTER, RequestAttributes.SCOPE_REQUEST) )
 		);
 
 		for(SysUserEntity sysUserEntity : page.getRecords()){

@@ -16,12 +16,13 @@
 
 package com.freeter.modules.sys.service;
 
+import java.util.List;
+
 import com.baomidou.mybatisplus.service.IService;
+import com.freeter.common.utils.PageInfo;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.modules.sys.entity.SysUserEntity;
-
-import java.util.List;
-import java.util.Map;
+import com.freeter.modules.sys.entity.model.SysUserModel;
 
 
 /**
@@ -33,7 +34,7 @@ import java.util.Map;
  */
 public interface SysUserService extends IService<SysUserEntity> {
 
-	PageUtils queryPage(Map<String, Object> params);
+	PageUtils queryPage(PageInfo pageInfo,SysUserModel sysUserModel);
 	
 	/**
 	 * 查询用户的所有菜单ID
