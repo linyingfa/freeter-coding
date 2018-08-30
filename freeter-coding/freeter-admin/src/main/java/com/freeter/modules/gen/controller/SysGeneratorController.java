@@ -87,9 +87,8 @@ public class SysGeneratorController {
 	 */
 	@RequestMapping("/code")
 	public void code(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
 		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+		String[] tableNames =tables.split(",");
 		
 		byte[] data = sysGeneratorService.generatorCode(tableNames);
 		
@@ -108,9 +107,8 @@ public class SysGeneratorController {
 	@RequestMapping("/allcode")
 	@ResponseBody
 	public R  allcode(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
 		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+		String[] tableNames =tables.split(",");
 		
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getTemplates());
 		
@@ -123,9 +121,9 @@ public class SysGeneratorController {
 	@RequestMapping("/genAPI")
 	@ResponseBody
 	public R  genAPI(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
-		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+ 		String tables = request.getParameter("tables");
+		String[] tableNames =tables.split(",");
+
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getAPITemplates());
 		
 		return R.ok("移动端接口全部更新成功，请刷新IDE");
@@ -136,10 +134,8 @@ public class SysGeneratorController {
 	 */
 	@RequestMapping("/genController")
 	@ResponseBody
-	public R  genController(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
-		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+	public R  genController(String tables,HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String[] tableNames =tables.split(",");
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getControllerTemplates());
 		
 		return R.ok("接口更新成功，请刷新IDE");
@@ -150,10 +146,8 @@ public class SysGeneratorController {
 	 */
 	@ResponseBody
 	@RequestMapping("/genVO")
-	public R genVO(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
-		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+	public R genVO(String tables,HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String[] tableNames = tables.split(",");
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getVOTemplates());
 		return R.ok("代码更新成功，请刷新IDE");
 		 
@@ -164,10 +158,9 @@ public class SysGeneratorController {
 	 */
 	@ResponseBody
 	@RequestMapping("/genEntity")
-	public R genEntity(HttpServletRequest request, HttpServletResponse response) throws IOException{
-		String[] tableNames = new String[]{};
-		String tables = request.getParameter("tables");
-		tableNames = JSON.parseArray(tables).toArray(tableNames);
+	public R genEntity(String tables,HttpServletRequest request, HttpServletResponse response) throws IOException{
+		String[] tableNames =tables.split(",");
+	 
 		sysGeneratorService.generatorAllCode(tableNames,GenUtils.getEntityTemplates());
 		return R.ok("代码更新成功，请刷新IDE");
 		 
