@@ -45,12 +45,12 @@ public class ${className}Controller {
      */
     @RequestMapping("/page")
     @RequiresPermissions("${moduleName}:${pathName}:list")
-    public R page(JQPageInfo jqPageInfo,${className}Model ${classname}){
+    public PageUtils page(JQPageInfo jqPageInfo,${className}Model ${classname}){
         EntityWrapper< ${className}Entity> ew = ParseWrapper.parseWrapper(${classname});
      	PageInfo pageInfo = new PageInfo(jqPageInfo);
      	PageUtils page = ${classname}Service.queryPage(pageInfo, ew);
     
-        return R.ok().put("page", page);
+        return page;
         
     }
 
