@@ -1,7 +1,9 @@
 <!DOCTYPE html>
 <html>
 <meta charset="utf-8">
-<#include "/header.html">
+#set($header='<#include "/header.html">')
+ <title>${comments}</title>
+ $header
 <body class="gray-bg">
 	<div class="wrapper wrapper-content animated fadeInRight" id="rrapp">
 		<div class="row">
