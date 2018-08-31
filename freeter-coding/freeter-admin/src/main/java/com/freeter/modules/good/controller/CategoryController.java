@@ -1,9 +1,7 @@
 package com.freeter.modules.good.controller;
 
-import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -16,17 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.freeter.common.utils.JQPageInfo;
+import com.freeter.common.utils.PageInfo;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.common.utils.R;
 import com.freeter.common.validator.Assert;
 import com.freeter.common.validator.ValidatorUtils;
 import com.freeter.modules.good.entity.CategoryEntity;
-import com.freeter.modules.good.entity.GoodEntity;
 import com.freeter.modules.good.entity.view.CategoryView;
 import com.freeter.modules.good.service.CategoryService;
 import com.freeter.modules.oss.cloud.OSSFactory;
-
-import cn.hutool.core.bean.BeanUtil;
 
 
 
@@ -48,9 +45,8 @@ public class CategoryController {
      */
     @RequestMapping("/list")
     @RequiresPermissions("good:category:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
-
+    public R list(JQPageInfo pageInfo){
+        PageUtils page = categoryService.queryPage(new PageInfo(pageInfo));
         return R.ok().put("page", page);
     }
 
