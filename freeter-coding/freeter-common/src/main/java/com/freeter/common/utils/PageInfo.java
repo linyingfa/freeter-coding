@@ -36,11 +36,13 @@ public class PageInfo<T> {
     		currPage = offset / limit + 1;
     	}
     
+        String pSidx = 	pageInfo.getSidx();
+        pSidx = MPUtil.camelToUnderline(pSidx);
         //防止SQL注入（因为sidx、order是通过拼接SQL实现排序的，会有SQL注入风险）
-        String sidx = SQLFilter.sqlInject(pageInfo.getSidx());
+        String sidx = SQLFilter.sqlInject(pSidx);
         String order = SQLFilter.sqlInject(pageInfo.getOrder());
         
-
+      
         //mybatis-plus分页
         this.page = new Page<>(currPage, limit);
 
