@@ -67,6 +67,7 @@ public class GenUtils {
 		templates.add("gen/template/list.js.vm");*/
 		templates.add("gen/template/blist.html.vm");
 		templates.add("gen/template/blist.js.vm");
+		templates.add("gen/template/edit.html.vm");
 		templates.add("gen/template/menu.sql.vm");
 		//templates.add("gen/template/Api.java.vm");
 		templates.add("gen/template/View.java.vm");
@@ -441,6 +442,11 @@ public class GenUtils {
 		if (template.contains("blist.html.vm")) {
 			return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + "modules"
 					+ File.separator + moduleName + File.separator + className.toLowerCase() + ".html";
+		}
+		
+		if (template.contains("edit.html.vm")) {
+			return "main" + File.separator + "resources" + File.separator + "templates" + File.separator + "modules"
+					+ File.separator + moduleName + File.separator + className.toLowerCase() + "Edit.html";
 		}
 
 		if (template.contains("blist.js.vm")) {
