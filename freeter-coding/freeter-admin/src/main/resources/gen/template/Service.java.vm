@@ -19,6 +19,7 @@ import ${mainPath}.common.utils.PageInfo;
  * @email ${email}
  * @date ${datetime}
  */
+ @SuppressWarnings({"unchecked","rawtypes"})
 public interface ${className}Service extends IService<${className}Entity> {
 
     

@@ -18,6 +18,7 @@ import ${package}.${moduleName}.entity.view.${className}View;
  * @email ${email}
  * @date ${datetime}
  */
+ @SuppressWarnings({"unchecked","rawtypes"})
 public interface ${className}Dao extends BaseMapper<${className}Entity> {
 	
 	List<${className}VO> selectListVO(@Param("ew") Wrapper<${className}Entity> wrapper);
