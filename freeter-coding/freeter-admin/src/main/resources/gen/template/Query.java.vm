@@ -35,6 +35,12 @@ public class ${className}Query  implements Serializable {
 	/**
 	 * $column.comments
 	 */
+	 #if($column.isNullable == 'NO' && $column.columnName != $pk.columnName  && $column.attrType != 'String')
+	
+	@NotNull (message = "${column.comments}不能为空") #end
+	#if($column.isNullable == 'NO' && $column.columnName != $pk.columnName  && $column.attrType == 'String')
+	
+	@NotBlank (message = "${column.comments}不能为空") #end
 	#if($column.attrType == 'Date')
 	
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
