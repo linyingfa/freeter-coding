@@ -17,6 +17,7 @@ import cn.hutool.core.util.ReflectUtil;
 
 public class ParseWrapper {
 
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T> EntityWrapper parseWrapper(T t)  {
 		EntityWrapper wrapper = new EntityWrapper();
 		 
