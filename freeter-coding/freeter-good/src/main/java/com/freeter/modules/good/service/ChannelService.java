@@ -1,15 +1,15 @@
 package com.freeter.modules.good.service;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.freeter.common.utils.PageInfo;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.modules.good.entity.ChannelEntity;
 import com.freeter.modules.good.entity.vo.ChannelVO;
-
-import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.annotations.Param;
 
 
 /**
@@ -21,7 +21,7 @@ import org.apache.ibatis.annotations.Param;
  */
 public interface ChannelService extends IService<ChannelEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    PageUtils queryPage(PageInfo pageInfo);
     
    	List<ChannelVO> selectListVO(Wrapper<ChannelEntity> wrapper);
    	

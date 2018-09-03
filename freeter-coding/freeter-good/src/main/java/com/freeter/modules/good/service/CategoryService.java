@@ -1,12 +1,12 @@
 package com.freeter.modules.good.service;
 
 import java.util.List;
-import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.baomidou.mybatisplus.mapper.Wrapper;
 import com.baomidou.mybatisplus.service.IService;
+import com.freeter.common.utils.PageInfo;
 import com.freeter.common.utils.PageUtils;
 import com.freeter.modules.good.entity.CategoryEntity;
 import com.freeter.modules.good.entity.view.CategoryView;
@@ -22,7 +22,7 @@ import com.freeter.modules.good.entity.vo.CategoryVO;
  */
 public interface CategoryService extends IService<CategoryEntity> {
 
-    PageUtils queryPage(Map<String, Object> params);
+    PageUtils queryPage(PageInfo pageInfo);
     
    	List<CategoryVO> selectListVO(Wrapper<CategoryEntity> wrapper);
    	

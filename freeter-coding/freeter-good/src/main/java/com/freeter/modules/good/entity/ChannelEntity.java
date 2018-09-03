@@ -1,25 +1,16 @@
 package com.freeter.modules.good.entity;
 
+import java.io.Serializable;
+import java.lang.reflect.InvocationTargetException;
+
+import org.apache.commons.beanutils.BeanUtils;
+
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.freeter.modules.good.entity.view.ChannelView;
-
-import java.lang.reflect.InvocationTargetException;
+import com.freeter.common.annotation.OwnerTable;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import java.io.Serializable;
-import java.util.Date;
-
-import javax.validation.constraints.NotBlank;
-import org.springframework.format.annotation.DateTimeFormat;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.apache.commons.beanutils.BeanUtils;
 
 
 
@@ -32,6 +23,7 @@ import org.apache.commons.beanutils.BeanUtils;
  */
 @TableName("cn_channel")
 @ApiModel(value = "Channel")
+@OwnerTable(ChannelEntity.class)
 public class ChannelEntity<T> implements Serializable {
 	private static final long serialVersionUID = 1L;
 
