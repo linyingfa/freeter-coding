@@ -4,7 +4,10 @@ import java.math.BigDecimal;
 
 import javax.validation.constraints.NotNull;
 
+import com.freeter.common.annotation.ConditionType;
+import com.freeter.common.annotation.MpBetween;
 import com.freeter.common.annotation.MpEQ;
+import com.freeter.common.annotation.MpIn;
 import com.freeter.common.annotation.MpLike;
 import com.freeter.common.annotation.OuterTable;
 import com.freeter.common.annotation.OwnerTable;
@@ -14,14 +17,14 @@ import io.swagger.annotations.ApiModelProperty;
 @OuterTable(value = { OrderGoodModel.class })
 @OwnerTable(OrderGoodModel.class)
 public class OrderGoodModel {
-
-	@MpLike("goodName")
+	@MpBetween(type = ConditionType.$gte,value="test")
+	//@MpLike("goodName")
 	@OuterTable(OrderGoodModel.class)
 	private Integer goodId;// 商品id
 
 	@MpEQ("orderBo")
 	private String orderNo;
-
+	
 	@MpLike
 	private String goodImg;// 商品图片
 
@@ -36,12 +39,20 @@ public class OrderGoodModel {
 	@MpLike({ "column1", "column12" })
 	@OuterTable({ OrderGoodModel.class, OrderGoodModel.class })
 	private Integer goodCount; // 商品数量
+	
+	//@MpBetween(type = ConditionType.$gte)
 	private BigDecimal unitPrice;// 商品单价
 	@NotNull(message = "用户id不能为空")
 	@ApiModelProperty(value = "用户id")
 	@OuterTable(OrderGoodModel.class)
 	private Integer userId;
 
+	@MpIn
+	private Integer[] ids;
+	
+	@MpIn
+	private String idstr;
+	
 	public String getGoodImg() {
 		return goodImg;
 	}
@@ -106,4 +117,21 @@ public class OrderGoodModel {
 		this.orderNo = orderNo;
 	}
 
+	public Integer[] getIds() {
+		return ids;
+	}
+
+	public void setIds(Integer[] ids) {
+		this.ids = ids;
+	}
+
+	public String getIdstr() {
+		return idstr;
+	}
+
+	public void setIdstr(String idstr) {
+		this.idstr = idstr;
+	}
+
+	
 }

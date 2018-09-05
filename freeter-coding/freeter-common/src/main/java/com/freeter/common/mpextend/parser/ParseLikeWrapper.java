@@ -41,7 +41,9 @@ public class ParseLikeWrapper {
 					ownerClass = tables[i];
 				}
 				camelFieldName = MPUtil.camelToUnderline(classRealNameArr[i]);
-
+				if(value == null) {
+					value = "";
+				}
 				wrapper.like(StrUtil.toUnderlineCase(ClearSuffix.clearSuffix(ownerClass))  
 						+ camelFieldName, value.toString());
 				if (i != realNameLength - 1) {

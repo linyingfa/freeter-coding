@@ -1,6 +1,7 @@
 package com.freeter.common.mpextend.parser;
 
 import java.lang.reflect.Field;
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
@@ -20,7 +21,7 @@ public class ParseWrapper {
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T> EntityWrapper parseWrapper(Object t)  {
 		EntityWrapper wrapper = new EntityWrapper();
-		 
+		
 		Field[] fArr = ReflectUtil.getFields(t.getClass());
 		OuterTable outer = t.getClass().getAnnotation(OuterTable.class);
 		OwnerTable owner = t.getClass().getAnnotation(OwnerTable.class);
@@ -75,6 +76,9 @@ public class ParseWrapper {
 					if(ifOwner) {
 						ownerClass = null;
 					}
+					ParseBetweenWrapper.parseWrapper(wrapper, map, field, camelFieldName, ownerClass);
+					ParseInWrapper.parseWrapper(wrapper, map, field, camelFieldName, ownerClass);
+
 					if (fieldHasLikeAnno) {
 						ParseLikeWrapper.parseWrapper(wrapper, map, field, camelFieldName, ownerClass);
 					} else {
@@ -89,7 +93,8 @@ public class ParseWrapper {
 					for (Class outerTableClassName : outerArr) {
 						Field outerField = CheckFieldOnClass.checkFieldOnClass(fieldName, outerTableClassName);
 						if (outerField != null) {
-
+							ParseBetweenWrapper.parseWrapper(wrapper, map, field, camelFieldName, outerTableClassName);
+							ParseInWrapper.parseWrapper(wrapper, map, outerField, camelFieldName, outerTableClassName);
 							if (fieldHasLikeAnno) {
 								ParseLikeWrapper.parseWrapper(wrapper, map, field, camelFieldName, outerTableClassName);
 							} else {
@@ -123,6 +128,10 @@ public class ParseWrapper {
 		ogd.setGoodSpec("223");
 		//ogd.setUserId(32);
 		ogd.setOrderNo("222");
+		//unitPrice
+		ogd.setUnitPrice(new BigDecimal(0));
+		ogd.setIds(new Integer[] {1,2,3});
+		ogd.setIdstr("1,2,3");
 		parseWrapper(ogd);
 	}
 }
