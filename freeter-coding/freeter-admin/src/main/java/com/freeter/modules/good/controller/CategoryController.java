@@ -36,6 +36,7 @@ import com.freeter.modules.oss.cloud.OSSFactory;
  */
 @RestController
 @RequestMapping("good/category")
+@SuppressWarnings("rawtypes")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -46,7 +47,8 @@ public class CategoryController {
     @RequestMapping("/list")
     @RequiresPermissions("good:category:list")
     public R list(JQPageInfo pageInfo){
-        PageUtils page = categoryService.queryPage(new PageInfo(pageInfo));
+      
+		PageUtils page = categoryService.queryPage(new PageInfo(pageInfo));
         return R.ok().put("page", page);
     }
 
