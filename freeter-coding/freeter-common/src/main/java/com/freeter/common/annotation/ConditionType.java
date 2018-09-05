@@ -5,11 +5,19 @@ package com.freeter.common.annotation;
 public enum ConditionType {
 
 	/**
-	 * 模糊查询
+	 * 小于
 	 */
-	LIKE,
+	$lt,
 	/**
-	 * 等值查询
+	 * 大于
 	 */
-	EQ
+	$gt,
+	/**
+	 * 小于等于
+	 */
+	$lte,
+	/**
+	 * 大于等于
+	 */
+	$gte
 }

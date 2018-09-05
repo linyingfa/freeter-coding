@@ -15,7 +15,7 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface MpBetween {
+public @interface MpIn {
 	
 	 /**
      * <p>
@@ -24,12 +24,6 @@ public @interface MpBetween {
      */
 	String value() default "";
     
-	 /**
-     * <p>
-     * 大于、小于、 大于等于、小于等于
-     * </p>
-     */ 
-	ConditionType type();
 	
     
 }
