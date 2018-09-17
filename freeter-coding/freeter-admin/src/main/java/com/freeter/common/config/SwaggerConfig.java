@@ -50,7 +50,7 @@ public class SwaggerConfig{
             .select()
             //加了ApiOperation注解的类，生成接口文档
             .apis(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class))
-            //包下的类，生成接口文档
+            //包下的类，生成接口文档 .apis(RequestHandlerSelectors.basePackage("com.freeter"))
             //.apis(RequestHandlerSelectors.basePackage(""))
             .paths(PathSelectors.any())
             .build();
