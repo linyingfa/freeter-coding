@@ -33,7 +33,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 @Configuration
 public class RedisConfig {
     @Autowired
-    private RedisConnectionFactory factory;
+    private RedisConnectionFactory redisConnectionFactory;
 
     @Bean
     public RedisTemplate<String, Object> redisTemplate() {
@@ -42,7 +42,7 @@ public class RedisConfig {
         redisTemplate.setHashKeySerializer(new StringRedisSerializer());
         redisTemplate.setHashValueSerializer(new StringRedisSerializer());
         redisTemplate.setValueSerializer(new JdkSerializationRedisSerializer());
-        redisTemplate.setConnectionFactory(factory);
+        redisTemplate.setConnectionFactory(redisConnectionFactory);
         return redisTemplate;
     }
 
