@@ -46,7 +46,7 @@ public class ${className}Model  implements Serializable {
 	#if($column.attrType == 'Date')
 	
 	@JsonFormat(locale="zh", timezone="GMT+8", pattern="yyyy-MM-dd HH:mm:ss")
-	@DateTimeFormat #end
+	@DateTimeFormat(pattern="yyyy-MM-dd HH:mm:ss") #end
 
 	@ApiModelProperty(value = "${column.comments}") 
 	private $column.attrType $column.attrname;
