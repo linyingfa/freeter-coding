@@ -70,8 +70,7 @@ public class ${className}Controller {
     @RequestMapping("/query")
     @RequiresPermissions("${moduleName}:${pathName}:info")
     public R query(${className}Entity ${classname}){
-        EntityWrapper< ${className}Entity> ew = new EntityWrapper< ${className}Entity>();
- 		ew.allEq(MPUtil.allEQMapPre( ${classname}, "${classname}")); 
+        EntityWrapper< ${className}Entity> ew = ParseWrapper.parseWrapper(${classname});
 		${className}View  ${classname}View =  ${classname}Service.selectView(ew);
 		return R.ok("查询${comments}成功").put("data",  ${classname}View);
     }
