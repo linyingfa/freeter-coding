@@ -24,16 +24,12 @@ $(function () {
 		sidePagination : "server", // 设置在哪里进行分页，可选值为"client" 或者
 		// "server"    
 		queryParams : function(params) {
- 					return {
-							// 说明：传入后台的参数包括offset开始索引，limit步长，sort排序列，order：desc或者,以及所有列的键值对
-							limit : params.limit,
-						    offset : params.offset,
-							username : vm.q.username,
-							sidx: params.sort, //排序列名  
-							order: params.order //排位命令（desc，asc） 
-							/* sort:"userId",
-							order:"desc" */
- 													};   
+			var search = vm.search;
+			search.limit =params.limit,
+			search.offset = params.offset,
+			search.sidx = params.sort, //排序列名  
+			search.order= params.order //排位命令（desc，asc） 
+ 			return search;  
  		},
  		
         columns: [		
@@ -79,8 +75,8 @@ $(function () {
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
-		q : {
-					username : null
+		search : {
+					
 				},
 		showList: true,
 		title: null,
