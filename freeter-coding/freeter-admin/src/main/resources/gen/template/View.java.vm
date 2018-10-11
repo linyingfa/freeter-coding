@@ -19,6 +19,7 @@ import java.io.Serializable;
  * @date ${datetime}
  */
 @ApiModel(value = "${className}")
+@SuppressWarnings("rawtypes")
 public class ${className}View  extends ${className}Entity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
