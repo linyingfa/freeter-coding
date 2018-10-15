@@ -1,6 +1,7 @@
 package com.freeter.common.mpextend.parser;
 
 import java.lang.reflect.Field;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
@@ -15,7 +16,10 @@ public class FilterMap  {
 		Map<String, Object> beanMap = BeanUtil.beanToMap(t, true, true);
 		Set<String> set = beanMap.keySet();
 		Set<String> mapSet = map.keySet();
-		for(String key: mapSet) {
+		Iterator<String> iterator =mapSet.iterator();
+
+		while (iterator.hasNext()) {
+			String key = iterator.next();
 			if (beanMap.containsKey(key)) {
 				OwnerTable owner = t.getClass().getAnnotation(OwnerTable.class);
 				Field ownerField = ReflectUtil.getField(owner.value(), key);
@@ -24,7 +28,10 @@ public class FilterMap  {
 				}
 				map.remove(key);
 			}
+		 
+
 		}
+		 
 		 
 	}
 
