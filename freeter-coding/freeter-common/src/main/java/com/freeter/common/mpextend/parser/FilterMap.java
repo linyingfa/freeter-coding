@@ -9,6 +9,7 @@ import com.freeter.common.annotation.OwnerTable;
 
 import cn.hutool.core.bean.BeanUtil;
 import cn.hutool.core.util.ReflectUtil;
+import cn.hutool.core.util.StrUtil;
 
 public class FilterMap  {
 
@@ -22,7 +23,8 @@ public class FilterMap  {
 			String key = iterator.next();
 			if (beanMap.containsKey(key)) {
 				OwnerTable owner = t.getClass().getAnnotation(OwnerTable.class);
-				Field ownerField = ReflectUtil.getField(owner.value(), key);
+				Field ownerField = ReflectUtil.getField(owner.value(), StrUtil.toCamelCase(key));
+				
 				if(ownerField != null) {
 					continue;
 				}
