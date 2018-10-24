@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/freeter-admin/freeter-admin.iml" filepath="$PROJECT_DIR$/freeter-admin/freeter-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-api/freeter-api.iml" filepath="$PROJECT_DIR$/freeter-api/freeter-api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-coding.iml" filepath="$PROJECT_DIR$/freeter-coding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-common/freeter-common.iml" filepath="$PROJECT_DIR$/freeter-common/freeter-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-generator/freeter-generator.iml" filepath="$PROJECT_DIR$/freeter-generator/freeter-generator.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-good/freeter-good.iml" filepath="$PROJECT_DIR$/freeter-good/freeter-good.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-job/freeter-job.iml" filepath="$PROJECT_DIR$/freeter-job/freeter-job.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freeter-user/freeter-user.iml" filepath="$PROJECT_DIR$/freeter-user/freeter-user.iml" />
+    </modules>
+  </component>
+</project>
