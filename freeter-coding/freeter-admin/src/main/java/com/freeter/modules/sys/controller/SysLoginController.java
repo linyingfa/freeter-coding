@@ -58,7 +58,6 @@ public class SysLoginController {
         BufferedImage image = producer.createImage(text);
         //保存到shiro session
         ShiroUtils.setSessionAttribute(Constants.KAPTCHA_SESSION_KEY, text);
-
         ServletOutputStream out = response.getOutputStream();
         ImageIO.write(image, "jpg", out);
     }
